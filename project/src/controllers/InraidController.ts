@@ -121,11 +121,17 @@ export class InraidController
         pmcData = this.inRaidHelper.setInventory(sessionID, pmcData, offraidData.profile);
         this.healthHelper.saveVitality(pmcData, offraidData.health, sessionID);
 
-        // remove inventory if player died and send insurance items
-        // TODO: dump of prapor/therapist dialogues that are sent when you die in lab with insurance.
+        // Remove inventory if player died and send insurance items
         if (insuranceEnabled)
         {
-            this.insuranceService.storeLostGear(pmcData, offraidData, preRaidGear, sessionID);
+            this.insuranceService.storeLostGear(pmcData, offraidData, preRaidGear, sessionID, isDead);
+        }
+        else
+        {
+            if (locationName === "Laboratory")
+            {
+                // TODO: dump of prapor/therapist dialogues that are sent when you die in lab with insured items
+            }
         }
 
         if (isDead)
@@ -164,8 +170,8 @@ export class InraidController
         {
             for (const questItem of postRaidSaveRequest.profile.Stats.CarriedQuestItems)
             {
-                const findItemConditionId = this.questHelper.getFindItemIdForQuestHandIn(questItem);
-                this.profileHelper.resetProfileQuestCondition(sessionID, findItemConditionId);
+                const findItemConditionIds = this.questHelper.getFindItemIdForQuestHandIn(questItem);
+                this.profileHelper.resetProfileQuestCondition(sessionID, findItemConditionIds);
             }
 
             pmcData.Stats.CarriedQuestItems = [];
