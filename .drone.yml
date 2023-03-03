@@ -72,7 +72,7 @@ trigger:
     - push
     - tag
   branch:
-    - development
+    - master
 
 steps:
   - name: Install
