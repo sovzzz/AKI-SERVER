@@ -1,0 +1,5 @@
+{
+    "runIntervalSeconds": 15,
+    "hoursForSkillCrafting": 28800,
+	"hideoutWallAppearTimeSeconds": 86400
+}

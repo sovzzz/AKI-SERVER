@@ -1,0 +1,233 @@
+{
+    "enableSeasonalEventDetection": true,
+    "eventGear": {
+        "halloween": {
+            "assault": {
+                "FaceCover": {
+                    "5bd071d786f7747e707b93a3": 1,
+                    "5bd0716d86f774171822ef4b": 1,
+                    "5bd06f5d86f77427101ad47c": 1,
+                    "6176a48d732a664031271438": 1,
+                    "6176a40f0b8c0312ac75a3d3": 1,
+                    "62a5c2c98ec41a51b34739c0": 1,
+                    "62a5c333ec21e50cad3b5dc6": 1,
+                    "62a5c41e8ec41a51b34739c3": 1,
+                    "635267ab3c89e2112001f826": 1
+                },
+                "Headwear": {
+                    "59ef13ca86f77445fd0e2483": 2
+                }
+            },
+            "bossTagilla": {
+                "Scabbard": {
+                    "63495c500c297e20065a08b1": 2
+                }
+            }
+        },
+        "christmas": {
+            "bossgluhar": {
+                "FaceCover": {
+                    "5c1a1e3f2e221602b66cc4c2": 5
+                },
+                "Headwear": {
+                    "5a43943586f77416ad2f06e2": 3,
+                    "5a43957686f7742a2c2f11b0": 3
+                }
+            },
+            "bossbully": {
+                "FaceCover": {
+                    "5c1a1e3f2e221602b66cc4c2": 5
+                },
+                "Headwear": {
+                    "5a43943586f77416ad2f06e2": 3,
+                    "5a43957686f7742a2c2f11b0": 3
+                }
+            },
+            "bossknight": {
+                "FaceCover": {
+                    "5c1a1e3f2e221602b66cc4c2": 5
+                },
+                "Headwear": {
+                    "5a43943586f77416ad2f06e2": 3,
+                    "5a43957686f7742a2c2f11b0": 3
+                }
+            },
+            "bosssanitar": {
+                "FaceCover": {
+                    "5c1a1e3f2e221602b66cc4c2": 5
+                },
+                "Headwear": {
+                    "5a43943586f77416ad2f06e2": 3,
+                    "5a43957686f7742a2c2f11b0": 3
+                }
+            },
+            "exusec": {
+                "FaceCover": {
+                    "5c1a1e3f2e221602b66cc4c2": 5
+                },
+                "Headwear": {
+                    "5a43943586f77416ad2f06e2": 3,
+                    "5a43957686f7742a2c2f11b0": 3
+                }
+            },
+            "followerbigpipe": {
+                "Headwear": {
+                    "5a43943586f77416ad2f06e2": 3,
+                    "5a43957686f7742a2c2f11b0": 3
+                }
+            },
+            "followerbirdeye": {
+                "Headwear": {
+                    "5a43943586f77416ad2f06e2": 3,
+                    "5a43957686f7742a2c2f11b0": 3
+                }
+            },
+            "followerbully": {
+                "Headwear": {
+                    "5a43943586f77416ad2f06e2": 3,
+                    "5a43957686f7742a2c2f11b0": 3
+                }
+            },
+            "followergluharassault": {
+                "FaceCover": {
+                    "5c1a1e3f2e221602b66cc4c2": 5
+                },
+                "Headwear": {
+                    "5a43943586f77416ad2f06e2": 3,
+                    "5a43957686f7742a2c2f11b0": 3
+                }
+            },
+            "followergluharscout": {
+                "FaceCover": {
+                    "5c1a1e3f2e221602b66cc4c2": 5
+                },
+                "Headwear": {
+                    "5a43943586f77416ad2f06e2": 3,
+                    "5a43957686f7742a2c2f11b0": 3
+                }
+            },
+            "followergluharsecurity": {
+                "FaceCover": {
+                    "5c1a1e3f2e221602b66cc4c2": 5
+                },
+                "Headwear": {
+                    "5a43943586f77416ad2f06e2": 3,
+                    "5a43957686f7742a2c2f11b0": 3
+                }
+            },
+            "followerkojaniy": {
+                "Headwear": {
+                    "5a43943586f77416ad2f06e2": 3,
+                    "5a43957686f7742a2c2f11b0": 3
+                }
+            },
+            "followersanitar": {
+                "FaceCover": {
+                    "5c1a1e3f2e221602b66cc4c2": 5
+                },
+                "Headwear": {
+                    "5a43943586f77416ad2f06e2": 3,
+                    "5a43957686f7742a2c2f11b0": 3
+                }
+            },
+            "marksman": {
+                "FaceCover": {
+                    "5c1a1e3f2e221602b66cc4c2": 5
+                },
+                "Headwear": {
+                    "5a43943586f77416ad2f06e2": 3,
+                    "5a43957686f7742a2c2f11b0": 3
+                }
+            },
+            "pmcbot": {
+                "FaceCover": {
+                    "5c1a1e3f2e221602b66cc4c2": 5
+                },
+                "Headwear": {
+                    "5a43943586f77416ad2f06e2": 3,
+                    "5a43957686f7742a2c2f11b0": 3
+                }
+            },
+            "sectantpriest": {
+                "FaceCover": {
+                    "5c1a1e3f2e221602b66cc4c2": 5
+                }
+            },
+            "sectantwarrior": {
+                "FaceCover": {
+                    "5c1a1e3f2e221602b66cc4c2": 5
+                }
+            },
+            "bear": {
+                "FaceCover": {
+                    "5c1a1e3f2e221602b66cc4c2": 30
+                },
+                "Headwear": {
+                    "5a43957686f7742a2c2f11b0": 80,
+                    "5a43943586f77416ad2f06e2": 80
+                }
+            },
+            "usec": {
+                "FaceCover": {
+                    "5c1a1e3f2e221602b66cc4c2": 30
+                },
+                "Headwear": {
+                    "5a43957686f7742a2c2f11b0": 80,
+                    "5a43943586f77416ad2f06e2": 80
+                }
+            }
+        }
+    },
+    "gifterSettings": [{
+            "map": "bigmap",
+            "zones": "ZoneDormitory,ZoneGasStation,ZoneScavBase",
+            "spawnChance": 15
+        }, {
+            "map": "factory4_day",
+            "zones": "BotZone",
+            "spawnChance": 10
+        }, {
+            "map": "laboratory",
+            "zones": "BotZoneFloor1,BotZoneFloor2",
+            "spawnChance": 15
+        }, {
+            "map": "interchange",
+            "zones": "ZoneCenterBot,ZoneCenter,ZoneOLI,ZoneIDEA,ZoneGoshan,ZoneIDEAPark,ZoneOLIPark",
+            "spawnChance": 15
+        }, {
+            "map": "lighthouse",
+            "zones": "Zone_TreatmentContainers,Zone_Chalet,Zone_RoofContainers,Zone_RoofBeach,Zone_Hellicopter",
+            "spawnChance": 15
+        }, {
+            "map": "rezervbase",
+            "zones": "ZoneRailStrorage,ZoneRailStrorage,ZoneRailStrorage,ZonePTOR1,ZonePTOR2,ZoneBarrack,ZoneBarrack,ZoneBarrack,ZoneSubStorage",
+            "spawnChance": 15
+        }, {
+            "map": "shoreline",
+            "zones": "ZonePort,ZoneGreenHouses,ZoneSanatorium1,ZoneGreenHouses,ZoneSanatorium2,ZoneMeteoStation,ZoneSanatorium1,ZoneSanatorium2",
+            "spawnChance": 15
+        }, {
+            "map": "tarkovstreets",
+            "zones": "ZoneColumn",
+            "spawnChance": 10
+        }, {
+            "map": "woods",
+            "zones": "ZoneScavBase2,ZoneWoodCutter",
+            "spawnChance": 15
+        }
+    ],
+    "events": [{
+            "name": "halloween",
+            "startDay": "24",
+            "startMonth": "10",
+            "endDay": "4",
+            "endMonth": "11"
+        }, {
+            "name": "christmas",
+            "startDay": "16",
+            "startMonth": "12",
+            "endDay": "31",
+            "endMonth": "12"
+        }
+    ]
+}

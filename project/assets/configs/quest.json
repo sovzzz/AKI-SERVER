@@ -1,0 +1,661 @@
+{
+    "redeemTime": 48,
+    "usecOnlyQuests": ["6179b5eabca27a099552e052", "5e383a6386f77465910ce1f3", "5e4d515e86f77438b2195244", "639282134ed9512be67647ed"],
+    "bearOnlyQuests": ["6179b5b06e9dd54ac275e409", "5e381b0286f77420e3417a74", "5e4d4ac186f774264f758336", "639136d68ba6894d155e77cf"],
+    "questTemplateIds": {
+        "pmc": {
+            "elimination": "616052ea3054fc0e2c24ce6e",
+            "completion": "61604635c725987e815b1a46",
+            "exploration": "616041eb031af660100c9967"
+        },
+        "scav": {
+            "elimination": "62825ef60e88d037dc1eb428",
+            "completion": "628f588ebb558574b2260fe5",
+            "exploration": "62825ef60e88d037dc1eb42c"
+        }
+    },
+    "repeatableQuests": [{
+            "name": "Daily",
+            "side": "Pmc",
+            "types": [
+                "Elimination",
+                "Completion",
+                "Exploration"
+            ],
+            "resetTime": 86400,
+            "numQuests": 3,
+            "minPlayerLevel": 5,
+            "rewardScaling": {
+                "levels": [1, 20, 45, 100],
+                "experience": [2000, 4000, 20000, 80000],
+                "roubles": [6000, 10000, 100000, 250000],
+                "items": [1, 2, 4, 4],
+                "reputation": [0.01, 0.01, 0.01, 0.01],
+                "rewardSpread": 0.5
+            },
+            "locations": {
+                "any": ["any"],
+                "factory4_day": ["factory4_day", "factory4_night"],
+                "bigmap": ["bigmap"],
+                "Woods": ["Woods"],
+                "Shoreline": ["Shoreline"],
+                "Interchange": ["Interchange"],
+                "Lighthouse": ["Lighthouse"],
+                "laboratory": ["laboratory"],
+                "RezervBase": ["RezervBase"]
+            },
+            "traderWhitelist": [{
+                    "traderId": "54cb50c76803fa8b248b4571",
+                    "questTypes": ["Completion", "Exploration", "Elimination"]
+                }, {
+                    "traderId": "54cb57776803fa99248b456e",
+                    "questTypes": ["Completion", "Exploration", "Elimination"]
+                }, {
+                    "traderId": "58330581ace78e27b8b10cee",
+                    "questTypes": ["Completion", "Exploration", "Elimination"]
+                }, {
+                    "traderId": "5935c25fb3acc3127c3d8cd9",
+                    "questTypes": ["Completion", "Exploration", "Elimination"]
+                }, {
+                    "traderId": "5a7c2eca46aef81a7ca2145d",
+                    "questTypes": ["Completion", "Exploration"]
+                }, {
+                    "traderId": "5ac3b934156ae10c4430e83c",
+                    "questTypes": ["Completion", "Exploration", "Elimination"]
+                }, {
+                    "traderId": "5c0647fdd443bc2504c2d371",
+                    "questTypes": ["Completion", "Exploration", "Elimination"]
+                }
+            ],
+            "questConfig": {
+                "Exploration": {
+                    "maxExtracts": 3,
+                    "specificExits": {
+                        "probability": 0.25,
+                        "passageRequirementWhitelist": [
+                            "None",
+                            "TransferItem",
+                            "WorldEvent",
+                            "Train",
+                            "Reference",
+                            "Empty"
+                        ]
+                    }
+                },
+                "Completion": {
+                    "minRequestedAmount": 1,
+                    "maxRequestedAmount": 5,
+                    "minRequestedBulletAmount": 20,
+                    "maxRequestedBulletAmount": 60,
+                    "useWhitelist": true,
+                    "useBlacklist": false
+                },
+                "Elimination": [{
+                        "levelRange": {
+                            "min": 1,
+                            "max": 15
+                        },
+                        "targets": [{
+                                "key": "Savage",
+                                "relativeProbability": 1,
+                                "data": {
+                                    "isBoss": false
+                                }
+                            }
+                        ],
+                        "bodyPartProb": 0.4,
+                        "bodyParts": [{
+                                "key": "Head",
+                                "relativeProbability": 1,
+                                "data": ["Head"]
+                            }, {
+                                "key": "Stomach",
+                                "relativeProbability": 3,
+                                "data": ["Stomach"]
+                            }, {
+                                "key": "Chest",
+                                "relativeProbability": 25,
+                                "data": ["Chest"]
+                            }, {
+                                "key": "Arms",
+                                "relativeProbability": 0.5,
+                                "data": ["LeftArm", "RightArm"]
+                            }, {
+                                "key": "Legs",
+                                "relativeProbability": 1,
+                                "data": ["LeftLeg", "RightLeg"]
+                            }
+                        ],
+                        "specificLocationProb": 0.25,
+                        "distLocationBlacklist": ["laboratory", "factory4_day", "factory4_night"],
+                        "distProb": 0.25,
+                        "maxDist": 100,
+                        "minDist": 20,
+                        "maxKills": 3,
+                        "minKills": 2
+                    }, {
+                        "levelRange": {
+                            "min": 16,
+                            "max": 100
+                        },
+                        "targets": [{
+                                "key": "Savage",
+                                "relativeProbability": 7,
+                                "data": {
+                                    "isBoss": false
+                                }
+                            }, {
+                                "key": "AnyPmc",
+                                "relativeProbability": 2,
+                                "data": {
+                                    "isBoss": false
+                                }
+                            }, {
+                                "key": "bossBully",
+                                "relativeProbability": 0.5,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }, {
+                                "key": "bossGluhar",
+                                "relativeProbability": 0.5,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }, {
+                                "key": "bossKilla",
+                                "relativeProbability": 0.5,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }, {
+                                "key": "bossSanitar",
+                                "relativeProbability": 0.5,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }, {
+                                "key": "bossTagilla",
+                                "relativeProbability": 0.5,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }, {
+                                "key": "bossKojaniy",
+                                "relativeProbability": 0.5,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }, {
+                                "key": "bossKnight",
+                                "relativeProbability": 0.5,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }
+                        ],
+                        "bodyPartProb": 0.4,
+                        "bodyParts": [{
+                                "key": "Head",
+                                "relativeProbability": 1,
+                                "data": ["Head"]
+                            }, {
+                                "key": "Stomach",
+                                "relativeProbability": 3,
+                                "data": ["Stomach"]
+                            }, {
+                                "key": "Chest",
+                                "relativeProbability": 5,
+                                "data": ["Chest"]
+                            }, {
+                                "key": "Arms",
+                                "relativeProbability": 0.5,
+                                "data": ["LeftArm", "RightArm"]
+                            }, {
+                                "key": "Legs",
+                                "relativeProbability": 1,
+                                "data": ["LeftLeg", "RightLeg"]
+                            }
+                        ],
+                        "specificLocationProb": 0.25,
+                        "distLocationBlacklist": ["laboratory", "factory4_day", "factory4_night"],
+                        "distProb": 0.25,
+                        "maxDist": 200,
+                        "minDist": 20,
+                        "maxKills": 5,
+                        "minKills": 2
+                    }
+                ]
+            },
+            "rewardBaseTypeBlacklist": ["543be5e94bdc2df1348b4568", "5b3f15d486f77432d0509248"],
+            "rewardBlacklist": ["627bce33f21bc425b06ab967"],
+            "rewardAmmoStackMinSize": 15
+        }, {
+            "name": "Weekly",
+            "side": "Pmc",
+            "types": [
+                "Elimination",
+                "Completion",
+                "Exploration"
+            ],
+            "resetTime": 604800,
+            "numQuests": 1,
+            "minPlayerLevel": 15,
+            "rewardScaling": {
+                "levels": [1, 20, 45, 100],
+                "experience": [4000, 8000, 40000, 160000],
+                "roubles": [12000, 20000, 200000, 500000],
+                "items": [3, 3, 4, 4],
+                "reputation": [0.02, 0.03, 0.03, 0.03],
+                "rewardSpread": 0.5
+            },
+            "locations": {
+                "any": ["any"],
+                "factory4_day": ["factory4_day", "factory4_night"],
+                "bigmap": ["bigmap"],
+                "Woods": ["Woods"],
+                "Shoreline": ["Shoreline"],
+                "Interchange": ["Interchange"],
+                "Lighthouse": ["Lighthouse"],
+                "laboratory": ["laboratory"],
+                "RezervBase": ["RezervBase"]
+            },
+            "traderWhitelist": [{
+                    "traderId": "54cb50c76803fa8b248b4571",
+                    "questTypes": ["Completion", "Exploration", "Elimination"]
+                }, {
+                    "traderId": "54cb57776803fa99248b456e",
+                    "questTypes": ["Completion", "Exploration", "Elimination"]
+                }, {
+                    "traderId": "58330581ace78e27b8b10cee",
+                    "questTypes": ["Completion", "Exploration", "Elimination"]
+                }, {
+                    "traderId": "5935c25fb3acc3127c3d8cd9",
+                    "questTypes": ["Completion", "Exploration", "Elimination"]
+                }, {
+                    "traderId": "5a7c2eca46aef81a7ca2145d",
+                    "questTypes": ["Completion", "Exploration"]
+                }, {
+                    "traderId": "5ac3b934156ae10c4430e83c",
+                    "questTypes": ["Completion", "Exploration", "Elimination"]
+                }, {
+                    "traderId": "5c0647fdd443bc2504c2d371",
+                    "questTypes": ["Completion", "Exploration", "Elimination"]
+                }
+            ],
+            "questConfig": {
+                "Exploration": {
+                    "maxExtracts": 10,
+                    "specificExits": {
+                        "probability": 0.5,
+                        "passageRequirementWhitelist": [
+                            "None",
+                            "TransferItem",
+                            "WorldEvent",
+                            "Train",
+                            "Reference",
+                            "Empty"
+                        ]
+                    }
+                },
+                "Completion": {
+                    "minRequestedAmount": 2,
+                    "maxRequestedAmount": 10,
+                    "minRequestedBulletAmount": 20,
+                    "maxRequestedBulletAmount": 60,
+                    "useWhitelist": true,
+                    "useBlacklist": false
+                },
+                "Elimination": [{
+					"levelRange": {
+                            "min": 1,
+                            "max": 15
+                        },
+                    "targets": [{
+                            "key": "Savage",
+                            "relativeProbability": 7,
+                            "data": {
+                                "isBoss": false
+                            }
+                        }, {
+                            "key": "AnyPmc",
+                            "relativeProbability": 1,
+                            "data": {
+                                "isBoss": false
+                            }
+                        }, {
+                            "key": "bossBully",
+                            "relativeProbability": 0,
+                            "data": {
+                                "isBoss": true
+                            }
+                        }, {
+                            "key": "bossGluhar",
+                            "relativeProbability": 0,
+                            "data": {
+                                "isBoss": true
+                            }
+                        }, {
+                            "key": "bossKilla",
+                            "relativeProbability": 0,
+                            "data": {
+                                "isBoss": true
+                            }
+                        }, {
+                            "key": "bossSanitar",
+                            "relativeProbability": 0,
+                            "data": {
+                                "isBoss": true
+                            }
+                        }, {
+                            "key": "bossTagilla",
+                            "relativeProbability": 0,
+                            "data": {
+                                "isBoss": true
+                            }
+                        }, {
+                            "key": "bossKojaniy",
+                            "relativeProbability": 0,
+                            "data": {
+                                "isBoss": true
+                            }
+                        }, {
+                            "key": "bossKnight",
+                            "relativeProbability": 0,
+                            "data": {
+                                "isBoss": true
+                            }
+                        }
+                    ],
+                    "bodyPartProb": 0.3,
+                    "bodyParts": [{
+                            "key": "Head",
+                            "relativeProbability": 1,
+                            "data": ["Head"]
+                        }, {
+                            "key": "Stomach",
+                            "relativeProbability": 3,
+                            "data": ["Stomach"]
+                        }, {
+                            "key": "Chest",
+                            "relativeProbability": 5,
+                            "data": ["Chest"]
+                        }, {
+                            "key": "Arms",
+                            "relativeProbability": 0.5,
+                            "data": ["LeftArm", "RightArm"]
+                        }, {
+                            "key": "Legs",
+                            "relativeProbability": 1,
+                            "data": ["LeftLeg", "RightLeg"]
+                        }
+                    ],
+                    "specificLocationProb": 0.25,
+                    "distLocationBlacklist": ["laboratory", "factory4_day", "factory4_night"],
+                    "distProb": 0.20,
+                    "maxDist": 100,
+                    "minDist": 20,
+                    "maxKills": 10,
+                    "minKills": 5
+                },
+				{
+					"levelRange": {
+                            "min": 16,
+                            "max": 100
+                        },
+                    "targets": [{
+                            "key": "Savage",
+                            "relativeProbability": 7,
+                            "data": {
+                                "isBoss": false
+                            }
+                        }, {
+                            "key": "AnyPmc",
+                            "relativeProbability": 2,
+                            "data": {
+                                "isBoss": false
+                            }
+                        }, {
+                            "key": "bossBully",
+                            "relativeProbability": 0.5,
+                            "data": {
+                                "isBoss": true
+                            }
+                        }, {
+                            "key": "bossGluhar",
+                            "relativeProbability": 0.5,
+                            "data": {
+                                "isBoss": true
+                            }
+                        }, {
+                            "key": "bossKilla",
+                            "relativeProbability": 0.5,
+                            "data": {
+                                "isBoss": true
+                            }
+                        }, {
+                            "key": "bossSanitar",
+                            "relativeProbability": 0.5,
+                            "data": {
+                                "isBoss": true
+                            }
+                        }, {
+                            "key": "bossTagilla",
+                            "relativeProbability": 0.5,
+                            "data": {
+                                "isBoss": true
+                            }
+                        }, {
+                            "key": "bossKojaniy",
+                            "relativeProbability": 0.5,
+                            "data": {
+                                "isBoss": true
+                            }
+                        }, {
+                            "key": "bossKnight",
+                            "relativeProbability": 0.5,
+                            "data": {
+                                "isBoss": true
+                            }
+                        }
+                    ],
+                    "bodyPartProb": 0.4,
+                    "bodyParts": [{
+                            "key": "Head",
+                            "relativeProbability": 1,
+                            "data": ["Head"]
+                        }, {
+                            "key": "Stomach",
+                            "relativeProbability": 3,
+                            "data": ["Stomach"]
+                        }, {
+                            "key": "Chest",
+                            "relativeProbability": 5,
+                            "data": ["Chest"]
+                        }, {
+                            "key": "Arms",
+                            "relativeProbability": 0.5,
+                            "data": ["LeftArm", "RightArm"]
+                        }, {
+                            "key": "Legs",
+                            "relativeProbability": 1,
+                            "data": ["LeftLeg", "RightLeg"]
+                        }
+                    ],
+                    "specificLocationProb": 0.25,
+                    "distLocationBlacklist": ["laboratory", "factory4_day", "factory4_night"],
+                    "distProb": 0.25,
+                    "maxDist": 200,
+                    "minDist": 20,
+                    "maxKills": 15,
+                    "minKills": 5
+                }]
+            },
+            "rewardBaseTypeBlacklist": ["543be5e94bdc2df1348b4568", "5b3f15d486f77432d0509248"],
+            "rewardBlacklist": ["627bce33f21bc425b06ab967"],
+            "rewardAmmoStackMinSize": 15
+        }, {
+            "name": "Daily_Savage",
+            "side": "Scav",
+            "types": [
+                "Elimination",
+                "Completion"
+            ],
+            "resetTime": 86400,
+            "numQuests": 1,
+            "minPlayerLevel": 1,
+            "rewardScaling": {
+                "levels": [1, 20, 45, 100],
+                "experience": [2000, 4000, 20000, 80000],
+                "roubles": [6000, 10000, 100000, 250000],
+                "items": [1, 2, 4, 4],
+                "reputation": [0.01, 0.02, 0.05, 0.05],
+                "rewardSpread": 0.5
+            },
+            "locations": {
+                "any": ["any"],
+                "factory4_day": ["factory4_day", "factory4_night"],
+                "bigmap": ["bigmap"],
+                "Woods": ["Woods"],
+                "Shoreline": ["Shoreline"],
+                "Interchange": ["Interchange"],
+                "Lighthouse": ["Lighthouse"],
+                "RezervBase": ["RezervBase"]
+            },
+            "traderWhitelist": [{
+                    "traderId": "579dc571d53a0658a154fbec",
+                    "questTypes": ["Completion", "Exploration", "Elimination"]
+                }
+            ],
+            "questConfig": {
+                "Exploration": {
+                    "maxExtracts": 3,
+                    "specificExits": {
+                        "probability": 0.25,
+                        "passageRequirementWhitelist": [
+                            "None",
+                            "WorldEvent",
+                            "Train",
+                            "Reference",
+                            "Empty"
+                        ]
+                    }
+                },
+                "Completion": {
+                    "minRequestedAmount": 1,
+                    "maxRequestedAmount": 5,
+                    "minRequestedBulletAmount": 20,
+                    "maxRequestedBulletAmount": 60,
+                    "useWhitelist": true,
+                    "useBlacklist": false
+                },
+                "Elimination": [{
+					"levelRange": {
+                            "min": 1,
+                            "max": 15
+                        },
+                    "targets":
+                    [{
+                            "key": "AnyPmc",
+                            "relativeProbability": 2,
+                            "data": {
+                                "isBoss": false
+                            }
+                        }
+                    ],
+                    "bodyPartProb": 0.4,
+                    "bodyParts": [{
+                            "key": "Head",
+                            "relativeProbability": 1,
+                            "data": ["Head"]
+                        }, {
+                            "key": "Stomach",
+                            "relativeProbability": 3,
+                            "data": ["Stomach"]
+                        }, {
+                            "key": "Chest",
+                            "relativeProbability": 10,
+                            "data": ["Chest"]
+                        }, {
+                            "key": "Arms",
+                            "relativeProbability": 0.5,
+                            "data": ["LeftArm", "RightArm"]
+                        }, {
+                            "key": "Legs",
+                            "relativeProbability": 1,
+                            "data": ["LeftLeg", "RightLeg"]
+                        }
+                    ],
+                    "specificLocationProb": 0.25,
+                    "distLocationBlacklist": ["laboratory"],
+                    "distProb": 0.20,
+                    "maxDist": 100,
+                    "minDist": 20,
+                    "maxKills": 3,
+                    "minKills": 1
+                },
+				{
+					"levelRange": {
+                            "min": 16,
+                            "max": 100
+                        },
+                    "targets":
+                    [{
+                            "key": "AnyPmc",
+                            "relativeProbability": 1,
+                            "data": {
+                                "isBoss": false
+                            }
+                        }
+                    ],
+                    "bodyPartProb": 0.4,
+                    "bodyParts": [{
+                            "key": "Head",
+                            "relativeProbability": 1,
+                            "data": ["Head"]
+                        }, {
+                            "key": "Stomach",
+                            "relativeProbability": 3,
+                            "data": ["Stomach"]
+                        }, {
+                            "key": "Chest",
+                            "relativeProbability": 5,
+                            "data": ["Chest"]
+                        }, {
+                            "key": "Arms",
+                            "relativeProbability": 0.5,
+                            "data": ["LeftArm", "RightArm"]
+                        }, {
+                            "key": "Legs",
+                            "relativeProbability": 1,
+                            "data": ["LeftLeg", "RightLeg"]
+                        }
+                    ],
+                    "specificLocationProb": 0.25,
+                    "distLocationBlacklist": ["laboratory"],
+                    "distProb": 0.25,
+                    "maxDist": 200,
+                    "minDist": 20,
+                    "maxKills": 5,
+                    "minKills": 2
+                }
+				]
+            },
+            "rewardBaseTypeBlacklist": ["543be5e94bdc2df1348b4568", "5b3f15d486f77432d0509248"],
+            "rewardBlacklist": ["627bce33f21bc425b06ab967"],
+            "rewardAmmoStackMinSize": 15
+        }
+    ],
+    "locationIdMap": {
+        "any": "any",
+        "factory4_day": "55f2d3fd4bdc2d5f408b4567",
+        "factory4_night": "59fc81d786f774390775787e",
+        "bigmap": "56f40101d2720b2a4d8b45d6",
+        "Woods": "5704e3c2d2720bac5b8b4567",
+        "Shoreline": "5704e554d2720bac5b8b456e",
+        "Interchange": "5714dbc024597771384a510d",
+        "Lighthouse": "5704e4dad2720bb55b8b4567",
+        "laboratory": "5b0fc42d86f7744a585f9105",
+        "RezervBase": "5704e5fad2720bc05b8b4567"
+    }
+}

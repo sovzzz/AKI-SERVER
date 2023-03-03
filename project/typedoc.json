@@ -1,0 +1,6 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "sort": ["source-order"],
+    "media": "media",
+    "basePath": "server-docs"
+}

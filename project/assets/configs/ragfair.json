@@ -1,0 +1,152 @@
+{
+    "runIntervalSeconds": 45,
+    "sell": {
+		"simulatedSellHours": 12,
+        "fees": true,
+        "chance": {
+            "base": 50,
+            "overpriced": 0.5,
+            "underpriced": 2
+        },
+        "time": {
+            "base": 1.5,
+            "min": 0,
+            "max": 1.0
+        },
+        "reputation": {
+            "gain": 0.0000002,
+            "loss": 0.0000002
+        }
+    },
+    "traders": {
+        "54cb50c76803fa8b248b4571": true,
+        "54cb57776803fa99248b456e": true,
+        "579dc571d53a0658a154fbec": false,
+        "58330581ace78e27b8b10cee": true,
+        "5935c25fb3acc3127c3d8cd9": true,
+        "5a7c2eca46aef81a7ca2145d": true,
+        "5ac3b934156ae10c4430e83c": true,
+        "5c0647fdd443bc2504c2d371": true,
+        "ragfair": false
+    },
+    "dynamic": {
+		"purchasesAreFoundInRaid": false,
+		"useTraderPriceForOffersIfHigher": true,
+		"barter": {
+			"enable": true,
+			"chancePercent": 20,
+			"itemCountMin": 1,
+			"itemCountMax": 3,
+			"priceRangeVariancePercent": 15,
+			"minRoubleCostToBecomeBarter": 20000,
+			"itemTypeBlacklist": [
+				"55802f4a4bdc2ddb688b4569",
+				"55802f3e4bdc2de7118b4584",
+				"543be5cb4bdc2deb348b4568",
+				"55818ac54bdc2d5b648b456e",
+				"5a74651486f7744e73386dd1"
+			]
+		},
+		"offerAdjustment":{
+			"maxPriceDifferenceBelowHandbookPercent": 64,
+			"handbookPriceMultipier": 1.1,
+			"priceThreshholdRub": 20000
+		},
+        "expiredOfferThreshold": 1500,
+        "offerItemCount": {
+            "min": 7,
+            "max": 30
+        },
+        "price": {
+            "min": 0.8,
+            "max": 1.2
+        },
+        "presetPrice": {
+            "min": 0.95,
+            "max": 1.05
+        },
+		"showDefaultPresetsOnly": true,
+        "endTimeSeconds": {
+            "min": 360,
+            "max": 3600
+        },
+        "condition": {
+            "5422acb9af1c889c16000029": {
+                "_name": "WEAPON",
+                "conditionChance": 0.2,
+                "min": 0.6,
+                "max": 1
+            },
+            "543be5664bdc2dd4348b4569": {
+                "_name": "MEDS",
+                "conditionChance": 0.2,
+                "min": 0.6,
+                "max": 1
+            },
+            "5447e0e74bdc2d3c308b4567": {
+                "_name": "SPEC_ITEM",
+                "conditionChance": 0.3,
+                "min": 0.02,
+                "max": 1
+            },
+            "543be5e94bdc2df1348b4568": {
+                "_name": "KEY",
+                "conditionChance": 0.02,
+                "min": 0.97,
+                "max": 1
+            },
+            "5448e5284bdc2dcb718b4567": {
+                "_name": "VEST",
+                "conditionChance": 0.2,
+                "min": 0.05,
+                "max": 1
+            },
+            "57bef4c42459772e8d35a53b": {
+                "_name": "ARMORED_EQUIPMENT",
+                "conditionChance": 0.6,
+                "min": 0.05,
+                "max": 1
+            },
+            "543be6674bdc2df1348b4569": {
+                "_name": "FOOD_DRINK",
+                "conditionChance": 0.05,
+                "min": 0.05,
+                "max": 1
+            }
+        },
+        "stackablePercent": {
+            "min": 10,
+            "max": 600
+        },
+        "nonStackableCount": {
+            "min": 1,
+            "max": 10
+        },
+        "rating": {
+            "min": 0.1,
+            "max": 0.95
+        },
+		"_currencies": "what percentage of the offers are in each currency",
+        "currencies": {
+            "5449016a4bdc2d6f028b456f": 78,
+            "5696686a4bdc2da3298b456a": 14,
+            "569668774bdc2da2298b4568": 8
+        },
+        "showAsSingleStack": [
+            "5422acb9af1c889c16000029",
+            "5448e54d4bdc2dcc718b4568",
+            "5795f317245977243854e041",
+            "5448e53e4bdc2d60728b4567",
+            "5448bf274bdc2dfc2f8b456a",
+            "543be5e94bdc2df1348b4568",
+            "5448f39d4bdc2d0a728b4568"
+        ],
+		"removeSeasonalItemsWhenNotInEvent": true,
+        "blacklist": {
+            "custom": [],
+            "enableBsgList": true,
+            "enableQuestList": true,
+            "traderItems": false
+        }
+    }
+}

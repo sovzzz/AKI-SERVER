@@ -1,0 +1,13 @@
+{
+    "extends": "./base_tsconfig.json",
+    "compilerOptions": {
+        "outDir": "obj",
+        "declaration": true,
+        "sourceMap": true,
+        "noImplicitAny": false
+    },
+    "include": [
+        "./types/**/*",
+        "./src/**/*"
+    ]
+}

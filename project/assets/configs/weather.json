@@ -1,0 +1,41 @@
+{
+    "acceleration": 7,
+    "weather": {
+        "clouds": {
+            "min": -1.5,
+            "max": 1.5
+        },
+        "windSpeed": {
+			"values": [0, 1, 2, 3],
+			"weights": [20, 15, 10, 5]
+        },
+        "windDirection": {
+			"values": [1, 2, 3, 4, 5, 6, 7, 8],
+			"weights": [10, 10, 10, 10, 10, 10, 10, 10]
+        },
+        "windGustiness": {
+            "min": 0,
+            "max": 1
+        },
+        "rain": {
+			"values": [1, 2, 3],
+			"weights": [100, 10, 5]
+        },
+        "rainIntensity": {
+            "min": 0,
+            "max": 1
+        },
+        "fog": {
+			"values": [0.002, 0.006, 0.008, 0.012, 0.087],
+			"weights": [100, 40, 25, 25, 5]
+        },
+        "temp": {
+            "min": 0,
+            "max": 24
+        },
+        "pressure": {
+            "min": 760,
+            "max": 764
+        }
+    }
+}

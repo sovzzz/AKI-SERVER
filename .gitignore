@@ -1,0 +1,41 @@
+## SPT-AKI
+*.exe
+*.zip
+*.d.ts
+project/build/
+project/obj/
+project/dist/
+project/user/
+project/logs/
+project/Aki_Data/
+project/tmp/
+project/docs/
+project/types/
+
+## visual studio
+.vs
+.idea
+slnx.sqlite
+slnx-journal.sqlite
+
+## nodejs
+node_modules
+node.exe
+package-lock.json
+yarn.lock
+
+## windows
+desktop.ini
+
+## parcel
+.parcel-cache/
+
+## Pkg
+.pkg-cache
+
+## yarn
+**/yarn-error.log
+
+#jest
+coverage
+.scannerwork/

@@ -1,0 +1,5 @@
+{
+    "gameLocale": "system",
+    "serverLocale": "system",
+	"serverSupportedLocales": ["en", "ru", "zh", "fr", "cz", "ge", "it", "ko", "jp", "es", "de", "tr", "hu", "pl", "sk", "pt", "sv", "nl"]
+}

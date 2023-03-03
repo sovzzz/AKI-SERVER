@@ -1,0 +1,10 @@
+{
+    "pkg": {
+        "scripts": [
+            "obj/**/*.js"
+        ],
+        "assets": [
+            "obj/**/*.d.ts"
+        ]
+    }
+}

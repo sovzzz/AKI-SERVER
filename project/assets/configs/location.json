@@ -1,0 +1,649 @@
+{
+    "looseLootMultiplier": {
+        "bigmap": 1.2,
+        "develop": 1,
+        "factory4_day": 1.2,
+        "factory4_night": 1.2,
+        "interchange": 1.2,
+        "laboratory": 1,
+        "rezervbase": 1.2,
+        "shoreline": 1.2,
+        "woods": 1.3,
+        "hideout": 0,
+        "lighthouse": 1.2,
+        "privatearea": 1,
+        "suburbs": 1,
+        "tarkovstreets": 1,
+        "terminal": 1,
+        "town": 1
+    },
+    "staticLootMultiplier": {
+        "bigmap": 1,
+        "develop": 1,
+        "factory4_day": 1,
+        "factory4_night": 1,
+        "interchange": 1,
+        "laboratory": 1,
+        "rezervbase": 1,
+        "shoreline": 1,
+        "woods": 1,
+        "hideout": 0,
+        "lighthouse": 1,
+        "privatearea": 1,
+        "suburbs": 1,
+        "tarkovstreets": 1,
+        "terminal": 1,
+        "town": 1
+    },
+    "customWaves": {
+        "boss": {
+            "factory4_day": [{
+                    "sptId": "sptBearFactoryDayBossSpawn",
+                    "BossName": "sptBear",
+                    "BossChance": 25,
+                    "BossZone": "BotZone",
+                    "BossPlayer": false,
+                    "BossDifficult": "normal",
+                    "BossEscortType": "sptBear",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortAmount": "1",
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptBear",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "1"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }, {
+                    "sptId": "sptUsecFactoryDayBossSpawn",
+                    "BossName": "sptUsec",
+                    "BossChance": 25,
+                    "BossZone": "BotZone",
+                    "BossPlayer": false,
+                    "BossDifficult": "normal",
+                    "BossEscortType": "sptUsec",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortAmount": "1",
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptUsec",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "1"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }
+            ],
+            "bigmap": [{
+                    "sptId": "sptBearCustomsScavBaseNormalSpawn",
+                    "BossName": "sptBear",
+                    "BossChance": 25,
+                    "BossZone": "ZoneScavBase",
+                    "BossPlayer": false,
+                    "BossDifficult": "normal",
+                    "BossEscortType": "sptBear",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortAmount": "2",
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptBear",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "2"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }, {
+                    "sptId": "sptUsecCustomsScavBaseNormalSpawn",
+                    "BossName": "sptUsec",
+                    "BossChance": 25,
+                    "BossZone": "ZoneScavBase",
+                    "BossPlayer": false,
+                    "BossDifficult": "normal",
+                    "BossEscortType": "sptUsec",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortAmount": "2",
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptUsec",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "2"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }
+            ],
+            "woods": [{
+                    "sptId": "sptBearWoodScavBaseNormalSpawn",
+                    "BossName": "sptBear",
+                    "BossChance": 25,
+                    "BossZone": "ZoneScavBase2",
+                    "BossPlayer": false,
+                    "BossDifficult": "normal",
+                    "BossEscortType": "sptBear",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortAmount": "2",
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptBear",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "2"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }, {
+                    "sptId": "sptUsecWoodScavBaseNormalSpawn",
+                    "BossName": "sptUsec",
+                    "BossChance": 25,
+                    "BossZone": "ZoneScavBase2",
+                    "BossPlayer": false,
+                    "BossDifficult": "normal",
+                    "BossEscortType": "sptUsec",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortAmount": "2",
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptUsec",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "2"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }
+            ],
+            "shoreline": [{
+                    "sptId": "sptBearShorelinePortNormalSpawn",
+                    "BossName": "sptBear",
+                    "BossChance": 20,
+                    "BossZone": "ZonePort",
+                    "BossPlayer": false,
+                    "BossDifficult": "normal",
+                    "BossEscortType": "sptBear",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortAmount": "2",
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptBear",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "1"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }, {
+                    "sptId": "sptUsecShorelinePortNormalSpawn",
+                    "BossName": "sptUsec",
+                    "BossChance": 20,
+                    "BossZone": "ZonePort",
+                    "BossPlayer": false,
+                    "BossDifficult": "normal",
+                    "BossEscortType": "sptUsec",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortAmount": "2",
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptUsec",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "1"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }, {
+                    "sptId": "sptUsecShorelineSanatorium1NormalSpawn",
+                    "BossName": "sptUsec",
+                    "BossChance": 10,
+                    "BossZone": "ZoneSanatorium1",
+                    "BossPlayer": false,
+                    "BossDifficult": "normal",
+                    "BossEscortType": "sptUsec",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortAmount": "1",
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptUsec",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "1"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }, {
+                    "sptId": "sptBearShorelineSanatorium1NormalSpawn",
+                    "BossName": "sptBear",
+                    "BossChance": 10,
+                    "BossZone": "ZoneSanatorium1",
+                    "BossPlayer": false,
+                    "BossDifficult": "normal",
+                    "BossEscortType": "sptBear",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortAmount": "1",
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptBear",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "1"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }, {
+                    "sptId": "sptUsecShorelineSanatorium2NormalSpawn",
+                    "BossName": "sptUsec",
+                    "BossChance": 10,
+                    "BossZone": "ZoneSanatorium2",
+                    "BossPlayer": false,
+                    "BossDifficult": "normal",
+                    "BossEscortType": "sptUsec",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortAmount": "1",
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptUsec",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "1"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }, {
+                    "sptId": "sptBearShorelineSanatorium2NormalSpawn",
+                    "BossName": "sptBear",
+                    "BossChance": 10,
+                    "BossZone": "ZoneSanatorium2",
+                    "BossPlayer": false,
+                    "BossDifficult": "normal",
+                    "BossEscortType": "sptBear",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortAmount": "1",
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptBear",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "1"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }
+            ],
+            "laboratory": [{
+                    "sptId": "sptBearLabsZoneFloor1NormalSpawn",
+                    "BossName": "sptBear",
+					"BossChance": 15,
+					"BossZone": "BotZoneFloor1",
+                    "BossDifficult": "normal",
+                    "BossEscortAmount": "1",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortType": "sptBear",
+                    "BossPlayer": false,
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptBear",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "1"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }, {
+                    "sptId": "sptBearLabsZoneFloor2NormalSpawn",
+                    "BossChance": 15,
+                    "BossName": "sptBear",
+					"BossZone": "BotZoneFloor2",
+                    "BossDifficult": "normal",
+                    "BossEscortAmount": "1",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortType": "sptBear",
+                    "BossPlayer": false,
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptBear",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "1"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }, {
+                    "sptId": "sptBearLabsZoneBasementNormalSpawn",
+                    "BossChance": 15,
+                    "BossDifficult": "normal",
+                    "BossEscortAmount": "0",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortType": "sptBear",
+                    "BossName": "sptBear",
+                    "BossPlayer": false,
+                    "BossZone": "BotZoneBasement",
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptBear",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "0"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }, {
+                    "sptId": "sptUsecLabsZoneFloor1NormalSpawn",
+                    "BossChance": 15,
+                    "BossDifficult": "normal",
+                    "BossEscortAmount": "1",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortType": "sptUsec",
+                    "BossName": "sptUsec",
+                    "BossPlayer": false,
+                    "BossZone": "BotZoneFloor1",
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptUsec",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "1"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }, {
+                    "sptId": "sptUsecLabsZoneFloor2NormalSpawn",
+                    "BossChance": 15,
+                    "BossDifficult": "normal",
+                    "BossEscortAmount": "1",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortType": "sptUsec",
+                    "BossName": "sptUsec",
+                    "BossPlayer": false,
+                    "BossZone": "BotZoneFloor2",
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptUsec",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "1"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }, {
+                    "sptId": "sptUsecLabsZoneBasementNormalSpawn",
+                    "BossChance": 15,
+                    "BossDifficult": "normal",
+                    "BossEscortAmount": "0",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortType": "sptUsec",
+                    "BossName": "sptUsec",
+                    "BossPlayer": false,
+                    "BossZone": "BotZoneBasement",
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptUsec",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "0"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }
+            ],
+			"interchange": [{
+                    "sptId": "sptBearInterchangeNormalSpawn",
+                    "BossName": "sptBear",
+                    "BossChance": 15,
+                    "BossZone": "ZoneCenter,ZoneCenterBot,ZoneOLI,ZoneIDEA,ZoneGoshan,ZonePowerStation",
+                    "BossPlayer": false,
+                    "BossDifficult": "normal",
+                    "BossEscortType": "sptBear",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortAmount": "1",
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptBear",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "1"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }, {
+                    "sptId": "sptUsecInterchangeNormalSpawn",
+                    "BossName": "sptUsec",
+                    "BossChance": 15,
+                    "BossZone": "ZoneCenter,ZoneCenterBot,ZoneOLI,ZoneIDEA,ZoneGoshan,ZonePowerStation",
+                    "BossPlayer": false,
+                    "BossDifficult": "normal",
+                    "BossEscortType": "sptUsec",
+                    "BossEscortDifficult": "normal",
+                    "BossEscortAmount": "1",
+                    "Time": -1,
+                    "Supports": [{
+                            "BossEscortType": "sptUsec",
+                            "BossEscortDifficult": [
+                                "normal"
+                            ],
+                            "BossEscortAmount": "1"
+                        }
+                    ],
+                    "RandomTimeSpawn": false
+                }]
+        },
+        "normal": {
+            "factory4_day": [{
+                    "sptId": "factoryDayScav1",
+                    "number": 1,
+                    "time_min": 5,
+                    "time_max": 500,
+                    "slots_min": 0,
+                    "slots_max": 1,
+                    "SpawnPoints": "BotZone",
+                    "BotSide": "Savage",
+                    "BotPreset": "normal",
+                    "WildSpawnType": "assault",
+                    "isPlayers": true
+                }, {
+                    "sptId": "factoryDayScav2",
+                    "number": 1,
+                    "time_min": 5,
+                    "time_max": 500,
+                    "slots_min": 0,
+                    "slots_max": 1,
+                    "SpawnPoints": "BotZone",
+                    "BotSide": "Savage",
+                    "BotPreset": "normal",
+                    "WildSpawnType": "assault",
+                    "isPlayers": true
+                }, {
+                    "sptId": "factoryDayScav3",
+                    "number": 1,
+                    "time_min": 5,
+                    "time_max": 500,
+                    "slots_min": 0,
+                    "slots_max": 1,
+                    "SpawnPoints": "BotZone",
+                    "BotSide": "Savage",
+                    "BotPreset": "normal",
+                    "WildSpawnType": "assault",
+                    "isPlayers": true
+                }, {
+                    "sptId": "factoryDayScav4",
+                    "number": 1,
+                    "time_min": 5,
+                    "time_max": 500,
+                    "slots_min": 0,
+                    "slots_max": 1,
+                    "SpawnPoints": "BotZone",
+                    "BotSide": "Savage",
+                    "BotPreset": "normal",
+                    "WildSpawnType": "assault",
+                    "isPlayers": true
+                }, {
+                    "sptId": "factoryDayScav5",
+                    "number": 1,
+                    "time_min": 5,
+                    "time_max": 500,
+                    "slots_min": 0,
+                    "slots_max": 1,
+                    "SpawnPoints": "BotZone",
+                    "BotSide": "Savage",
+                    "BotPreset": "normal",
+                    "WildSpawnType": "assault",
+                    "isPlayers": true
+                }, {
+                    "sptId": "factoryDayScav6",
+                    "number": 1,
+                    "time_min": 5,
+                    "time_max": 500,
+                    "slots_min": 0,
+                    "slots_max": 1,
+                    "SpawnPoints": "BotZone",
+                    "BotSide": "Savage",
+                    "BotPreset": "normal",
+                    "WildSpawnType": "assault",
+                    "isPlayers": true
+                }, {
+                    "sptId": "factoryDayScav7",
+                    "number": 1,
+                    "time_min": 5,
+                    "time_max": 500,
+                    "slots_min": 0,
+                    "slots_max": 1,
+                    "SpawnPoints": "BotZone",
+                    "BotSide": "Savage",
+                    "BotPreset": "normal",
+                    "WildSpawnType": "assault",
+                    "isPlayers": true
+                }, {
+                    "sptId": "factoryDayScav8",
+                    "number": 1,
+                    "time_min": 5,
+                    "time_max": 500,
+                    "slots_min": 0,
+                    "slots_max": 1,
+                    "SpawnPoints": "BotZone",
+                    "BotSide": "Savage",
+                    "BotPreset": "normal",
+                    "WildSpawnType": "assault",
+                    "isPlayers": true
+                }, {
+                    "sptId": "factoryDayScav9",
+                    "number": 1,
+                    "time_min": 5,
+                    "time_max": 500,
+                    "slots_min": 0,
+                    "slots_max": 1,
+                    "SpawnPoints": "BotZone",
+                    "BotSide": "Savage",
+                    "BotPreset": "normal",
+                    "WildSpawnType": "assault",
+                    "isPlayers": true
+                }, {
+                    "sptId": "factoryDayScav10",
+                    "number": 1,
+                    "time_min": 5,
+                    "time_max": 500,
+                    "slots_min": 0,
+                    "slots_max": 1,
+                    "SpawnPoints": "BotZone",
+                    "BotSide": "Savage",
+                    "BotPreset": "normal",
+                    "WildSpawnType": "assault",
+                    "isPlayers": true
+                }, {
+                    "sptId": "factoryDayScav11",
+                    "number": 1,
+                    "time_min": 5,
+                    "time_max": 500,
+                    "slots_min": 0,
+                    "slots_max": 1,
+                    "SpawnPoints": "BotZone",
+                    "BotSide": "Savage",
+                    "BotPreset": "normal",
+                    "WildSpawnType": "assault",
+                    "isPlayers": true
+                }, {
+                    "sptId": "factoryDayScav12",
+                    "number": 1,
+                    "time_min": 5,
+                    "time_max": 500,
+                    "slots_min": 0,
+                    "slots_max": 1,
+                    "SpawnPoints": "BotZone",
+                    "BotSide": "Savage",
+                    "BotPreset": "normal",
+                    "WildSpawnType": "assault",
+                    "isPlayers": true
+                }, {
+                    "sptId": "factoryDayScav13",
+                    "number": 1,
+                    "time_min": 5,
+                    "time_max": 500,
+                    "slots_min": 0,
+                    "slots_max": 1,
+                    "SpawnPoints": "BotZone",
+                    "BotSide": "Savage",
+                    "BotPreset": "normal",
+                    "WildSpawnType": "assault",
+                    "isPlayers": true
+                }
+            ]
+        }
+    },
+    "openZones": {
+        "bigmap": ["ZoneScavBase"]
+    },
+    "forcedLootSingleSpawnById": {
+        "bigmap": ["5ac620eb86f7743a8e6e0da0", "5939e5a786f77461f11c0098"],
+        "lighthouse": [
+            "6331bb0d1aa9f42b804997a6",
+            "6398a072e301557ae24cec92",
+            "6398a0861c712b1e1d4dadf1"
+        ],
+        "tarkovstreets": [
+            "638df4cc7b560b03794a18d2",
+            "638cbc68a63f1b49be6a3010",
+            "6391fcf5744e45201147080f",
+            "638e0057ab150a5f56238960",
+            "63927b29c115f907b14700b9",
+            "638dfc803083a019d447768e",
+            "638e9d5536b3b72c944e2fc7",
+            "6393262086e646067c176aa2",
+            "63989ced706b793c7d60cfef",
+            "63a39e1d234195315d4020bd"
+        ]
+    },
+    "splitWaveIntoSingleSpawnsSettings": {
+        "enabled": true,
+        "ignoreMaps": ["base", "develop", "hideout", "privatearea", "suburbs", "terminal", "town", "factory4_day", "factory4_night"],
+        "waveSizeThreshold": 4
+    },
+    "rogueLighthouseSpawnTimeSettings": {
+        "enabled": true,
+        "waitTimeSeconds": 180
+    },
+    "fixEmptyBotWavesSettings": {
+        "enabled": true,
+        "ignoreMaps": ["base", "develop", "hideout", "privatearea", "suburbs", "terminal", "town"]
+    }
+}
