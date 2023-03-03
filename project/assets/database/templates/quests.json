@@ -27487,7 +27487,7 @@
                     "value": "1",
                     "distance": {
                       "compareMethod": ">=",
-                      "value": 125
+                      "value": 100
                     },
                     "bodyPart": [
                       "Head"
@@ -27532,7 +27532,7 @@
                     "value": "1",
                     "distance": {
                       "compareMethod": ">=",
-                      "value": 125
+                      "value": 100
                     },
                     "bodyPart": [
                       "Head"
@@ -27577,7 +27577,7 @@
                     "value": "1",
                     "distance": {
                       "compareMethod": ">=",
-                      "value": 125
+                      "value": 100
                     },
                     "bodyPart": [
                       "Head"
