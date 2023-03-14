@@ -89,6 +89,7 @@ Player profile is stored in SPT folder as a JSON file, allowing for changes to p
 	 - bossKojainy (Shturman)
 	 - bossSanitar
 	 - bossTagilla
+	 - bosszryachiy
 	 - curedAssault
 	 - exUsec (Rogue)
 	 - followerBigPipe
@@ -101,6 +102,7 @@ Player profile is stored in SPT folder as a JSON file, allowing for changes to p
 	 - followerGluharSnipe
 	 - followerKojaniy
 	 - followerSanitar
+	 - followerzryachiy
 	 - gifter
 		 - ~~Gives gifts~~ NOT IMPLEMENTED
 	 - marksman
@@ -205,7 +207,7 @@ Player profile is stored in SPT folder as a JSON file, allowing for changes to p
 	- Replace daily quest
 		- Replace quest with new one
 		- Charged fee
-	- ~~Scav daily quests~~ NOT IMPLEMENTED
+	- Scav daily quests
 	- Types
 		- Elimination
 		- Exit location
@@ -268,15 +270,16 @@ Player profile is stored in SPT folder as a JSON file, allowing for changes to p
 	- Lighthouse
 	- Laboratory
 	- Shoreline
+	- Streets
 - Loot
-	- Generated from over 40,000 loot runs on live, spawn chances calculated from all runs to give fairly accurate depiction of live loot.
+	- Generated from over 30,000 loot runs on live, spawn chances calculated from all runs to give fairly accurate depiction of live loot.
 	- Static loot (containers)
 		- Each container type can contain items appropriate to that type
 	- Loose loot
 		- Randomised loose items found on map
 - Airdrops
 	- Randomised chance of spawning
-	- ~~Fires flares~~ NOT IMPLEMENTED
+	- Fire red flare to request an airdrop
 	- ~~Drops 1 of 3 randomised loot crate types~~ NOT IMPLEMENTED
 	- Drops lootable crate in:
 		- Customs
@@ -284,7 +287,8 @@ Player profile is stored in SPT folder as a JSON file, allowing for changes to p
 		- Woods
 		- Lighthouse
 		- Shoreline
-	- Can be adjusted by config file
+		- Streets
+	- Can be adjusted via config file
 - Raid damage
 	- Exiting a raid with injury to player character will be persisted out of raid
 - Post-raid therapist healing
@@ -304,9 +308,13 @@ Player profile is stored in SPT folder as a JSON file, allowing for changes to p
 	- Standard/Left Behind/Prepare To Escape/Edge Of Darkness
 	- Custom profiles
 		- SPT Easy start
-			- Lots of roubles / some skills / high level
+			- Lots of money / some QoL skills level 20 / level 69
 		- SPT Zero to hero
-			- No roubles, skills, trader rep or items
+			- No money, skills, trader rep or items, only a knife
+		- SPT Developer
+			- Testing profile, level 69, most skills maxed, max trader rep
+			- USEC have all quests ready to start
+			- BEAR have all quests ready to hand in
 - Note system
 	- Add
 	- Edit
@@ -314,13 +322,13 @@ Player profile is stored in SPT folder as a JSON file, allowing for changes to p
 - Extensive config system
 	- Alter how SPT works
 - Holiday themes in hideout on appropriate days
-	- ~~Halloween~~ NOT IMPLEMENTED
-	- ~~Christmas~~ NOT IMPLEMENTED
+	- Halloween
+	- Christmas
 
 ## Code
 - TypeScript
-	- Majority of custom EFT classes passed from client to server have been mapped
+	- Majority of EFT request/response classes passed from client to server have been mapped
 - Unit Tests
-	- Supports tests
+	- Supports tests via jest
 - Dependency injection
-- Config files accessible from `Aki_Data\Server\configs`
+- Config files accessible from `Aki_Data\Server\configs` / `project\assets\configs`
