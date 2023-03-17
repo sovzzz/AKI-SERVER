@@ -329,7 +329,8 @@
         "5fca13ca637ee0341a484f46",
         "637b6179104668754b72f8f5",
         "637b620db7afa97bfc3d7009",
-        "5c10c8fd86f7743d7d706df3"
+        "5c10c8fd86f7743d7d706df3",
+        "5ed515f6915ec335206e4152"
       ],
       "Backpack": [
         "5c1d0d6d86f7744bb2683e1f",
@@ -409,8 +410,8 @@
         "5c0e534186f7747fa1419867",
         "544fb25a4bdc2dfb738b4567",
         "5c0e531d86f7747fa23f4d42",
-        "5c0e530286f7747fa1419862",
         "637b612fb7afa97bfc3d7005",
+        "5c0e530286f7747fa1419862",
         "590c661e86f7741e566b646a",
         "544fb37f4bdc2dee738b4567",
         "5755383e24597772cb798966",
@@ -455,7 +456,11 @@
         "56742c284bdc2d98058b456d",
         "5b43575a86f77424f443fe62",
         "59faf7ca86f7740dbe19f6c2",
-        "62a0a098de7ac8199358053b"
+        "62a0a098de7ac8199358053b",
+        "57347c1124597737fb1379e3",
+        "5d0379a886f77420407aa271",
+        "59e3556c86f7741776641ac2",
+        "590c5c9f86f77477c91c36e7"
       ],
       "SecuredContainer": [
         "5e99711486f7744bfc4af328",
@@ -2534,8 +2539,8 @@
   "chances": {
     "equipment": {
       "Headwear": 0,
-      "Earpiece": 26,
-      "FaceCover": 25,
+      "Earpiece": 27,
+      "FaceCover": 26,
       "ArmorVest": 0,
       "Eyewear": 31,
       "ArmBand": 0,
@@ -2558,7 +2563,7 @@
       "mod_scope": 100,
       "mod_stock": 0,
       "mod_sight_front": 100,
-      "mod_mount": 51,
+      "mod_mount": 52,
       "mod_muzzle": 0,
       "mod_foregrip": 0,
       "mod_mount_001": 0,
