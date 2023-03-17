@@ -2432,13 +2432,11 @@
       },
       "looseLoot": {
         "max": 23,
-        "min": 0,
-        "whitelist": []
+        "min": 0
       },
       "magazines": {
         "max": 4,
-        "min": 2,
-        "whitelist": []
+        "min": 2
       },
       "specialItems": {
         "max": 0,
