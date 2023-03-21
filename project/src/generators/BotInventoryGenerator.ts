@@ -258,7 +258,7 @@ export class BotInventoryGenerator
     protected getFilteredDynamicModsForItem(itemTpl: string, equipmentBlacklist: EquipmentFilterDetails[]): Record<string, string[]>
     {
         const modPool = this.botEquipmentModPoolService.getModsForGearSlot(itemTpl);
-        for (const modSlot of Object.keys(modPool))
+        for (const modSlot of Object.keys(modPool ?? []))
         {
             const blacklistedMods = equipmentBlacklist[0].equipment[modSlot] || [];
             const filteredMods =  modPool[modSlot].filter(x => !blacklistedMods.includes(x));

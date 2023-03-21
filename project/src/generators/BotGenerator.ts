@@ -318,7 +318,7 @@ export class BotGenerator
      */
     protected getSkillsWithRandomisedProgressValue(skills: IBaseSkill[]): IBaseSkill[]
     {
-        if (Object.keys(skills).length === 0)
+        if (Object.keys(skills ?? []).length === 0)
         {
             return;
         }
