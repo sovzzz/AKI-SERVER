@@ -341,6 +341,7 @@ export class BotGenerator
 
         bot._id = botId;
         bot.aid = botId;
+
         return bot;
     }
 
