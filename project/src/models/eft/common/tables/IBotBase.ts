@@ -150,6 +150,13 @@ export interface Inventory
     fastPanel: Record<string, string>
 }
 
+export interface IBaseJsonSkills
+{
+    Common: Record<string, Common>
+    Mastering: Record<string, Mastering>
+    Points: number
+}
+
 export interface Skills 
 {
     Common: Common[]

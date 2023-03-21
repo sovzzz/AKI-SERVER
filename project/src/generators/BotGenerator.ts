@@ -4,7 +4,7 @@ import { BotDifficultyHelper } from "../helpers/BotDifficultyHelper";
 import { BotHelper } from "../helpers/BotHelper";
 import { ProfileHelper } from "../helpers/ProfileHelper";
 import { WeightedRandomHelper } from "../helpers/WeightedRandomHelper";
-import { Health as PmcHealth, IBaseSkill, IBotBase, Info, Skills as botSkills } from "../models/eft/common/tables/IBotBase";
+import { Health as PmcHealth, IBaseJsonSkills, IBaseSkill, IBotBase, Info, Skills as botSkills } from "../models/eft/common/tables/IBotBase";
 import { Health, IBotType } from "../models/eft/common/tables/IBotType";
 import { Item, Upd } from "../models/eft/common/tables/IItem";
 import { BaseClasses } from "../models/enums/BaseClasses";
@@ -154,7 +154,7 @@ export class BotGenerator
         bot.Info.Settings.StandingForKill = botJsonTemplate.experience.standingForKill;
         bot.Info.Voice = this.randomUtil.getArrayValue(botJsonTemplate.appearance.voice);
         bot.Health = this.generateHealth(botJsonTemplate.health, bot.Info.Side === "Savage");
-        bot.Skills = this.generateSkills(botJsonTemplate.skills);
+        bot.Skills = this.generateSkills(<any>botJsonTemplate.skills); // TODO: fix bad type, bot jsons store skills in dict, output needs to be array
         bot.Customization.Head = this.randomUtil.getArrayValue(botJsonTemplate.appearance.head);
         bot.Customization.Body = this.weightedRandomHelper.getWeightedInventoryItem(botJsonTemplate.appearance.body);
         bot.Customization.Feet = this.weightedRandomHelper.getWeightedInventoryItem(botJsonTemplate.appearance.feet);
@@ -300,11 +300,11 @@ export class BotGenerator
      * @param botSkills Skills that should have their progress value randomised
      * @returns 
      */
-    protected generateSkills(botSkills: botSkills): botSkills
+    protected generateSkills(botSkills: IBaseJsonSkills): botSkills
     {
         const skillsToReturn: botSkills = {
-            Common: this.getSkillsWithRandomisedProgressValue(botSkills.Common),
-            Mastering: this.getSkillsWithRandomisedProgressValue(botSkills.Mastering),
+            Common: this.getSkillsWithRandomisedProgressValue(Object.values(botSkills.Common ?? [])),
+            Mastering: this.getSkillsWithRandomisedProgressValue(Object.values(botSkills.Mastering ?? [])),
             Points: 0
         };
 
