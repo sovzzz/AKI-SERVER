@@ -166,12 +166,12 @@ export class QuestController
 
     /**
      * Is the quest for the opposite side the player is on
-     * @param side player side (usec/bear)
-     * @param questId questId to check
+     * @param playerSide Player side (usec/bear)
+     * @param questId QuestId to check
      */
-    protected questIsForOtherSide(side: string, questId: string): boolean
+    protected questIsForOtherSide(playerSide: string, questId: string): boolean
     {
-        const isUsec = side.toLowerCase() === "usec";
+        const isUsec = playerSide.toLowerCase() === "usec";
         if (isUsec && this.questConfig.bearOnlyQuests.includes(questId))
         {
             // player is usec and quest is bear only, skip
@@ -295,18 +295,17 @@ export class QuestController
      */
     protected getRepeatableQuestFromProfile(pmcData: IPmcData, acceptedQuest: IAcceptQuestRequestData): IRepeatableQuest
     {
-        let result: IRepeatableQuest;
-        for (const repeatable of pmcData.RepeatableQuests)
+        for (const repeatableQuest of pmcData.RepeatableQuests)
         {
-            result = repeatable.activeQuests.find(x => x._id === acceptedQuest.qid);
+            const result = repeatableQuest.activeQuests.find(x => x._id === acceptedQuest.qid);
             if (result)
             {
-                this.logger.debug(`Accepted repeatable quest ${acceptedQuest.qid} from ${repeatable.name}`);
+                this.logger.debug(`Accepted repeatable quest ${acceptedQuest.qid} from ${repeatableQuest.name}`);
                 break;
             }
         }
 
-        return result;
+        return undefined;
     }
 
     /**

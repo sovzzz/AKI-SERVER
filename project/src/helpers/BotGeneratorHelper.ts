@@ -41,64 +41,64 @@ export class BotGeneratorHelper
      */
     public generateExtraPropertiesForItem(itemTemplate: ITemplateItem, botRole: string = null): { upd?: Upd } 
     {
-        const properties: Upd = {};
+        const itemProperties: Upd = {};
 
         if (itemTemplate._props.MaxDurability) 
         {
             if (itemTemplate._props.weapClass) // Is weapon
             {
-                properties.Repairable = this.generateWeaponRepairableProperties(itemTemplate, botRole);
+                itemProperties.Repairable = this.generateWeaponRepairableProperties(itemTemplate, botRole);
             }
             else if (itemTemplate._props.armorClass) // Is armor
             {
-                properties.Repairable = this.generateArmorRepairableProperties(itemTemplate, botRole);
+                itemProperties.Repairable = this.generateArmorRepairableProperties(itemTemplate, botRole);
             }
         }
 
         if (itemTemplate._props.HasHinge) 
         {
-            properties.Togglable = { On: true };
+            itemProperties.Togglable = { On: true };
         }
 
         if (itemTemplate._props.Foldable) 
         {
-            properties.Foldable = { Folded: false };
+            itemProperties.Foldable = { Folded: false };
         }
 
         if (itemTemplate._props.weapFireType?.length) 
         {
             if (itemTemplate._props.weapFireType.includes("fullauto")) 
             {
-                properties.FireMode = { FireMode: "fullauto" };
+                itemProperties.FireMode = { FireMode: "fullauto" };
             }
             else 
             {
-                properties.FireMode = { FireMode: this.randomUtil.getArrayValue(itemTemplate._props.weapFireType) };
+                itemProperties.FireMode = { FireMode: this.randomUtil.getArrayValue(itemTemplate._props.weapFireType) };
             }
         }
 
         if (itemTemplate._props.MaxHpResource) 
         {
-            properties.MedKit = { HpResource: itemTemplate._props.MaxHpResource };
+            itemProperties.MedKit = { HpResource: itemTemplate._props.MaxHpResource };
         }
 
         if (itemTemplate._props.MaxResource && itemTemplate._props.foodUseTime) 
         {
-            properties.FoodDrink = { HpPercent: itemTemplate._props.MaxResource };
+            itemProperties.FoodDrink = { HpPercent: itemTemplate._props.MaxResource };
         }
 
         if ([BaseClasses.FLASHLIGHT, BaseClasses.TACTICAL_COMBO].includes(<BaseClasses>itemTemplate._parent)) 
         {
             // Get chance from botconfig for bot type, use 50% if no value found
             const lightLaserActiveChance = this.getBotEquipmentSettingFromConfig(botRole, "lightLaserIsActiveChancePercent", 50);
-            properties.Light = { IsActive: (this.randomUtil.getChance100(lightLaserActiveChance)), SelectedMode: 0 };
+            itemProperties.Light = { IsActive: (this.randomUtil.getChance100(lightLaserActiveChance)), SelectedMode: 0 };
         }
 
         if (itemTemplate._parent === BaseClasses.NIGHTVISION) 
         {
             // Get chance from botconfig for bot type, use 50% if no value found
             const nvgActiveChance = this.getBotEquipmentSettingFromConfig(botRole, "nvgIsActiveChancePercent", 50);
-            properties.Togglable = { On: (this.randomUtil.getChance100(nvgActiveChance)) };
+            itemProperties.Togglable = { On: (this.randomUtil.getChance100(nvgActiveChance)) };
         }
 
         // Togglable face shield
@@ -106,11 +106,11 @@ export class BotGeneratorHelper
         {
             // Get chance from botconfig for bot type, use 75% if no value found
             const faceShieldActiveChance = this.getBotEquipmentSettingFromConfig(botRole, "faceShieldIsActiveChancePercent", 75);
-            properties.Togglable = { On: (this.randomUtil.getChance100(faceShieldActiveChance)) };
+            itemProperties.Togglable = { On: (this.randomUtil.getChance100(faceShieldActiveChance)) };
         }
 
-        return Object.keys(properties).length
-            ? { upd: properties }
+        return Object.keys(itemProperties).length
+            ? { upd: itemProperties }
             : {};
     }
 

@@ -477,35 +477,38 @@ class ItemHelper
     }
 
     /**
-     * split item stack if it exceeds StackMaxSize
+     * split item stack if it exceeds its StackMaxSize property
+     * @param itemToSplit item being split into smaller stacks
+     * @returns Array of split items
      */
-    public splitStack(item: Item): Item[]
+    public splitStack(itemToSplit: Item): Item[]
     {
-        if (!(("upd" in item) && ("StackObjectsCount" in item.upd)))
+        if (!(itemToSplit?.upd?.StackObjectsCount != null))
         {
-            return [item];
+            return [itemToSplit];
         }
 
-        const maxStack = this.databaseServer.getTables().templates.items[item._tpl]._props.StackMaxSize;
-        let count = item.upd.StackObjectsCount;
+        const maxStackSize = this.databaseServer.getTables().templates.items[itemToSplit._tpl]._props.StackMaxSize;
+        let remainingCount = itemToSplit.upd.StackObjectsCount;
         const stacks: Item[] = [];
 
         // If the current count is already equal or less than the max
         // then just return the item as is.
-        if (count <= maxStack)
+        if (remainingCount <= maxStackSize)
         {
-            stacks.push(this.jsonUtil.clone(item));
+            stacks.push(this.jsonUtil.clone(itemToSplit));
+
             return stacks;
         }
 
-        while (count)
+        while (remainingCount)
         {
-            const amount = Math.min(count, maxStack);
-            const newStack = this.jsonUtil.clone(item);
+            const amount = Math.min(remainingCount, maxStackSize);
+            const newStack = this.jsonUtil.clone(itemToSplit);
 
             newStack._id = this.hashUtil.generate();
             newStack.upd.StackObjectsCount = amount;
-            count -= amount;
+            remainingCount -= amount;
             stacks.push(newStack);
         }
 
@@ -514,19 +517,19 @@ class ItemHelper
 
     /**
      * Find Barter items in the inventory
-     * @param {string} by
+     * @param {string} by tpl or id
      * @param {Object} pmcData
      * @param {string} barterItemId
      * @returns Array of Item objects
      */
-    public findBarterItems(by: string, pmcData: IPmcData, barterItemId: string): Item[]
+    public findBarterItems(by: "tpl" | "id", pmcData: IPmcData, barterItemId: string): Item[]
     { 
         // find required items to take after buying (handles multiple items)
         const barterIDs = typeof barterItemId === "string"
             ? [barterItemId]
             : barterItemId;
-        let itemsArray: Item[] = [];
 
+        let barterItems: Item[] = [];
         for (const barterID of barterIDs)
         {
             const filterResult = pmcData.Inventory.items.filter(item =>
@@ -536,10 +539,15 @@ class ItemHelper
                     : (item._id === barterID);
             });
 
-            itemsArray = Object.assign(itemsArray, filterResult);
+            barterItems = Object.assign(barterItems, filterResult);
+        }
+
+        if (barterItems.length === 0) 
+        {
+            this.logger.warning(`No items found for barter Id: ${barterIDs}`);
         }
     
-        return itemsArray;
+        return barterItems;
     }
 
     /**
@@ -800,6 +808,7 @@ class ItemHelper
 
         // Add new stack-size-correct items to ammo box
         let currentStoredCartridgeCount = 0;
+        // Location in ammoBox cartridges will be placed
         let location = 0;
         while (currentStoredCartridgeCount < ammoBoxMaxCartridgeCount)
         {
@@ -808,7 +817,7 @@ class ItemHelper
                 ? ammoBoxMaxCartridgeCount
                 : cartridgeMaxStackSize;
 
-            // Add cartridge item object into items array
+            // Add cartridge item into items array
             ammoBox.push(this.createCartridges(ammoBox[0]._id, cartridgeTpl, cartridgeCountToAdd, location));
 
             currentStoredCartridgeCount += cartridgeCountToAdd;
@@ -832,7 +841,7 @@ class ItemHelper
         minSizePercent = 0.25
     ): void
     {
-        // no caliber defined, choose one
+        // no caliber defined, choose one at random
         if (!caliber)
         {
             caliber = this.getRandomValidCaliber(magTemplate);
