@@ -297,7 +297,7 @@ export class BotGenerator
 
     /**
      * Get a bots skills with randomsied progress value between the min and max values
-     * @param botSkills 
+     * @param botSkills Skills that should have their progress value randomised
      * @returns 
      */
     protected generateSkills(botSkills: botSkills): botSkills
