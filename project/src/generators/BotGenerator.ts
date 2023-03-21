@@ -318,14 +318,17 @@ export class BotGenerator
      */
     protected getSkillsWithRandomisedProgressValue(skills: IBaseSkill[]): IBaseSkill[]
     {
+        if (Object.keys(skills).length === 0)
+        {
+            return;
+        }
+
         // Create a new array of skills with randomised progress value
         return skills.map((skill) => ({
             Id: skill.Id,
             Progress: this.randomUtil.getInt(skill.min, skill.max)
         }));
     }
-
-
 
     /**
      * Generate a random Id for a bot and apply to bots _id and aid value
