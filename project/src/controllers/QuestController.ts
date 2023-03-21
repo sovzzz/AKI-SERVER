@@ -297,11 +297,12 @@ export class QuestController
     {
         for (const repeatableQuest of pmcData.RepeatableQuests)
         {
-            const result = repeatableQuest.activeQuests.find(x => x._id === acceptedQuest.qid);
-            if (result)
+            const matchingQuest = repeatableQuest.activeQuests.find(x => x._id === acceptedQuest.qid);
+            if (matchingQuest)
             {
                 this.logger.debug(`Accepted repeatable quest ${acceptedQuest.qid} from ${repeatableQuest.name}`);
-                break;
+                
+                return matchingQuest;
             }
         }
 
