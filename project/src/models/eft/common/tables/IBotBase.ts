@@ -157,23 +157,22 @@ export interface Skills
     Points: number
 }
 
-export interface Common 
+export interface IBaseSkill
 {
     Id: string
     Progress: number
-    PointsEarnedDuringSession?: number
-    LastAccess?: number
     max?: number
     min?: number
 }
 
-export interface Mastering 
+export interface Common extends IBaseSkill
 {
-    Id: string
-    Progress: number
-    max?: number
-    min?: number
+    PointsEarnedDuringSession?: number
+    LastAccess?: number
 }
+
+export interface Mastering extends IBaseSkill
+{}
 
 export interface Stats 
 {
