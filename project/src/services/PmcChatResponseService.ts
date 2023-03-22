@@ -37,8 +37,9 @@ export class PmcChatResponseService
      * For each PMC victim of the player, have a chance to send a message to the player, can be positive or negative
      * @param sessionId Session id
      * @param pmcVictims Array of bots killed by player
+     * @param pmcData Player profile
      */
-    public sendVictimResponse(sessionId: string, pmcVictims: Victim[]): void
+    public sendVictimResponse(sessionId: string, pmcVictims: Victim[], pmcData: IPmcData): void
     {
         for (const victim of pmcVictims)
         {
@@ -48,7 +49,7 @@ export class PmcChatResponseService
             }
 
             const victimDetails = this.getVictimDetails(victim);
-            const message = this.chooseMessage(true);
+            const message = this.chooseMessage(true, pmcData);
             this.notificationSendHelper.sendMessageToPlayer(sessionId, victimDetails, message, MessageType.USER_MESSAGE);
         }        
     }
@@ -58,6 +59,7 @@ export class PmcChatResponseService
      * Not fully implemented yet, needs method of acquiring killers details after raid
      * @param sessionId Session id
      * @param pmcData Players profile
+     * @param killer The bot who killed the player
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public sendKillerResponse(sessionId: string, pmcData: IPmcData, killer: Aggressor): void
@@ -90,7 +92,7 @@ export class PmcChatResponseService
             }
         };
 
-        const message = this.chooseMessage(false);
+        const message = this.chooseMessage(false, pmcData);
         if (!message)
         {
             return;
@@ -101,10 +103,11 @@ export class PmcChatResponseService
 
     /**
      * Choose a localised message to send the player (different if sender was killed or killed player)
-     * @param isVictim 
-     * @returns 
+     * @param isVictim Is the message coming from a bot killed by the player
+     * @param pmcData Player profile
+     * @returns Message from PMC to player
      */
-    protected chooseMessage(isVictim: boolean): string
+    protected chooseMessage(isVictim: boolean, pmcData: IPmcData): string
     {
         // Positive/negative etc
         const responseType = this.chooseResponseType(isVictim);
@@ -119,7 +122,7 @@ export class PmcChatResponseService
         }
 
         // Choose random response from above list and request it from localisation service
-        let responseText = this.localisationService.getText(this.randomUtil.getArrayValue(possibleResponseLocaleKeys));
+        let responseText = this.localisationService.getText(this.randomUtil.getArrayValue(possibleResponseLocaleKeys), {playerName: pmcData.Info.Nickname, playerLevel: pmcData.Info.Level, playerSide: pmcData.Info.Side});
 
         if (this.appendSuffixToMessageEnd(isVictim))
         {

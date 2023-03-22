@@ -156,7 +156,7 @@ export class InraidController
         const victims = offraidData.profile.Stats.Victims.filter(x => x.Role === "sptBear" || x.Role === "sptUsec");
         if (victims?.length > 0)
         {
-            this.pmcChatResponseService.sendVictimResponse(sessionID, victims);
+            this.pmcChatResponseService.sendVictimResponse(sessionID, victims, pmcData);
         }
 
         if (insuranceEnabled)
