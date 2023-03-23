@@ -64,6 +64,11 @@ export class PmcChatResponseService
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public sendKillerResponse(sessionId: string, pmcData: IPmcData, killer: Aggressor): void
     {
+        if (!killer)
+        {
+            return;
+        }
+
         if (!this.randomUtil.getChance100(this.pmcResponsesConfig.killer.responseChancePercent))
         {
             return;
