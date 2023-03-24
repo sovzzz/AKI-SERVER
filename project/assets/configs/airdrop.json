@@ -1,6 +1,6 @@
 {
     "airdropChancePercent": {
-        "bigmap": 20,
+        "bigmap": 100,
         "woods": 25,
         "lighthouse": 20,
         "shoreline": 20,
@@ -12,7 +12,7 @@
         "mixed": 2,
         "weaponArmor": 1,
         "foodMedical": 1,
-		"barter": 1
+        "barter": 1
     },
     "airdropMinStartTimeSeconds": 60,
     "airdropMaxStartTimeSeconds": 300,
@@ -42,7 +42,8 @@
                 "63495c500c297e20065a08b1",
                 "5cde8864d7f00c0010373be1",
                 "5b3b713c5acfc4330140bd8d",
-                "60c080eb991ac167ad1c3ad4"
+                "60c080eb991ac167ad1c3ad4",
+                "6389c88b33a719183c7f63b6"
             ],
             "itemTypeWhitelist": [
                 "543be5dd4bdc2deb348b4569",
@@ -217,13 +218,13 @@
                 "60c080eb991ac167ad1c3ad4"
             ],
             "itemTypeWhitelist": [
-				"543be5dd4bdc2deb348b4569",
-				"5448e8d64bdc2dce718b4568",
-				"5448e8d04bdc2ddf718b4569",
-				"5448f3a64bdc2d60728b456a",
-				"5448f3ac4bdc2dce718b4569",
-				"5448f39d4bdc2d0a728b4568",
-				"5448f3a14bdc2d27728b4569"
+                "543be5dd4bdc2deb348b4569",
+                "5448e8d64bdc2dce718b4568",
+                "5448e8d04bdc2ddf718b4569",
+                "5448f3a64bdc2d60728b456a",
+                "5448f3ac4bdc2dce718b4569",
+                "5448f39d4bdc2d0a728b4568",
+                "5448f3a14bdc2d27728b4569"
             ],
             "itemLimits": {
                 "5447b5cf4bdc2d65278b4567": 1,
@@ -272,8 +273,8 @@
                 }
             }
         },
-		"barter": {
-			"presetCount": {
+        "barter": {
+            "presetCount": {
                 "min": 3,
                 "max": 5
             },
@@ -292,16 +293,17 @@
                 "63495c500c297e20065a08b1",
                 "5cde8864d7f00c0010373be1",
                 "5b3b713c5acfc4330140bd8d",
-                "60c080eb991ac167ad1c3ad4"
+                "60c080eb991ac167ad1c3ad4",
+                "6389c88b33a719183c7f63b6"
             ],
             "itemTypeWhitelist": [
-				"5d650c3e815116009f6201d2",
-				"57864ee62459775490116fc1",
-				"57864ada245977548638de91",
-				"57864bb7245977548b3b66c2",
-				"57864e4c24597754843f8723",
-				"57864c322459775490116fbf",
-				"57864a66245977548f04a81f"
+                "5d650c3e815116009f6201d2",
+                "57864ee62459775490116fc1",
+                "57864ada245977548638de91",
+                "57864bb7245977548b3b66c2",
+                "57864e4c24597754843f8723",
+                "57864c322459775490116fbf",
+                "57864a66245977548f04a81f"
             ],
             "itemLimits": {
                 "5447b5cf4bdc2d65278b4567": 1,
@@ -350,6 +352,6 @@
                     "max": 500
                 }
             }
-		}
+        }
     }
 }
