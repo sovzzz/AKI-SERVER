@@ -207,7 +207,7 @@ export class BotGenerator
             name += ` ${botRole}`;
         }
 
-        return name;
+        return name.trim();
     }
 
     /**
