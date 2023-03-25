@@ -189,7 +189,7 @@ export class HideoutController
 
         // Apply bonuses
         const bonuses = hideoutData.stages[hideoutArea.level].bonuses;
-        if (bonuses.length > 0)
+        if (bonuses?.length > 0)
         {
             for (const bonus of bonuses)
             {
