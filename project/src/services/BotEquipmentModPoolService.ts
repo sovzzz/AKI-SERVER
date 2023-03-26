@@ -59,6 +59,12 @@ export class BotEquipmentModPoolService
                 pool[item._id] = {};
             }
 
+            // No slots, skip
+            if (!item._props.Slots)
+            {
+                return;
+            }
+
             for (const slot of item._props.Slots)
             {
                 const itemsThatFit = slot._props.filters[0].Filter;
