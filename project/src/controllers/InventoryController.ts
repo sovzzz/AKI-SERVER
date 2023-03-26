@@ -379,6 +379,10 @@ export class InventoryController
 
     /**
      * Toggles "Toggleable" items like night vision goggles and face shields.
+     * @param pmcData player profile
+     * @param body Toggle request
+     * @param sessionID Session id
+     * @returns IItemEventRouterResponse
      */
     public toggleItem(pmcData: IPmcData, body: IInventoryToggleRequestData, sessionID: string): IItemEventRouterResponse
     {
@@ -388,16 +392,24 @@ export class InventoryController
             pmcData = this.profileHelper.getScavProfile(sessionID);
         }
 
-        for (const item of pmcData.Inventory.items)
+        const itemToToggle = pmcData.Inventory.items.find(x => x._id === body.item);
+        if (itemToToggle)
         {
-            if (item._id && item._id === body.item)
+            if (!itemToToggle.upd)
             {
-                item.upd.Togglable = { On: body.value };
-                return this.eventOutputHolder.getOutput(sessionID);
+                this.logger.warning(`Item with _id: ${itemToToggle._id} is missing a upd object, adding`);
+                itemToToggle.upd = {};
             }
+
+            itemToToggle.upd.Togglable = { On: body.value };
+
+            return this.eventOutputHolder.getOutput(sessionID);
+        }
+        else
+        {
+            this.logger.warning(`Unable to find inventory item with _id to toggle: ${body.item}`);
         }
 
-        //return "";
         return {
             warnings: [],
             profileChanges: {}
