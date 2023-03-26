@@ -1,12 +1,12 @@
 {
     "airdropChancePercent": {
-        "bigmap": 100,
+        "bigmap": 25,
         "woods": 25,
         "lighthouse": 20,
         "shoreline": 20,
         "interchange": 20,
-        "reserve": 10,
-        "tarkovStreets": 12
+        "reserve": 20,
+        "tarkovStreets": 20
     },
     "airdropTypeWeightings": {
         "mixed": 2,
