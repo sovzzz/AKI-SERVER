@@ -78,7 +78,9 @@ export interface EquipmentFilters
     weaponModLimits: ModLimits
     weaponSightWhitelist: Record<string, string[]>
     faceShieldIsActiveChancePercent?: number;
-    lightLaserIsActiveChancePercent?: number;
+    lightIsActiveDayChancePercent?: number;
+    lightIsActiveNightChancePercent?: number;
+    laserIsActiveChancePercent?: number;
     nvgIsActiveChancePercent?: number;
     randomisation: RandomisationDetails[]
     blacklist: EquipmentFilterDetails[]

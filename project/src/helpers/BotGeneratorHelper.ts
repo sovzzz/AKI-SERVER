@@ -1,8 +1,13 @@
 import { inject, injectable } from "tsyringe";
 
+import { ApplicationContext } from "../context/ApplicationContext";
+import { ContextVariableType } from "../context/ContextVariableType";
 import { DurabilityLimitsHelper } from "../helpers/DurabilityLimitsHelper";
 import { Item, Repairable, Upd } from "../models/eft/common/tables/IItem";
 import { ITemplateItem } from "../models/eft/common/tables/ITemplateItem";
+import {
+    IGetRaidConfigurationRequestData
+} from "../models/eft/match/IGetRaidConfigurationRequestData";
 import { BaseClasses } from "../models/enums/BaseClasses";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
 import { EquipmentFilters, IBotConfig } from "../models/spt/config/IBotConfig";
@@ -25,6 +30,7 @@ export class BotGeneratorHelper
         @inject("DatabaseServer") protected databaseServer: DatabaseServer,
         @inject("DurabilityLimitsHelper") protected durabilityLimitsHelper: DurabilityLimitsHelper,
         @inject("ItemHelper") protected itemHelper: ItemHelper,
+        @inject("ApplicationContext") protected applicationContext: ApplicationContext,
         @inject("LocalisationService") protected localisationService: LocalisationService,
         @inject("ConfigServer") protected configServer: ConfigServer
     ) 
@@ -87,10 +93,22 @@ export class BotGeneratorHelper
             itemProperties.FoodDrink = { HpPercent: itemTemplate._props.MaxResource };
         }
 
-        if ([BaseClasses.FLASHLIGHT, BaseClasses.TACTICAL_COMBO].includes(<BaseClasses>itemTemplate._parent)) 
+        if (itemTemplate._parent === BaseClasses.FLASHLIGHT)
+        {
+            // Get raid settings, if no raid, default to day
+            const raidSettings = this.applicationContext.getLatestValue(ContextVariableType.RAID_CONFIGURATION)?.getValue<IGetRaidConfigurationRequestData>();
+            const raidIsNight = raidSettings?.timeVariant === "PAST";
+
+            // Get chance from botconfig for bot type, use 50% if no value found
+            const lightLaserActiveChance = raidIsNight
+                ? this.getBotEquipmentSettingFromConfig(botRole, "lightIsActiveNightChancePercent", 50)
+                : this.getBotEquipmentSettingFromConfig(botRole, "lightIsActiveDayChancePercent", 25);
+            itemProperties.Light = { IsActive: (this.randomUtil.getChance100(lightLaserActiveChance)), SelectedMode: 0 };
+        }
+        else if (itemTemplate._parent === BaseClasses.TACTICAL_COMBO)
         {
             // Get chance from botconfig for bot type, use 50% if no value found
-            const lightLaserActiveChance = this.getBotEquipmentSettingFromConfig(botRole, "lightLaserIsActiveChancePercent", 50);
+            const lightLaserActiveChance = this.getBotEquipmentSettingFromConfig(botRole, "laserIsActiveChancePercent", 50);
             itemProperties.Light = { IsActive: (this.randomUtil.getChance100(lightLaserActiveChance)), SelectedMode: 0 };
         }
 
