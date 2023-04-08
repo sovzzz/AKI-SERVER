@@ -47,6 +47,10 @@ export class BotGeneratorHelper
      */
     public generateExtraPropertiesForItem(itemTemplate: ITemplateItem, botRole: string = null): { upd?: Upd } 
     {
+        // Get raid settings, if no raid, default to day
+        const raidSettings = this.applicationContext.getLatestValue(ContextVariableType.RAID_CONFIGURATION)?.getValue<IGetRaidConfigurationRequestData>();
+        const raidIsNight = raidSettings?.timeVariant === "PAST";
+
         const itemProperties: Upd = {};
 
         if (itemTemplate._props.MaxDurability) 
@@ -95,11 +99,7 @@ export class BotGeneratorHelper
 
         if (itemTemplate._parent === BaseClasses.FLASHLIGHT)
         {
-            // Get raid settings, if no raid, default to day
-            const raidSettings = this.applicationContext.getLatestValue(ContextVariableType.RAID_CONFIGURATION)?.getValue<IGetRaidConfigurationRequestData>();
-            const raidIsNight = raidSettings?.timeVariant === "PAST";
-
-            // Get chance from botconfig for bot type, use 50% if no value found
+            // Get chance from botconfig for bot type
             const lightLaserActiveChance = raidIsNight
                 ? this.getBotEquipmentSettingFromConfig(botRole, "lightIsActiveNightChancePercent", 50)
                 : this.getBotEquipmentSettingFromConfig(botRole, "lightIsActiveDayChancePercent", 25);
@@ -114,8 +114,10 @@ export class BotGeneratorHelper
 
         if (itemTemplate._parent === BaseClasses.NIGHTVISION) 
         {
-            // Get chance from botconfig for bot type, use 50% if no value found
-            const nvgActiveChance = this.getBotEquipmentSettingFromConfig(botRole, "nvgIsActiveChancePercent", 50);
+            // Get chance from botconfig for bot type
+            const nvgActiveChance = raidIsNight
+                ? this.getBotEquipmentSettingFromConfig(botRole, "nvgIsActiveChanceNightPercent", 90)
+                : this.getBotEquipmentSettingFromConfig(botRole, "nvgIsActiveChanceDayPercent", 15);
             itemProperties.Togglable = { On: (this.randomUtil.getChance100(nvgActiveChance)) };
         }
 

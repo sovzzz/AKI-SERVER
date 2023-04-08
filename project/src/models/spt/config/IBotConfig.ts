@@ -81,7 +81,8 @@ export interface EquipmentFilters
     lightIsActiveDayChancePercent?: number;
     lightIsActiveNightChancePercent?: number;
     laserIsActiveChancePercent?: number;
-    nvgIsActiveChancePercent?: number;
+    nvgIsActiveChanceDayPercent?: number;
+    nvgIsActiveChanceNightPercent?: number;
     randomisation: RandomisationDetails[]
     blacklist: EquipmentFilterDetails[]
     whitelist: EquipmentFilterDetails[]

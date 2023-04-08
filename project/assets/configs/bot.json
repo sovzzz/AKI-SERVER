@@ -293,7 +293,8 @@
             ]
         },
         "marksman": {
-            "nvgIsActiveChancePercent": 60,
+            "nvgIsActiveChanceDayPercent": 60,
+            "nvgIsActiveChanceNightPercent": 60,
             "faceShieldIsActiveChancePercent": 100,
             "lightIsActiveDayChancePercent": 25,
             "lightIsActiveNightChancePercent": 85,
@@ -310,21 +311,24 @@
             "laserIsActiveChancePercent": 75
         },
         "exusec": {
-            "nvgIsActiveChancePercent": 80,
+            "nvgIsActiveChanceDayPercent": 10,
+            "nvgIsActiveChanceNightPercent": 90,
             "faceShieldIsActiveChancePercent": 100,
             "lightIsActiveDayChancePercent": 25,
             "lightIsActiveNightChancePercent": 90,
             "laserIsActiveChancePercent": 85
         },
         "bossbully": {
-            "nvgIsActiveChancePercent": 75,
+            "nvgIsActiveChanceDayPercent": 10,
+            "nvgIsActiveChanceNightPercent": 90,
             "faceShieldIsActiveChancePercent": 100,
             "lightIsActiveDayChancePercent": 25,
             "lightIsActiveNightChancePercent": 75,
             "laserIsActiveChancePercent": 75
         },
         "bossgluhar": {
-            "nvgIsActiveChancePercent": 80,
+            "nvgIsActiveChanceDayPercent": 10,
+            "nvgIsActiveChanceNightPercent": 90,
             "faceShieldIsActiveChancePercent": 100,
             "lightIsActiveDayChancePercent": 45,
             "lightIsActiveNightChancePercent": 95,
@@ -359,14 +363,16 @@
             "laserIsActiveChancePercent": 75
         },
         "bossknight": {
-            "nvgIsActiveChancePercent": 90,
+            "nvgIsActiveChanceDayPercent": 10,
+            "nvgIsActiveChanceNightPercent": 90,
             "faceShieldIsActiveChancePercent": 100,
             "lightIsActiveDayChancePercent": 25,
             "lightIsActiveNightChancePercent": 75,
             "laserIsActiveChancePercent": 75
         },
         "bosszryachiy": {
-            "nvgIsActiveChancePercent": 90,
+            "nvgIsActiveChanceDayPercent": 10,
+            "nvgIsActiveChanceNightPercent": 90,
             "lightIsActiveDayChancePercent": 25,
             "lightIsActiveNightChancePercent": 85,
             "laserIsActiveChancePercent": 85
@@ -379,7 +385,8 @@
             "laserIsActiveChancePercent": 75
         },
         "followergluharassault": {
-            "nvgIsActiveChancePercent": 75,
+            "nvgIsActiveChanceDayPercent": 10,
+            "nvgIsActiveChanceNightPercent": 85,
             "faceShieldIsActiveChancePercent": 100,
             "lightIsActiveDayChancePercent": 25,
             "lightIsActiveNightChancePercent": 75,
@@ -404,7 +411,8 @@
             "laserIsActiveChancePercent": 75
         },
         "followerkojaniy": {
-            "nvgIsActiveChancePercent": 80,
+            "nvgIsActiveChanceDayPercent": 10,
+            "nvgIsActiveChanceNightPercent": 85,
             "faceShieldIsActiveChancePercent": 100,
             "lightIsActiveDayChancePercent": 25,
             "lightIsActiveNightChancePercent": 75,
@@ -418,7 +426,8 @@
         },
         "followertagilla": {},
         "followerbirdeye": {
-            "nvgIsActiveChancePercent": 80,
+            "nvgIsActiveChanceDayPercent": 10,
+            "nvgIsActiveChanceNightPercent": 90,
             "faceShieldIsActiveChancePercent": 100,
             "lightIsActiveDayChancePercent": 25,
             "lightIsActiveNightChancePercent": 75,
@@ -429,28 +438,32 @@
             }
         },
         "followerbigpipe": {
-            "nvgIsActiveChancePercent": 90,
+            "nvgIsActiveChanceDayPercent": 10,
+            "nvgIsActiveChanceNightPercent": 90,
             "faceShieldIsActiveChancePercent": 100,
             "lightIsActiveDayChancePercent": 25,
             "lightIsActiveNightChancePercent": 75,
             "laserIsActiveChancePercent": 75
         },
         "followerzryachiy": {
-            "nvgIsActiveChancePercent": 90,
+            "nvgIsActiveChanceDayPercent": 10,
+            "nvgIsActiveChanceNightPercent": 90,
             "lightIsActiveDayChancePercent": 25,
             "lightIsActiveNightChancePercent": 85,
             "laserIsActiveChancePercent": 85
         },
         "followertest": {},
         "sectantpriest": {
-            "nvgIsActiveChancePercent": 100,
+            "nvgIsActiveChanceDayPercent": 10,
+            "nvgIsActiveChanceNightPercent": 100,
             "faceShieldIsActiveChancePercent": 100,
             "lightIsActiveDayChancePercent": 25,
             "lightIsActiveNightChancePercent": 85,
             "laserIsActiveChancePercent": 95
         },
         "sectantwarrior": {
-            "nvgIsActiveChancePercent": 100,
+            "nvgIsActiveChanceDayPercent": 10,
+            "nvgIsActiveChanceNightPercent": 100,
             "faceShieldIsActiveChancePercent": 100,
             "lightIsActiveDayChancePercent": 25,
             "lightIsActiveNightChancePercent": 75,
@@ -458,7 +471,8 @@
         },
         "test": {},
         "pmcbot": {
-            "nvgIsActiveChancePercent": 80,
+            "nvgIsActiveChanceDayPercent": 20,
+            "nvgIsActiveChanceNightPercent": 95,
             "faceShieldIsActiveChancePercent": 100,
             "lightIsActiveDayChancePercent": 35,
             "lightIsActiveNightChancePercent": 95,
@@ -491,7 +505,8 @@
                 "5447b5e04bdc2d62278b4567": ["55818ad54bdc2ddc698b4569", "55818acf4bdc2dde698b456b", "55818ac54bdc2d5b648b456e"],
                 "5447b6254bdc2dc3278b4568": ["55818ae44bdc2dde698b456c", "55818ac54bdc2d5b648b456e", "55818aeb4bdc2ddc698b456a", "55818add4bdc2d5b648b456f"]
             },
-            "nvgIsActiveChancePercent": 50,
+            "nvgIsActiveChanceDayPercent": 20,
+            "nvgIsActiveChanceNightPercent": 95,
             "faceShieldIsActiveChancePercent": 85,
             "lightIsActiveDayChancePercent": 25,
             "lightIsActiveNightChancePercent": 95,
