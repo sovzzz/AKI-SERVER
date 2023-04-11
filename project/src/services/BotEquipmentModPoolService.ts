@@ -83,7 +83,7 @@ export class BotEquipmentModPoolService
                     
                     // Check item added into array for slots, need to iterate over those
                     const subItemDetails = this.databaseServer.getTables().templates.items[itemToAdd];
-                    const hasSubItemsToAdd = subItemDetails._props.Slots?.length > 0;
+                    const hasSubItemsToAdd = subItemDetails?._props?.Slots?.length > 0;
                     if (hasSubItemsToAdd)
                     {
                         // Recursive call
