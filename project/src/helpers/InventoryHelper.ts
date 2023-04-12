@@ -528,7 +528,7 @@ export class InventoryHelper
      * inputs Item template ID, Item Id, InventoryItem (item from inventory having _id and _tpl)
      * outputs [width, height]
      */
-    public getItemSize(itemTpl: string, itemID: string, inventoryItem: Item[]): Record<number, number>
+    public getItemSize(itemTpl: string, itemID: string, inventoryItem: Item[]): number[]
     {
         // -> Prepares item Width and height returns [sizeX, sizeY]
         return this.getSizeByInventoryItemHash(itemTpl, itemID, this.getInventoryItemHash(inventoryItem));
@@ -536,20 +536,31 @@ export class InventoryHelper
 
     // note from 2027: there IS a thing i didn't explore and that is Merges With Children
     // -> Prepares item Width and height returns [sizeX, sizeY]
-    protected getSizeByInventoryItemHash(itemTpl: string, itemID: string, inventoryItemHash: InventoryHelper.InventoryItemHash): Record<number, number>
+    protected getSizeByInventoryItemHash(itemTpl: string, itemID: string, inventoryItemHash: InventoryHelper.InventoryItemHash): number[]
     {
         const toDo = [itemID];
         const result = this.itemHelper.getItem(itemTpl);
         const tmpItem = result[1];
 
+        // Invalid item or no object
         if (!(result[0] && result[1]))
         {
             this.logger.error(this.localisationService.getText("inventory-invalid_item_missing_from_db", itemTpl));
         }
 
-        if (!tmpItem._props)
+        // item found but no _props property
+        if (tmpItem && !tmpItem._props)
         {
-            this.logger.error(`Item ${tmpItem._id} ${tmpItem._name} is missing a props field, a size for it cannot be acquired`);
+            this.logger.error(`Item ${itemTpl} ${tmpItem?._name} is missing a props field, a size for it cannot be acquired`);
+        }
+
+        // No item object or getItem() returned false
+        if (!(tmpItem && result[0]))
+        {
+            // return default size of 1x1
+            this.logger.error(this.localisationService.getText("inventory-return_default_size", itemTpl));
+
+            return [1, 1];
         }
 
         const rootItem = inventoryItemHash.byItemId[itemID];

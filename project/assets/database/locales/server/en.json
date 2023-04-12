@@ -83,6 +83,7 @@
     "inventory-unable_to_fill_container": "[OOB] for item: {{id}}; Error message: {{error}}",
     "inventory-unable_to_find_item": "getExaminedItemTpl() Unable to find item with tpl: %s in database or flea",
     "inventory-unable_to_find_stash": "No stash found",
+    "inventory-return_default_size": "Defaulting item %s to size 1x1",
     "item-durability_value_invalid_use_default": "getRepairableItemQualityValue() weapon tpl: %s durability value is invalid, defaulting to 1",
     "linux_use_priviledged_port_non_root": "Non-root processes cannot bind to ports below 1024",
     "location-containers_generated_success": "A total of %s static containers generated",
