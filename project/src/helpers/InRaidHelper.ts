@@ -237,7 +237,7 @@ export class InRaidHelper
      * @param preRaidProfile profile to update
      * @param postRaidProfile profile to update inventory contents of
      * @param isPlayerScav Was this a p scav raid
-     * @returns
+     * @returns profile with FiR items properly tagged
      */
     public addSpawnedInSessionPropertyToItems(preRaidProfile: IPmcData, postRaidProfile: IPmcData, isPlayerScav: boolean): IPmcData
     {
@@ -248,24 +248,15 @@ export class InRaidHelper
                 const itemExistsInProfile = preRaidProfile.Inventory.items.find((itemData) => item._id === itemData._id);
                 if (itemExistsInProfile)
                 {
-                    if ("upd" in item && "SpawnedInSession" in item.upd)
-                    {
-                        // if the item exists and is taken inside the raid, remove the taken in raid status
-                        delete item.upd.SpawnedInSession;
-                    }
+                    // if the item exists and is taken inside the raid, remove the taken in raid status
+                    delete item.upd?.SpawnedInSession;
 
                     continue;
                 }
             }
 
-            if ("upd" in item)
-            {
-                item.upd.SpawnedInSession = true;
-            }
-            else
-            {
-                item.upd = { SpawnedInSession: true };
-            }
+            item.upd = item.upd ?? {};
+            item.upd.SpawnedInSession = true;
         }
 
         return postRaidProfile;
