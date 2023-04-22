@@ -322,34 +322,50 @@ export class InRaidHelper
      */
     public deleteInventory(pmcData: IPmcData, sessionID: string): void
     {
-        const toDelete = [];
-        for (const item of pmcData.Inventory.items)
+        // Get inventory item ids to remove from players profile
+        const itemIdsToDeleteFromProfile = this.getInventoryItemsLostOnDeath(pmcData).map(x => x._id);
+        itemIdsToDeleteFromProfile.forEach(x =>
         {
-            if (this.isItemKeptAfterDeath(pmcData, item))
-            {
-                continue;
-            }
+            this.inventoryHelper.removeItem(pmcData, x, sessionID);
+        });
 
-            // Remove normal items or quest raid items
-            if (item.parentId === pmcData.Inventory.equipment
-                || item.parentId === pmcData.Inventory.questRaidItems)
-            {
-                toDelete.push(item._id);
-            }
-
-            if (item.slotId.startsWith("pocket"))
-            {
-                toDelete.push(item._id);
-            }
-        }
-
-        // Delete items flagged above
-        for (const item of toDelete)
-        {
-            this.inventoryHelper.removeItem(pmcData, item, sessionID);
-        }
-
+        // Remove contents of fast panel
         pmcData.Inventory.fastPanel = {};
+    }
+
+    /**
+     * Get an array of items from a profile that will be lost on death
+     * @param pmcProfile Profile to get items from
+     * @returns Array of items lost on death
+     */
+    protected getInventoryItemsLostOnDeath(pmcProfile: IPmcData): Item[]
+    {
+        const inventoryItems = pmcProfile.Inventory.items ?? []; 
+        const equipment = pmcProfile?.Inventory?.equipment;
+        const questRaidItems = pmcProfile?.Inventory?.questRaidItems;
+
+        return inventoryItems.filter(x =>
+        {
+            // Keep items flagged as kept after death
+            if (this.isItemKeptAfterDeath(pmcProfile, x))
+            {
+                return false;
+            }
+    
+            // Remove normal items or quest raid items
+            if (x.parentId === equipment || x.parentId === questRaidItems)
+            {
+                return true;
+            }
+    
+            // Pocket items are not lost on death
+            if (x.slotId.startsWith("pocket"))
+            {
+                return true;
+            }
+    
+            return false;
+        });
     }
 
     /**
