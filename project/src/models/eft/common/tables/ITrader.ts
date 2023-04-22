@@ -101,10 +101,10 @@ export interface ISuit
     tid: string
     suiteId: string
     isActive: boolean
-    requirements: Requirements
+    requirements: ISuitRequirements
 }
 
-export interface Requirements 
+export interface ISuitRequirements 
 {
     loyaltyLevel: number
     profileLevel: number
