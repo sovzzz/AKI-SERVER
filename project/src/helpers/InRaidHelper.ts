@@ -273,15 +273,17 @@ export class InRaidHelper
      */
     public removeSpawnedInSessionPropertyFromItems(postRaidProfile: IPmcData): IPmcData
     {
-        const items = this.databaseServer.getTables().templates.items;
-        for (const offraidItem of postRaidProfile.Inventory.items)
+        const dbItems = this.databaseServer.getTables().templates.items;
+        const itemsToRemovePropertyFrom = postRaidProfile.Inventory.items.filter(x =>
         {
-            // Remove the FIR status if the item marked FIR at raid start
-            if ("upd" in offraidItem && "SpawnedInSession" in offraidItem.upd && !items[offraidItem._tpl]._props.QuestItem)
-            {
-                delete offraidItem.upd.SpawnedInSession;
-            }
-        }
+            // Has upd object + upd.SpawnedInSession property + not a quest item
+            return "upd" in x && "SpawnedInSession" in x.upd && !dbItems[x._tpl]._props.QuestItem;
+        });
+
+        itemsToRemovePropertyFrom.forEach(item =>
+        {
+            delete item.upd.SpawnedInSession;
+        });
 
         return postRaidProfile;
     }
