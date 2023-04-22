@@ -79,32 +79,38 @@ export class InRaidHelper
      */
     public calculateFenceStandingChangeFromKills(existingFenceStanding: number, victims: Victim[]): number
     {
-        const botTypes = this.databaseServer.getTables().bots.types;
-        for (const victim of victims)
+        // Run callback on every victim, adding up the standings gained/lossed, starting value is existing fence standing
+        const newFenceStanding = victims.reduce((acc, victim) =>
         {
-            let standingForKill = null;
-            if (victim.Side.toLowerCase() === "savage")
-            {
-                // Scavs and bosses
-                standingForKill = botTypes[victim.Role.toLowerCase()].experience.standingForKill;
-            }
-            else
-            {
-                // PMCs
-                standingForKill = botTypes[victim.Side.toLowerCase()].experience.standingForKill;
-            }
-
+            const standingForKill = this.getStandingChangeForKill(victim);
             if (standingForKill)
             {
-                existingFenceStanding += standingForKill;
+                return acc + standingForKill;
             }
-            else
-            {
-                this.logger.warning(this.localisationService.getText("inraid-missing_standing_for_kill", {victimSide: victim.Side, victimRole: victim.Role}));
-            }
-        }
+            this.logger.warning(this.localisationService.getText("inraid-missing_standing_for_kill", {victimSide: victim.Side, victimRole: victim.Role}));
+            
+            return acc;
+        }, existingFenceStanding);
 
-        return existingFenceStanding;
+        return newFenceStanding;
+    }
+
+    /**
+     * Get the standing gain/loss for killing an npc
+     * @param victim Who was killed by player
+     * @returns a numerical standing gain or loss
+     */
+    protected getStandingChangeForKill(victim: Victim): number
+    {
+        const botTypes = this.databaseServer.getTables().bots.types;
+        if (victim.Side.toLowerCase() === "savage")
+        {
+            // Scavs and bosses
+            return botTypes[victim.Role.toLowerCase()]?.experience?.standingForKill;
+        }
+        
+        // PMCs
+        return botTypes[victim.Side.toLowerCase()]?.experience?.standingForKill;
     }
 
     /**
