@@ -41,7 +41,6 @@ export class HideoutHelper
     public static bitcoin = "59faff1d86f7746c51718c9c";
     public static expeditionaryFuelTank = "5d1b371186f774253763a656";
     public static maxSkillPoint = 5000;
-    private static generatorOffMultipler = 0.2;
 
     protected hideoutConfig: IHideoutConfig;
 
@@ -208,12 +207,7 @@ export class HideoutHelper
      */
     protected updateWaterCollectorProductionTimer(pmcData: IPmcData, productionId: string, hideoutProperties: { btcFarmCGs?: number; isGeneratorOn: boolean; waterCollectorHasFilter: boolean; }): void
     {
-        let timeElapsed = (this.timeUtil.getTimestamp() - pmcData.Hideout.sptUpdateLastRunTimestamp);
-        if (!hideoutProperties.isGeneratorOn)
-        {
-            timeElapsed = Math.floor(timeElapsed * HideoutHelper.generatorOffMultipler);
-        }
-
+        const timeElapsed = this.getTimeElapsedSinceLastServerTick(pmcData, hideoutProperties.isGeneratorOn);
         if (hideoutProperties.waterCollectorHasFilter)
         {
 
@@ -290,12 +284,7 @@ export class HideoutHelper
         }
 
         // Get seconds since last hideout update + now
-        let timeElapsed = this.timeUtil.getTimestamp() - pmcData.Hideout.sptUpdateLastRunTimestamp;
-        if (!hideoutProperties.isGeneratorOn)
-        {
-            // Adjust for running without fuel
-            timeElapsed *= this.databaseServer.getTables().hideout.settings.generatorSpeedWithoutFuel;
-        }
+        const timeElapsed = this.getTimeElapsedSinceLastServerTick(pmcData, hideoutProperties.isGeneratorOn);
 
         // Increment progress by time passed
         pmcData.Hideout.Production[prodId].Progress += timeElapsed;
@@ -572,24 +561,15 @@ export class HideoutHelper
         return waterFilterArea;
     }
 
+
+
     /**
-     * Get number of ticks that have passed since hideout areas were last processed, reduced when generator is off
-     * @param pmcData Player profile
-     * @param isGeneratorOn Is the generator on for the duration of elapsed time
-     * @returns Amount of time elapsed in seconds
+     * Create a upd object using passed in parameters
+     * @param stackCount 
+     * @param resourceValue 
+     * @param resourceUnitsConsumed 
+     * @returns Upd
      */
-    protected getTimeElapsedSinceLastServerTick(pmcData: IPmcData, isGeneratorOn: boolean): number
-    {
-        // Reduce time elapsed (and progress) when generator is off
-        let timeElapsed = this.timeUtil.getTimestamp() - pmcData.Hideout.sptUpdateLastRunTimestamp;
-        if (!isGeneratorOn)
-        {
-            timeElapsed = Math.floor(timeElapsed * HideoutHelper.generatorOffMultipler);
-        }
-
-        return timeElapsed;
-    }
-
     protected getAreaUpdObject(stackCount: number, resourceValue: number, resourceUnitsConsumed: number): Upd
     {
         return {
@@ -679,13 +659,7 @@ export class HideoutHelper
 
         if (this.isProduction(btcProd))
         {
-            let timeElapsedSeconds = this.timeUtil.getTimestamp() - pmcData.Hideout.sptUpdateLastRunTimestamp;
-            if (!isGeneratorOn)
-            {
-                // Generator off, reduce time elapsed
-                timeElapsedSeconds = Math.floor(timeElapsedSeconds * HideoutHelper.generatorOffMultipler);
-            }
-
+            const timeElapsedSeconds = this.getTimeElapsedSinceLastServerTick(pmcData, isGeneratorOn);
             btcProd.Progress += timeElapsedSeconds;
 
             // The wiki has a wrong formula!
@@ -751,6 +725,24 @@ export class HideoutHelper
         {
             return null;
         }
+    }
+
+    /**
+     * Get number of ticks that have passed since hideout areas were last processed, reduced when generator is off
+     * @param pmcData Player profile
+     * @param isGeneratorOn Is the generator on for the duration of elapsed time
+     * @returns Amount of time elapsed in seconds
+     */
+    protected getTimeElapsedSinceLastServerTick(pmcData: IPmcData, isGeneratorOn: boolean): number
+    {
+        // Reduce time elapsed (and progress) when generator is off
+        let timeElapsed = this.timeUtil.getTimestamp() - pmcData.Hideout.sptUpdateLastRunTimestamp;
+        if (!isGeneratorOn)
+        {
+            timeElapsed *= this.databaseServer.getTables().hideout.settings.generatorSpeedWithoutFuel;
+        }
+
+        return timeElapsed;
     }
 
     /**
