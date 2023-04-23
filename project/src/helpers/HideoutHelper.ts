@@ -287,15 +287,14 @@ export class HideoutHelper
         const timeElapsed = this.getTimeElapsedSinceLastServerTick(pmcData, hideoutProperties.isGeneratorOn);
 
         // Increment progress by time passed
-        pmcData.Hideout.Production[prodId].Progress += timeElapsed;
+        const production = pmcData.Hideout.Production[prodId];
+        production.Progress += timeElapsed;
 
         // Limit progress to total production time if progress is over (dont run for continious crafts))
         if (!recipe.continuous)
         {
-            if (pmcData.Hideout.Production[prodId].Progress > pmcData.Hideout.Production[prodId].ProductionTime)
-            {
-                pmcData.Hideout.Production[prodId].Progress = pmcData.Hideout.Production[prodId].ProductionTime;
-            }
+            // If progress is larger than prod time, return ProductionTime, hard cap the vaue
+            production.Progress = Math.min(production.Progress, production.ProductionTime);
         }
     }
 
