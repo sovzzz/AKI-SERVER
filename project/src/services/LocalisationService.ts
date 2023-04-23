@@ -3,6 +3,7 @@ import { inject, injectable } from "tsyringe";
 
 import { ILocaleConfig } from "../models/spt/config/ILocaleConfig";
 import { ILogger } from "../models/spt/utils/ILogger";
+import { DatabaseServer } from "../servers/DatabaseServer";
 import { LocaleService } from "./LocaleService";
 
 /**
@@ -16,6 +17,7 @@ export class LocalisationService
 
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
+        @inject("DatabaseServer") protected databaseServer: DatabaseServer,
         @inject("LocaleService") protected localeService: LocaleService
     )
     {
@@ -49,6 +51,6 @@ export class LocalisationService
      */
     public getKeys(): string[]
     {
-        return Object.keys(this.i18n.getCatalog("en"));
+        return Object.keys(this.databaseServer.getTables().locales.server["en"]);
     }
 }
