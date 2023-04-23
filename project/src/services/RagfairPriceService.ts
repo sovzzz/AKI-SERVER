@@ -97,16 +97,14 @@ export class RagfairPriceService implements OnLoad
     public getFleaPriceForItem(tplId: string): number
     {
         // Get dynamic price (templates/prices), if that doesnt exist get price from static array (templates/handbook)
-        let itemPrice = this.getDynamicPriceForItem(tplId);
-        if (!itemPrice || itemPrice === 1)
-        {
-            itemPrice = this.getStaticPriceForItem(tplId);
-        }
+        let itemPrice = this.getDynamicPriceForItem(tplId) || this.getStaticPriceForItem(tplId);
 
-        if (!itemPrice)
+        // If no price in dynamic/static, set to 1
+        itemPrice = itemPrice || 1;
+
+        if (itemPrice === 1)
         {
             this.logger.debug(`Missing item price for ${tplId}`);
-            itemPrice = 1;
         }
 
         return itemPrice;
