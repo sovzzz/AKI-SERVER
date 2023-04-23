@@ -501,7 +501,6 @@ export class HideoutHelper
      */
     protected updateWaterFilters(waterFilterArea: HideoutArea, production: Production, isGeneratorOn: boolean, pmcData: IPmcData): HideoutArea
     {
-        let timeElapsed = this.timeUtil.getTimestamp() - pmcData.Hideout.sptUpdateLastRunTimestamp;
         // 100 resources last 8 hrs 20 min, 100/8.33/60/60 = 0.00333
         let filterDrainRate = 0.00333;
         // Hideout management resource consumption bonus:
@@ -513,21 +512,12 @@ export class HideoutHelper
         const recipe = this.databaseServer.getTables().hideout.production.find(prod => prod._id === HideoutHelper.waterCollector);
         productionTime = (recipe.productionTime || 0);
 
-        // Reduce time elapsed (and progress) when generator is off
-        if (!isGeneratorOn)
-        {
-            timeElapsed = Math.floor(timeElapsed * HideoutHelper.generatorOffMultipler);
-        }
+        const timeElapsed = this.getTimeElapsedSinceLastServerTick(pmcData, isGeneratorOn);
         
-        if (timeElapsed > productionTime) 
-        {
-            // We've gone beyond completion
-            filterDrainRate *= (productionTime - production.Progress);
-        }
-        else 
-        {
-            filterDrainRate *= timeElapsed;
-        }
+        // Get filter drain rate, handle edge case when craft time has gone on longer than total production time
+        filterDrainRate *= timeElapsed > productionTime
+            ? (productionTime - production.Progress)
+            : timeElapsed;
 
         // Production hasn't completed
         if (production.Progress < productionTime)
@@ -580,6 +570,24 @@ export class HideoutHelper
         }
 
         return waterFilterArea;
+    }
+
+    /**
+     * Get number of ticks that have passed since hideout areas were last processed, reduced when generator is off
+     * @param pmcData Player profile
+     * @param isGeneratorOn Is the generator on for the duration of elapsed time
+     * @returns Amount of time elapsed in seconds
+     */
+    protected getTimeElapsedSinceLastServerTick(pmcData: IPmcData, isGeneratorOn: boolean): number
+    {
+        // Reduce time elapsed (and progress) when generator is off
+        let timeElapsed = this.timeUtil.getTimestamp() - pmcData.Hideout.sptUpdateLastRunTimestamp;
+        if (!isGeneratorOn)
+        {
+            timeElapsed = Math.floor(timeElapsed * HideoutHelper.generatorOffMultipler);
+        }
+
+        return timeElapsed;
     }
 
     protected getAreaUpdObject(stackCount: number, resourceValue: number, resourceUnitsConsumed: number): Upd
@@ -686,14 +694,14 @@ export class HideoutHelper
             // *******************************************************
             /*
                 public override int InstalledSuppliesCount
-	            {
-		            get
-		            {
-			            return this.int_1;
-		            }
-		            protected set
-		            {
-			            if (this.int_1 === value)
+             {
+              get
+              {
+               return this.int_1;
+              }
+              protected set
+              {
+               if (this.int_1 === value)
                         {
                             return;
                         }
