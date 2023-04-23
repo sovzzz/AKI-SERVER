@@ -458,11 +458,11 @@ export class HideoutController
      * Add generated scav case rewards to player profile
      * @param pmcData player profile to add rewards to
      * @param rewards reward items to add to profile
-     * @param recipieId recipie id to save into Production dict
+     * @param recipeId recipe id to save into Production dict
      */
-    protected addScavCaseRewardsToProfile(pmcData: IPmcData, rewards: Product[], recipieId: string): void
+    protected addScavCaseRewardsToProfile(pmcData: IPmcData, rewards: Product[], recipeId: string): void
     {
-        pmcData.Hideout.Production[`ScavCase${recipieId}`] = {
+        pmcData.Hideout.Production[`ScavCase${recipeId}`] = {
             Products: rewards
         };
     }
@@ -500,7 +500,7 @@ export class HideoutController
         const recipe = this.databaseServer.getTables().hideout.production.find(r => r._id === request.recipeId);
         if (recipe)
         {
-            return this.handleRecipie(sessionID, recipe, pmcData, request, output);
+            return this.handleRecipe(sessionID, recipe, pmcData, request, output);
         }
 
         const scavCase = this.databaseServer.getTables().hideout.scavcase.find(r => r._id === request.recipeId);
@@ -515,15 +515,15 @@ export class HideoutController
     }
 
     /**
-     * Take recipie-type production out of hideout area and place into player inventory
+     * Take recipe-type production out of hideout area and place into player inventory
      * @param sessionID Session id
-     * @param recipe Completed recipie of item
+     * @param recipe Completed recipe of item
      * @param pmcData Player profile
      * @param request Remove production from area request
      * @param output Output object to update
      * @returns IItemEventRouterResponse
      */
-    protected handleRecipie(sessionID: string, recipe: IHideoutProduction, pmcData: IPmcData, request: IHideoutTakeProductionRequestData, output: IItemEventRouterResponse): IItemEventRouterResponse
+    protected handleRecipe(sessionID: string, recipe: IHideoutProduction, pmcData: IPmcData, request: IHideoutTakeProductionRequestData, output: IItemEventRouterResponse): IItemEventRouterResponse
     {
         // Variables for managemnet of skill
         let craftingExpAmount = 0;
@@ -619,7 +619,7 @@ export class HideoutController
         // Remove the old production from output object before its sent to client
         delete output.profileChanges[sessionID].production[request.recipeId];
 
-        // Handle the isEncoded flag from recipie
+        // Handle the isEncoded flag from recipe
         if (recipe.isEncoded)
         {
             const upd: Upd = {

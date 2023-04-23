@@ -89,7 +89,7 @@ export class RagfairAssortGenerator
                 continue;
             }
 
-            results.push(this.createRagfairAssortItem(item._id, item._id)); // tplid and id must be the same so hideout recipie reworks work
+            results.push(this.createRagfairAssortItem(item._id, item._id)); // tplid and id must be the same so hideout recipe reworks work
         }
 
         for (const weapon of weaponPresets)
