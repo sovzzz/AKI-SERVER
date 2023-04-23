@@ -370,26 +370,29 @@ export class HideoutHelper
 
     protected updateWaterCollector(sessionId: string, pmcData: IPmcData, area: HideoutArea, isGeneratorOn: boolean): void
     {
-        if (area.level === 3)
+        // Skip water collector when not level 3
+        if (area.level !== 3)
         {
-            const prod = pmcData.Hideout.Production[HideoutHelper.waterCollector];
-            if (prod && this.isProduction(prod))
-            {
-                area = this.updateWaterFilters(area, prod, isGeneratorOn, pmcData);
-            }
-            else
-            {
-                // continuousProductionStart()
-                // seem to not trigger consistently
-                const recipe: IHideoutSingleProductionStartRequestData = {
-                    recipeId: HideoutHelper.waterCollector,
-                    Action: "HideoutSingleProductionStart",
-                    items: [],
-                    timestamp: this.timeUtil.getTimestamp()
-                };
+            return;
+        }
 
-                this.registerProduction(pmcData, recipe, sessionId);
-            }
+        const prod = pmcData.Hideout.Production[HideoutHelper.waterCollector];
+        if (prod && this.isProduction(prod))
+        {
+            area = this.updateWaterFilters(area, prod, isGeneratorOn, pmcData);
+        }
+        else
+        {
+            // continuousProductionStart()
+            // seem to not trigger consistently
+            const recipe: IHideoutSingleProductionStartRequestData = {
+                recipeId: HideoutHelper.waterCollector,
+                Action: "HideoutSingleProductionStart",
+                items: [],
+                timestamp: this.timeUtil.getTimestamp()
+            };
+
+            this.registerProduction(pmcData, recipe, sessionId);
         }
     }
 
@@ -489,25 +492,18 @@ export class HideoutHelper
      */
     protected updateWaterFilters(waterFilterArea: HideoutArea, production: Production, isGeneratorOn: boolean, pmcData: IPmcData): HideoutArea
     {
-        // 100 resources last 8 hrs 20 min, 100/8.33/60/60 = 0.00333
-        let filterDrainRate = 0.00333;
-        // Hideout management resource consumption bonus:
-        const hideoutManagementConsumptionBonus = 1.0 - this.getHideoutManagementConsumptionBonus(pmcData);
-        filterDrainRate *= hideoutManagementConsumptionBonus;
-        let productionTime = 0;
-        let pointsConsumed = 0;
-
-        const recipe = this.databaseServer.getTables().hideout.production.find(prod => prod._id === HideoutHelper.waterCollector);
-        productionTime = (recipe.productionTime || 0);
-
+        let filterDrainRate = this.getWaterFilterDrainRate(pmcData);
+        const productionTime = this.getProductionTimeSeconds(HideoutHelper.waterCollector);
+        
         const timeElapsed = this.getTimeElapsedSinceLastServerTick(pmcData, isGeneratorOn);
         
-        // Get filter drain rate, handle edge case when craft time has gone on longer than total production time
+        // Adjust filter drain rate based on elapsed time, handle edge case when craft time has gone on longer than total production time
         filterDrainRate *= timeElapsed > productionTime
             ? (productionTime - production.Progress)
             : timeElapsed;
-
+        
         // Production hasn't completed
+        let pointsConsumed = 0;
         if (production.Progress < productionTime)
         {
             // Check all slots that take water filters
@@ -546,13 +542,11 @@ export class HideoutHelper
                         this.logger.debug(`Water filter: ${resourceValue} filter left on slot ${i + 1}`);
                         break; // Break here to avoid updating all filters
                     }
-                    else
-                    {
-                        // Filter ran out / used up
-                        delete waterFilterArea.slots[i].item;
-                        // Update remaining resources to be subtracted
-                        filterDrainRate = Math.abs(resourceValue);
-                    }
+
+                    // Filter ran out / used up
+                    delete waterFilterArea.slots[i].item;
+                    // Update remaining resources to be subtracted
+                    filterDrainRate = Math.abs(resourceValue);
                 }
             }
         }
@@ -560,7 +554,30 @@ export class HideoutHelper
         return waterFilterArea;
     }
 
+    /**
+     * Get the water filter drain rate based on hideout bonues player has
+     * @param pmcData Player profile
+     * @returns Drain rate
+     */
+    protected getWaterFilterDrainRate(pmcData: IPmcData): number
+    {
+        // 100 resources last 8 hrs 20 min, 100/8.33/60/60 = 0.00333
+        const filterDrainRate = 0.00333;
+        const hideoutManagementConsumptionBonus = 1.0 - this.getHideoutManagementConsumptionBonus(pmcData);
 
+        return filterDrainRate * hideoutManagementConsumptionBonus;
+    }
+
+    /**
+     * Get the production time in seconds for the desired production
+     * @param prodId Id, e.g. Water collector id
+     * @returns seconds to produce item
+     */
+    protected getProductionTimeSeconds(prodId: string): number
+    {
+        const recipe = this.databaseServer.getTables().hideout.production.find(prod => prod._id === prodId);
+        return (recipe.productionTime || 0);
+    }
 
     /**
      * Create a upd object using passed in parameters
