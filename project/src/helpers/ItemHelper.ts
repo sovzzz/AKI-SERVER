@@ -46,7 +46,7 @@ class ItemHelper
     {
         const defaultInvalidBaseTypes: string[] = [
             BaseClasses.LOOT_CONTAINER,
-            BaseClasses.MOD_CONTAINER,
+            BaseClasses.MOB_CONTAINER,
             BaseClasses.STASH,
             BaseClasses.SORTING_TABLE,
             BaseClasses.INVENTORY,
