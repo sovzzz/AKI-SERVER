@@ -289,12 +289,12 @@ export class HideoutHelper
             return;
         }
 
-        // Get seconds since production started + now
-        let timeElapsed = (this.timeUtil.getTimestamp() - pmcData.Hideout.Production[prodId].StartTimestamp) - pmcData.Hideout.Production[prodId].Progress;
+        // Get seconds since last hideout update + now
+        let timeElapsed = this.timeUtil.getTimestamp() - pmcData.Hideout.sptUpdateLastRunTimestamp;
         if (!hideoutProperties.isGeneratorOn)
         {
             // Adjust for running without fuel
-            timeElapsed = Math.floor(timeElapsed * this.databaseServer.getTables().hideout.settings.generatorSpeedWithoutFuel);
+            timeElapsed *= this.databaseServer.getTables().hideout.settings.generatorSpeedWithoutFuel;
         }
 
         // Increment progress by time passed

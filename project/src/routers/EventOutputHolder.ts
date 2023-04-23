@@ -146,6 +146,12 @@ export class EventOutputHolder
             {
                 this.clientActiveSessionStorage[productionKey] = {clientInformed: true};
             }
+
+            // Only return integer for progress, ignore the decimal progress gained when generator is off
+            if (production.Progress > 0)
+            {
+                Math.round(production.Progress);
+            }
         }
 
         return productions;
