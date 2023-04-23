@@ -83,7 +83,7 @@ export class HandbookHelper
 
         if (this.handbookPriceCache.items.byId.has(tpl))
         {
-            return this.handbookPriceCache.items.byId[tpl];
+            return this.handbookPriceCache.items.byId.get(tpl);
         }
 
         const handbookItem = this.databaseServer.getTables().templates.handbook.Items.find(x => x.Id === tpl);
