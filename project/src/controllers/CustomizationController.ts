@@ -50,23 +50,23 @@ export class CustomizationController
         return result;
     }
 
-    public wearClothing(pmcData: IPmcData, body: IWearClothingRequestData, sessionID: string): IItemEventRouterResponse
+    public wearClothing(pmcData: IPmcData, wearClothingRequest: IWearClothingRequestData, sessionID: string): IItemEventRouterResponse
     {
-        for (let i = 0; i < body.suites.length; i++)
+        for (const suitId of wearClothingRequest.suites)
         {
-            const suite = this.databaseServer.getTables().templates.customization[body.suites[i]];
+            const dbSuit = this.databaseServer.getTables().templates.customization[suitId];
 
-            // this parent refers to Lower Node
-            if (suite._parent === "5cd944d01388ce000a659df9")
+            // Lower Node
+            if (dbSuit._parent === "5cd944d01388ce000a659df9")
             {
-                pmcData.Customization.Feet = suite._props.Feet;
+                pmcData.Customization.Feet = dbSuit._props.Feet;
             }
 
-            // this parent reffers to Upper Node
-            if (suite._parent === "5cd944ca1388ce03a44dc2a4")
+            // Upper Node
+            if (dbSuit._parent === "5cd944ca1388ce03a44dc2a4")
             {
-                pmcData.Customization.Body = suite._props.Body;
-                pmcData.Customization.Hands = suite._props.Hands;
+                pmcData.Customization.Body = dbSuit._props.Body;
+                pmcData.Customization.Hands = dbSuit._props.Hands;
             }
         }
 
