@@ -268,17 +268,21 @@ export class FenceService
     protected getCountOfItemsToGenerate(existingItemCountToReplace: number): number
     {
         const desiredTotalCount = this.traderConfig.fence.assortSize;
-        const actualTotalCount = this.fenceAssort.items.filter(x => x.slotId === "hideout").length;
-        if (actualTotalCount < desiredTotalCount)
+        const actualTotalCount = this.fenceAssort.items.reduce((count, item) =>
         {
-            return (desiredTotalCount - actualTotalCount) + existingItemCountToReplace;
-        }
+            return item.slotId === "hideout"
+                ? count + 1
+                : count;
+        }, 0);
 
-        return existingItemCountToReplace;
+        return actualTotalCount < desiredTotalCount
+            ? (desiredTotalCount - actualTotalCount) + existingItemCountToReplace
+            : existingItemCountToReplace;
     }
 
     /**
      * Choose an item (not mod) at random and remove from assorts
+     * @param assort Items to remove from
      */
     protected removeRandomItemFromAssorts(assort: ITraderAssort): void
     {
