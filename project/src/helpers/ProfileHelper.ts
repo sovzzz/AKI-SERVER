@@ -124,25 +124,45 @@ export class ProfileHelper
         return output;
     }
 
-    public isNicknameTaken(info: IValidateNicknameRequestData, sessionID: string): boolean
+    /**
+     * Check if a nickname is used by another profile loaded by the server
+     * @param nicknameRequest 
+     * @param sessionID Session id
+     * @returns True if already used
+     */
+    public isNicknameTaken(nicknameRequest: IValidateNicknameRequestData, sessionID: string): boolean
     {
         for (const id in this.saveServer.getProfiles())
         {
             const profile = this.saveServer.getProfile(id);
-
-            // rome-ignore lint/complexity/useSimplifiedLogicExpression: <explanation>
-            if  (!("characters" in profile) || !("pmc" in profile.characters) || !("Info" in profile.characters.pmc))
+            if (!this.profileHasInfoProperty(profile))
             {
                 continue;
             }
 
-            if (profile.info.id !== sessionID && profile.characters.pmc.Info.LowerNickname === info.nickname.toLowerCase())
+            if (!this.sessionIdMatchesProfileId(profile.info.id, sessionID)
+                && this.nicknameMatches(profile.characters.pmc.Info.LowerNickname, nicknameRequest.nickname))
             {
                 return true;
             }
         }
 
         return false;
+    }
+
+    protected profileHasInfoProperty(profile: IAkiProfile): boolean
+    {
+        return !!(profile?.characters?.pmc?.Info);
+    }
+
+    protected nicknameMatches(profileName: string, nicknameRequest: string): boolean
+    {
+        return profileName.toLowerCase() === nicknameRequest.toLowerCase();
+    }
+
+    protected sessionIdMatchesProfileId(profileId: string, sessionId: string): boolean
+    {
+        return profileId === sessionId;
     }
 
     /**

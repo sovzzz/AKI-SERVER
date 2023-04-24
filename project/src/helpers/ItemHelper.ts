@@ -339,7 +339,7 @@ class ItemHelper
     }
 
     /**
-     * Recursive function that looks at every item from parameter and gets their childrens Ids
+     * Recursive function that looks at every item from parameter and gets their childrens Ids + includes parent item in results
      * @param items 
      * @param itemID 
      * @returns an array of strings
