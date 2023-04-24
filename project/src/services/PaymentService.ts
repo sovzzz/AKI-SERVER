@@ -210,14 +210,10 @@ export class PaymentService
      */
     public addPaymentToOutput(pmcData: IPmcData, currencyTpl: string, amountToPay: number, sessionID: string, output: IItemEventRouterResponse): IItemEventRouterResponse
     {
-        const moneyItemsInInventory = this.itemHelper.findBarterItems("tpl", pmcData, currencyTpl);
-
-        // Move items in stash to top of array
-        moneyItemsInInventory.sort((a, b) => this.prioritiseStashSort(a, b, pmcData.Inventory.items));
-
+        const moneyItemsInInventory = this.getSortedMoneyItemsInInventory(pmcData, currencyTpl);
         const amountAvailable = moneyItemsInInventory.reduce((accumulator, item) => accumulator + item.upd.StackObjectsCount, 0);
 
-        // if no money in inventory or amount is not enough we return false
+        // If no money in inventory or amount is not enough we return false
         if (moneyItemsInInventory.length <= 0 || amountAvailable < amountToPay)
         {
             this.logger.error(this.localisationService.getText("payment-not_enough_money_to_complete_transation", {amountToPay: amountToPay, amountAvailable: amountAvailable}));
@@ -249,6 +245,22 @@ export class PaymentService
         }
 
         return output;
+    }
+
+    /**
+     * Get all money stacks in inventory and prioritse items in stash
+     * @param pmcData 
+     * @param currencyTpl 
+     * @returns Sorting money items
+     */
+    protected getSortedMoneyItemsInInventory(pmcData: IPmcData, currencyTpl: string): Item[]
+    {
+        const moneyItemsInInventory = this.itemHelper.findBarterItems("tpl", pmcData, currencyTpl);
+
+        // Prioritise items in stash to top of array
+        moneyItemsInInventory.sort((a, b) => this.prioritiseStashSort(a, b, pmcData.Inventory.items));
+
+        return moneyItemsInInventory;
     }
 
     /**
