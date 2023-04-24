@@ -278,25 +278,15 @@ export class ProfileHelper
     public removeSecureContainer(profile: IPmcData): IPmcData
     {
         const items = profile.Inventory.items;
-        for (const item of items)
+        const secureContainer = items.find(x => x.slotId === "SecuredContainer");
+        if (secureContainer)
         {
-            if (item.slotId === "SecuredContainer")
-            {
-                const toRemove = this.itemHelper.findAndReturnChildrenByItems(items, item._id);
-                let n = items.length;
+            // Find and remove container + children
+            const childItemsInSecureContainer = this.itemHelper.findAndReturnChildrenByItems(items, secureContainer._id);
 
-                while (n-- > 0)
-                {
-                    if (toRemove.includes(items[n]._id))
-                    {
-                        items.splice(n, 1);
-                    }
-                }
-                break;
-            }
+            // Remove child items + secure container
+            profile.Inventory.items = items.filter(x => !childItemsInSecureContainer.includes(x._id));
         }
-
-        profile.Inventory.items = items;
 
         return profile;
     }
