@@ -125,15 +125,7 @@ export class InsuranceService
             };
 
             // Remove 'hideout' slotid property on all insurance items
-            for (const insuredItem of this.getInsurance(sessionID)[traderId])
-            {
-                const isParentHere = this.getInsurance(sessionID)[traderId].find(isParent => isParent._id === insuredItem.parentId);
-                if (!isParentHere)
-                {
-                    insuredItem.slotId = "hideout";
-                    delete insuredItem.location;
-                }
-            }
+            this.removeLocationProperty(sessionID, traderId);
 
             this.saveServer.getProfile(sessionID).insurance.push({
                 scheduledTime: insuranceReturnTimestamp,
@@ -144,6 +136,20 @@ export class InsuranceService
         }
 
         this.resetInsurance(sessionID);
+    }
+
+    protected removeLocationProperty(sessionId: string, traderId: string): void
+    {
+        const insuredItems = this.getInsurance(sessionId)[traderId];
+        for (const insuredItem of this.getInsurance(sessionId)[traderId])
+        {
+            const isParentHere = insuredItems.find(isParent => isParent._id === insuredItem.parentId);
+            if (!isParentHere)
+            {
+                insuredItem.slotId = "hideout";
+                delete insuredItem.location;
+            }
+        }
     }
 
     /**
@@ -181,22 +187,10 @@ export class InsuranceService
      */
     public storeLostGear(pmcData: IPmcData, offraidData: ISaveProgressRequestData, preRaidGear: Item[], sessionID: string, playerDied: boolean): void
     {
-        const preRaidGearHash: Record<string, Item> = {};
-        const offRaidGearHash: Record<string, Item> = {};
-        const gears = [];
+        const preRaidGearHash = this.createItemHashTable(preRaidGear);
+        const offRaidGearHash = this.createItemHashTable(offraidData.profile.Inventory.items);
 
-        // Build a hash table to reduce loops
-        for (const item of preRaidGear)
-        {
-            preRaidGearHash[item._id] = item;
-        }
-
-        // Build a hash of offRaidGear
-        for (const item of offraidData.profile.Inventory.items)
-        {
-            offRaidGearHash[item._id] = item;
-        }
-
+        const equipmentToSendToPlayer = [];
         for (const insuredItem of pmcData.InsuredItems)
         {
             // Check insured item was on player during raid
@@ -206,7 +200,7 @@ export class InsuranceService
                 // Check if item missing OR player died with item on
                 if (!offRaidGearHash[insuredItem.itemId] || playerDied)
                 {
-                    gears.push({
+                    equipmentToSendToPlayer.push({
                         "pmcData": pmcData,
                         "insuredItem": insuredItem,
                         "item": preRaidGearHash[insuredItem.itemId],
@@ -217,10 +211,26 @@ export class InsuranceService
         }
 
         // Process all insured items lost in-raid
-        for (const gear of gears)
+        for (const gear of equipmentToSendToPlayer)
         {
             this.addGearToSend(gear.pmcData, gear.insuredItem, gear.item, gear.sessionID);
         }
+    }
+
+    /**
+     * Create a hash table for an array of items, keyed by items _id
+     * @param items Items to hash
+     * @returns Hashtable
+     */
+    protected createItemHashTable(items: Item[]): Record<string, Item>
+    {
+        const hashTable: Record<string, Item> = {};
+        for (const item of items)
+        {
+            hashTable[item._id] = item;
+        }
+
+        return hashTable;
     }
 
     /**
