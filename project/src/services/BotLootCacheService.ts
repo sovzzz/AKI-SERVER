@@ -31,7 +31,7 @@ export class BotLootCacheService
     }
 
     /**
-     * Remove all cached bot loot data
+     * Remove cached bot loot data
      */
     public clearCache(): void
     {

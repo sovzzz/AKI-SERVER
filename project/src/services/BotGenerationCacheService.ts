@@ -65,7 +65,7 @@ export class BotGenerationCacheService
     }
     
     /**
-     * Remove all cached bot profiles
+     * Remove all cached bot profiles from memory
      */
     public clearStoredBots(): void
     {

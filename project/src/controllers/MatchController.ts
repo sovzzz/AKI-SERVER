@@ -171,40 +171,75 @@ export class MatchController
         return botDifficulty;
     }
 
-    public endOfflineRaid(info: IEndOfflineRaidRequestData, sessionID: string): void
+    public endOfflineRaid(info: IEndOfflineRaidRequestData, sessionId: string): void
     {       
-        const pmcData: IPmcData = this.profileHelper.getPmcProfile(sessionID);
-        const extract = info.exitName;
+        const pmcData: IPmcData = this.profileHelper.getPmcProfile(sessionId);
+        const extractName = info.exitName;
 
         // clean up cached bots now raid is over
         this.botGenerationCacheService.clearStoredBots();
 
-        if (!this.inraidConfig.carExtracts.includes(extract))
+        // clear bot loot cache
+        this.botLootCacheService.clearCache();
+
+        if (this.extractWasViaCar(extractName))
         {
-            return;
+            this.handleCarExtract(extractName, pmcData, sessionId);
+        }
+    }
+
+    /**
+     * Is extract by car
+     * @param extractName name of extract
+     * @returns true if car extract
+     */
+    protected extractWasViaCar(extractName: string): boolean
+    {
+        return this.inraidConfig.carExtracts.includes(extractName);
+    }
+
+    /**
+     * Handle when a player extracts using a car - Add rep to fence
+     * @param extractName name of the extract used
+     * @param pmcData Player profile
+     * @param sessionId Session id
+     */
+    protected handleCarExtract(extractName: string, pmcData: IPmcData, sessionId: string): void
+    {
+        // Ensure key exists for extract
+        if (!(extractName in pmcData.CarExtractCounts))
+        {
+            pmcData.CarExtractCounts[extractName] = 0;
         }
 
-        if (!(extract in pmcData.CarExtractCounts))
-        {
-            pmcData.CarExtractCounts[extract] = 0;
-        }
+        // Increment extract count value
+        pmcData.CarExtractCounts[extractName] += 1;
 
-        pmcData.CarExtractCounts[extract] += 1;
-        const extractCount: number = pmcData.CarExtractCounts[extract];
+        const fenceId: string = Traders.FENCE;
+        this.updateFenceStandingInProfile(pmcData, fenceId, extractName);
+        
+        this.traderHelper.lvlUp(fenceId, sessionId);
+        pmcData.TradersInfo[fenceId].loyaltyLevel = Math.max(pmcData.TradersInfo[fenceId].loyaltyLevel, 1);
+    }
 
-        const fenceID: string = Traders.FENCE;
-        let fenceStanding = Number(pmcData.TradersInfo[fenceID].standing);
+    /**
+     * Update players fence trader standing value in profile
+     * @param pmcData Player profile
+     * @param fenceId Id of fence trader
+     * @param extractName Name of extract used 
+     */
+    protected updateFenceStandingInProfile(pmcData: IPmcData, fenceId: string, extractName: string): void
+    {
+        let fenceStanding = Number(pmcData.TradersInfo[fenceId].standing);
 
         // Not exact replica of Live behaviour
         // Simplified for now, no real reason to do the whole (unconfirmed) extra 0.01 standing per day regeneration mechanic
         const baseGain: number = this.inraidConfig.carExtractBaseStandingGain;
+        const extractCount: number = pmcData.CarExtractCounts[extractName];
+
         fenceStanding += Math.max(baseGain / extractCount, 0.01);
 
-        pmcData.TradersInfo[fenceID].standing = Math.min(Math.max(fenceStanding, -7), 15);
-        this.traderHelper.lvlUp(fenceID, sessionID);
-        pmcData.TradersInfo[fenceID].loyaltyLevel = Math.max(pmcData.TradersInfo[fenceID].loyaltyLevel, 1);
-
-        // clear bot loot cache
-        this.botLootCacheService.clearCache();
+        // Ensure fence loyalty level is not above/below the range -7 - 15
+        pmcData.TradersInfo[fenceId].standing = Math.min(Math.max(fenceStanding, -7), 15);
     }
 }
