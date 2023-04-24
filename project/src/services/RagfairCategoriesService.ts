@@ -49,44 +49,31 @@ export class RagfairCategoriesService
 
     /**
      * Increment or decrement a category array
-     * @param offer offer to process
-     * @param categories categories to update
-     * @param increment should item be incremented or decremented
+     * @param offer Offer to process
+     * @param categories Categories to update
+     * @param increment (Optional) Should item be incremented or decremented
      */
     protected addOrIncrementCategory(offer: IRagfairOffer, categories: Record<string, number>, increment = true ): void
     {
-        
         const itemId = offer.items[0]._tpl;
         if (increment)
         {
-            if (!categories[itemId])
-            {
-                categories[itemId] = 1;
-            }
-            else
-            {
-                categories[itemId]++;
-            }
+            categories[itemId] = categories[itemId]
+                ? categories[itemId] + 1
+                : 1;
         }
         else
         {
-            
             // No category, no work to do
-            if (!categories[itemId])
-            {
-                return;
-            }
-
-            // Key exists, decrement
             if (categories[itemId])
             {
                 categories[itemId]--;
-            }
 
-            // remove category entirely as its 0 or less
-            if (categories[itemId] < 1)
-            {
-                delete categories[itemId];
+                // Remove category entirely as its 0 or less
+                if (categories[itemId] < 1)
+                {
+                    delete categories[itemId];
+                }
             }
         }
     }
