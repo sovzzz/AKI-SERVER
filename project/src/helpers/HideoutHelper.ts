@@ -16,6 +16,7 @@ import {
 import {
     IHideoutTakeProductionRequestData
 } from "../models/eft/hideout/IHideoutTakeProductionRequestData";
+import { IAddItemRequestData } from "../models/eft/inventory/IAddItemRequestData";
 import { IItemEventRouterResponse } from "../models/eft/itemEvent/IItemEventRouterResponse";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
 import { HideoutAreas } from "../models/enums/HideoutAreas";
@@ -210,7 +211,6 @@ export class HideoutHelper
         const timeElapsed = this.getTimeElapsedSinceLastServerTick(pmcData, hideoutProperties.isGeneratorOn);
         if (hideoutProperties.waterCollectorHasFilter)
         {
-
             pmcData.Hideout.Production[productionId].Progress += timeElapsed;
         }
     }
@@ -464,6 +464,7 @@ export class HideoutHelper
 
                     this.logger.debug(`Generator: ${resourceValue} fuel left in slot ${i + 1}`);
                     hasFuelRemaining = true;
+
                     break; // Break here to avoid updating all the fuel tanks
                 }
                 else
@@ -576,6 +577,7 @@ export class HideoutHelper
     protected getProductionTimeSeconds(prodId: string): number
     {
         const recipe = this.databaseServer.getTables().hideout.production.find(prod => prod._id === prodId);
+
         return (recipe.productionTime || 0);
     }
 
@@ -670,6 +672,7 @@ export class HideoutHelper
         {
             // Set progress to 0
             btcProd.Progress = 0;
+
             return btcProd;
         }
 
@@ -718,14 +721,8 @@ export class HideoutHelper
             {
                 if (btcProd.Products.length < coinSlotCount)
                 {
-                    btcProd.Products.push({
-                        "_id": this.hashUtil.generate(),
-                        "_tpl": "59faff1d86f7746c51718c9c",
-                        "upd": {
-                            "StackObjectsCount": 1
-                        }
-                    });
-                    btcProd.Progress -= coinCraftTimeSeconds;
+                    // Has space to add a coin to production
+                    this.addBtcToProduction(btcProd, coinCraftTimeSeconds);
                 }
                 else
                 {
@@ -741,6 +738,24 @@ export class HideoutHelper
         {
             return null;
         }
+    }
+
+    /**
+     * Add bitcoin object to btc production products array and set progress time
+     * @param btcProd Bitcoin production object
+     * @param coinCraftTimeSeconds Time to craft a bitcoin
+     */
+    protected addBtcToProduction(btcProd: Production, coinCraftTimeSeconds: number): void
+    {
+        btcProd.Products.push({
+            _id: this.hashUtil.generate(),
+            _tpl: "59faff1d86f7746c51718c9c",
+            upd: {
+                "StackObjectsCount": 1
+            }
+        });
+
+        btcProd.Progress -= coinCraftTimeSeconds;
     }
 
     /**
@@ -884,15 +899,7 @@ export class HideoutHelper
             return this.httpResponse.appendErrorToOutput(output, errorMsg);
         }
 
-        const coinsToAddToInventory = {
-            items: [{
-                // eslint-disable-next-line @typescript-eslint/naming-convention
-                item_id: HideoutHelper.bitcoin,
-                count: pmcData.Hideout.Production[HideoutHelper.bitcoinFarm].Products.length
-            }],
-            tid: "ragfair"
-        };
-
+        const btcCoinCreationRequest = this.createBitcoinRequest(pmcData);
         const coinSlotCount = this.getBTCSlots(pmcData);
 
         // Run callback after coins are added to player inventory
@@ -910,7 +917,24 @@ export class HideoutHelper
         };
 
         // Add FiR coins to player inventory
-        return this.inventoryHelper.addItem(pmcData, coinsToAddToInventory, output, sessionId, callback, true);
+        return this.inventoryHelper.addItem(pmcData, btcCoinCreationRequest, output, sessionId, callback, true);
+    }
+
+    /**
+     * Create a single bitcoin request object
+     * @param pmcData Player profile
+     * @returns IAddItemRequestData
+     */
+    protected createBitcoinRequest(pmcData: IPmcData): IAddItemRequestData
+    {
+        return {
+            items: [{
+                // eslint-disable-next-line @typescript-eslint/naming-convention
+                item_id: HideoutHelper.bitcoin,
+                count: pmcData.Hideout.Production[HideoutHelper.bitcoinFarm].Products.length
+            }],
+            tid: "ragfair"
+        };
     }
 
     /**
@@ -983,12 +1007,9 @@ export class HideoutHelper
      */
     protected hideoutImprovementIsComplete(improvement: IHideoutImprovement): boolean
     {
-        if (improvement?.completed)
-        {
-            return true;
-        }
-
-        return false;
+        return improvement?.completed
+            ? true
+            : false;
     }
 
     /**
