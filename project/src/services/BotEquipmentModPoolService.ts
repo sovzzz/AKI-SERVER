@@ -45,6 +45,8 @@ export class BotEquipmentModPoolService
             if (!item._props)
             {
                 this.logger.error(`Item ${item._id} ${item._name} is missing a _props property`);
+
+                continue;
             }
 
             // skip item witout slots
