@@ -4,7 +4,12 @@ import { BotDifficultyHelper } from "../helpers/BotDifficultyHelper";
 import { BotHelper } from "../helpers/BotHelper";
 import { ProfileHelper } from "../helpers/ProfileHelper";
 import { WeightedRandomHelper } from "../helpers/WeightedRandomHelper";
-import { Health as PmcHealth, IBaseJsonSkills, IBaseSkill, IBotBase, Info, Skills as botSkills } from "../models/eft/common/tables/IBotBase";
+import {
+    Common,
+    IBaseJsonSkills, IBaseSkill, IBotBase, Info,
+    Health as PmcHealth,
+    Skills as botSkills
+} from "../models/eft/common/tables/IBotBase";
 import { Health, IBotType } from "../models/eft/common/tables/IBotType";
 import { Item, Upd } from "../models/eft/common/tables/IItem";
 import { BaseClasses } from "../models/enums/BaseClasses";
@@ -303,8 +308,8 @@ export class BotGenerator
     protected generateSkills(botSkills: IBaseJsonSkills): botSkills
     {
         const skillsToReturn: botSkills = {
-            Common: this.getSkillsWithRandomisedProgressValue(Object.values(botSkills.Common ?? [])),
-            Mastering: this.getSkillsWithRandomisedProgressValue(Object.values(botSkills.Mastering ?? [])),
+            Common: this.getSkillsWithRandomisedProgressValue(botSkills.Common, true),
+            Mastering: this.getSkillsWithRandomisedProgressValue(botSkills.Mastering, false),
             Points: 0
         };
 
@@ -314,20 +319,40 @@ export class BotGenerator
     /**
      * Randomise the progress value of passed in skills based on the min/max value
      * @param skills Skills to randomise
+     * @param isCommonSkills Are the skills 'common' skills
      * @returns Skills with randomised progress values as an array
      */
-    protected getSkillsWithRandomisedProgressValue(skills: IBaseSkill[]): IBaseSkill[]
+    protected getSkillsWithRandomisedProgressValue(skills: Record<string, IBaseSkill>, isCommonSkills: boolean): IBaseSkill[]
     {
         if (Object.keys(skills ?? []).length === 0)
         {
-            return;
+            return [];
         }
 
-        // Create a new array of skills with randomised progress value
-        return skills.map((skill) => ({
-            Id: skill.Id,
-            Progress: this.randomUtil.getInt(skill.min, skill.max)
-        }));
+        return Object.keys(skills).map((skillKey): IBaseSkill =>
+        {
+            // Get skill from dict, skip if not found
+            const skill = skills[skillKey];
+            if (!skill)
+            {
+                return null;
+            }
+    
+            // All skills have id and progress props
+            const skillToAdd: IBaseSkill = {
+                Id: skillKey,
+                Progress: this.randomUtil.getInt(skill.min, skill.max)
+            };
+    
+            // Common skills have additional props
+            if (isCommonSkills)
+            {
+                (skillToAdd as Common).PointsEarnedDuringSession = 0;
+                (skillToAdd as Common).LastAccess = 0;
+            }
+    
+            return skillToAdd;
+        }).filter(x => x !== null);
     }
 
     /**
