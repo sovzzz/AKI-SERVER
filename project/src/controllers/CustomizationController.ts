@@ -163,7 +163,7 @@ export class CustomizationController
 
         if (relatedItem.upd.StackObjectsCount > clothingItem.count)
         {
-            pmcData.Inventory.items[relatedItem._id].upd.StackObjectsCount -= clothingItem.count;
+            relatedItem.upd.StackObjectsCount -= clothingItem.count;
             output.profileChanges[sessionId].items.change.push({
                 _id: relatedItem._id,
                 _tpl: relatedItem._tpl,
