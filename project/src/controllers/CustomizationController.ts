@@ -89,7 +89,7 @@ export class CustomizationController
         }
 
         const suitId = traderOffer.suiteId;
-        if (this.outfitAlreadyPurchased(sessionId, suitId))
+        if (this.outfitAlreadyPurchased(suitId, sessionId))
         {
             const suitDetails = db.templates.customization[suitId];
             this.logger.error(this.localisationService.getText("customisation-item_already_purchased", {itemId: suitDetails._id, itemName: suitDetails._name}));
