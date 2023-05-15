@@ -38,8 +38,8 @@ export class BotEquipmentModPoolService
      */
     protected generatePool(items: ITemplateItem[], poolType: string): void
     {
+        // Get weapon or gear pool
         const pool = (poolType === "weapon" ? this.weaponModPool : this.gearModPool);
-
         for (const item of items)
         {
             if (!item._props)
