@@ -4751,7 +4751,7 @@
     ],
     "WalkSpeed": {
       "x": 0.625,
-      "y": 0.86,
+      "y": 0.717,
       "z": 0
     },
     "SprintSpeed": {
@@ -5458,7 +5458,7 @@
         "y": 65,
         "z": 0.5
       },
-      "InertiaLimitsStep": 0.1,
+      "InertiaLimitsStep": 0.025,
       "ExitMovementStateSpeedThreshold": {
         "x": 0.01,
         "y": 0.01,
