@@ -98,17 +98,15 @@ export class BotDifficultyHelper
      */
     public convertBotDifficultyDropdownToBotDifficulty(dropDownDifficulty: string): string
     {
-        if (dropDownDifficulty.toLowerCase() === "medium")
+        switch (dropDownDifficulty.toLowerCase())
         {
-            return "normal";
+            case "medium":
+                return "normal";
+            case "random":
+                return this.chooseRandomDifficulty();
+            default:
+                return dropDownDifficulty.toLowerCase();
         }
-
-        if (dropDownDifficulty.toLowerCase() === "random")
-        {
-            return this.chooseRandomDifficulty();
-        }
-
-        return dropDownDifficulty.toLowerCase();
     }
 
     /**
