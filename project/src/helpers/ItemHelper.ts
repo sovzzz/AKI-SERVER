@@ -241,6 +241,13 @@ class ItemHelper
         return [false, undefined];
     }
 
+    public isItemInDb(tpl: string): boolean
+    {
+        const itemDetails = this.getItem(tpl);
+
+        return itemDetails[0];
+    }
+
     /**
      * get normalized value (0-1) based on item condition
      * @param item 

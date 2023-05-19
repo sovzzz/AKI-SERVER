@@ -275,26 +275,22 @@ export class ScavCaseRewardGenerator
      */
     protected getScavCaseRewardCountsAndPrices(scavCaseDetails: IHideoutScavCase): ScavCaseRewardCountsAndPrices
     {
-        return {
-            common: {
-                minCount: scavCaseDetails.EndProducts["Common"].min, 
-                maxCount: scavCaseDetails.EndProducts["Common"].max,
-                minPriceRub: this.scavCaseConfig.rewardItemValueRangeRub["common"].min,
-                maxPriceRub: this.scavCaseConfig.rewardItemValueRangeRub["common"].max
-            },
-            rare: {
-                minCount: scavCaseDetails.EndProducts["Rare"].min, 
-                maxCount: scavCaseDetails.EndProducts["Rare"].max,
-                minPriceRub: this.scavCaseConfig.rewardItemValueRangeRub["rare"].min,
-                maxPriceRub: this.scavCaseConfig.rewardItemValueRangeRub["rare"].max
-            },
-            superrare: {
-                minCount: scavCaseDetails.EndProducts["Superrare"].min, 
-                maxCount: scavCaseDetails.EndProducts["Superrare"].max,
-                minPriceRub: this.scavCaseConfig.rewardItemValueRangeRub["superrare"].min,
-                maxPriceRub: this.scavCaseConfig.rewardItemValueRangeRub["superrare"].max
-            }
-        };
+        const rewardTypes: (keyof ScavCaseRewardCountsAndPrices)[] = ["common", "rare", "superrare"];
+        const result: Partial<ScavCaseRewardCountsAndPrices> = {};
+
+        // Create reward min/max counts for each type
+        for (const rewardType of rewardTypes)
+        {
+            result[rewardType] =
+            {
+                minCount: scavCaseDetails.EndProducts[rewardType].min,
+                maxCount: scavCaseDetails.EndProducts[rewardType].max,
+                minPriceRub: this.scavCaseConfig.rewardItemValueRangeRub[rewardType].min,
+                maxPriceRub: this.scavCaseConfig.rewardItemValueRangeRub[rewardType].max
+            };
+        }
+
+        return result as ScavCaseRewardCountsAndPrices;
     }
 
     /**

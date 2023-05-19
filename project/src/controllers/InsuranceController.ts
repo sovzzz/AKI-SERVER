@@ -54,21 +54,23 @@ export class InsuranceController
     {
         const time = this.timeUtil.getTimestamp();
 
+        // Process each profile in turn
         for (const sessionID in this.saveServer.getProfiles())
         {
             const insurance = this.saveServer.getProfile(sessionID).insurance;
-            let i = insurance.length;
+            let insuredItemCount = insurance.length;
 
             // Skip profile with no insurance items
-            if (i === 0)
+            if (insuredItemCount === 0)
             {
                 continue;
             }
 
-            while (i-- > 0)
+            // Use count as array index
+            while (insuredItemCount-- > 0)
             {
-                const insured = insurance[i];
-                const traderReturnChance = this.insuranceConfig.returnChancePercent[insured.traderId];
+                const insured = insurance[insuredItemCount];
+                
 
                 // Return time not reached, skip
                 if (time < insured.scheduledTime)
@@ -76,16 +78,13 @@ export class InsuranceController
                     continue;
                 }
 
-                // Gather up items that can fail
-                const slotIdsThatCanFail = this.insuranceConfig.slotIdsWithChanceOfNotReturning;
-                const toDelete = [];
+                // Items to be removed from inventory
+                const toDelete: string[] = [];
 
-                // Loop over insurance items
+                // Loop over insurance items, find items to delete from player inventory
                 for (const insuredItem of insured.items)
                 {
-                    // Roll from 0 to 9999, then divide it by 100: 9999 =  99.99%
-                    const returnChance = this.randomUtil.getInt(0, 9999) / 100;
-                    if ((slotIdsThatCanFail.includes(insuredItem.slotId)) && returnChance >= traderReturnChance && !toDelete.includes(insuredItem._id))
+                    if (this.itemShouldBeLost(insuredItem, insured.traderId, toDelete))
                     {
                         // Skip if not an item
                         const itemDetails = this.itemHelper.getItem(insuredItem._tpl);
@@ -100,7 +99,7 @@ export class InsuranceController
                             continue;
                         }
 
-                        // Remove item and its sub-items to prevent orphaned items
+                        // Remove item and its sub-items to prevent orphans
                         toDelete.push(...this.itemHelper.findAndReturnChildrenByItems(insured.items, insuredItem._id));
                     }
                 }
@@ -123,11 +122,28 @@ export class InsuranceController
                 this.dialogueHelper.addDialogueMessage(insured.traderId, insured.messageContent, sessionID, insured.items);
 
                 // Remove insurance package from profile now we've processed it
-                insurance.splice(i, 1);
+                insurance.splice(insuredItemCount, 1);
             }
 
             this.saveServer.getProfile(sessionID).insurance = insurance;
         }
+    }
+
+    /**
+     * Should the passed in item be removed from player inventory
+     * @param insuredItem Insurued item to roll to lose
+     * @param traderId Trader the item was insured by
+     * @param itemsBeingDeleted All items to remove from player
+     * @returns True if item should be removed
+     */
+    protected itemShouldBeLost(insuredItem: Item, traderId: string, itemsBeingDeleted: string[]): boolean
+    {
+        // Roll from 0 to 9999, then divide it by 100: 9999 =  99.99%
+        const returnChance = this.randomUtil.getInt(0, 9999) / 100;
+        const traderReturnChance = this.insuranceConfig.returnChancePercent[traderId];
+
+        const slotIdsThatCanFail = this.insuranceConfig.slotIdsWithChanceOfNotReturning;
+        return (slotIdsThatCanFail.includes(insuredItem.slotId)) && returnChance >= traderReturnChance && !itemsBeingDeleted.includes(insuredItem._id);
     }
 
     /**
