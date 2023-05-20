@@ -133,7 +133,7 @@ export interface IUpdatableChatMember
     Nickname: string
     Side: string
     Level: number
-    MemberCategory: string
+    MemberCategory: MemberCategory
     Ignored: boolean
     Banned: boolean
 }

@@ -69,6 +69,14 @@ export class MatchStaticRouter extends StaticRouter
                     }
                 ),
                 new RouteAction(
+                    "/client/match/group/leave",
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    (url: string, info: any, sessionID: string, output: string): any => 
+                    {
+                        return this. matchCallbacks.leaveGroup(url, info, sessionID);
+                    }
+                ),
+                new RouteAction(
                     "/client/match/group/status",
                     // eslint-disable-next-line @typescript-eslint/no-unused-vars
                     (url: string, info: any, sessionID: string, output: string): any => 
@@ -138,6 +146,14 @@ export class MatchStaticRouter extends StaticRouter
                     (url: string, info: any, sessionID: string, output: string): any => 
                     {
                         return this.matchCallbacks.cancelAllGroupInvite(url, info, sessionID);
+                    }
+                ),
+                new RouteAction(
+                    "/client/match/group/transfer",
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    (url: string, info: any, sessionID: string, output: string): any => 
+                    {
+                        return this.matchCallbacks.transferGroup(url, info, sessionID);
                     }
                 ),
                 new RouteAction(

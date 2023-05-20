@@ -3,6 +3,7 @@ import { inject, injectable } from "tsyringe";
 import { DialogueController } from "../controllers/DialogueController";
 import { OnUpdate } from "../di/OnUpdate";
 import { IEmptyRequestData } from "../models/eft/common/IEmptyRequestData";
+import { IAcceptFriendRequestData } from "../models/eft/dialog/IAcceptFriendRequestData";
 import { IChatServer } from "../models/eft/dialog/IChatServer";
 import { IClearMailMessageRequest } from "../models/eft/dialog/IClearMailMessageRequest";
 import { IDeleteFriendRequest } from "../models/eft/dialog/IDeleteFriendRequest";
@@ -149,6 +150,12 @@ export class DialogueCallbacks implements OnUpdate
     public sendFriendRequest(url: string, request: IFriendRequestData, sessionID: string): IGetBodyResponseData<IFriendRequestSendResponse>
     {
         return this.httpResponse.getBody({status: 0, requestid: "12345", retryAfter: 600});
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public acceptFriendRequest(url: string, request: IAcceptFriendRequestData, sessionID: string): IGetBodyResponseData<boolean>
+    {
+        return this.httpResponse.getBody(true);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

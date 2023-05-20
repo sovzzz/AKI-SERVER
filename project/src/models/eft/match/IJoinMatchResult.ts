@@ -1,6 +1,13 @@
 export interface IJoinMatchResult
 {
+    maxPveCountExceeded: boolean
+    profiles: IJoinMatchPlayerProfile[]
+}
+
+export interface IJoinMatchPlayerProfile
+{
     profileid: string
+    profileToken: string
     status: string
     sid: string
     ip: string

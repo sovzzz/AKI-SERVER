@@ -20,6 +20,7 @@ import { IJoinMatchResult } from "../models/eft/match/IJoinMatchResult";
 import { IPutMetricsRequestData } from "../models/eft/match/IPutMetricsRequestData";
 import { IRemovePlayerFromGroupRequest } from "../models/eft/match/IRemovePlayerFromGroupRequest";
 import { ISendGroupInviteRequest } from "../models/eft/match/ISendGroupInviteRequest";
+import { ITransferGroupRequest } from "../models/eft/match/ITransferGroupRequest";
 import { IUpdatePingRequestData } from "../models/eft/match/IUpdatePingRequestData";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { HttpResponseUtil } from "../utils/HttpResponseUtil";
@@ -42,6 +43,7 @@ export class MatchCallbacks
         return this.httpResponse.nullResponse();
     }
 
+    // Handle client/match/exit
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public exitMatch(url: string, info: IEmptyRequestData, sessionID: string): INullResponseData
     {
@@ -88,6 +90,12 @@ export class MatchCallbacks
     {
         return this.httpResponse.getBody(true);
     }
+    /** Handle client/match/group/transfer */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public transferGroup(url: string, info: ITransferGroupRequest, sessionID: string): IGetBodyResponseData<boolean>
+    {
+        return this.httpResponse.getBody(true);
+    }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public cancelAllGroupInvite(url: string, info: any, sessionID: string): INullResponseData
@@ -107,8 +115,9 @@ export class MatchCallbacks
         return this.httpResponse.getBody(this.matchController.getProfile(info));
     }
 
+    // Handle client/match/available
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    public serverAvailable(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<any> | IGetBodyResponseData<true>
+    public serverAvailable(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<boolean>
     {
         const output = this.matchController.getEnabled();
 
@@ -120,7 +129,8 @@ export class MatchCallbacks
         return this.httpResponse.getBody(output);
     }
 
-    public joinMatch(url: string, info: IJoinMatchRequestData, sessionID: string): IGetBodyResponseData<IJoinMatchResult[]>
+    // Handle match/group/start_game
+    public joinMatch(url: string, info: IJoinMatchRequestData, sessionID: string): IGetBodyResponseData<IJoinMatchResult>
     {
         return this.httpResponse.getBody(this.matchController.joinMatch(info, sessionID));
     }
@@ -151,6 +161,13 @@ export class MatchCallbacks
     {
         this.matchController.deleteGroup(info);
         return this.httpResponse.nullResponse();
+    }
+
+    // Handle client/match/group/leave
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public leaveGroup(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<boolean>
+    {
+        return this.httpResponse.getBody(true);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

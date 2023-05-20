@@ -82,6 +82,7 @@ class GameCallbacks
         return this.httpResponse.getBody(this.gameController.getServer());
     }
 
+    // Handle client/match/group/current
     public getCurrentGroup(url: string, info: IEmptyRequestData, sessionID: string): any 
     {
         return this.httpResponse.getBody(this.gameController.getCurrentGroup(sessionID));

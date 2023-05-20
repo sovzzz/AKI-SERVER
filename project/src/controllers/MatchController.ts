@@ -82,45 +82,31 @@ export class MatchController
         this.matchLocationService.deleteGroup(info);
     }
 
-    public joinMatch(info: IJoinMatchRequestData, sessionID: string): IJoinMatchResult[]
+    public joinMatch(info: IJoinMatchRequestData, sessionId: string): IJoinMatchResult
     {
-        const match = this.getMatch(info.location);
-        const output: IJoinMatchResult[] = [];
-
-        // --- LOOP (DO THIS FOR EVERY PLAYER IN GROUP)
-        // get player profile
-        const account = this.saveServer.getProfile(sessionID).info;
-        const profileID = info.savage
-            ? `scav${account.id}`
-            : `pmc${account.id}`;
+        const output: IJoinMatchResult = {
+            maxPveCountExceeded: false,
+            profiles: []
+        };
 
         // get list of players joining into the match
-        output.push({
-            "profileid": profileID,
-            "status": "busy",
+        output.profiles.push({
+            "profileid": "TODO",
+            profileToken: "TODO",
+            "status": "MatchWait",
             "sid": "",
-            "ip": match.ip,
-            "port": match.port,
+            "ip": "",
+            "port": 0,
             "version": "live",
-            "location": info.location,
+            "location": "TODO get location",
             raidMode: "Online",
             "mode": "deathmatch",
-            "shortid": match.id,
+            "shortid": null,
             // eslint-disable-next-line @typescript-eslint/naming-convention
-            additional_info: undefined
+            additional_info: null
         });
 
         return output;
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    protected getMatch(location: string): any
-    {
-        return {
-            "id": "TEST",
-            "ip": "127.0.0.1",
-            "port": 9909
-        };
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -128,8 +114,7 @@ export class MatchController
     {
         return {
             "players": [],
-            "invite": [],
-            "group": []
+            maxPveCountExceeded: false
         };
     }
 

@@ -1,10 +1,7 @@
 export interface IJoinMatchRequestData
 {
-    location: string
-    savage: boolean
-    dt: string
+    groupid: string
     servers: Server[]
-    keyId: string
 }
 
 export interface Server

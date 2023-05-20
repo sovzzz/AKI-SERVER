@@ -10,6 +10,7 @@ import { IEmptyRequestData } from "../models/eft/common/IEmptyRequestData";
 import { IPmcData } from "../models/eft/common/IPmcData";
 import { BodyPartHealth } from "../models/eft/common/tables/IBotBase";
 import { ICheckVersionResponse } from "../models/eft/game/ICheckVersionResponse";
+import { ICurrentGroupResponse } from "../models/eft/game/ICurrentGroupResponse";
 import { IGameConfigResponse } from "../models/eft/game/IGameConfigResponse";
 import { IServerDetails } from "../models/eft/game/IServerDetails";
 import { IAkiProfile } from "../models/eft/profile/IAkiProfile";
@@ -498,11 +499,11 @@ export class GameController
         ];
     }
 
-    public getCurrentGroup(sessionId: any): any
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public getCurrentGroup(sessionId: string): ICurrentGroupResponse
     {
         return {
-            squad: [],
-            raidSettings: {}
+            squad: []
         };
     }
 

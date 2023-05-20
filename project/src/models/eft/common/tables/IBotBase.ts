@@ -328,7 +328,7 @@ export interface LastPlayerStateInfo
     Nickname: string
     Side: string
     Level: number
-    MemberCategory: string
+    MemberCategory: MemberCategory
 }
 
 export interface BackendCounter 
