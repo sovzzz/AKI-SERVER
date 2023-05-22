@@ -65,7 +65,7 @@ export class QuestHelper
     */
     public getQuestStatus(pmcData: IPmcData, questId: string): QuestStatus
     {
-        const quest = pmcData.Quests.find(q => q.qid === questId);
+        const quest = pmcData.Quests?.find(q => q.qid === questId);
 
         return quest
             ? quest.status
