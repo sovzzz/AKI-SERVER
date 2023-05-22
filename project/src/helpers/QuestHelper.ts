@@ -85,9 +85,17 @@ export class QuestHelper
             switch (condition._props.compareMethod)
             {
                 case ">=":
-                    return playerLevel >= condition._props.value;
+                    return playerLevel >= <number>condition._props.value;
+                case ">":
+                    return playerLevel > <number>condition._props.value;
+                case "<":
+                    return playerLevel < <number>condition._props.value;
+                case "<=":
+                    return playerLevel <= <number>condition._props.value;
+                case "=":
+                    return playerLevel === <number>condition._props.value;
                 default:
-                    this.logger.debug(`Unrecognised Comparison Method: ${condition._props.compareMethod}`);
+                    this.logger.error(`Unrecognised Comparison Method: ${condition._props.compareMethod}`);
                     return false;
             }
         }
