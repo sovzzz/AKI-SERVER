@@ -33,8 +33,8 @@
       "max": 1
     },
     "reward": {
-      "min": 275,
-      "max": 275
+      "min": 325,
+      "max": 325
     },
     "standingForKill": -0.05,
     "aggressorBonus": 0.02
