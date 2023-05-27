@@ -135,7 +135,7 @@ export class InraidController
         // Remove inventory if player died and send insurance items
         if (insuranceEnabled)
         {
-            this.insuranceService.storeLostGear(pmcData, offraidData, preRaidGear, sessionID, isDead);
+            this.insuranceService.storeLostGear(pmcData, offraidData, preRaidGear, sessionID, isDead, locationName);
         }
         else
         {

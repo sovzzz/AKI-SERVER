@@ -230,6 +230,8 @@ export interface Insurance
     traderId: string
     messageContent: MessageContent
     items: Item[]
+    locationlost?: string
+    timeStampLost?: number
 }
 
 export interface MessageContent

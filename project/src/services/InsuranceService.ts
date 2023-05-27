@@ -20,10 +20,17 @@ import { RandomUtil } from "../utils/RandomUtil";
 import { TimeUtil } from "../utils/TimeUtil";
 import { LocalisationService } from "./LocalisationService";
 
+export interface IInsuranceData
+{
+    locationLost?: string
+    timestampLost?: number
+    items: Item[]
+}
+
 @injectable()
 export class InsuranceService
 {
-    protected insured: Record<string, Record<string, Item[]>> = {};
+    protected insured: Record<string, Record<string, IInsuranceData>> = {};
     protected insuranceConfig: IInsuranceConfig;
 
     constructor(
@@ -53,14 +60,14 @@ export class InsuranceService
         return this.insured[sessionId][traderId] !== undefined;
     }
 
-    public getInsurance(sessionId: string): Record<string, Item[]>
+    public getInsurance(sessionId: string): Record<string, IInsuranceData>
     {
         return this.insured[sessionId];
     }
 
     public getInsuranceItems(sessionId: string, traderId: string): Item[]
     {
-        return this.insured[sessionId][traderId];
+        return this.insured[sessionId][traderId].items;
     }
 
     public resetInsurance(sessionId: string): void
@@ -70,12 +77,22 @@ export class InsuranceService
 
     public resetInsuranceTraderArray(sessionId: string, traderId: string): void
     {
-        this.insured[sessionId][traderId] = [];
+        this.insured[sessionId][traderId] = {items: []};
     }
 
-    public addInsuranceItemToArray(sessionId: string, traderId: string, itemToAdd: any): void
+    public addInsuranceItemToArray(sessionId: string, traderId: string, itemToAdd: Item): void
     {
-        this.insured[sessionId][traderId].push(itemToAdd);
+        this.insured[sessionId][traderId].items.push(itemToAdd);
+    }
+
+    public addLocationLostToInsuranceItem(sessionId: string, traderId: string, locationName: string): void
+    {
+        this.insured[sessionId][traderId].locationLost = locationName;
+    }
+
+    public addTimestampLostToInsuranceItem(sessionId: string, traderId: string, timestampLost: number): void
+    {
+        this.insured[sessionId][traderId].timestampLost = timestampLost;
     }
 
     /**
@@ -106,7 +123,9 @@ export class InsuranceService
         {
             const trader = this.traderHelper.getTrader(traderId, sessionID);
             const insuranceReturnTimestamp = this.getInsuranceReturnTimestamp(pmcData, trader);
+            const insurance = this.getInsurance(sessionID)[traderId];
             const dialogueTemplates = this.databaseServer.getTables().traders[traderId].dialogue;
+
             let messageContent = this.dialogueHelper.createMessageContext(this.randomUtil.getArrayValue(dialogueTemplates.insuranceStart), MessageType.NPC_TRADER, trader.insurance.max_storage_time);
 
             this.dialogueHelper.addDialogueMessage(traderId, messageContent, sessionID);
@@ -131,7 +150,9 @@ export class InsuranceService
                 scheduledTime: insuranceReturnTimestamp,
                 traderId: traderId,
                 messageContent: messageContent,
-                items: this.getInsurance(sessionID)[traderId]
+                items: insurance.items,
+                locationlost: insurance.locationLost,
+                timeStampLost: insurance.timestampLost
             });
         }
 
@@ -140,8 +161,8 @@ export class InsuranceService
 
     protected removeLocationProperty(sessionId: string, traderId: string): void
     {
-        const insuredItems = this.getInsurance(sessionId)[traderId];
-        for (const insuredItem of this.getInsurance(sessionId)[traderId])
+        const insuredItems = this.getInsurance(sessionId)[traderId].items;
+        for (const insuredItem of this.getInsurance(sessionId)[traderId].items)
         {
             const isParentHere = insuredItems.find(isParent => isParent._id === insuredItem.parentId);
             if (!isParentHere)
@@ -184,8 +205,9 @@ export class InsuranceService
      * @param preRaidGear gear player wore prior to raid
      * @param sessionID Session id
      * @param playerDied did the player die in raid
+     * @param locationName Name of map gear was lost on
      */
-    public storeLostGear(pmcData: IPmcData, offraidData: ISaveProgressRequestData, preRaidGear: Item[], sessionID: string, playerDied: boolean): void
+    public storeLostGear(pmcData: IPmcData, offraidData: ISaveProgressRequestData, preRaidGear: Item[], sessionID: string, playerDied: boolean, locationName: string): void
     {
         const preRaidGearHash = this.createItemHashTable(preRaidGear);
         const offRaidGearHash = this.createItemHashTable(offraidData.profile.Inventory.items);
@@ -213,7 +235,7 @@ export class InsuranceService
         // Process all insured items lost in-raid
         for (const gear of equipmentToSendToPlayer)
         {
-            this.addGearToSend(gear.pmcData, gear.insuredItem, gear.item, gear.sessionID);
+            this.addGearToSend(gear, locationName);
         }
     }
 
@@ -235,13 +257,16 @@ export class InsuranceService
 
     /**
      * Add gear item to InsuredItems array in player profile
-     * @param pmcData profile to store item in
-     * @param insuredItem Item to store in profile
-     * @param actualItem item to store
-     * @param sessionID Session id
+     * @param gear Details on what item to store (player profile/item to store in profile/item db details/session id)
+     * @param locationName Name of map gear was lost on
      */
-    protected addGearToSend(pmcData: IPmcData, insuredItem: InsuredItem, actualItem: Item, sessionID: string): void
+    protected addGearToSend(gear: { pmcData: any; insuredItem: InsuredItem, item: Item, sessionID: string; }, locationName: string): void
     {
+        const pmcData = gear.pmcData;
+        const insuredItem = gear.insuredItem;
+        const actualItem = gear.item;
+        const sessionID = gear.sessionID;
+
         // Skip items defined in config
         if (this.insuranceConfig.blacklistedEquipment.includes(actualItem.slotId))
         {
@@ -291,6 +316,9 @@ export class InsuranceService
         }
 
         this.addInsuranceItemToArray(sessionID, insuredItem.tid, actualItem);
+        
+        this.addLocationLostToInsuranceItem(sessionID, insuredItem.tid, locationName);
+        this.addTimestampLostToInsuranceItem(sessionID, insuredItem.tid, this.timeUtil.getTimestamp());
 
         // Remove processed item from array
         pmcData.InsuredItems = pmcData.InsuredItems.filter((item) =>
