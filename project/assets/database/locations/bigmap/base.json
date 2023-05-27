@@ -205,7 +205,8 @@
     "path": "",
     "rcid": ""
   },
-  "RequiredPlayerLevel": 0,
+  "RequiredPlayerLevelMin": 0,
+  "RequiredPlayerLevelMax": 100,
   "Rules": "AvoidAllPmc",
   "SafeLocation": false,
   "ScavMaxPlayersInGroup": 4,
