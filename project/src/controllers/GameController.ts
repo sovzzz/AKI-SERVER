@@ -285,7 +285,7 @@ export class GameController
                 continue;
             }
 
-            for (const wave of location.base.waves)
+            for (const wave of location.base.waves ?? [])
             {
                 if ((wave.slots_max - wave.slots_min === 0))
                 {
