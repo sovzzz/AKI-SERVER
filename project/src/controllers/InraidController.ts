@@ -180,11 +180,6 @@ export class InraidController
         this.updatePmcHealthPostRaid(postRaidSaveRequest, pmcData);
         this.inRaidHelper.deleteInventory(pmcData, sessionID);
 
-        if (insuranceEnabled)
-        {
-            this.insuranceService.storeInsuredItemsForReturn(pmcData, postRaidSaveRequest, preRaidGear, sessionID);
-        }
-
         // Remove quest items
         if (this.inRaidHelper.removeQuestItemsOnDeath())
         {

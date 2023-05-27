@@ -234,58 +234,6 @@ export class InsuranceService
     }
 
     /**
-     * Store insured items on pmc death inside insurance array in player profile
-     * @param pmcData Player profile
-     * @param offraidData Player gear post-raid
-     * @param preRaidGear Player gear before raid
-     * @param sessionID Session id
-     */
-    public storeInsuredItemsForReturn(pmcData: IPmcData, offraidData: ISaveProgressRequestData, preRaidGear: Item[], sessionID: string): void
-    {
-        const preRaidGearDictionary = {};
-        const pmcItemsDictionary = {};
-        const itemsToReturn = [];
-
-        const itemsInSecureContainer = this.secureContainerHelper.getSecureContainerItems(offraidData.profile.Inventory.items);
-
-        // Create dict of gear player had when entering raid
-        for (const item of preRaidGear)
-        {
-            preRaidGearDictionary[item._id] = item;
-        }
-
-        // Create dict of gear player has post-raid
-        for (const item of pmcData.Inventory.items)
-        {
-            pmcItemsDictionary[item._id] = item;
-        }
-
-        for (const insuredItem of pmcData.InsuredItems)
-        {
-            // Only return certain insured items:
-            // Existed before raid
-            // Not in secure container
-            // Not in PMC inventory post raid
-            if (preRaidGearDictionary[insuredItem.itemId]
-                && !(itemsInSecureContainer.includes(insuredItem.itemId))
-                && !(typeof pmcItemsDictionary[insuredItem.itemId] === "undefined"))
-            {
-                itemsToReturn.push(
-                    { "pmcData": pmcData,
-                        "insuredItem": insuredItem,
-                        "item": pmcItemsDictionary[insuredItem.itemId],
-                        "sessionID": sessionID }
-                );
-            }
-        }
-
-        for (const item of itemsToReturn)
-        {
-            this.addGearToSend(item.pmcData, item.insuredItem, item.item, item.sessionID);
-        }
-    }
-
-    /**
      * Add gear item to InsuredItems array in player profile
      * @param pmcData profile to store item in
      * @param insuredItem Item to store in profile
