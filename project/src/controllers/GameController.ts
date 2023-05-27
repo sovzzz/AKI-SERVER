@@ -279,6 +279,12 @@ export class GameController
 
             // Loop over all of the locations waves and look for waves with identical min and max slots
             const location: ILocationData = this.databaseServer.getTables().locations[locationKey];
+            if (!location.base)
+            {
+                this.logger.warning(`Map ${locationKey} lacks a base json, skipping map wave fixes`);
+                continue;
+            }
+
             for (const wave of location.base.waves)
             {
                 if ((wave.slots_max - wave.slots_min === 0))
