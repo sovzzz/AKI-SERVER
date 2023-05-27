@@ -57,8 +57,8 @@ export class InsuranceController
         // Process each profile in turn
         for (const sessionID in this.saveServer.getProfiles())
         {
-            const insurance = this.saveServer.getProfile(sessionID).insurance;
-            let insuredItemCount = insurance.length;
+            const insuranceDetails = this.saveServer.getProfile(sessionID).insurance;
+            let insuredItemCount = insuranceDetails.length;
 
             // Skip profile with no insurance items
             if (insuredItemCount === 0)
@@ -69,8 +69,7 @@ export class InsuranceController
             // Use count as array index
             while (insuredItemCount-- > 0)
             {
-                const insured = insurance[insuredItemCount];
-                
+                const insured = insuranceDetails[insuredItemCount];
 
                 // Return time not reached, skip
                 if (time < insured.scheduledTime)
@@ -87,14 +86,14 @@ export class InsuranceController
                     if (this.itemShouldBeLost(insuredItem, insured.traderId, toDelete))
                     {
                         // Skip if not an item
-                        const itemDetails = this.itemHelper.getItem(insuredItem._tpl);
-                        if (!itemDetails[0])
+                        const itemDbDetails = this.itemHelper.getItem(insuredItem._tpl);
+                        if (!itemDbDetails[0])
                         {
                             continue;
                         }
 
                         // Is a mod and can't be edited in-raid
-                        if (insuredItem.slotId !== "hideout" && !itemDetails[1]._props.RaidModdable)
+                        if (insuredItem.slotId !== "hideout" && !itemDbDetails[1]._props.RaidModdable)
                         {
                             continue;
                         }
@@ -122,10 +121,10 @@ export class InsuranceController
                 this.dialogueHelper.addDialogueMessage(insured.traderId, insured.messageContent, sessionID, insured.items);
 
                 // Remove insurance package from profile now we've processed it
-                insurance.splice(insuredItemCount, 1);
+                insuranceDetails.splice(insuredItemCount, 1);
             }
 
-            this.saveServer.getProfile(sessionID).insurance = insurance;
+            this.saveServer.getProfile(sessionID).insurance = insuranceDetails;
         }
     }
 
