@@ -107,10 +107,8 @@ export class InsuranceService
             const trader = this.traderHelper.getTrader(traderId, sessionID);
             const insuranceReturnTimestamp = this.getInsuranceReturnTimestamp(pmcData, trader);
             const dialogueTemplates = this.databaseServer.getTables().traders[traderId].dialogue;
+
             let messageContent = this.dialogueHelper.createMessageContext(this.randomUtil.getArrayValue(dialogueTemplates.insuranceStart), MessageType.NPC_TRADER, trader.insurance.max_storage_time);
-
-            this.dialogueHelper.addDialogueMessage(traderId, messageContent, sessionID);
-
             messageContent = {
                 templateId: this.randomUtil.getArrayValue(dialogueTemplates.insuranceFound),
                 type: MessageType.INSURANCE_RETURN,
@@ -123,6 +121,9 @@ export class InsuranceService
                     location: mapId
                 }
             };
+
+            // Must occur after systemData is hydrated
+            this.dialogueHelper.addDialogueMessage(traderId, messageContent, sessionID);
 
             // Remove 'hideout' slotid property on all insurance items
             this.removeLocationProperty(sessionID, traderId);
