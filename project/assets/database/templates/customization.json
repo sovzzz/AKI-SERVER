@@ -8403,21 +8403,6 @@
       "Prefab": "BossBully"
     }
   },
-  "5fc615710b735e7b024c76ed": {
-    "_id": "5fc615710b735e7b024c76ed",
-    "_name": "BossSanitar",
-    "_parent": "5fc100cf95572123ae738483",
-    "_type": "Item",
-    "_props": {
-      "Name": "BossSanitar",
-      "ShortName": "BossSanitar",
-      "Description": "BossSanitar",
-      "Side": [
-        "Savage"
-      ],
-      "Prefab": "BossSanitar"
-    }
-  },
   "5fc6155b0b735e7b024c76ec": {
     "_id": "5fc6155b0b735e7b024c76ec",
     "_name": "BossGluhar",
@@ -8431,6 +8416,21 @@
         "Savage"
       ],
       "Prefab": "BossGluhar"
+    }
+  },
+  "5fc615710b735e7b024c76ed": {
+    "_id": "5fc615710b735e7b024c76ed",
+    "_name": "BossSanitar",
+    "_parent": "5fc100cf95572123ae738483",
+    "_type": "Item",
+    "_props": {
+      "Name": "BossSanitar",
+      "ShortName": "BossSanitar",
+      "Description": "BossSanitar",
+      "Side": [
+        "Savage"
+      ],
+      "Prefab": "BossSanitar"
     }
   },
   "5fc613c80b735e7b024c76e2": {
@@ -8677,6 +8677,36 @@
       "Prefab": "BossTagilla"
     },
     "_proto": "5fc50bddb4965a7a2f48c5af"
+  },
+  "646e46ca286188c5480a1a37": {
+    "_id": "646e46ca286188c5480a1a37",
+    "_name": "Arena_Guard_1",
+    "_parent": "5fc100cf95572123ae738483",
+    "_type": "Item",
+    "_props": {
+      "Name": "Arena_Guard_1",
+      "ShortName": "Arena_Guard_1",
+      "Description": "Arena_Guard_1",
+      "Side": [
+        "Savage"
+      ],
+      "Prefab": "Arena_Guard_1"
+    }
+  },
+  "646e46d8f5438077af029fdb": {
+    "_id": "646e46d8f5438077af029fdb",
+    "_name": "Arena_Guard_2",
+    "_parent": "5fc100cf95572123ae738483",
+    "_type": "Item",
+    "_props": {
+      "Name": "Arena_Guard_2",
+      "ShortName": "Arena_Guard_2",
+      "Description": "Arena_Guard_2",
+      "Side": [
+        "Savage"
+      ],
+      "Prefab": "Arena_Guard_2"
+    }
   },
   "5cd943c31388ce000a659df5": {
     "_id": "5cd943c31388ce000a659df5",

@@ -963,7 +963,7 @@
     "TradingUnlimitedItems": false,
     "MaxLoyaltyLevelForAll": false,
     "GlobalLootChanceModifier": 0.2,
-    "TimeBeforeDeploy": 20,
+    "TimeBeforeDeploy": 10,
     "TimeBeforeDeployLocal": 10,
     "LoadTimeSpeedProgress": 1,
     "BaseLoadTime": 0.85,
@@ -1635,6 +1635,20 @@
         },
         {
           "voice": "BossBigPipe",
+          "side": [
+            "Savage"
+          ],
+          "isNotRandom": true
+        },
+        {
+          "voice": "Arena_Guard_1",
+          "side": [
+            "Savage"
+          ],
+          "isNotRandom": true
+        },
+        {
+          "voice": "Arena_Guard_2",
           "side": [
             "Savage"
           ],
@@ -4855,7 +4869,13 @@
           "50": {
             "Multiplier": 0.3
           }
-        }
+        },
+        "DependentSkillRatios": [
+          {
+            "SkillId": "Health",
+            "Ratio": 0.25
+          }
+        ]
       },
       "Strength": {
         "SprintActionMin": 0.04,
@@ -4878,6 +4898,12 @@
           {
             "Level": 50,
             "Multiplier": 0.3
+          }
+        ],
+        "DependentSkillRatios": [
+          {
+            "SkillId": "Health",
+            "Ratio": 0.25
           }
         ]
       },
@@ -5466,7 +5492,7 @@
       },
       "WalkInertia": {
         "x": 0.05,
-        "y": 0.55,
+        "y": 0.4675,
         "z": 0
       },
       "FallThreshold": 0.15,

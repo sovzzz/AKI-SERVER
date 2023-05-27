@@ -51,8 +51,9 @@ export interface ILocationBase
     OldSpawn: boolean
     OpenZones: string
     Preview: Preview
-    RequiredPlayerLevelMin: number
-    RequiredPlayerLevelMax: number
+    RequiredPlayerLevel?: number
+    RequiredPlayerLevelMin?: number
+    RequiredPlayerLevelMax?: number
     MinPlayerLvlAccessKeys: number
     PmcMaxPlayersInGroup: number
     ScavMaxPlayersInGroup: number

@@ -1160,11 +1160,13 @@ export interface Endurance
     MovementAction: number
     SprintAction: number
     GainPerFatigueStack: number
+    DependentSkillRatios: IDependentSkillRatio[]
     QTELevelMultipliers: Record<string,Record<string, number>>
 }
 
 export interface Strength 
 {
+    DependentSkillRatios: IDependentSkillRatio[]
     SprintActionMin: number
     SprintActionMax: number
     MovementActionMin: number
@@ -1174,6 +1176,12 @@ export interface Strength
     QTELevelMultipliers: IQTELevelMultiplier[]
     FistfightAction: number
     ThrowAction: number
+}
+
+export interface IDependentSkillRatio
+{
+    Ratio: number
+    SkillId: string
 }
 
 export interface IQTELevelMultiplier
