@@ -65,6 +65,14 @@ export class RagfairOfferHelper
         this.questConfig = this.configServer.getConfig(ConfigTypes.QUEST);
     }
 
+    /**
+     * Passthrough to ragfairOfferService.getOffers(), get flea offers a player should see
+     * @param searchRequest 
+     * @param itemsToAdd 
+     * @param traderAssorts Trader assorts
+     * @param pmcProfile Player profile
+     * @returns Offers the player should see
+     */
     public getValidOffers(searchRequest: ISearchRequestData, itemsToAdd: string[], traderAssorts: Record<string, ITraderAssort>, pmcProfile: IPmcData): IRagfairOffer[]
     {
         return this.ragfairOfferService.getOffers().filter(x => this.isDisplayableOffer(searchRequest, itemsToAdd, traderAssorts, x, pmcProfile));
@@ -76,7 +84,7 @@ export class RagfairOfferHelper
      * @param itemsToAdd string array of item tpls to search for
      * @param traderAssorts All trader assorts player can access/buy
      * @param pmcProfile Player profile
-     * @returns ITraderAssort
+     * @returns IRagfairOffer array
      */
     public getOffersForBuild(searchRequest: ISearchRequestData, itemsToAdd: string[], traderAssorts: Record<string, ITraderAssort>, pmcProfile: IPmcData): IRagfairOffer[]
     {
@@ -201,6 +209,7 @@ export class RagfairOfferHelper
      * Get an array of flea offers that are inaccessible to player due to their inadequate loyalty level
      * @param offers Offers to check
      * @param pmcProfile Players profile with trader loyalty levels
+     * @returns array of offer ids player cannot see
      */
     protected getLoyaltyLockedOffers(offers: IRagfairOffer[], pmcProfile: IPmcData): string[]
     {
@@ -220,10 +229,14 @@ export class RagfairOfferHelper
         return loyaltyLockedOffers;
     }
 
+    /**
+     * Process all player-listed flea offers for a desired profile
+     * @param sessionID Session id to process offers for
+     * @returns true = complete
+     */
     public processOffersOnProfile(sessionID: string): boolean
     {
         const timestamp = this.timeUtil.getTimestamp();
-
         const profileOffers = this.getProfileOffers(sessionID);
 
         // No offers, don't do anything
@@ -269,6 +282,11 @@ export class RagfairOfferHelper
         profile.characters.pmc.RagfairInfo.isRatingGrowing = true;
     }
 
+    /**
+     * Return all offers a player has listed on a desired profile
+     * @param sessionID Session id
+     * @returns Array of ragfair offers
+     */
     protected getProfileOffers(sessionID: string): IRagfairOffer[]
     {
         const profile = this.profileHelper.getPmcProfile(sessionID);
@@ -281,6 +299,11 @@ export class RagfairOfferHelper
         return profile.RagfairInfo.offers;
     }
 
+    /**
+     * Delete an offer from a desired profile
+     * @param sessionID Session id of profile to delete offer from
+     * @param offerId Offer id to delete
+     */
     protected deleteOfferByOfferId(sessionID: string, offerId: string): void
     {
         const profileRagfairInfo = this.saveServer.getProfile(sessionID).characters.pmc.RagfairInfo;
@@ -417,6 +440,15 @@ export class RagfairOfferHelper
         return this.eventOutputHolder.getOutput(sessionID);
     }
 
+    /**
+     * Should a ragfair offer be visible to the player
+     * @param info Search request
+     * @param itemsToAdd ?
+     * @param traderAssorts Trader assort items
+     * @param offer The flea offer
+     * @param pmcProfile Player profile
+     * @returns True = should be shown to player
+     */
     public isDisplayableOffer(info: ISearchRequestData, itemsToAdd: string[], traderAssorts: Record<string, ITraderAssort>, offer: IRagfairOffer, pmcProfile: IPmcData): boolean
     {
         const item = offer.items[0];
