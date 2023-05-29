@@ -349,6 +349,7 @@ export interface Hideout
     Production: Record<string, Productive>
     Areas: HideoutArea[]
     Improvements: Record<string, IHideoutImprovement>
+    Seed: number
     sptUpdateLastRunTimestamp: number
 }
 
