@@ -4,7 +4,7 @@ import { IPmcData } from "../models/eft/common/IPmcData";
 import { Item } from "../models/eft/common/tables/IItem";
 import { ITraderAssort } from "../models/eft/common/tables/ITrader";
 import { IItemEventRouterResponse } from "../models/eft/itemEvent/IItemEventRouterResponse";
-import { ISystemData } from "../models/eft/profile/IAkiProfile";
+import { IAkiProfile, ISystemData } from "../models/eft/profile/IAkiProfile";
 import { IRagfairOffer } from "../models/eft/ragfair/IRagfairOffer";
 import { ISearchRequestData, OfferOwnerType } from "../models/eft/ragfair/ISearchRequestData";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
@@ -246,10 +246,7 @@ export class RagfairOfferHelper
                     boughtAmount = offer.sellResult[0].amount;
                 }
 
-                // Increase rating
-                const profileRagfairInfo = this.saveServer.getProfile(sessionID).characters.pmc.RagfairInfo;
-                profileRagfairInfo.rating += this.ragfairConfig.sell.reputation.gain * offer.summaryCost / totalItemsCount * boughtAmount;
-                profileRagfairInfo.isRatingGrowing = true;
+                this.increaseProfileRagfairRating(this.saveServer.getProfile(sessionID), offer.summaryCost / totalItemsCount * boughtAmount);
 
                 this.completeOffer(sessionID, offer, boughtAmount);
                 offer.sellResult.splice(0, 1);
@@ -259,6 +256,17 @@ export class RagfairOfferHelper
         }
 
         return true;
+    }
+
+    /**
+     * Add amount to players ragfair rating
+     * @param sessionId Profile to update
+     * @param amountToIncrementBy Raw amount to add to players ragfair rating (excluding the reputation gain multiplier)
+     */
+    public increaseProfileRagfairRating(profile: IAkiProfile, amountToIncrementBy: number): void
+    {
+        profile.characters.pmc.RagfairInfo.rating += this.ragfairConfig.sell.reputation.gain * amountToIncrementBy;
+        profile.characters.pmc.RagfairInfo.isRatingGrowing = true;
     }
 
     protected getProfileOffers(sessionID: string): IRagfairOffer[]
