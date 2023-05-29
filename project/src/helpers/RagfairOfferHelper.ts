@@ -290,6 +290,13 @@ export class RagfairOfferHelper
         this.ragfairOfferService.removeOfferById(offerId);
     }
 
+    /**
+     * Complete the selling of players' offer
+     * @param sessionID Session id
+     * @param offer Sold offer details
+     * @param boughtAmount Amount item was purchased for
+     * @returns Client response
+     */
     protected completeOffer(sessionID: string, offer: IRagfairOffer, boughtAmount: number): IItemEventRouterResponse
     {
         const itemTpl = offer.items[0]._tpl;
@@ -326,7 +333,6 @@ export class RagfairOfferHelper
             }
 
             let foundNewItems = true;
-
             while (foundNewItems)
             {
                 foundNewItems = false;
@@ -335,7 +341,6 @@ export class RagfairOfferHelper
                 for (const id of idsToRemove)
                 {
                     const newIds = offer.items.filter(i => !idsToRemove.includes(i._id) && idsToRemove.includes(i.parentId)).map(i => i._id);
-
                     if (newIds.length > 0)
                     {
                         foundNewItems = true;
@@ -350,7 +355,7 @@ export class RagfairOfferHelper
             }
         }
 
-        // assemble the payment items
+        // Assemble the payment item(s)
         for (const requirement of offer.requirements)
         {
             // Create an item template item
@@ -382,13 +387,19 @@ export class RagfairOfferHelper
 
         // Generate a message to inform that item was sold
         const globalLocales = this.localeService.getLocaleDb();
-        const messageTpl = globalLocales[RagfairOfferHelper.goodSoldTemplate];
+        const soldMessageLocaleGuid = globalLocales[RagfairOfferHelper.goodSoldTemplate];
+        if (!soldMessageLocaleGuid)
+        {
+            this.logger.error(`Unable to find locale with key of ${RagfairOfferHelper.goodSoldTemplate}`);
+        }
+
+        // Used to replace tokens in sold message sent to player
         const tplVars: ISystemData = {
             soldItem: globalLocales[`${itemTpl} Name`] || itemTpl,
             buyerNickname: this.ragfairServerHelper.getNickname(this.hashUtil.generate()),
             itemCount: boughtAmount
         };
-        const messageText = messageTpl.replace(/{\w+}/g, (matched) =>
+        const messageText = soldMessageLocaleGuid.replace(/{\w+}/g, (matched) =>
         {
             return tplVars[matched.replace(/{|}/g, "")];
         });
@@ -401,8 +412,8 @@ export class RagfairOfferHelper
             handbookId: itemTpl
         };
 
-
         this.dialogueHelper.addDialogueMessage(Traders.RAGMAN, messageContent, sessionID, itemsToSend);
+
         return this.eventOutputHolder.getOutput(sessionID);
     }
 
