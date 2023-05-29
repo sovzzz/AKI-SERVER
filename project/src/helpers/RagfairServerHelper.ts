@@ -28,7 +28,7 @@ export class RagfairServerHelper
 {
     protected ragfairConfig: IRagfairConfig;
     protected questConfig: IQuestConfig;
-    protected static goodsReturnedTemplate = "5bdac06e86f774296f5a19c5";
+    protected static goodsReturnedTemplate = "5bdabfe486f7743e1665df6e 0"; // Your item was not sold
 
     constructor(
         @inject("RandomUtil") protected randomUtil: RandomUtil,

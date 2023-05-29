@@ -36,7 +36,7 @@ import { TraderHelper } from "./TraderHelper";
 @injectable()
 export class RagfairOfferHelper
 {
-    protected static goodSoldTemplate = "5bdac0b686f7743e1665e09e";
+    protected static goodSoldTemplate = "5bdabfb886f7743e152e867e 0"; // Your {soldItem} {itemCount} items were bought by {buyerNickname}.
     protected ragfairConfig: IRagfairConfig;
     protected questConfig: IQuestConfig;
 
@@ -226,6 +226,7 @@ export class RagfairOfferHelper
 
         const profileOffers = this.getProfileOffers(sessionID);
 
+        // No offers, don't do anything
         if (!profileOffers?.length)
         {
             return true;
@@ -252,6 +253,8 @@ export class RagfairOfferHelper
 
                 this.completeOffer(sessionID, offer, boughtAmount);
                 offer.sellResult.splice(0, 1);
+
+                // TODO: Send a mail to player informing them offer was sold, text comes from locale with id: "5b55a1f786f77469803bca61 0" (Your offer was sold {buyerNickname})
             }
         }
 
