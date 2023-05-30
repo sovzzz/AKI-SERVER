@@ -347,12 +347,12 @@ export class InraidController
         const fenceId = Traders.FENCE;
 
         let fenceStanding = Number(pmcData.TradersInfo[fenceId].standing);
+        this.logger.debug(`Old fence standing: ${fenceStanding}`);
         fenceStanding = this.inRaidHelper.calculateFenceStandingChangeFromKills(fenceStanding, offraidData.profile.Stats.Victims);
 
         // Successful extract with scav adds 0.01 standing
         if (offraidData.exit === "survived")
         {
-            this.logger.debug(`Old fence standing: ${fenceStanding}`);
             fenceStanding += this.inraidConfig.scavExtractGain;
         }
 
