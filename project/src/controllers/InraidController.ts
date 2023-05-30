@@ -352,6 +352,7 @@ export class InraidController
         // Successful extract with scav adds 0.01 standing
         if (offraidData.exit === "survived")
         {
+            this.logger.debug(`Old fence standing: ${fenceStanding}`);
             fenceStanding += this.inraidConfig.scavExtractGain;
         }
 
@@ -363,6 +364,7 @@ export class InraidController
 
         // Make standing changes to scav profile
         scavData.TradersInfo[fenceId].standing = Math.min(Math.max(fenceStanding, -7), 15);
+        this.logger.debug(`New fence standing: ${scavData.TradersInfo[fenceId].standing}`);
 
         // Make standing changes to pmc profile
         pmcData.TradersInfo[fenceId].standing = scavData.TradersInfo[fenceId].standing;
