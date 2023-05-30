@@ -66,8 +66,6 @@ export class GameController
 
     public gameStart(_url: string, _info: IEmptyRequestData, sessionID: string, startTimeStampMS: number): void
     {
-        this.logger.debug(`Started game with sessionId: ${sessionID}`);
-
         // Store start time in app context
         this.applicationContext.addValue(ContextVariableType.CLIENT_START_TIMESTAMP, startTimeStampMS);
 
@@ -83,6 +81,8 @@ export class GameController
         {
             const fullProfile = this.profileHelper.getFullProfile(sessionID);
             const pmcProfile = fullProfile.characters.pmc;
+
+            this.logger.debug(`Started game with sessionId: ${sessionID}`);
 
             if (pmcProfile.Health)
             {
