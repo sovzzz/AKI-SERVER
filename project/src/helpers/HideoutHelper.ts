@@ -62,6 +62,13 @@ export class HideoutHelper
         this.hideoutConfig = this.configServer.getConfig(ConfigTypes.HIDEOUT);
     }
 
+    /**
+     * Add production to profiles' Hideout.Production array
+     * @param pmcData Profile to add production to
+     * @param body Production request
+     * @param sessionID Session id
+     * @returns client response
+     */
     public registerProduction(pmcData: IPmcData, body: IHideoutSingleProductionStartRequestData | IHideoutContinuousProductionStartRequestData, sessionID: string): IItemEventRouterResponse
     {
         const recipe = this.databaseServer.getTables().hideout.production.find(p => p._id === body.recipeId);

@@ -369,6 +369,7 @@ export class HideoutController
 
         // Find the recipe of the production
         const recipe = this.databaseServer.getTables().hideout.production.find(p => p._id === body.recipeId);
+
         // Find the actual amount of items we need to remove because body can send weird data
         const requirements = this.jsonUtil.clone(recipe.requirements.filter(i => i.type === "Item"));
 
@@ -379,7 +380,10 @@ export class HideoutController
             const itemToCheck = pmcData.Inventory.items.find(i => i._id === itemToDelete.id);
             const requirement = requirements.find(requirement => requirement.templateId === itemToCheck._tpl);
             if (requirement.count <= 0)
+            {
                 continue;
+            }
+
             this.inventoryHelper.removeItemByCount(pmcData, itemToDelete.id, requirement.count, sessionID, output);
             requirement.count -= itemToDelete.count;
         }
@@ -699,7 +703,7 @@ export class HideoutController
     }
 
     /**
-     * Start area production for item
+     * Start area production for item by adding production to profiles' Hideout.Production array
      * @param pmcData Player profile
      * @param request Start production request
      * @param sessionID Session id

@@ -23,6 +23,7 @@ export class ItemBaseClassService
 
     /**
      * Create cache and store inside ItemBaseClassService
+     * Store a dict of an items tpl to the base classes it and its parents have
      */
     public hydrateItemBaseClassCache(): void
     {
