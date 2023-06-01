@@ -3,14 +3,18 @@ import { ITraderBase } from "../models/eft/common/tables/ITrader";
 
 import { DialogueHelper } from "../helpers/DialogueHelper";
 import { HandbookHelper } from "../helpers/HandbookHelper";
+import { NotificationSendHelper } from "../helpers/NotificationSendHelper";
 import { SecureContainerHelper } from "../helpers/SecureContainerHelper";
 import { TraderHelper } from "../helpers/TraderHelper";
 import { IPmcData } from "../models/eft/common/IPmcData";
 import { InsuredItem } from "../models/eft/common/tables/IBotBase";
 import { Item } from "../models/eft/common/tables/IItem";
 import { ISaveProgressRequestData } from "../models/eft/inRaid/ISaveProgressRequestData";
+import { IUserDialogInfo } from "../models/eft/profile/IAkiProfile";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
+import { MemberCategory } from "../models/enums/MemberCategory";
 import { MessageType } from "../models/enums/MessageType";
+import { Traders } from "../models/enums/Traders";
 import { IInsuranceConfig } from "../models/spt/config/IInsuranceConfig";
 import { ILogger } from "../models/spt/utils/ILogger";
 import { ConfigServer } from "../servers/ConfigServer";
@@ -18,6 +22,7 @@ import { DatabaseServer } from "../servers/DatabaseServer";
 import { SaveServer } from "../servers/SaveServer";
 import { RandomUtil } from "../utils/RandomUtil";
 import { TimeUtil } from "../utils/TimeUtil";
+import { LocaleService } from "./LocaleService";
 import { LocalisationService } from "./LocalisationService";
 
 @injectable()
@@ -37,6 +42,8 @@ export class InsuranceService
         @inject("DialogueHelper") protected dialogueHelper: DialogueHelper,
         @inject("HandbookHelper") protected handbookHelper: HandbookHelper,
         @inject("LocalisationService") protected localisationService: LocalisationService,
+        @inject("LocaleService") protected localeService: LocaleService,
+        @inject("NotificationSendHelper") protected notificationSendHelper: NotificationSendHelper,
         @inject("ConfigServer") protected configServer: ConfigServer
     )
     {
@@ -108,18 +115,14 @@ export class InsuranceService
             const insuranceReturnTimestamp = this.getInsuranceReturnTimestamp(pmcData, trader);
             const dialogueTemplates = this.databaseServer.getTables().traders[traderId].dialogue;
 
-            let messageContent = this.dialogueHelper.createMessageContext(this.randomUtil.getArrayValue(dialogueTemplates.insuranceStart), MessageType.NPC_TRADER, trader.insurance.max_storage_time);
-            messageContent = {
-                templateId: this.randomUtil.getArrayValue(dialogueTemplates.insuranceFound),
-                type: MessageType.INSURANCE_RETURN,
-                text: "", // live insurance returns have an empty string for the text property
-                maxStorageTime: trader.insurance.max_storage_time * TimeUtil.oneHourAsSeconds,
-                profileChangeEvents: [],
-                systemData: {
-                    date: this.timeUtil.getDateMailFormat(),
-                    time: this.timeUtil.getTimeMailFormat(),
-                    location: mapId
-                }
+            // Send "i will go look for your stuff" message
+            const messageContent = this.dialogueHelper.createMessageContext(this.randomUtil.getArrayValue(dialogueTemplates.insuranceStart), MessageType.NPC_TRADER, trader.insurance.max_storage_time);
+            messageContent.text = ""; // live insurance returns have an empty string for the text property
+            messageContent.profileChangeEvents = [];
+            messageContent.systemData = {
+                date: this.timeUtil.getDateMailFormat(),
+                time: this.timeUtil.getTimeMailFormat(),
+                location: mapId
             };
 
             // Must occur after systemData is hydrated
@@ -128,6 +131,11 @@ export class InsuranceService
             // Remove 'hideout' slotid property on all insurance items
             this.removeLocationProperty(sessionID, traderId);
 
+            // Reuse existing context for message sent to player with insurance return
+            messageContent.templateId = this.randomUtil.getArrayValue(dialogueTemplates.insuranceFound);
+            messageContent.type = MessageType.INSURANCE_RETURN;
+
+            // Store insurance return details in profile + "hey i found your stuff, here you go!" message details to send player at a later date
             this.saveServer.getProfile(sessionID).insurance.push({
                 scheduledTime: insuranceReturnTimestamp,
                 traderId: traderId,
@@ -137,6 +145,28 @@ export class InsuranceService
         }
 
         this.resetInsurance(sessionID);
+    }
+
+    /**
+     * Send a message to player informing them gear was lost
+     * @param sessionID Session id
+     */
+    public sendLostInsuranceMessage(sessionID: string): void
+    {
+        const localeDb = this.localeService.getLocaleDb();
+        const dialogueTemplates = this.databaseServer.getTables().traders[Traders.PRAPOR].dialogue; // todo: get trader id instead of hard coded prapor
+        const failedText = localeDb[this.randomUtil.getArrayValue(dialogueTemplates.insuranceFailed)];
+        const senderDetails: IUserDialogInfo = {
+            _id: Traders.PRAPOR,
+            info: {
+                Nickname: "Prapor",
+                Level: 1,
+                Side: "Bear",
+                MemberCategory: MemberCategory.TRADER
+            }
+        };
+
+        this.notificationSendHelper.sendMessageToPlayer(sessionID, senderDetails, failedText, MessageType.NPC_TRADER);
     }
 
     protected removeLocationProperty(sessionId: string, traderId: string): void

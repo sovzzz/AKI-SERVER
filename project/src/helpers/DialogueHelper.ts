@@ -28,6 +28,13 @@ export class DialogueHelper
     )
     { }
 
+    /**
+     * Create basic message context template
+     * @param templateId 
+     * @param messageType 
+     * @param maxStoreTime 
+     * @returns 
+     */
     public createMessageContext(templateId: string, messageType: MessageType, maxStoreTime: number): MessageContent
     {
         return {
