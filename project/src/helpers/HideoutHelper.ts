@@ -196,15 +196,30 @@ export class HideoutHelper
     public updatePlayerHideout(sessionID: string): void
     {
         const pmcData = this.profileHelper.getPmcProfile(sessionID);
-        const hideoutProperties = {
-            btcFarmCGs: 0,
-            isGeneratorOn: false,
-            waterCollectorHasFilter: false
-        };
+        const hideoutProperties = this.getHideoutProperties(pmcData);
 
         this.updateAreasWithResources(sessionID, pmcData, hideoutProperties);
         this.updateProductionTimers(pmcData, hideoutProperties);
         pmcData.Hideout.sptUpdateLastRunTimestamp = this.timeUtil.getTimestamp();
+    }
+
+    /**
+     * Get various properties that will be passed to hideout update-related functions
+     * @param pmcData Player profile
+     * @returns Properties
+     */
+    protected getHideoutProperties(pmcData: IPmcData): { btcFarmCGs: number; isGeneratorOn: boolean; waterCollectorHasFilter: boolean; }
+    {
+        const bitcoinFarm = pmcData.Hideout.Areas.find(x => x.type === HideoutAreas.BITCOIN_FARM);
+        const bitcoinCount = bitcoinFarm?.slots.filter(slot => slot.item).length ?? 0; // Get slots with an item property
+
+        const hideoutProperties = {
+            btcFarmCGs: bitcoinCount,
+            isGeneratorOn: pmcData.Hideout.Areas.find(x => x.type === HideoutAreas.GENERATOR)?.active ?? false,
+            waterCollectorHasFilter: this.doesWaterCollectorHaveFilter(pmcData.Hideout.Areas.find(x => x.type === HideoutAreas.WATER_COLLECTOR))
+        };
+
+        return hideoutProperties;
     }
     
     /**
@@ -341,34 +356,19 @@ export class HideoutHelper
             switch (area.type)
             {
                 case HideoutAreas.GENERATOR:
-                    hideoutProperties.isGeneratorOn = area.active;
-
                     if (hideoutProperties.isGeneratorOn)
                     {
                         this.updateFuel(area, pmcData);
                     }
                     break;
-
                 case HideoutAreas.WATER_COLLECTOR:
                     this.updateWaterCollector(sessionID, pmcData, area, hideoutProperties.isGeneratorOn);
-                    hideoutProperties.waterCollectorHasFilter = this.doesWaterCollectorHaveFilter(area);
-
                     break;
 
                 case HideoutAreas.AIR_FILTERING:
                     if (hideoutProperties.isGeneratorOn)
                     {
                         this.updateAirFilters(area, pmcData);
-                    }
-                    break;
-
-                case HideoutAreas.BITCOIN_FARM:
-                    for (const slot of area.slots)
-                    {
-                        if (slot.item)
-                        {
-                            hideoutProperties.btcFarmCGs++;
-                        }
                     }
                     break;
             }
