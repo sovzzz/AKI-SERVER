@@ -17,6 +17,11 @@ import { LocalisationService } from "../services/LocalisationService";
 @injectable()
 export class CustomizationController
 {
+    protected readonly clothingIds = {
+        lowerParentId: "5cd944d01388ce000a659df9",
+        upperParentId: "5cd944ca1388ce03a44dc2a4"
+    };
+
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
         @inject("EventOutputHolder") protected eventOutputHolder: EventOutputHolder,
@@ -27,45 +32,41 @@ export class CustomizationController
     )
     {}
 
+    /**
+     * Get purchasable clothing items from trader that match players side (usec/bear)
+     * @param traderID trader to look up clothing for
+     * @param sessionID Session id
+     * @returns ISuit array
+     */
     public getTraderSuits(traderID: string, sessionID: string): ISuit[]
     {
         const pmcData: IPmcData = this.profileHelper.getPmcProfile(sessionID);
         const templates = this.databaseServer.getTables().templates.customization;
         const suits = this.databaseServer.getTables().traders[traderID].suits;
-        const result: ISuit[] = [];
 
-        // get only suites from the player's side (e.g. USEC)
-        for (const suit of suits)
-        {
-            if (suit.suiteId in templates)
-            {
-                for (let i = 0; i < templates[suit.suiteId]._props.Side.length; i++)
-                {
-                    if (templates[suit.suiteId]._props.Side[i] === pmcData.Info.Side)
-                    {
-                        result.push(suit);
-                    }
-                }
-            }
-        }
+        // Get an inner join of clothing from templates.customization and ragmans suits array
+        const matchingSuits = suits.filter(x => x.suiteId in templates);
 
-        return result;
+        // Return all suits that have a side array containing the players side (usec/bear)
+        return matchingSuits.filter(x => templates[x.suiteId]._props.Side.includes(pmcData.Info.Side));
     }
 
+    /** Equip one to many clothing items to player */
     public wearClothing(pmcData: IPmcData, wearClothingRequest: IWearClothingRequestData, sessionID: string): IItemEventRouterResponse
     {
         for (const suitId of wearClothingRequest.suites)
         {
+            // Find desired clothing item in db
             const dbSuit = this.databaseServer.getTables().templates.customization[suitId];
 
-            // Lower Node
-            if (dbSuit._parent === "5cd944d01388ce000a659df9")
+            // Legs
+            if (dbSuit._parent === this.clothingIds.lowerParentId)
             {
                 pmcData.Customization.Feet = dbSuit._props.Feet;
             }
 
-            // Upper Node
-            if (dbSuit._parent === "5cd944ca1388ce03a44dc2a4")
+            // Torso
+            if (dbSuit._parent === this.clothingIds.upperParentId)
             {
                 pmcData.Customization.Body = dbSuit._props.Body;
                 pmcData.Customization.Hands = dbSuit._props.Hands;
@@ -75,6 +76,13 @@ export class CustomizationController
         return this.eventOutputHolder.getOutput(sessionID);
     }
 
+    /**
+     * Purchase/unlock a clothing item from a trader
+     * @param pmcData Player profile
+     * @param buyClothingRequest Request object
+     * @param sessionId Session id
+     * @returns IItemEventRouterResponse
+     */
     public buyClothing(pmcData: IPmcData, buyClothingRequest: IBuyClothingRequestData, sessionId: string): IItemEventRouterResponse
     {
         const db = this.databaseServer.getTables();
@@ -115,7 +123,7 @@ export class CustomizationController
      * Has an outfit been purchased by a player
      * @param suitId clothing id
      * @param sessionID Session id
-     * @returns true/false
+     * @returns true if purchased already
      */
     protected outfitAlreadyPurchased(suitId: string, sessionID: string): boolean
     {
