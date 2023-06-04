@@ -54,7 +54,7 @@ export class RagfairSellHelper
     }
 
     /**
-     * Determine if the offer being listed will be sold
+     * Get array of item count and sell time (empty array = no sell)
      * @param sellChancePercent chance item will sell
      * @param itemSellCount count of items to sell
      * @returns Array of purchases of item(s) listed
@@ -76,10 +76,11 @@ export class RagfairSellHelper
         // Value can sometimes be NaN for whatever reason, default to base chance if that happens
         if (isNaN(sellChancePercent))
         {
+            this.logger.warning(`Sell chance was not a number: ${sellChancePercent}, defaulting to ${this.ragfairConfig.sell.chance.base} %`);
             sellChancePercent = this.ragfairConfig.sell.chance.base;
         }
         
-        this.logger.debug(`Rolling for sell ${itemSellCount} items (chance: ${sellChancePercent})`);
+        this.logger.debug(`Rolling to sell ${itemSellCount} items (chance: ${sellChancePercent}%)`);
 
         // No point rolling for a sale on a 0% chance item, exit early
         if (sellChancePercent === 0)
@@ -89,21 +90,25 @@ export class RagfairSellHelper
         
         while (remainingCount > 0 && sellTime < endTime)
         {
-            sellTime += Math.max(Math.round(chance / 100 * this.ragfairConfig.sell.time.max * 60), this.ragfairConfig.sell.time.min * 60);
-
+            const boughtAmount = this.randomUtil.getInt(1, remainingCount);
             if (this.randomUtil.getChance100(sellChancePercent))
             {
-                const boughtAmount = this.randomUtil.getInt(1, remainingCount);
+                // Passed roll check, item will be sold
+                sellTime += Math.max(Math.round(chance / 100 * this.ragfairConfig.sell.time.max * 60), this.ragfairConfig.sell.time.min * 60);
 
                 result.push({
                     sellTime: sellTime,
                     amount: boughtAmount
                 });
 
-                this.logger.debug(`offer will sell at ${new Date(sellTime*1000).toLocaleTimeString("en-US")}`);
-
-                remainingCount -= boughtAmount;
+                this.logger.debug(`Offer will sell at: ${new Date(sellTime * 1000).toLocaleTimeString("en-US")}`);
             }
+            else
+            {
+                this.logger.debug("Offer will not sell");
+            }
+
+            remainingCount -= boughtAmount;
         }
 
         return result;
