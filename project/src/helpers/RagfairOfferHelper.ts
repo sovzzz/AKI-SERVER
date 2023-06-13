@@ -278,8 +278,14 @@ export class RagfairOfferHelper
      */
     public increaseProfileRagfairRating(profile: IAkiProfile, amountToIncrementBy: number): void
     {
-        profile.characters.pmc.RagfairInfo.rating += this.ragfairConfig.sell.reputation.gain * amountToIncrementBy;
         profile.characters.pmc.RagfairInfo.isRatingGrowing = true;
+        if (isNaN(amountToIncrementBy))
+        {
+            this.logger.warning(`Unable to increment ragfair rating, value was not a number: ${amountToIncrementBy}`);
+
+            return;
+        }
+        profile.characters.pmc.RagfairInfo.rating += this.ragfairConfig.sell.reputation.gain * amountToIncrementBy;
     }
 
     /**

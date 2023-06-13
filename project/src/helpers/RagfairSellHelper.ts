@@ -80,7 +80,7 @@ export class RagfairSellHelper
             sellChancePercent = this.ragfairConfig.sell.chance.base;
         }
         
-        this.logger.debug(`Rolling to sell ${itemSellCount} items (chance: ${sellChancePercent}%)`);
+        this.logger.debug(`Rolling to sell: ${itemSellCount} items (chance: ${sellChancePercent}%)`);
 
         // No point rolling for a sale on a 0% chance item, exit early
         if (sellChancePercent === 0)
