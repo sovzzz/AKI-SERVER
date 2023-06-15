@@ -30,6 +30,7 @@
         "gifter": 5,
         "test": 30,
         "exUsec": 30,
+        "arenaFighterEvent": 15,
         "sptUsec": 20,
         "sptBear": 20
     },
@@ -149,6 +150,20 @@
                 "minLimitPercent": 15
             }
         },
+        "arenafighterevent": {
+            "armor": {
+                "maxDelta": 10,
+                "minDelta": 0,
+                "minLimitPercent": 15
+            },
+            "weapon": {
+                "lowestMax": 80,
+                "highestMax": 100,
+                "maxDelta": 10,
+                "minDelta": 0,
+                "minLimitPercent": 15
+            }
+        },
         "exusec": {
             "armor": {
                 "maxDelta": 10,
@@ -236,6 +251,7 @@
         "sectantwarrior": {},
         "test": {},
         "pmcbot": {},
+        "arenafighterevent": {},
         "assaultgroup": {},
         "gifter": {},
         "pmc": {
@@ -472,6 +488,18 @@
         "test": {},
         "pmcbot": {
             "nvgIsActiveChanceDayPercent": 20,
+            "nvgIsActiveChanceNightPercent": 95,
+            "faceShieldIsActiveChancePercent": 100,
+            "lightIsActiveDayChancePercent": 35,
+            "lightIsActiveNightChancePercent": 95,
+            "laserIsActiveChancePercent": 95,
+            "weaponModLimits": {
+                "scopeLimit": 1,
+                "lightLaserLimit": 1
+            }
+        },
+		"arenafighterevent": {
+            "nvgIsActiveChanceDayPercent": 10,
             "nvgIsActiveChanceNightPercent": 95,
             "faceShieldIsActiveChancePercent": 100,
             "lightIsActiveDayChancePercent": 35,
