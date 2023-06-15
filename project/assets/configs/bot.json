@@ -498,7 +498,7 @@
                 "lightLaserLimit": 1
             }
         },
-		"arenafighterevent": {
+        "arenafighterevent": {
             "nvgIsActiveChanceDayPercent": 10,
             "nvgIsActiveChanceNightPercent": 95,
             "faceShieldIsActiveChancePercent": 100,
