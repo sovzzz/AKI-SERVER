@@ -431,8 +431,8 @@ export interface Slot
     _props: SlotProps
     // eslint-disable-next-line @typescript-eslint/naming-convention
     _max_count?: number
-    _required: boolean
-    _mergeSlotWithChildren: boolean
+    _required?: boolean
+    _mergeSlotWithChildren?: boolean
     _proto: string
 }
 
