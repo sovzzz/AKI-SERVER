@@ -104,7 +104,7 @@ export class RagfairPriceService implements OnLoad
 
         if (itemPrice === 1)
         {
-            this.logger.debug(`Missing item price for ${tplId}`);
+            this.logger.warning(`Missing live flea or handbook item price for ${tplId}, defaulting to 1, if this is a modded item contact the mods author`);
         }
 
         return itemPrice;
