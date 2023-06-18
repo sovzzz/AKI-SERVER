@@ -246,7 +246,7 @@ export class BotGeneratorHelper
         }
 
         // Check if any of the current inventory templates have the incoming item defined as incompatible
-        blockingItem = equippedItems.find(x => x._props.ConflictingItems.includes(tplToCheck));
+        blockingItem = equippedItems.find(x => x._props.ConflictingItems?.includes(tplToCheck));
         if (blockingItem) 
         {
             //this.logger.warning(`2 incompatibility found between - ${itemToEquip[1]._name} and ${blockingItem._props.Name} - ${equipmentSlot}`);
@@ -254,7 +254,7 @@ export class BotGeneratorHelper
         }
 
         // Check if the incoming item has any inventory items defined as incompatible
-        const blockingInventoryItem = items.find(x => itemToEquip[1]._props[`Blocks${x.slotId}`] || itemToEquip[1]._props.ConflictingItems.includes(x._tpl));
+        const blockingInventoryItem = items.find(x => itemToEquip[1]._props[`Blocks${x.slotId}`] || itemToEquip[1]._props.ConflictingItems?.includes(x._tpl));
         if (blockingInventoryItem) 
         {
             //this.logger.warning(`3 incompatibility found between - ${itemToEquip[1]._name} and ${blockingInventoryItem._tpl} - ${equipmentSlot}`)
