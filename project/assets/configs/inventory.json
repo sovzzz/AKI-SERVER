@@ -77,7 +77,7 @@
 			},
 			"55818b224bdc2dde698b456f": {
 				"type": "mount",
-				"min": 0,
+				"min": 1,
 				"max": 2
 			},
 			"555ef6e44bdc2de9068b457e": {
@@ -103,7 +103,7 @@
 			"550aa4cd4bdc2dd8348b456c": {
 				"type": "silencer",
 				"min": 0,
-				"max": 1
+				"max": 2
 			},
 			"55818b084bdc2d5b648b4571": {
 				"type": "flashlight",
