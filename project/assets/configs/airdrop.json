@@ -31,10 +31,10 @@
                 "min": 12,
                 "max": 25
             },
-			"weaponCrateCount": {
-				"min": 0,
-				"max": 2
-			},
+            "weaponCrateCount": {
+                "min": 0,
+                "max": 2
+            },
             "itemBlacklist": [
                 "5e997f0b86f7741ac73993e2",
                 "5b44abe986f774283e2e3512",
@@ -136,10 +136,10 @@
                 "min": 10,
                 "max": 20
             },
-			"weaponCrateCount": {
-				"min": 0,
-				"max": 2
-			},
+            "weaponCrateCount": {
+                "min": 0,
+                "max": 2
+            },
             "itemBlacklist": [
                 "5e997f0b86f7741ac73993e2",
                 "5b44abe986f774283e2e3512",
@@ -212,10 +212,10 @@
                 "min": 17,
                 "max": 28
             },
-			"weaponCrateCount": {
-				"min": 0,
-				"max": 0
-			},
+            "weaponCrateCount": {
+                "min": 0,
+                "max": 0
+            },
             "itemBlacklist": [
                 "5e997f0b86f7741ac73993e2",
                 "5b44abe986f774283e2e3512",
@@ -294,10 +294,10 @@
                 "min": 16,
                 "max": 25
             },
-			"weaponCrateCount": {
-				"min": 0,
-				"max": 0
-			},
+            "weaponCrateCount": {
+                "min": 0,
+                "max": 0
+            },
             "itemBlacklist": [
                 "5e997f0b86f7741ac73993e2",
                 "5b44abe986f774283e2e3512",
