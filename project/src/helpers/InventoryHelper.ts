@@ -333,6 +333,7 @@ export class InventoryHelper
                                 ...itemLocation,
                                 upd: upd
                             });
+                            this.logger.debug(`Added ${itemLib[tmpKey]._tpl} with id: ${idForItemToAdd} to inventory`);
                         }
 
                         toDo.push([itemLib[tmpKey]._id, idForItemToAdd]);
@@ -957,6 +958,11 @@ export class InventoryHelper
     public getRandomLootContainerRewardDetails(itemTpl: string): RewardDetails
     {
         return this.inventoryConfig.randomLootContainers[itemTpl];
+    }
+
+    public getInventoryConfig(): IInventoryConfig
+    {
+        return this.inventoryConfig;
     }
 }
 

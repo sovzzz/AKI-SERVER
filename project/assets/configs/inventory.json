@@ -19,5 +19,141 @@
             }
         }
     },
+	"sealedAirdropContainer": {
+		"weaponRewardWeight": {
+			"5447a9cd4bdc2dbd208b4567": 1,
+			"5bb2475ed4351e00853264e3": 1,
+			"5bd70322209c4d00d7167b8f": 1,
+			"5ac66d2e5acfc43b321d4b53": 1,
+			"5ac66d725acfc43b321d4b60": 1,
+			"5ac66d9b5acfc4001633997a": 1,
+			"62e7c4fba689e8c9c50dfc38": 1,
+			"63171672192e68c5460cebc5": 1,
+			"5c488a752e221602b412af63": 1,
+			"5dcbd56fdbd3d91b3e5468d5": 1,
+			"623063e994fc3f7b302a9696": 1,
+			"5fbcc1d9016cce60e8341ab3": 1,
+			"606587252535c57a13424cfd": 1,
+			"5b0bbe4e5acfc40dc528a72d": 1,
+			"6184055050224f204c1da540": 1,
+			"6183afd850224f204c1da514": 1,
+			"5beed0f50db834001c062b12": 1,
+			"5cc82d76e24e8d00134b4b83": 1,
+			"5fc3e272f8b6a877a729eac5": 1,
+			"5fb6548dd1409e5ca04b54f9": 1,
+			"5aafa857e5b5b00018480968": 1,
+			"5bfea6e90db834001b7347f3": 1,
+			"5cadfbf7ae92152ac412eeef": 1,
+			"628a60ae6b1d481ff772e9c8": 1,
+			"628b5638ad252a16da6dd245": 1,
+			"5d43021ca4b9362eab4b5e25": 1,
+			"58948c8e86f77409493f7266": 1,
+			"62e14904c2699c0ec93adc47": 1,
+			"5c46fbd72e2216398b5a8c9c": 1,
+			"5df8ce05b11454561e39243b": 1,
+			"5df24cf80dee1b22f862e9bc": 1
+		},
+		"defaultPresetsOnly": true,
+		"weaponModRewardLimits": {
+			"5448bc234bdc2d3c308b4569": {
+				"type": "magazine",
+				"min": 2,
+				"max": 4
+			},
+			"55818b164bdc2ddc698b456c": {
+				"type": "laserLight",
+				"min": 1,
+				"max": 2
+			},
+			"55818ad54bdc2ddc698b4569": {
+				"type": "collimator",
+				"min": 0,
+				"max": 2
+			},
+			"55818acf4bdc2dde698b456b": {
+				"type": "compactCollimator",
+				"min": 0,
+				"max": 2
+			},
+			"55818b224bdc2dde698b456f": {
+				"type": "mount",
+				"min": 0,
+				"max": 2
+			},
+			"555ef6e44bdc2de9068b457e": {
+				"type": "barrel",
+				"min": 1,
+				"max": 1
+			},
+			"55818add4bdc2d5b648b456f": {
+				"type": "assaultScope",
+				"min": 0,
+				"max": 1
+			},
+			"55818ae44bdc2dde698b456c": {
+				"type": "opticScope",
+				"min": 0,
+				"max": 1
+			},
+			"55818af64bdc2d5b648b4570": {
+				"type": "foregrip",
+				"min": 0,
+				"max": 1
+			},
+			"550aa4cd4bdc2dd8348b456c": {
+				"type": "silencer",
+				"min": 0,
+				"max": 1
+			},
+			"55818b084bdc2d5b648b4571": {
+				"type": "flashlight",
+				"min": 0,
+				"max": 1
+			},
+			"55818a104bdc2db9688b4569": {
+				"type": "handguard",
+				"min": 0,
+				"max": 2
+			}
+		},
+		"rewardTypeLimits": {
+			"5448e8d04bdc2ddf718b4569": {
+				"type": "food",
+				"min": 2,
+				"max": 8
+			},
+			"5448f3a64bdc2d60728b456a": {
+				"type": "stim",
+				"min": 2,
+				"max": 5
+			},
+			"543be5cb4bdc2deb348b4568": {
+				"type": "ammobox",
+				"min": 2,
+				"max": 5
+			},
+			"5448f3ac4bdc2dce718b4569": {
+				"type": "medical",
+				"min": 2,
+				"max": 7
+			}
+		},
+		"ammoBoxWhitelist": [
+			"648983d6b5a2df1c815a04ec",
+			"6489848173c462723909a14b",
+			"648984b8d5b4df6140000a1a",
+			"648984e3f09d032aa9399d53",
+			"6489851fc827d4637f01791b",
+			"6489854673c462723909a14e",
+			"648985c074a806211e4fb682",
+			"6489875745f9ca4ba51c4808",
+			"648987d673c462723909a151",
+			"648986bbc827d4637f01791e",
+			"64898583d5b4df6140000a1d",
+			"64898602f09d032aa9399d56",
+			"6489870774a806211e4fb685",
+			"6489879db5a2df1c815a04ef"
+		]
+	}
 	"customMoneyTpls": []
 }

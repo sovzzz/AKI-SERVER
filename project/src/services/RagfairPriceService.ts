@@ -51,6 +51,8 @@ export class RagfairPriceService implements OnLoad
      */
     public async onLoad(): Promise<void> 
     {
+        this.addMissingHandbookPrices();
+
         if (!this.generatedStaticPrices)
         {
             this.generateStaticPrices();
@@ -61,6 +63,24 @@ export class RagfairPriceService implements OnLoad
         {
             this.generateDynamicPrices();
             this.generatedDynamicPrices = true;
+        }
+    }
+
+    /**
+     * Add placeholder values for the new sealed weapon containers
+     */
+    protected addMissingHandbookPrices(): void
+    {
+        const db = this.databaseServer.getTables();
+        const sealedWeaponContainers = Object.values(db.templates.items).filter(x => x._name.includes("event_container_airdrop"));
+
+        for (const container of sealedWeaponContainers)
+        {
+            // doesnt have a handbook value
+            if (db.templates.handbook.Items.findIndex(x => x.Id === container._id)  === -1)
+            {
+                db.templates.handbook.Items.push({Id: container._id, ParentId: container._parent, Price: 100});
+            }
         }
     }
 

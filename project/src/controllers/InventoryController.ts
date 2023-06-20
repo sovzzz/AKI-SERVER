@@ -1,10 +1,11 @@
 import { inject, injectable } from "tsyringe";
 
+import { LootGenerator } from "../generators/LootGenerator";
 import { InventoryHelper } from "../helpers/InventoryHelper";
+import { ItemHelper } from "../helpers/ItemHelper";
 import { PaymentHelper } from "../helpers/PaymentHelper";
 import { PresetHelper } from "../helpers/PresetHelper";
 import { ProfileHelper } from "../helpers/ProfileHelper";
-import { WeightedRandomHelper } from "../helpers/WeightedRandomHelper";
 import { IPmcData } from "../models/eft/common/IPmcData";
 import { Item } from "../models/eft/common/tables/IItem";
 import { IAddItemRequestData } from "../models/eft/inventory/IAddItemRequestData";
@@ -38,7 +39,9 @@ import {
     IOpenRandomLootContainerRequestData
 } from "../models/eft/inventory/IOpenRandomLootContainerRequestData";
 import { IItemEventRouterResponse } from "../models/eft/itemEvent/IItemEventRouterResponse";
+import { BackendErrorCodes } from "../models/enums/BackendErrorCodes";
 import { Traders } from "../models/enums/Traders";
+import { RewardDetails } from "../models/spt/config/IInventoryConfig";
 import { ILogger } from "../models/spt/utils/ILogger";
 import { EventOutputHolder } from "../routers/EventOutputHolder";
 import { DatabaseServer } from "../servers/DatabaseServer";
@@ -57,6 +60,7 @@ export class InventoryController
         @inject("WinstonLogger") protected logger: ILogger,
         @inject("HashUtil") protected hashUtil: HashUtil,
         @inject("JsonUtil") protected jsonUtil: JsonUtil,
+        @inject("ItemHelper") protected itemHelper: ItemHelper,
         @inject("RandomUtil") protected randomUtil: RandomUtil,
         @inject("DatabaseServer") protected databaseServer: DatabaseServer,
         @inject("FenceService") protected fenceService: FenceService,
@@ -64,9 +68,9 @@ export class InventoryController
         @inject("InventoryHelper") protected inventoryHelper: InventoryHelper,
         @inject("RagfairOfferService") protected ragfairOfferService: RagfairOfferService,
         @inject("ProfileHelper") protected profileHelper: ProfileHelper,
-        @inject("WeightedRandomHelper") protected weightedRandomHelper: WeightedRandomHelper,
         @inject("PaymentHelper") protected paymentHelper: PaymentHelper,
         @inject("LocalisationService") protected localisationService: LocalisationService,
+        @inject("LootGenerator") protected lootGenerator: LootGenerator,
         @inject("EventOutputHolder") protected eventOutputHolder: EventOutputHolder,
         @inject("HttpResponseUtil") protected httpResponseUtil: HttpResponseUtil
     )
@@ -97,7 +101,7 @@ export class InventoryController
             // Dont move items from trader to profile, this can happen when editing a traders preset weapons
             if (moveRequest.fromOwner?.type === "Trader" && !items.isMail)
             {
-                return this.httpResponseUtil.appendErrorToOutput(output, this.localisationService.getText("inventory-edit_trader_item"), 228);
+                return this.httpResponseUtil.appendErrorToOutput(output, this.localisationService.getText("inventory-edit_trader_item"), <BackendErrorCodes>228);
             }
 
             this.inventoryHelper.moveItemInternal(pmcData, items.from, moveRequest);
@@ -760,29 +764,28 @@ export class InventoryController
     public openRandomLootContainer(pmcData: IPmcData, body: IOpenRandomLootContainerRequestData, sessionID: string): IItemEventRouterResponse
     {
         const openedItem = pmcData.Inventory.items.find(x => x._id === body.item);
-        const rewardContainerDetails = this.inventoryHelper.getRandomLootContainerRewardDetails(openedItem._tpl);
+        const containerDetails = this.itemHelper.getItem(openedItem._tpl);
+        const isSealedWeaponBox = containerDetails[1]._name.includes("event_container_airdrop");
 
         const newItemRequest: IAddItemRequestData = {
             tid: "RandomLootContainer",
             items: []
         };
 
-        // Get random items and add to newItemRequest
-        for (let index = 0; index < rewardContainerDetails.rewardCount; index++)
+        let rewardContainerDetails: RewardDetails = {
+            rewardCount: 0,
+            foundInRaid: true
+        };
+
+        if (isSealedWeaponBox)
         {
-            // Pick random reward from pool, add to request object
-            const chosenRewardItemTpl = this.weightedRandomHelper.getWeightedInventoryItem(rewardContainerDetails.rewardTplPool);
-            const existingItemInRequest = newItemRequest.items.find(x => x.item_id === chosenRewardItemTpl);
-            if (existingItemInRequest)
-            {
-                // Exists in request already, increment count
-                existingItemInRequest.count++;
-            }
-            else
-            {
-                // eslint-disable-next-line @typescript-eslint/naming-convention
-                newItemRequest.items.push({item_id: chosenRewardItemTpl, count: 1});
-            }
+            newItemRequest.items.push(...this.lootGenerator.getSealedWeaponCaseLoot());
+        }
+        else
+        {
+            // Get summary of loot from config
+            rewardContainerDetails = this.inventoryHelper.getRandomLootContainerRewardDetails(openedItem._tpl);
+            newItemRequest.items.push(...this.lootGenerator.getRandomLootContainerLoot(rewardContainerDetails));
         }
 
         const output = this.eventOutputHolder.getOutput(sessionID);

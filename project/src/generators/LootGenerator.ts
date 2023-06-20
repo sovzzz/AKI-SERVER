@@ -1,15 +1,21 @@
 import { inject, injectable } from "tsyringe";
 
+import { InventoryHelper } from "../helpers/InventoryHelper";
 import { ItemHelper } from "../helpers/ItemHelper";
+import { PresetHelper } from "../helpers/PresetHelper";
+import { WeightedRandomHelper } from "../helpers/WeightedRandomHelper";
 import { Preset } from "../models/eft/common/IGlobals";
 import { ITemplateItem } from "../models/eft/common/tables/ITemplateItem";
+import { AddItem } from "../models/eft/inventory/IAddItemRequestData";
 import { BaseClasses } from "../models/enums/BaseClasses";
+import { ISealedAirdropContainerSettings, RewardDetails } from "../models/spt/config/IInventoryConfig";
 import { LootItem } from "../models/spt/services/LootItem";
 import { LootRequest } from "../models/spt/services/LootRequest";
 import { ILogger } from "../models/spt/utils/ILogger";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { ItemFilterService } from "../services/ItemFilterService";
 import { LocalisationService } from "../services/LocalisationService";
+import { RagfairLinkedItemService } from "../services/RagfairLinkedItemService";
 import { HashUtil } from "../utils/HashUtil";
 import { RandomUtil } from "../utils/RandomUtil";
 
@@ -27,7 +33,11 @@ export class LootGenerator
         @inject("DatabaseServer") protected databaseServer: DatabaseServer,
         @inject("RandomUtil") protected randomUtil: RandomUtil,
         @inject("ItemHelper") protected itemHelper: ItemHelper,
+        @inject("PresetHelper") protected presetHelper: PresetHelper,
+        @inject("InventoryHelper") protected inventoryHelper: InventoryHelper,
+        @inject("WeightedRandomHelper") protected weightedRandomHelper: WeightedRandomHelper,
         @inject("LocalisationService") protected localisationService: LocalisationService,
+        @inject("RagfairLinkedItemService") protected ragfairLinkedItemService: RagfairLinkedItemService,
         @inject("ItemFilterService") protected itemFilterService: ItemFilterService
     )
     {}
@@ -227,5 +237,205 @@ export class LootGenerator
         
         // item added okay
         return true;
+    }
+
+    /**
+     * Sealed weapon containers have a weapon + associated mods inside them + assortment of other things (food/meds)
+     * @returns Array of items to add to player inventory
+     */
+    public getSealedWeaponCaseLoot(): AddItem[]
+    {
+        const itemsToReturn: AddItem[] = [];
+        const containerSettings = this.inventoryHelper.getInventoryConfig().sealedAirdropContainer;
+
+        // choose a weapon to give to the player (weighted)
+        const chosenWeaponTpl = this.weightedRandomHelper.getWeightedInventoryItem(containerSettings.weaponRewardWeight);
+        const weaponDetailsDb = this.itemHelper.getItem(chosenWeaponTpl);
+        if (!weaponDetailsDb[0])
+        {
+            this.logger.warning(`Non-item was picked as reward ${chosenWeaponTpl}, unable to continue`);
+
+            return itemsToReturn;
+        }
+        
+        // Get weapon preset - default or choose a random one from all possible
+        const chosenWeaponPreset = containerSettings.defaultPresetsOnly
+            ? this.presetHelper.getDefaultPreset(chosenWeaponTpl)
+            : this.randomUtil.getArrayValue(this.presetHelper.getPresets(chosenWeaponTpl));
+
+        // Add preset to return object
+        itemsToReturn.push({
+            count: 1,
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            item_id: chosenWeaponPreset._id,
+            isPreset: true
+        });
+
+        // Get items related to chosen weapon
+        const linkedItemsToWeapon = this.ragfairLinkedItemService.getLinkedDbItems(chosenWeaponTpl);
+        itemsToReturn.push(...this.getSealedContainerWeaponModRewards(containerSettings, linkedItemsToWeapon, chosenWeaponPreset));
+
+        // Handle non-weapon mod reward types
+        itemsToReturn.push(...this.getSealedContainerNonWeaponModRewards(containerSettings, weaponDetailsDb[1]));
+
+        return itemsToReturn;
+    }
+
+    /**
+     * Get non-weapon mod rewards for a sealed container
+     * @param containerSettings Sealed weapon container settings
+     * @param weaponDetailsDb Details for the weapon to reward player
+     * @returns AddItem array
+     */
+    protected getSealedContainerNonWeaponModRewards(containerSettings: ISealedAirdropContainerSettings, weaponDetailsDb: ITemplateItem): AddItem[]
+    {
+        const rewards: AddItem[] = [];
+
+        for (const rewardTypeId in containerSettings.rewardTypeLimits)
+        {
+            const settings = containerSettings.rewardTypeLimits[rewardTypeId];
+            const rewardCount = this.randomUtil.getInt(settings.min, settings.max);
+
+            if (rewardCount === 0)
+            {
+                continue;
+            }
+
+            // Edge case - ammo boxes
+            if (rewardTypeId === BaseClasses.AMMO_BOX)
+            {
+                // Get ammoboxes from db
+                const ammoBoxesDetails = containerSettings.ammoBoxWhitelist.map(x =>
+                {
+                    const itemDetails = this.itemHelper.getItem(x);
+                    return itemDetails[1];
+                });
+                
+                // Need to find boxes that matches weapons caliber
+                const weaponCaliber = weaponDetailsDb._props.ammoCaliber;
+                const ammoBoxesMatchingCaliber = ammoBoxesDetails.filter(x => x._props.ammoCaliber === weaponCaliber);
+                if (ammoBoxesMatchingCaliber.length === 0)
+                {
+                    this.logger.debug(`No ammo box with caliber ${weaponCaliber} found, skipping`);
+
+                    continue;
+                }
+
+                // No need to add ammo to box, inventoryHelper.addItem() will handle it
+                const chosenAmmoBox = this.randomUtil.getArrayValue(ammoBoxesMatchingCaliber);
+                rewards.push({
+                    count: rewardCount,
+                    // eslint-disable-next-line @typescript-eslint/naming-convention
+                    item_id: chosenAmmoBox._id,
+                    isPreset: false
+                });
+
+                continue;
+            }
+
+            // Get all items of the desired type + not quest items + not globally blacklisted
+            const possibleRewardItems = Object.values(this.databaseServer.getTables().templates.items)
+                .filter(x => x._parent === rewardTypeId
+                    && x._type.toLowerCase() === "item"
+                    && !this.itemFilterService.isItemBlacklisted(x._id)
+                    && !x._props.QuestItem);
+
+            if (possibleRewardItems.length === 0)
+            {
+                this.logger.debug(`No items with base type of ${rewardTypeId} found, skipping`);
+
+                continue;
+            }
+
+            for (let index = 0; index < rewardCount; index++)
+            {
+                // choose a random item from pool
+                const chosenRewardItem = this.randomUtil.getArrayValue(possibleRewardItems);
+                this.addOrIncrementItemToArray(chosenRewardItem._id, rewards);         
+            }
+        }
+
+        return rewards;
+    }
+
+    /**
+     * Iterate over the container weaponModRewardLimits settings and create an array of weapon mods to reward player
+     * @param containerSettings Sealed weapon container settings
+     * @param linkedItemsToWeapon All items that can be attached/inserted into weapon
+     * @param chosenWeaponPreset The weapon preset given to player as reward
+     * @returns AddItem array
+     */
+    protected getSealedContainerWeaponModRewards(containerSettings: ISealedAirdropContainerSettings, linkedItemsToWeapon: ITemplateItem[], chosenWeaponPreset: Preset): AddItem[]
+    {
+        const modRewards: AddItem[] = [];
+        for (const rewardTypeId in containerSettings.weaponModRewardLimits)
+        {
+            const settings = containerSettings.weaponModRewardLimits[rewardTypeId];
+            const rewardCount = this.randomUtil.getInt(settings.min, settings.max);
+
+            // Nothing to add, skip reward type
+            if (rewardCount === 0)
+            {
+                continue;
+            }
+
+            // Get items that fulfil reward type criteral from items that fit on gun
+            const relatedItems = linkedItemsToWeapon.filter(x => x._parent === rewardTypeId);
+            if (!relatedItems || relatedItems.length === 0)
+            {
+                this.logger.debug(`no items found to fulfil reward type ${rewardTypeId} for weapon: ${chosenWeaponPreset._name}, skipping`);
+                continue;
+            }
+
+            // Find a random item of the desired type and add as reward
+            for (let index = 0; index < rewardCount; index++) 
+            {
+                const chosenItem = this.randomUtil.drawRandomFromList(relatedItems);
+                this.addOrIncrementItemToArray(chosenItem[0]._id, modRewards);
+            }
+        }
+
+        return modRewards;
+    }
+
+    /**
+     * Handle event-related loot containers - currently just the halloween jack-o-lanterns that give food rewards
+     * @param rewardContainerDetails 
+     * @returns AddItem array
+     */
+    public getRandomLootContainerLoot(rewardContainerDetails: RewardDetails): AddItem[]
+    {
+        const itemsToReturn: AddItem[] = [];
+
+        // Get random items and add to newItemRequest
+        for (let index = 0; index < rewardContainerDetails.rewardCount; index++)
+        {
+            // Pick random reward from pool, add to request object
+            const chosenRewardItemTpl = this.weightedRandomHelper.getWeightedInventoryItem(rewardContainerDetails.rewardTplPool);
+            this.addOrIncrementItemToArray(chosenRewardItemTpl, itemsToReturn);
+        }
+
+        return itemsToReturn;
+    }
+
+    /**
+     * A bug in inventoryHelper.addItem() means you cannot add the same item to the array twice with a count of 1, it causes duplication
+     * Default adds 1, or increments count
+     * @param itemTplToAdd items tpl we want to add to array
+     * @param resultsArray Array to add item tpl to
+     */
+    protected addOrIncrementItemToArray(itemTplToAdd: string, resultsArray: AddItem[]): void
+    {
+        const existingItemIndex = resultsArray.findIndex(x => x.item_id === itemTplToAdd);
+        if (existingItemIndex > -1)
+        {
+            // Exists in array already, increment count
+            resultsArray[existingItemIndex].count++;
+        }
+        else
+        {
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            resultsArray.push({item_id: itemTplToAdd, count: 1, isPreset: false});
+        }
     }
 }

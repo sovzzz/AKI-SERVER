@@ -467,7 +467,7 @@ export class RagfairOfferGenerator
         if ("Repairable" in item.upd)
         {
             // Randomise non-0 class armor
-            if (itemDetails._props.armorClass && itemDetails._props.armorClass >= 1)
+            if (itemDetails._props.armorClass && <number>itemDetails._props.armorClass >= 1)
             {
                 this.randomiseDurabilityValues(item, multiplier);
             }

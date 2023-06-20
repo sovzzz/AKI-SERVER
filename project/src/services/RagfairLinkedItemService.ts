@@ -8,7 +8,7 @@ import { DatabaseServer } from "../servers/DatabaseServer";
 @injectable()
 export class RagfairLinkedItemService
 {
-    protected linkedItemsCache: Record<string, Iterable<string>> = {};
+    protected linkedItemsCache: Record<string, Set<string>> = {};
 
     constructor(
         @inject("DatabaseServer") protected databaseServer: DatabaseServer,
@@ -16,7 +16,7 @@ export class RagfairLinkedItemService
     )
     { }
 
-    public getLinkedItems(linkedSearchId: string): Iterable<string>
+    public getLinkedItems(linkedSearchId: string): Set<string>
     {
         if (Object.keys(this.linkedItemsCache).length === 0)
         {
@@ -24,6 +24,21 @@ export class RagfairLinkedItemService
         }
 
         return this.linkedItemsCache[linkedSearchId];
+    }
+
+    /**
+     * Use ragfair linked item service to get an array of items that can fit on or in designated itemtpl
+     * @param itemTpl Item to get sub-items for
+     * @returns ITemplateItem array
+     */
+    public getLinkedDbItems(itemTpl: string): ITemplateItem[]
+    {
+        const linkedItemsToWeaponTpls = this.getLinkedItems(itemTpl);
+        return [...linkedItemsToWeaponTpls].map(x =>
+        {
+            const itemDetails = this.itemHelper.getItem(x);
+            return itemDetails[1];
+        });
     }
 
     /**
@@ -91,7 +106,12 @@ export class RagfairLinkedItemService
         }
     }
 
-    /* Scans a given slot type for filters and returns them as a Set */
+    /**
+     * Scans a given slot type for filters and returns them as a Set
+     * @param item 
+     * @param slot 
+     * @returns array of ids
+     */
     protected getFilters(item: ITemplateItem, slot: string): string[]
     {
         if (!(slot in item._props && item._props[slot].length))
