@@ -185,6 +185,7 @@ export class LocationController
         return {
             presetCount: lootSettingsByType.presetCount,
             itemCount: lootSettingsByType.itemCount,
+            weaponCrateCount: lootSettingsByType.weaponCrateCount,
             itemBlacklist: lootSettingsByType.itemBlacklist,
             itemTypeWhitelist: lootSettingsByType.itemTypeWhitelist,
             itemLimits: lootSettingsByType.itemLimits,

@@ -57,6 +57,26 @@ export class LootGenerator
         const itemBlacklist = this.itemFilterService.getBlacklistedItems();
         itemBlacklist.push(...options.itemBlacklist);
 
+        // Handle sealed weapon containers
+        const desiredWeaponCrateCount = this.randomUtil.getInt(options.weaponCrateCount.min, options.weaponCrateCount.max);
+        if (desiredWeaponCrateCount > 0)
+        {
+            // Get list of all sealed containers from db
+            const sealedWeaponContainerPool = Object.values(tables.templates.items).filter(x => x._name.includes("event_container_airdrop"));
+            
+            for (let index = 0; index < desiredWeaponCrateCount; index++)
+            {
+                // Choose one at random + add to results array
+                const chosenSealedContainer = this.randomUtil.getArrayValue(sealedWeaponContainerPool);
+                result.push({
+                    id: this.hashUtil.generate(),
+                    tpl: chosenSealedContainer._id,
+                    isPreset: false,
+                    stackCount: 1
+                });
+            }
+        }
+
         // Get items from items.json that have a type of item + not in global blacklist + basetype is in whitelist
         const items = Object.entries(tables.templates.items).filter(x => !itemBlacklist.includes(x[1]._id) 
             && x[1]._type.toLowerCase() === "item" 
