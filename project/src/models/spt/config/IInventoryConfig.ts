@@ -23,6 +23,7 @@ export interface ISealedAirdropContainerSettings
 {
     weaponRewardWeight: Record<string, number>
     defaultPresetsOnly: boolean
+    foundInRaid: boolean;
     weaponModRewardLimits: Record<string, MinMax>
     rewardTypeLimits: Record<string, MinMax>
     ammoBoxWhitelist: string[]

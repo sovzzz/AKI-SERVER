@@ -41,7 +41,6 @@ import {
 import { IItemEventRouterResponse } from "../models/eft/itemEvent/IItemEventRouterResponse";
 import { BackendErrorCodes } from "../models/enums/BackendErrorCodes";
 import { Traders } from "../models/enums/Traders";
-import { RewardDetails } from "../models/spt/config/IInventoryConfig";
 import { ILogger } from "../models/spt/utils/ILogger";
 import { EventOutputHolder } from "../routers/EventOutputHolder";
 import { DatabaseServer } from "../servers/DatabaseServer";
@@ -772,20 +771,21 @@ export class InventoryController
             items: []
         };
 
-        let rewardContainerDetails: RewardDetails = {
-            rewardCount: 0,
-            foundInRaid: true
-        };
-
+        let foundInRaid = false;
         if (isSealedWeaponBox)
         {
-            newItemRequest.items.push(...this.lootGenerator.getSealedWeaponCaseLoot());
+            const containerSettings = this.inventoryHelper.getInventoryConfig().sealedAirdropContainer;
+            newItemRequest.items.push(...this.lootGenerator.getSealedWeaponCaseLoot(containerSettings));
+
+            foundInRaid = containerSettings.foundInRaid;
         }
         else
         {
             // Get summary of loot from config
-            rewardContainerDetails = this.inventoryHelper.getRandomLootContainerRewardDetails(openedItem._tpl);
+            const rewardContainerDetails = this.inventoryHelper.getRandomLootContainerRewardDetails(openedItem._tpl);
             newItemRequest.items.push(...this.lootGenerator.getRandomLootContainerLoot(rewardContainerDetails));
+
+            foundInRaid = rewardContainerDetails.foundInRaid;
         }
 
         const output = this.eventOutputHolder.getOutput(sessionID);
@@ -793,8 +793,8 @@ export class InventoryController
         // Find and delete opened item from player inventory
         this.inventoryHelper.removeItem(pmcData, body.item, sessionID, output);
 
-        // Add random reward items to player inventory
-        this.inventoryHelper.addItem(pmcData, newItemRequest, output, sessionID, null, rewardContainerDetails.foundInRaid);
+        // Add reward items to player inventory
+        this.inventoryHelper.addItem(pmcData, newItemRequest, output, sessionID, null, foundInRaid);
 
         return output;
     }

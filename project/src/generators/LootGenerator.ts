@@ -261,12 +261,12 @@ export class LootGenerator
 
     /**
      * Sealed weapon containers have a weapon + associated mods inside them + assortment of other things (food/meds)
+     * @param containerSettings sealed weapon container settings
      * @returns Array of items to add to player inventory
      */
-    public getSealedWeaponCaseLoot(): AddItem[]
+    public getSealedWeaponCaseLoot(containerSettings: ISealedAirdropContainerSettings): AddItem[]
     {
         const itemsToReturn: AddItem[] = [];
-        const containerSettings = this.inventoryHelper.getInventoryConfig().sealedAirdropContainer;
 
         // choose a weapon to give to the player (weighted)
         const chosenWeaponTpl = this.weightedRandomHelper.getWeightedInventoryItem(containerSettings.weaponRewardWeight);
