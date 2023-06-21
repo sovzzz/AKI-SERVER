@@ -54,7 +54,7 @@
             "5df24cf80dee1b22f862e9bc": 1
         },
         "defaultPresetsOnly": true,
-		"foundInRaid": true,
+        "foundInRaid": true,
         "weaponModRewardLimits": {
             "5448bc234bdc2d3c308b4569": {
                 "type": "magazine",
@@ -155,6 +155,6 @@
             "6489870774a806211e4fb685",
             "6489879db5a2df1c815a04ef"
         ]
-    }
+    },
     "customMoneyTpls": []
 }
