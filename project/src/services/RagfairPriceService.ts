@@ -118,14 +118,13 @@ export class RagfairPriceService implements OnLoad
     {
         // Get dynamic price (templates/prices), if that doesnt exist get price from static array (templates/handbook)
         let itemPrice = this.getDynamicPriceForItem(tplId) || this.getStaticPriceForItem(tplId);
-
-        // If no price in dynamic/static, set to 1
-        itemPrice = itemPrice || 1;
-
-        if (itemPrice === 1)
+        if (!itemPrice)
         {
             this.logger.warning(`Missing live flea or handbook item price for ${tplId}, defaulting to 1, if this is a modded item contact the mods author`);
         }
+
+        // If no price in dynamic/static, set to 1
+        itemPrice = itemPrice || 1;
 
         return itemPrice;
     }
