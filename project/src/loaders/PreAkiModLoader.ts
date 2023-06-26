@@ -186,9 +186,9 @@ export class PreAkiModLoader implements IModLoader
             modNames.push(`${mod.author}-${mod.name}`);
         }
         const dupes = this.getDuplicates(modNames);
-        if (dupes && dupes.length > 0)
+        if (dupes?.length > 0)
         {
-            this.logger.error(this.localisationService.getText("modloader-x_duplicates_found", dupes));
+            this.logger.error(this.localisationService.getText("modloader-x_duplicates_found", dupes.join(",")));
         }
     }
 
