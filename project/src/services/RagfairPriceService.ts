@@ -67,7 +67,7 @@ export class RagfairPriceService implements OnLoad
     }
 
     /**
-     * Add placeholder values for the new sealed weapon containers
+     * Add placeholder values for items missing from handbook
      */
     protected addMissingHandbookPrices(): void
     {
@@ -82,6 +82,9 @@ export class RagfairPriceService implements OnLoad
                 db.templates.handbook.Items.push({Id: container._id, ParentId: container._parent, Price: 100});
             }
         }
+
+        // Add handbook record for: Primorsky Ave apartment key
+        db.templates.handbook.Items.push({Id: "6391fcf5744e45201147080f", ParentId: "5c99f98d86f7745c314214b3", Price: 1});
     }
 
     public getRoute(): string 
