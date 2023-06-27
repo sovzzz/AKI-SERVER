@@ -362,7 +362,7 @@ export class BotLootGenerator
         // return true, we are over limit
         if (limitCount[idToCheckFor] > itemSpawnLimits[idToCheckFor])
         {
-            // Prevent edge-case of small loot pools and code tries to max-limit-reached item over and over
+            // Prevent edge-case of small loot pools + code trying to add limited item over and over infinitely
             if (limitCount[idToCheckFor] > itemSpawnLimits[idToCheckFor] * 10)
             {
                 this.logger.warning(this.localisationService.getText("bot-item_spawn_limit_reached_skipping_item", {botRole: botRole, itemName: itemTemplate._name, attempts: limitCount[idToCheckFor]}));
