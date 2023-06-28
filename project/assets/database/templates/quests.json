@@ -60850,7 +60850,7 @@
         {
           "_parent": "PlaceBeacon",
           "_props": {
-            "id": "5a6873bc86f7741f8d4589a3",
+            "id": "5a6873d786f7743ad1151d6e",
             "index": 1,
             "parentId": "",
             "dynamicLocale": false,
@@ -60867,7 +60867,7 @@
         {
           "_parent": "PlaceBeacon",
           "_props": {
-            "id": "5a6873d786f7743ad1151d6e",
+            "id": "5a6873ec86f7743cc55d8622",
             "index": 2,
             "parentId": "",
             "dynamicLocale": false,
