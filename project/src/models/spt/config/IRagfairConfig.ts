@@ -129,6 +129,8 @@ export interface Condition
   
 export interface Blacklist 
 {
+    /** Damaged ammo packs */
+    damagedAmmoPacks: boolean
     /** Custom blacklist for item Tpls */
     custom: string[]
     /** BSG blacklist a large number of items from flea, true = use blacklist */

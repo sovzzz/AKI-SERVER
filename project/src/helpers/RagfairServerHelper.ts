@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 
 import { Item } from "../models/eft/common/tables/IItem";
 import { ITemplateItem } from "../models/eft/common/tables/ITemplateItem";
+import { BaseClasses } from "../models/enums/BaseClasses";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
 import { MemberCategory } from "../models/enums/MemberCategory";
 import { MessageType } from "../models/enums/MessageType";
@@ -83,6 +84,12 @@ export class RagfairServerHelper
 
         // Skip quest items
         if (blacklistConfig.enableQuestList && this.itemHelper.isQuestItem(itemDetails[1]._id))
+        {
+            return false;
+        }
+
+        // Don't include damaged ammo packs
+        if (this.ragfairConfig.dynamic.blacklist.damagedAmmoPacks && itemDetails[1]._parent === BaseClasses.AMMO_BOX && itemDetails[1]._name.includes("_damaged"))
         {
             return false;
         }

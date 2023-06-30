@@ -145,6 +145,7 @@
         ],
 		"removeSeasonalItemsWhenNotInEvent": true,
         "blacklist": {
+			"damagedAmmoPacks": true,
             "custom": [],
             "enableBsgList": true,
             "enableQuestList": true,
