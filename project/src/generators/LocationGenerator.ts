@@ -5,7 +5,7 @@ import { ItemHelper } from "../helpers/ItemHelper";
 import { PresetHelper } from "../helpers/PresetHelper";
 import { RagfairServerHelper } from "../helpers/RagfairServerHelper";
 import {
-    ILooseLoot, Spawnpoint, SpawnpointsForced, SpawnpointTemplate
+    ILooseLoot, Spawnpoint, SpawnpointTemplate, SpawnpointsForced
 } from "../models/eft/common/ILooseLoot";
 import { Item } from "../models/eft/common/tables/IItem";
 import {
@@ -55,43 +55,142 @@ export class LocationGenerator
     }
 
     /**
-     * Choose loot to put into a static container
-     * @param containerIn 
-     * @param staticForced 
-     * @param staticLootDist 
-     * @param staticAmmoDist 
+     * Choose loot to put into a static container based on weighting
+     * Handle forced items + seasonal item removal when not in season
+     * @param staticContainer The container itself we will add loot to
+     * @param staticForced Loot we need to force into the container
+     * @param staticLootDist staticLoot.json
+     * @param staticAmmoDist staticAmmo.json
      * @param locationName Name of the map to generate static loot for
      * @returns IStaticContainerProps
      */
     public generateContainerLoot(
-        containerIn: IStaticContainerProps,
+        staticContainer: IStaticContainerProps,
         staticForced: IStaticForcedProps[],
         staticLootDist: Record<string, IStaticLootDetails>,
         staticAmmoDist: Record<string, IStaticAmmoDetails[]>,
         locationName: string): IStaticContainerProps
     {
-        const container = this.jsonUtil.clone(containerIn);
-        const containerTypeId = container.Items[0]._tpl;
+        const container = this.jsonUtil.clone(staticContainer);
+        const containerTpl = container.Items[0]._tpl;
+
+        // Create new unique parent id to prevent any collisions
         const parentId = this.objectId.generate();
         container.Root = parentId;
         container.Items[0]._id = parentId;
 
-        const containerTemplate = this.itemHelper.getItem(containerTypeId)[1];
+        let containerMap = this.getContainerMapping(containerTpl);
+
+        // Choose count of items to add to container
+        const itemCountToAdd = this.getWeightedCountOfContainerItems(containerTpl, staticLootDist, locationName);
+
+        // Get all possible loot items for container
+        const containerLootPool = this.getPossibleLootItemsForContainer(containerTpl, staticLootDist);
+
+        // Some containers need to have items forced into it (quest keys etc)
+        const tplsForced = staticForced.filter(x => x.containerId === container.Id).map(x => x.itemTpl);
+
+        // Draw random loot
+        // Money spawn more than once in container
+        let failedToFitCount = 0;
+        const locklist = [Money.ROUBLES, Money.DOLLARS, Money.EUROS];
+
+        // Choose items to add to container, factor in weighting + lock money down
+        const chosenTpls = containerLootPool.draw(itemCountToAdd, false, locklist);
+
+        // Add forced loot to chosen item pool
+        const tplsToAddToContainer = tplsForced.concat(chosenTpls);
+        for (const tplToAdd of tplsToAddToContainer)
+        {
+            const chosenItemWithChildren = this.createStaticLootItem(tplToAdd, staticAmmoDist, parentId);
+            const items = chosenItemWithChildren.items;
+            const width = chosenItemWithChildren.width;
+            const height = chosenItemWithChildren.height;
+
+            // look for open slot to put chosen item into
+            const result = this.containerHelper.findSlotForItem(containerMap, width, height);
+            if (!result.success)
+            {
+                // 2 attempts to fit an item, container is probably full, stop trying to add more
+                if (failedToFitCount >= this.locationConfig.fitLootIntoContainerAttempts)
+                {
+                    break;
+                }
+
+                // Can't fit item, skip
+                failedToFitCount++;
+
+                continue;
+            }
+
+            containerMap = this.containerHelper.fillContainerMapWithItem(containerMap, result.x, result.y, width, height, result.rotation);
+            const rotation = result.rotation ? 1 : 0;
+
+            items[0].slotId = "main";
+            items[0].location = { "x": result.x, "y": result.y, "r": rotation };
+
+            // Add loot to container before returning
+            for (const item of items)
+            {
+                container.Items.push(item);
+            }
+        }
+
+        return container;
+    }
+
+    /**
+     * Get a 2d grid of a containers item slots
+     * @param containerTpl Tpl id of the container
+     * @returns number[][]
+     */
+    protected getContainerMapping(containerTpl: string): number[][]
+    {
+        // Get template from db
+        const containerTemplate = this.itemHelper.getItem(containerTpl)[1];
+
+        // Get height/width
         const height = containerTemplate._props.Grids[0]._props.cellsV;
         const width = containerTemplate._props.Grids[0]._props.cellsH;
-        let container2D: number[][] = Array(height).fill(0).map(() => Array(width).fill(0));
 
+        // Calcualte 2d array and return
+        return Array(height).fill(0).map(() => Array(width).fill(0));
+    }
+
+    /**
+     * Look up a containers itemcountDistribution data and choose an item count based on the found weights
+     * @param containerTypeId Container to get item count for
+     * @param staticLootDist staticLoot.json
+     * @param locationName Map name (to get per-map multiplier for from config)
+     * @returns item count
+     */
+    protected getWeightedCountOfContainerItems(containerTypeId: string, staticLootDist: Record<string, IStaticLootDetails>, locationName: string): number
+    {
+        // Create probability array to calcualte the total count of lootable items inside container
         const itemCountArray = new ProbabilityObjectArray<number>(this.mathUtil);
-        for (const icd of staticLootDist[containerTypeId].itemcountDistribution)
+        for (const itemCountDistribution of staticLootDist[containerTypeId].itemcountDistribution)
         {
+            // Add each count of items into array
             itemCountArray.push(
-                new ProbabilityObject(icd.count, icd.relativeProbability)
+                new ProbabilityObject(itemCountDistribution.count, itemCountDistribution.relativeProbability)
             );
         }
-        const numberItems = Math.round(this.getStaticLootMultiplerForLocation(locationName) * itemCountArray.draw()[0]);
 
+        return Math.round(this.getStaticLootMultiplerForLocation(locationName) * itemCountArray.draw()[0]);
+    }
+
+    /**
+     * Get all possible loot items that can be placed into a container
+     * Do not add seasonal items if found + current date is inside seasonal event
+     * @param containerTypeId Contianer to get possible loot for
+     * @param staticLootDist staticLoot.json
+     * @returns ProbabilityObjectArray of item tpls + probabilty
+     */
+    protected getPossibleLootItemsForContainer(containerTypeId: string, staticLootDist: Record<string, IStaticLootDetails>): ProbabilityObjectArray<string, number>
+    {
         const seasonalEventActive = this.seasonalEventService.seasonalEventEnabled();
         const seasonalItemTplBlacklist = this.seasonalEventService.getSeasonalEventItemsToBlock();
+
         const itemDistribution = new ProbabilityObjectArray<string>(this.mathUtil);
         for (const icd of staticLootDist[containerTypeId].itemDistribution)
         {
@@ -106,52 +205,7 @@ export class LocationGenerator
             );
         }
 
-        // Get forced container loot tpls
-        const tplsForced = staticForced.filter(x => x.containerId === container.Id).map(x => x.itemTpl);
-
-        // Draw random loot
-        // money spawn more than once in container
-        let failedToFitCount = 0;
-        const locklist = [Money.ROUBLES, Money.DOLLARS, Money.EUROS];
-        const tplsDraw = itemDistribution.draw(numberItems, false, locklist);
-        const tpls = tplsForced.concat(tplsDraw);
-        for (const tpl of tpls)
-        {
-            const chosenItemWithChildren = this.createStaticLootItem(tpl, staticAmmoDist, parentId);
-            const items = chosenItemWithChildren.items;
-            const width = chosenItemWithChildren.width;
-            const height = chosenItemWithChildren.height;
-
-            // look for open slot to put chosen item into
-            const result = this.containerHelper.findSlotForItem(container2D, width, height);
-            if (!result.success)
-            {
-                // 2 attempts to fit an item, container is probably full, stop trying to add more
-                if (failedToFitCount >= this.locationConfig.fitLootIntoContainerAttempts)
-                {
-                    break;
-                }
-
-                // Can't fit item, skip
-                failedToFitCount++;
-                continue;
-                
-            }
-
-            container2D = this.containerHelper.fillContainerMapWithItem(container2D, result.x, result.y, width, height, result.rotation);
-            const rot = result.rotation ? 1 : 0;
-
-            items[0].slotId = "main";
-            items[0].location = { "x": result.x, "y": result.y, "r": rot };
-
-
-            for (const item of items)
-            {
-                container.Items.push(item);
-            }
-        }
-
-        return container;
+        return itemDistribution;
     }
 
     protected getLooseLootMultiplerForLocation(location: string): number

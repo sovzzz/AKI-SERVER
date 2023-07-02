@@ -77,22 +77,22 @@ export class LocationController
 
         output.Loot = [];
 
-        // mounted weapons
+        // Mounted weapons
         for (const mi of staticWeapons)
         {
             output.Loot.push(mi);
         }
 
-        let count = 0;
+        let staticContainerCount = 0;
         // static loot
-        for (const ci of staticContainers)
+        for (const staticContainer of staticContainers)
         {
-            const container = this.locationGenerator.generateContainerLoot(ci, staticForced, staticLootDist, staticAmmoDist, name);
+            const container = this.locationGenerator.generateContainerLoot(staticContainer, staticForced, staticLootDist, staticAmmoDist, name);
             output.Loot.push(container);
-            count++;
+            staticContainerCount++;
         }
 
-        this.logger.success(this.localisationService.getText("location-containers_generated_success", count));
+        this.logger.success(this.localisationService.getText("location-containers_generated_success", staticContainerCount));
 
         // dyanmic loot
         const dynamicLootDist: ILooseLoot = this.jsonUtil.clone(location.looseLoot);

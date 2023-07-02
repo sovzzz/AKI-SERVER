@@ -98,7 +98,7 @@ export class ContainerHelper
         return new FindSlotResult();
     }
 
-    public fillContainerMapWithItem(container2D: number[][], x: number, y: number, itemW: number, itemH: number, rotate: boolean): any
+    public fillContainerMapWithItem(container2D: number[][], x: number, y: number, itemW: number, itemH: number, rotate: boolean): number[][]
     {
         const itemWidth = rotate ? itemH : itemW;
         const itemHeight = rotate ? itemW : itemH;
