@@ -58676,6 +58676,19 @@
             "visibilityConditions": []
           },
           "dynamicLocale": false
+        },
+        {
+          "_parent": "Level",
+          "_props": {
+            "compareMethod": ">=",
+            "dynamicLocale": false,
+            "id": "4afb375d098ac33724acad41",
+            "index": 1,
+            "parentId": "",
+            "value": 60,
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
         }
       ],
       "Fail": []
