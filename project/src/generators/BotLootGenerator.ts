@@ -59,7 +59,7 @@ export class BotLootGenerator
         // Limits on item types to be added as loot
         const itemCounts = botJsonTemplate.generation.items;
         
-        const nValue =  this.getBotLootNValue(isPmc);
+        const nValue =  this.getBotLootNValueByRole(botRole);
         const looseLootMin = itemCounts.looseLoot.min;
         const looseLootMax = itemCounts.looseLoot.max;
 
@@ -199,7 +199,7 @@ export class BotLootGenerator
             const itemSpawnLimits: Record<string,Record<string, number>> = {};
             for (let i = 0; i < totalItemCount; i++)
             {
-                const itemToAddTemplate = this.getRandomItemFromPool(pool, isPmc);
+                const itemToAddTemplate = this.getRandomItemFromPoolByRole(pool, botRole);
                 const id = this.hashUtil.generate();
                 const itemsToAdd: Item[] = [{
                     _id: id,
@@ -282,6 +282,7 @@ export class BotLootGenerator
     }
 
     /**
+     * @deprecated replaced by getRandomItemFromPoolByRole()
      * Get a random item from the pool parameter using the biasedRandomNumber system
      * @param pool pool of items to pick an item from
      * @param isPmc is the bot being created a pmc
@@ -294,6 +295,19 @@ export class BotLootGenerator
     }
 
     /**
+     * Get a random item from the pool parameter using the biasedRandomNumber system
+     * @param pool pool of items to pick an item from
+     * @param isPmc is the bot being created a pmc
+     * @returns ITemplateItem object
+     */
+    protected getRandomItemFromPoolByRole(pool: ITemplateItem[], botRole: string): ITemplateItem
+    {
+        const itemIndex = this.randomUtil.getBiasedRandomNumber(0, pool.length - 1, pool.length - 1, this.getBotLootNValueByRole(botRole));
+        return pool[itemIndex];
+    }
+
+    /**
+     * @deprecated Replaced by getBotLootNValueByRole()
      * Get the loot nvalue from botconfig
      * @param isPmc if true the pmc nvalue is returned
      * @returns nvalue as number
@@ -306,6 +320,24 @@ export class BotLootGenerator
         }
 
         return this.botConfig.lootNValue["scav"];
+    }
+
+    /**
+     * Get the loot nvalue from botconfig
+     * @param botRole role of bot e.g. assault/sptBear
+     * @returns nvalue as number
+     */
+    protected getBotLootNValueByRole(botRole: string): number
+    {
+        const result = this.botConfig.lootNValue[botRole];
+        if (!result)
+        {
+            this.logger.warning(`Bot ${botRole} loot n value missing, using scav value instead`);
+
+            return this.botConfig.lootNValue["scav"];
+        }
+
+        return result;
     }
 
     /**
