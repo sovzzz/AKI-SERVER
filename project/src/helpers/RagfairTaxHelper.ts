@@ -1,11 +1,11 @@
+import { inject, injectable } from "tsyringe";
 import { IPmcData } from "../models/eft/common/IPmcData";
 import { Item } from "../models/eft/common/tables/IItem";
 import { ITemplateItem } from "../models/eft/common/tables/ITemplateItem";
+import { ILogger } from "../models/spt/utils/ILogger";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { RagfairPriceService } from "../services/RagfairPriceService";
 import { ItemHelper } from "./ItemHelper";
-import { inject, injectable } from "tsyringe";
-import { ILogger } from "../models/spt/utils/ILogger";
 
 @injectable()
 export class RagfairTaxHelper
@@ -122,7 +122,7 @@ export class RagfairTaxHelper
             worth = worth / itemTemplate._props.MaxResource * item.upd.FoodDrink.HpPercent;
         }
 
-        if ("Repairable" in item.upd && itemTemplate._props.armorClass > 0)
+        if ("Repairable" in item.upd && <number>itemTemplate._props.armorClass > 0)
         {
             const num2 = 0.01 * Math.pow(0.0, item.upd.Repairable.MaxDurability);
             worth = worth * ((item.upd.Repairable.MaxDurability / itemTemplate._props.Durability) - num2) - Math.floor(itemTemplate._props.RepairCost * (item.upd.Repairable.MaxDurability - item.upd.Repairable.Durability));
