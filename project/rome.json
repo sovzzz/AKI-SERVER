@@ -6,6 +6,7 @@
             "recommended": true,
             "style": {
                 "noImplicitBoolean": "off",
+                "noParameterAssign": "warn",
                 "useTemplate": "warn",
                 "useSingleVarDeclarator": "warn"
             },
