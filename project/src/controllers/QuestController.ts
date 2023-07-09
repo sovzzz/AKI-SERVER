@@ -1,6 +1,5 @@
 import { inject, injectable } from "tsyringe";
 
-import { SeasonalEventType } from "@spt-aki/models/enums/SeasonalEventType";
 import { DialogueHelper } from "../helpers/DialogueHelper";
 import { ItemHelper } from "../helpers/ItemHelper";
 import { ProfileHelper } from "../helpers/ProfileHelper";
@@ -19,6 +18,7 @@ import { IHandoverQuestRequestData } from "../models/eft/quests/IHandoverQuestRe
 import { ConfigTypes } from "../models/enums/ConfigTypes";
 import { MessageType } from "../models/enums/MessageType";
 import { QuestStatus } from "../models/enums/QuestStatus";
+import { SeasonalEventType } from "../models/enums/SeasonalEventType";
 import { IQuestConfig } from "../models/spt/config/IQuestConfig";
 import { ILogger } from "../models/spt/utils/ILogger";
 import { EventOutputHolder } from "../routers/EventOutputHolder";
@@ -68,8 +68,6 @@ export class QuestController
         const quests: IQuest[] = [];
         const allQuests = this.questHelper.getQuestsFromDb();
         const profile: IPmcData = this.profileHelper.getPmcProfile(sessionID);
-        const isChristmasEventActive = this.seasonalEventService.christmasEventEnabled();
-        const isHalloweenEventActive = this.seasonalEventService.halloweenEventEnabled();
 
         for (const quest of allQuests)
         {
@@ -86,20 +84,7 @@ export class QuestController
                 continue;
             }
 
-            // Not christmas
-            if (!isChristmasEventActive && this.seasonalEventService.isQuestRelatedToEvent(quest._id, SeasonalEventType.CHRISTMAS))
-            {
-                continue;
-            }
-
-            // Not halloween + quest is for halloween
-            if (!isHalloweenEventActive && this.seasonalEventService.isQuestRelatedToEvent(quest._id, SeasonalEventType.HALLOWEEN))
-            {
-                continue;
-            }
-
-            // Should event quests be shown to player
-            if (!this.questConfig.showNonSeasonalEventQuests && this.seasonalEventService.isQuestRelatedToEvent(quest._id, SeasonalEventType.NONE))
+            if (!this.showEventQuestToPlayer(quest._id))
             {
                 continue;
             }
@@ -185,6 +170,37 @@ export class QuestController
         }
 
         return quests;
+    }
+
+    /**
+     * Should a quest be shown to the player in trader quest screen
+     * @param questId Quest to check
+     * @returns true = show to player
+     */
+    protected showEventQuestToPlayer(questId: string): boolean
+    {
+        const isChristmasEventActive = this.seasonalEventService.christmasEventEnabled();
+        const isHalloweenEventActive = this.seasonalEventService.halloweenEventEnabled();
+
+        // Not christmas + quest is for christmas
+        if (!isChristmasEventActive && this.seasonalEventService.isQuestRelatedToEvent(questId, SeasonalEventType.CHRISTMAS))
+        {
+            return false;
+        }
+
+        // Not halloween + quest is for halloween
+        if (!isHalloweenEventActive && this.seasonalEventService.isQuestRelatedToEvent(questId, SeasonalEventType.HALLOWEEN))
+        {
+            return false;
+        }
+
+        // Should non-season event quests be shown to player
+        if (!this.questConfig.showNonSeasonalEventQuests && this.seasonalEventService.isQuestRelatedToEvent(questId, SeasonalEventType.NONE))
+        {
+            return false;
+        }
+
+        return true;
     }
 
     /**
