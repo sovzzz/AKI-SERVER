@@ -15,6 +15,7 @@ import { IGameConfigResponse } from "../models/eft/game/IGameConfigResponse";
 import { IServerDetails } from "../models/eft/game/IServerDetails";
 import { IAkiProfile } from "../models/eft/profile/IAkiProfile";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
+import { Traders } from "../models/enums/Traders";
 import { ICoreConfig } from "../models/spt/config/ICoreConfig";
 import { IHttpConfig } from "../models/spt/config/IHttpConfig";
 import { ILocationConfig } from "../models/spt/config/ILocationConfig";
@@ -133,6 +134,8 @@ export class GameController
 
             this.saveActiveModsToProfile(fullProfile);
 
+            this.validateQuestAssortUnlocksExist();
+
             if (pmcProfile.Info)
             {
                 this.addPlayerToPMCNames(pmcProfile);
@@ -146,6 +149,35 @@ export class GameController
             if (pmcProfile?.Skills?.Common)
             {
                 this.warnOnActiveBotReloadSkill(pmcProfile);
+            }
+        }
+    }
+    
+    protected validateQuestAssortUnlocksExist(): void
+    {
+        const db = this.databaseServer.getTables();
+        const traders = db.traders;
+        const quests = db.templates.quests;
+        for (const traderId of Object.values(Traders))
+        {
+            const traderData = traders[traderId];
+            const traderAssorts = traderData?.assort;
+            if (!traderAssorts)
+            {
+                continue;
+            }
+
+            // Merge started/success/fail quest assorts into one dictionary
+            const mergedQuestAssorts = Object.assign({}, traderData.questassort["started"], traderData.questassort["success"], traderData.questassort["fail"]);
+
+            // loop over all assorts for trader
+            for (const [assortKey, questKey] of Object.entries(mergedQuestAssorts))
+            {
+                // Does assort key exist in trader assort file
+                if (!traderAssorts.loyal_level_items[assortKey])
+                {
+                    this.logger.warning(this.localisationService.getText("assort-missing_quest_assort_unlocks", {traderName: Object.keys(Traders)[Object.values(Traders).indexOf(traderId)], questName: quests[questKey].QuestName}));
+                }
             }
         }
     }

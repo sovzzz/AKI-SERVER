@@ -27,7 +27,7 @@ export class AssortHelper
      * @param pmcProfile Player profile
      * @param traderId Traders id the assort belongs to
      * @param traderAssorts All assort items from same trader
-     * @param mergedQuestAssorts Dict of quest assort to quest id unlocks for all traders
+     * @param mergedQuestAssorts Dict of quest assort to quest id unlocks for all traders (key = started/failed/complete)
      * @returns Assort items minus locked quest assorts
      */
     public stripLockedQuestAssort(pmcProfile: IPmcData, traderId: string, traderAssorts: ITraderAssort, mergedQuestAssorts: Record<string, Record<string, string>>, flea = false): ITraderAssort
