@@ -218,14 +218,16 @@
     ],
     "events": [{
             "name": "halloween",
+			"type": "HALLOWEEN",
             "startDay": "24",
             "startMonth": "10",
             "endDay": "4",
             "endMonth": "11"
         }, {
             "name": "christmas",
-            "startDay": "16",
-            "startMonth": "12",
+			"type": "CHRISTMAS",
+            "startDay": "7",
+            "startMonth": "7",
             "endDay": "31",
             "endMonth": "12"
         }

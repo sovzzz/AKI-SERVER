@@ -1,5 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
+import { SeasonalEventType } from "@spt-aki/models/enums/SeasonalEventType";
 import { DialogueHelper } from "../helpers/DialogueHelper";
 import { ItemHelper } from "../helpers/ItemHelper";
 import { ProfileHelper } from "../helpers/ProfileHelper";
@@ -26,6 +27,7 @@ import { DatabaseServer } from "../servers/DatabaseServer";
 import { LocaleService } from "../services/LocaleService";
 import { LocalisationService } from "../services/LocalisationService";
 import { PlayerService } from "../services/PlayerService";
+import { SeasonalEventService } from "../services/SeasonalEventService";
 import { HttpResponseUtil } from "../utils/HttpResponseUtil";
 import { TimeUtil } from "../utils/TimeUtil";
 
@@ -47,13 +49,13 @@ export class QuestController
         @inject("QuestConditionHelper") protected questConditionHelper: QuestConditionHelper,
         @inject("PlayerService") protected playerService: PlayerService,
         @inject("LocaleService") protected localeService: LocaleService,
+        @inject("SeasonalEventService") protected seasonalEventService: SeasonalEventService,
         @inject("LocalisationService") protected localisationService: LocalisationService,
         @inject("ConfigServer") protected configServer: ConfigServer
     )
     {
         this.questConfig = this.configServer.getConfig(ConfigTypes.QUEST);
     }
-
 
     /**
      * Get all quests visible to player
@@ -66,17 +68,38 @@ export class QuestController
         const quests: IQuest[] = [];
         const allQuests = this.questHelper.getQuestsFromDb();
         const profile: IPmcData = this.profileHelper.getPmcProfile(sessionID);
+        const isChristmasEventActive = this.seasonalEventService.christmasEventEnabled();
+        const isHalloweenEventActive = this.seasonalEventService.halloweenEventEnabled();
 
         for (const quest of allQuests)
         {
-            // If a quest is already in the profile we need to just add it
+            // Player already accepted the quest, show it regardless of status
             if (profile.Quests.some(x => x.qid === quest._id))
             {
                 quests.push(quest);
                 continue;
             }
 
+            // Filter out bear quests for usec and vice versa
             if (this.questIsForOtherSide(profile.Info.Side, quest._id))
+            {
+                continue;
+            }
+
+            // Not christmas
+            if (!isChristmasEventActive && this.seasonalEventService.isQuestRelatedToEvent(quest._id, SeasonalEventType.CHRISTMAS))
+            {
+                continue;
+            }
+
+            // Not halloween + quest is for halloween
+            if (!isHalloweenEventActive && this.seasonalEventService.isQuestRelatedToEvent(quest._id, SeasonalEventType.HALLOWEEN))
+            {
+                continue;
+            }
+
+            // Should event quests be shown to player
+            if (!this.questConfig.showNonSeasonalEventQuests && this.seasonalEventService.isQuestRelatedToEvent(quest._id, SeasonalEventType.NONE))
             {
                 continue;
             }

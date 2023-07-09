@@ -4,6 +4,8 @@ import { BotHelper } from "../helpers/BotHelper";
 import { Config } from "../models/eft/common/IGlobals";
 import { Inventory } from "../models/eft/common/tables/IBotType";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
+import { SeasonalEventType } from "../models/enums/SeasonalEventType";
+import { IQuestConfig } from "../models/spt/config/IQuestConfig";
 import { ISeasonalEvent, ISeasonalEventConfig } from "../models/spt/config/ISeasonalEventConfig";
 import { ILocationData } from "../models/spt/server/ILocations";
 import { ILogger } from "../models/spt/utils/ILogger";
@@ -15,6 +17,7 @@ import { LocalisationService } from "./LocalisationService";
 export class SeasonalEventService
 {
     protected seasonalEventConfig: ISeasonalEventConfig;
+    protected questConfig: IQuestConfig;
 
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
@@ -25,15 +28,7 @@ export class SeasonalEventService
     )
     {
         this.seasonalEventConfig = this.configServer.getConfig(ConfigTypes.SEASONAL_EVENT);
-    }
-
-    protected get events(): Record<string, string>
-    {
-        return {
-            "None": "None",
-            "Christmas": "Christmas",
-            "Halloween": "Halloween"
-        };
+        this.questConfig = this.configServer.getConfig(ConfigTypes.QUEST);
     }
 
     protected get christmasEventItems(): string[]
@@ -144,26 +139,26 @@ export class SeasonalEventService
      */
     public seasonalEventEnabled(): boolean
     {
-        return this.databaseServer.getTables().globals.config.EventType.includes(this.events.Christmas) ||
-            this.databaseServer.getTables().globals.config.EventType.includes(this.events.Halloween);
+        return this.databaseServer.getTables().globals.config.EventType.includes(SeasonalEventType.CHRISTMAS) ||
+            this.databaseServer.getTables().globals.config.EventType.includes(SeasonalEventType.HALLOWEEN);
     }
 
     /**
-     * is christmas event active
+     * Is christmas event active (Globals eventtype array contains even name)
      * @returns true if active
      */
     public christmasEventEnabled(): boolean
     {
-        return this.databaseServer.getTables().globals.config.EventType.includes(this.events.Christmas);
+        return this.databaseServer.getTables().globals.config.EventType.includes(SeasonalEventType.CHRISTMAS);
     }
 
     /**
-     * is christmas event active
+     * is halloween event active (Globals eventtype array contains even name)
      * @returns true if active
      */
     public halloweenEventEnabled(): boolean
     {
-        return this.databaseServer.getTables().globals.config.EventType.includes(this.events.Halloween);
+        return this.databaseServer.getTables().globals.config.EventType.includes(SeasonalEventType.HALLOWEEN);
     }
 
     /**
@@ -180,9 +175,9 @@ export class SeasonalEventService
      * @param eventName Name of event to get gear changes for
      * @returns bots with equipment changes
      */
-    protected getEventBotGear(eventName: string): Record<string, Record<string, Record<string, number>>>
+    protected getEventBotGear(eventType: SeasonalEventType): Record<string, Record<string, Record<string, number>>>
     {
-        return this.seasonalEventConfig.eventGear[eventName.toLowerCase()];
+        return this.seasonalEventConfig.eventGear[eventType.toLowerCase()];
     }
 
     /**
@@ -192,6 +187,23 @@ export class SeasonalEventService
     public getEventDetails(): ISeasonalEvent[]
     {
         return this.seasonalEventConfig.events;
+    }
+
+    /**
+     * Look up quest in configs/quest.json
+     * @param questId Quest to look up
+     * @param event event type (Christmas/Halloween/None)
+     * @returns true if related
+     */
+    public isQuestRelatedToEvent(questId: string, event: SeasonalEventType): boolean
+    {
+        const eventQuestData = this.questConfig.eventQuests[questId];
+        if (eventQuestData?.season.toLowerCase() === event.toLowerCase())
+        {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -212,7 +224,7 @@ export class SeasonalEventService
             if (currentDate >= eventStartDate
                 && currentDate <= eventEndDate)
             {
-                this.updateGlobalEvents(globalConfig, event.name);
+                this.updateGlobalEvents(globalConfig, event.type);
             }
         }
     }
@@ -258,29 +270,29 @@ export class SeasonalEventService
      * @param globalConfig globals.json
      * @param eventName Name of the event to enable. e.g. Christmas
      */
-    protected updateGlobalEvents(globalConfig: Config, eventName: string): void
+    protected updateGlobalEvents(globalConfig: Config, eventType: SeasonalEventType): void
     {
-        switch (eventName.toLowerCase())
+        switch (eventType.toLowerCase())
         {
-            case "halloween":
+            case SeasonalEventType.HALLOWEEN.toLowerCase():
                 globalConfig.EventType = globalConfig.EventType.filter(x => x !== "None");
                 globalConfig.EventType.push("Halloween");
                 globalConfig.EventType.push("HalloweenIllumination");
                 globalConfig.Health.ProfileHealthSettings.DefaultStimulatorBuff = "Buffs_Halloween";
-                this.addEventGearToBots("halloween");
+                this.addEventGearToBots(eventType);
                 this.addPumpkinsToScavBackpacks();
                 break;
-            case "christmas":
+            case SeasonalEventType.CHRISTMAS.toLowerCase():
                 globalConfig.EventType = globalConfig.EventType.filter(x => x !== "None");
                 globalConfig.EventType.push("Christmas");
-                this.addEventGearToBots("christmas");
+                this.addEventGearToBots(eventType);
                 this.addGifterBotToMaps();
                 this.addLootItemsToGifterDropItemsList();
                 this.enableDancingTree();
                 break;
             default:
                 // Likely a mod event
-                this.addEventGearToBots(eventName.toLowerCase());
+                this.addEventGearToBots(eventType);
                 break;
         }
     }
@@ -301,12 +313,12 @@ export class SeasonalEventService
      * Read in data from seasonalEvents.json and add found equipment items to bots
      * @param eventName Name of the event to read equipment in from config
      */
-    protected addEventGearToBots(eventName: string): void
+    protected addEventGearToBots(eventType: SeasonalEventType): void
     {
-        const botGearChanges = this.getEventBotGear(eventName);
+        const botGearChanges = this.getEventBotGear(eventType);
         if (!botGearChanges)
         {
-            this.logger.warning(this.localisationService.getText("gameevent-no_gear_data", eventName));
+            this.logger.warning(this.localisationService.getText("gameevent-no_gear_data", eventType));
 
             return;
         }

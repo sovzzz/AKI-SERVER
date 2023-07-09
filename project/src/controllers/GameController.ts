@@ -153,6 +153,7 @@ export class GameController
         }
     }
     
+    /** Check for any missing assorts inside each traders assort.json data, checking against traders qeustassort.json */
     protected validateQuestAssortUnlocksExist(): void
     {
         const db = this.databaseServer.getTables();
@@ -176,7 +177,8 @@ export class GameController
                 // Does assort key exist in trader assort file
                 if (!traderAssorts.loyal_level_items[assortKey])
                 {
-                    this.logger.warning(this.localisationService.getText("assort-missing_quest_assort_unlocks", {traderName: Object.keys(Traders)[Object.values(Traders).indexOf(traderId)], questName: quests[questKey].QuestName}));
+                    // reverse lookup of enum key by value 
+                    this.logger.warning(this.localisationService.getText("assort-missing_quest_assort_unlock", {traderName: Object.keys(Traders)[Object.values(Traders).indexOf(traderId)], questName: quests[questKey].QuestName}));
                 }
             }
         }
