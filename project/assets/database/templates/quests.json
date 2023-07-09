@@ -77613,21 +77613,7 @@
           "dynamicLocale": false
         }
       ],
-      "AvailableForStart": [
-        {
-          "_parent": "Level",
-          "_props": {
-            "compareMethod": ">=",
-            "dynamicLocale": false,
-            "id": "1165cab6d9dcbcaddd9d4806",
-            "index": 0,
-            "parentId": "",
-            "value": 20,
-            "visibilityConditions": []
-          },
-          "dynamicLocale": false
-        }
-      ],
+      "AvailableForStart": [],
       "Fail": []
     },
     "description": "641dbfd7f43eda9d810d7137 description",
@@ -77800,21 +77786,7 @@
           "dynamicLocale": false
         }
       ],
-      "AvailableForStart": [
-        {
-          "_parent": "Level",
-          "_props": {
-            "compareMethod": ">=",
-            "dynamicLocale": false,
-            "id": "420738a50dbc55f6ec206ee3",
-            "index": 0,
-            "parentId": "",
-            "value": 25,
-            "visibilityConditions": []
-          },
-          "dynamicLocale": false
-        }
-      ],
+      "AvailableForStart": [],
       "Fail": []
     },
     "description": "64764abcd125ab430a14ccb5 description",
@@ -78291,21 +78263,7 @@
           "dynamicLocale": false
         }
       ],
-      "AvailableForStart": [
-        {
-          "_parent": "Level",
-          "_props": {
-            "compareMethod": ">=",
-            "dynamicLocale": false,
-            "id": "1c1ec64ca3ee8e0f3dd3bf10",
-            "index": 0,
-            "parentId": "",
-            "value": 25,
-            "visibilityConditions": []
-          },
-          "dynamicLocale": false
-        }
-      ],
+      "AvailableForStart": [],
       "Fail": []
     },
     "description": "647710905320c660d91c15a5 description",
@@ -78616,7 +78574,7 @@
     "type": "Elimination"
   },
   "64916da7ad4e722c106f2345": {
-    "QuestName": "Failed setup",
+    "QuestName": "Failed setup-Event",
     "_id": "64916da7ad4e722c106f2345",
     "acceptPlayerMessage": "64916da7ad4e722c106f2345 acceptPlayerMessage",
     "canShowNotificationsInGame": true,
@@ -79049,21 +79007,7 @@
           "dynamicLocale": false
         }
       ],
-      "AvailableForStart": [
-        {
-          "_parent": "Level",
-          "_props": {
-            "compareMethod": ">=",
-            "dynamicLocale": false,
-            "id": "b45c99340f9cfa450b244118",
-            "index": 0,
-            "parentId": "",
-            "value": 25,
-            "visibilityConditions": []
-          },
-          "dynamicLocale": false
-        }
-      ],
+      "AvailableForStart": [],
       "Fail": []
     },
     "description": "649567f359eab30d1b7c9585 description",
@@ -79588,21 +79532,7 @@
           "dynamicLocale": false
         }
       ],
-      "AvailableForStart": [
-        {
-          "_parent": "Level",
-          "_props": {
-            "compareMethod": ">=",
-            "dynamicLocale": false,
-            "id": "ccb06490ec5830ff0813accf",
-            "index": 0,
-            "parentId": "",
-            "value": 25,
-            "visibilityConditions": []
-          },
-          "dynamicLocale": false
-        }
-      ],
+      "AvailableForStart": [],
       "Fail": []
     },
     "description": "649570491bb4d158bc4d0168 description",
@@ -79751,21 +79681,7 @@
           "dynamicLocale": false
         }
       ],
-      "AvailableForStart": [
-        {
-          "_parent": "Level",
-          "_props": {
-            "compareMethod": ">=",
-            "dynamicLocale": false,
-            "id": "826f4c6e6df2ff8119838c67",
-            "index": 0,
-            "parentId": "",
-            "value": 25,
-            "visibilityConditions": []
-          },
-          "dynamicLocale": false
-        }
-      ],
+      "AvailableForStart": [],
       "Fail": [
         {
           "_parent": "CounterCreator",
