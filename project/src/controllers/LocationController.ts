@@ -9,11 +9,11 @@ import {
     ILocationsGenerateAllResponse
 } from "../models/eft/common/ILocationsSourceDestinationBase";
 import { ILooseLoot, SpawnpointTemplate } from "../models/eft/common/ILooseLoot";
+import { IAirdropLootResult } from "../models/eft/location/IAirdropLootResult";
 import { AirdropTypeEnum } from "../models/enums/AirdropType";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
 import { IAirdropConfig } from "../models/spt/config/IAirdropConfig";
 import { ILocations } from "../models/spt/server/ILocations";
-import { LootItem } from "../models/spt/services/LootItem";
 import { LootRequest } from "../models/spt/services/LootRequest";
 import { ILogger } from "../models/spt/utils/ILogger";
 import { ConfigServer } from "../servers/ConfigServer";
@@ -55,7 +55,7 @@ export class LocationController
     public generate(name: string): ILocationBase
     {
         const location: ILocation = this.databaseServer.getTables().locations[name];
-        const output: ILocationBase = location.base;
+        const output: ILocationBase = this.jsonUtil.clone(location.base);
         // const ids = {};
 
         output.UnixDateTime = this.timeUtil.getTimestamp();
@@ -68,7 +68,7 @@ export class LocationController
 
         const locationName = location.base.Name;
 
-        // generate loot
+        // Copy loot data
         const staticWeapons = this.jsonUtil.clone(this.databaseServer.getTables().loot.staticContainers[locationName].staticWeapons);
         const staticContainers = this.jsonUtil.clone(this.databaseServer.getTables().loot.staticContainers[locationName].staticContainers);
         const staticForced = this.jsonUtil.clone(this.databaseServer.getTables().loot.staticContainers[locationName].staticForced);
@@ -146,7 +146,7 @@ export class LocationController
      * Generates it randomly based on config/airdrop.json values
      * @returns Array of LootItem objects
      */
-    public getAirdropLoot(): LootItem[]
+    public getAirdropLoot(): IAirdropLootResult
     {
         const airdropType = this.chooseAirdropType();
 
@@ -154,7 +154,7 @@ export class LocationController
 
         const airdropConfig = this.getAirdropLootConfigByType(airdropType);
 
-        return this.lootGenerator.createRandomLoot(airdropConfig);
+        return {dropType: airdropType, loot: this.lootGenerator.createRandomLoot(airdropConfig)};
     }
 
     /**

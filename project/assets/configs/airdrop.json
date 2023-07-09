@@ -21,6 +21,12 @@
     "planeVolume": 0.5,
     "planeSpeed": 65,
     "crateFallSpeed": 3,
+	"containerIds": {
+		"mixed": "6223349b3136504a544d1608",
+		"weaponArmor": "6223349b3136504a544d1608",
+		"foodMedical": "6223349b3136504a544d1608",
+		"barter": "6223349b3136504a544d1608"
+	},
     "loot": {
         "mixed": {
             "presetCount": {
