@@ -23,12 +23,12 @@ export class AssortHelper
     { }
 
     /**
-     * Remove assorts from a trader that have not been unlocked yet
-     * @param pmcProfile player profile
-     * @param traderId traders id the assort belongs to
+     * Remove assorts from a trader that have not been unlocked yet (via player completing corrisponding quest)
+     * @param pmcProfile Player profile
+     * @param traderId Traders id the assort belongs to
      * @param traderAssorts All assort items from same trader
      * @param mergedQuestAssorts Dict of quest assort to quest id unlocks for all traders
-     * @returns assort items minus locked quest assorts
+     * @returns Assort items minus locked quest assorts
      */
     public stripLockedQuestAssort(pmcProfile: IPmcData, traderId: string, traderAssorts: ITraderAssort, mergedQuestAssorts: Record<string, Record<string, string>>, flea = false): ITraderAssort
     {
