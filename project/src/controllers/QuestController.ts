@@ -65,7 +65,7 @@ export class QuestController
      */
     public getClientQuests(sessionID: string): IQuest[]
     {
-        const quests: IQuest[] = [];
+        const questsToShowPlayer: IQuest[] = [];
         const allQuests = this.questHelper.getQuestsFromDb();
         const profile: IPmcData = this.profileHelper.getPmcProfile(sessionID);
 
@@ -74,7 +74,7 @@ export class QuestController
             // Player already accepted the quest, show it regardless of status
             if (profile.Quests.some(x => x.qid === quest._id))
             {
-                quests.push(quest);
+                questsToShowPlayer.push(quest);
                 continue;
             }
 
@@ -90,32 +90,18 @@ export class QuestController
             }
 
             // Don't add quests that have a level higher than the user's
-            const levelConditions = this.questConditionHelper.getLevelConditions(quest.conditions.AvailableForStart);
-            if (levelConditions.length)
+            if (!this.playerLevelFulfillsQuestRequrement(quest, profile.Info.Level))
             {
-                let skipQuest = false;
-                for (const levelCondition of levelConditions)
-                {
-                    if (!this.questHelper.doesPlayerLevelFulfilCondition(profile.Info.Level, levelCondition))
-                    {
-                        skipQuest = true;
-                        break;
-                    }
-                }
-
-                if (skipQuest)
-                {
-                    continue;
-                }
+                continue;
             }
 
             const questRequirements = this.questConditionHelper.getQuestConditions(quest.conditions.AvailableForStart);
             const loyaltyRequirements = this.questConditionHelper.getLoyaltyConditions(quest.conditions.AvailableForStart);
 
-            // If the quest has no quest/loyalty conditions then add to visible quest list
+            // Quest has no conditions or loyalty conditions, add to visible quest list
             if (questRequirements.length === 0 && loyaltyRequirements.length === 0)
             {
-                quests.push(quest);
+                questsToShowPlayer.push(quest);
                 continue;
             }
 
@@ -124,9 +110,8 @@ export class QuestController
             let haveCompletedPreviousQuest = true;
             for (const condition of questRequirements)
             {
-                const previousQuest = profile.Quests.find(pq => pq.qid === condition._props.target);
-
                 // If the previous quest isn't in the user profile, it hasn't been completed or started
+                const previousQuest = profile.Quests.find(pq => pq.qid === condition._props.target);
                 if (!previousQuest)
                 {
                     haveCompletedPreviousQuest = false;
@@ -165,11 +150,36 @@ export class QuestController
 
             if (haveCompletedPreviousQuest && passesLoyaltyRequirements)
             {
-                quests.push(quest);
+                questsToShowPlayer.push(quest);
             }
         }
 
-        return quests;
+        return questsToShowPlayer;
+    }
+
+    /**
+     * Does a provided quest have a level requirement equal to or below defined level
+     * @param quest Quest to check
+     * @param playerLevel level of player to test against quest
+     * @returns true if quest can be seen/accepted by player of defined level
+     */
+    protected playerLevelFulfillsQuestRequrement(quest: IQuest, playerLevel: number): boolean
+    {
+        const levelConditions = this.questConditionHelper.getLevelConditions(quest.conditions.AvailableForStart);
+        if (levelConditions.length)
+        {
+            for (const levelCondition of levelConditions)
+            {
+                if (!this.questHelper.doesPlayerLevelFulfilCondition(playerLevel, levelCondition))
+                {
+                    // Not valid, exit out
+                    return false;
+                }
+            }
+        }
+
+        // All conditions passed / has no level requirement, valid
+        return true; 
     }
 
     /**
