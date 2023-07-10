@@ -1,5 +1,6 @@
 export interface IAddItemRequestData
 {
+    /** Trader id */
     tid: string;
     items: AddItem[];
 }
