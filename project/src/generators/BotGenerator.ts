@@ -426,7 +426,7 @@ export class BotGenerator
      */
     protected getRandomisedGameVersionAndCategory(botInfo: Info): void
     {
-        if (botInfo.Nickname === "Nikita")
+        if (botInfo.Nickname.toLowerCase() === "nikita")
         {
             botInfo.GameVersion = "edge_of_darkness";
             botInfo.AccountType = MemberCategory.DEVELOPER;
@@ -434,10 +434,8 @@ export class BotGenerator
             return;
         }
 
-        const gameVersions = ["standard", "standard", "left_behind", "prepare_for_escape", "edge_of_darkness"];
-        const accountTypes = [MemberCategory.DEFAULT,MemberCategory.DEFAULT,MemberCategory.DEFAULT,MemberCategory.DEFAULT,MemberCategory.DEFAULT,MemberCategory.DEFAULT,MemberCategory.DEFAULT,MemberCategory.DEFAULT,MemberCategory.DEFAULT,MemberCategory.DEFAULT,MemberCategory.DEFAULT,MemberCategory.DEVELOPER, MemberCategory.SHERPA,MemberCategory.SHERPA,MemberCategory.SHERPA,MemberCategory.EMISSARY, MemberCategory.EMISSARY, MemberCategory.EMISSARY]; // 0 = normal, 1 = dev, 256 = sherpa, 512 = emissary
-        botInfo.GameVersion = this.randomUtil.getArrayValue(gameVersions);
-        botInfo.AccountType = this.randomUtil.getArrayValue(accountTypes);
+        botInfo.GameVersion = this.weightedRandomHelper.getWeightedValue(this.botConfig.pmc.gameVersionWeight);
+        botInfo.AccountType = Number.parseInt(this.weightedRandomHelper.getWeightedValue(this.botConfig.pmc.accountTypeWeight));
     }
 
     /**

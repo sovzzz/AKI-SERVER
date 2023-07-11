@@ -993,6 +993,18 @@
         }
     },
     "pmc": {
+		"gameVersionWeight": {
+			"standard": 5,
+			"left_behind": 1,
+			"prepare_for_escape": 1,
+			"edge_of_darkness": 3
+		},
+		"accountTypeWeight": {
+			0: 15,
+			1: 1,
+			256: 3,
+			512: 3
+		},
         "vestLoot": {
             "whitelist": [
                 "5485a8684bdc2da71d8b4567",
