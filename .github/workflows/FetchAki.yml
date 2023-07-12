@@ -1,6 +1,6 @@
 name: sync up
 env:
-  # Required, URL to upstream (fork base)
+  # Required, URL to upstream (fork base) from aki
   UPSTREAM_URL: "https://dev.sp-tarkov.com/SPT-AKI/Server.git"
   # Required, token to authenticate bot, could use ${{ secrets.GITHUB_TOKEN }} 
   # Over here, we use a PAT instead to authenticate workflow file changes.
