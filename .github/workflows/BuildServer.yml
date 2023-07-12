@@ -14,6 +14,8 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
+      - name: NASM
+        uses: ilammy/setup-nasm@v1
       - name: Checkout
         uses: actions/checkout@v2
       - name: Get current date
