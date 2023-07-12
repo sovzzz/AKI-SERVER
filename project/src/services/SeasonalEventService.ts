@@ -5,12 +5,14 @@ import { Config } from "../models/eft/common/IGlobals";
 import { Inventory } from "../models/eft/common/tables/IBotType";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
 import { SeasonalEventType } from "../models/enums/SeasonalEventType";
+import { IHttpConfig } from "../models/spt/config/IHttpConfig";
 import { IQuestConfig } from "../models/spt/config/IQuestConfig";
 import { ISeasonalEvent, ISeasonalEventConfig } from "../models/spt/config/ISeasonalEventConfig";
 import { ILocationData } from "../models/spt/server/ILocations";
 import { ILogger } from "../models/spt/utils/ILogger";
 import { ConfigServer } from "../servers/ConfigServer";
 import { DatabaseServer } from "../servers/DatabaseServer";
+import { DatabaseImporter } from "../utils/DatabaseImporter";
 import { LocalisationService } from "./LocalisationService";
 
 @injectable()
@@ -18,10 +20,12 @@ export class SeasonalEventService
 {
     protected seasonalEventConfig: ISeasonalEventConfig;
     protected questConfig: IQuestConfig;
+    protected httpConfig: IHttpConfig;
 
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
         @inject("DatabaseServer") protected databaseServer: DatabaseServer,
+        @inject("DatabaseImporter") protected databaseImporter: DatabaseImporter,
         @inject("LocalisationService") protected localisationService: LocalisationService,
         @inject("BotHelper") protected botHelper: BotHelper,
         @inject("ConfigServer") protected configServer: ConfigServer
@@ -29,6 +33,7 @@ export class SeasonalEventService
     {
         this.seasonalEventConfig = this.configServer.getConfig(ConfigTypes.SEASONAL_EVENT);
         this.questConfig = this.configServer.getConfig(ConfigTypes.QUEST);
+        this.httpConfig = this.configServer.getConfig(ConfigTypes.HTTP);
     }
 
     protected get christmasEventItems(): string[]
@@ -281,6 +286,7 @@ export class SeasonalEventService
                 globalConfig.Health.ProfileHealthSettings.DefaultStimulatorBuff = "Buffs_Halloween";
                 this.addEventGearToBots(eventType);
                 this.addPumpkinsToScavBackpacks();
+                //this.adjustTraderIcons(eventType);
                 break;
             case SeasonalEventType.CHRISTMAS.toLowerCase():
                 globalConfig.EventType = globalConfig.EventType.filter(x => x !== "None");
@@ -295,6 +301,32 @@ export class SeasonalEventService
                 this.addEventGearToBots(eventType);
                 break;
         }
+    }
+
+    /**
+     * Change trader icons to be more event themed (Halloween only so far)
+     * @param eventType What event is active
+     */
+    protected adjustTraderIcons(eventType: SeasonalEventType): void
+    {
+        switch (eventType.toLowerCase())
+        {
+            case SeasonalEventType.HALLOWEEN.toLowerCase():
+                this.httpConfig.serverImagePathOverride["./assets/images/traders/5a7c2ebb86f7746e324a06ab.png"] = "./assets/images/traders/halloween/5a7c2ebb86f7746e324a06ab.png";
+                this.httpConfig.serverImagePathOverride["./assets/images/traders/5ac3b86a86f77461491d1ad8.png"] = "./assets/images/traders/halloween/5ac3b86a86f77461491d1ad8.png";
+                this.httpConfig.serverImagePathOverride["Aki_Data/Server/images/traders/5c06531a86f7746319710e1b.png"] = "Aki_Data/Server/images/traders/halloween/5c06531a86f7746319710e1b.png";
+                this.httpConfig.serverImagePathOverride["Aki_Data/Server/images/traders/59b91ca086f77469a81232e4.png"] = "Aki_Data/Server/images/traders/halloween/59b91ca086f77469a81232e4.png";
+                this.httpConfig.serverImagePathOverride["Aki_Data/Server/images/traders/59b91cab86f77469aa5343ca.png"] = "Aki_Data/Server/images/traders/halloween/59b91cab86f77469aa5343ca.png";
+                this.httpConfig.serverImagePathOverride["Aki_Data/Server/images/traders/59b91cb486f77469a81232e5.png"] = "Aki_Data/Server/images/traders/halloween/59b91cb486f77469a81232e5.png";
+                this.httpConfig.serverImagePathOverride["Aki_Data/Server/images/traders/59b91cbd86f77469aa5343cb.png"] = "Aki_Data/Server/images/traders/halloween/59b91cbd86f77469aa5343cb.png";
+                this.httpConfig.serverImagePathOverride["Aki_Data/Server/images/traders/579dc571d53a0658a154fbec.png"] = "Aki_Data/Server/images/traders/halloween/579dc571d53a0658a154fbec.png"; 
+                break; 
+            case SeasonalEventType.CHRISTMAS.toLowerCase():
+                // TODO: find christmas trader icons
+                break;
+        }
+
+        this.databaseImporter.loadImages(`${this.databaseImporter.getSptDataPath()}images/`, ["traders"], ["/files/trader/avatar/"]);
     }
 
     /**

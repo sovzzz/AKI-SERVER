@@ -38,10 +38,21 @@ export class DatabaseImporter implements OnLoad
     {
         this.httpConfig = this.configServer.getConfig(ConfigTypes.HTTP);
     }
+
+    /**
+     * Get path to aki data
+     * @returns path to data
+     */
+    public getSptDataPath(): string
+    {
+        return (globalThis.G_RELEASE_CONFIGURATION)
+            ? "Aki_Data/Server/"
+            : "./assets/";
+    }
     
     public async onLoad(): Promise<void>
     {
-        this.filepath = (globalThis.G_RELEASE_CONFIGURATION) ? "Aki_Data/Server/" : "./assets/";
+        this.filepath = this.getSptDataPath();
         
         if (globalThis.G_RELEASE_CONFIGURATION)
         {
@@ -69,7 +80,9 @@ export class DatabaseImporter implements OnLoad
 
         await this.hydrateDatabase(this.filepath);
 
-        this.loadImages(`${this.filepath}images/`, [
+        const imageFilePath = `${this.filepath}images/`;
+        const directories = this.vfs.getDirs(imageFilePath);
+        this.loadImages(imageFilePath, directories, [
             "/files/CONTENT/banners/",
             "/files/handbook/",
             "/files/Hideout/",
@@ -143,9 +156,8 @@ export class DatabaseImporter implements OnLoad
      * Find and map files with image router inside a designated path
      * @param filepath Path to find files in
      */
-    public loadImages(filepath: string, routes: string[]): void
+    public loadImages(filepath: string, directories: string[], routes: string[]): void
     {
-        const directories = this.vfs.getDirs(filepath);
         for (const directoryIndex in directories)
         {
             // Get all files in directory
@@ -160,6 +172,7 @@ export class DatabaseImporter implements OnLoad
                 const pathOverride = this.getImagePathOverride(imagePath);
                 if (pathOverride)
                 {
+                    this.logger.debug(`overrode route: ${routeKey} endpoint: ${imagePath} with ${pathOverride}`);
                     imagePath = pathOverride;
                 }
 
