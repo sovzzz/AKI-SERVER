@@ -445,8 +445,8 @@ export class HideoutHelper
                 {
                     const fuelItem = HideoutHelper.expeditionaryFuelTank;
                     resourceValue = generatorArea.slots[i].item[0]._tpl === fuelItem
-                        ? resourceValue = 60 - fuelDrainRate
-                        : resourceValue = 100 - fuelDrainRate;
+                        ? 60 - fuelDrainRate
+                        : 100 - fuelDrainRate;
                     pointsConsumed = fuelDrainRate;
                 }
                 else
@@ -793,17 +793,9 @@ export class HideoutHelper
         const bitcoinProduction = this.databaseServer.getTables().hideout.production.find(p => p._id === HideoutHelper.bitcoinFarm);
         const productionSlots = bitcoinProduction?.productionLimitCount || 3;
         const hasManagementSkillSlots = this.hasEliteHideoutManagementSkill(pmcData);
-        const managementSlotsCount = this.getManagementSkillsSlots() || 2;
+        const managementSlotsCount = this.getBitcoinMinerContainerSlotSize() || 2;
 
         return productionSlots + (hasManagementSkillSlots ? managementSlotsCount : 0);
-    }
-
-    /**
-     * Get a count of bitcoins player miner can hold
-     */
-    protected getManagementSkillsSlots(): number
-    {
-        return this.databaseServer.getTables().globals.config.SkillsSettings.HideoutManagement.EliteSlots.BitcoinFarm.Container;
     }
 
     /**
@@ -817,13 +809,21 @@ export class HideoutHelper
     }
 
     /**
+     * Get a count of bitcoins player miner can hold
+     */
+    protected getBitcoinMinerContainerSlotSize(): number
+    {
+        return this.databaseServer.getTables().globals.config.SkillsSettings.HideoutManagement.EliteSlots.BitcoinFarm.Container;
+    }
+
+    /**
      * Get the hideout management skill from player profile
      * @param pmcData Profile to look at
      * @returns Hideout management skill object
      */
     protected getHideoutManagementSkill(pmcData: IPmcData): Common
     {
-        return pmcData.Skills.Common.find(x => x.Id === "HideoutManagement");
+        return pmcData.Skills.Common.find(x => x.Id === SkillTypes.HIDEOUT_MANAGEMENT);
     }
 
     protected getHideoutManagementConsumptionBonus(pmcData: IPmcData): number
@@ -843,24 +843,6 @@ export class HideoutHelper
     }
 
     /**
-     * Get the crafting skill details from player profile
-     * @param pmcData Player profile
-     * @returns crafting skill, null if not found
-     */
-    protected getCraftingSkill(pmcData: IPmcData): Common
-    {
-        for (const skill of pmcData.Skills.Common)
-        {
-            if (skill.Id === SkillTypes.CRAFTING)
-            {
-                return skill;
-            }
-        }
-
-        return null;
-    }
-
-    /**
      * Adjust craft time based on crafting skill level found in player profile
      * @param pmcData Player profile
      * @param productionTime Time to complete hideout craft in seconds
@@ -868,7 +850,7 @@ export class HideoutHelper
      */
     protected getCraftingSkillProductionTimeReduction(pmcData: IPmcData, productionTime: number): number
     {
-        const craftingSkill = this.getCraftingSkill(pmcData);
+        const craftingSkill = pmcData.Skills.Common.find(x=> x.Id === SkillTypes.CRAFTING);
         if (!craftingSkill)
         {
             return productionTime;

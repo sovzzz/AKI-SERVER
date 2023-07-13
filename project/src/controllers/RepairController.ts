@@ -85,7 +85,7 @@ export class RepairController
         // add repaired item to send to client
         output.profileChanges[sessionID].items.change.push(repairDetails.repairedItem);
 
-        // Add skill points for repairing weapons
+        // Add skill points for repairing items
         this.repairService.addRepairSkillPoints(sessionID, repairDetails, pmcData);
 
         return output;

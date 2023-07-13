@@ -15,6 +15,7 @@ import { RepairItem } from "../models/eft/repair/ITraderRepairActionDataRequest"
 import { IProcessBuyTradeRequestData } from "../models/eft/trade/IProcessBuyTradeRequestData";
 import { BaseClasses } from "../models/enums/BaseClasses";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
+import { SkillTypes } from "../models/enums/SkillTypes";
 import { BonusSettings, IRepairConfig } from "../models/spt/config/IRepairConfig";
 import { ILogger } from "../models/spt/utils/ILogger";
 import { ConfigServer } from "../servers/ConfigServer";
@@ -156,15 +157,18 @@ export class RepairService
             if (!itemDetails[0])
             {
                 this.logger.error(`Unable to find item ${repairDetails.repairedItem._tpl} in items db, cannot add skill points`);
+
                 return;
             }
 
             const isHeavyArmor = itemDetails[1]._props.ArmorType === "Heavy";
-            const skillToLevel = (isHeavyArmor) ? "HeavyVests" : "LightVests";
-            const pointsToAddToSkill = repairDetails.repairAmount * this.repairConfig.armorKitSkillPointGainPerRepairPointMultiplier;
+            const vestSkillToLevel = (isHeavyArmor) ? "HeavyVests" : "LightVests";
+            const pointsToAddToVestSkill = repairDetails.repairAmount * this.repairConfig.armorKitSkillPointGainPerRepairPointMultiplier;
 
-            this.questHelper.rewardSkillPoints(sessionId, pmcData, skillToLevel, pointsToAddToSkill);
+            this.questHelper.rewardSkillPoints(sessionId, pmcData, vestSkillToLevel, pointsToAddToVestSkill);
         }
+
+        this.questHelper.rewardSkillPoints(sessionId, pmcData, SkillTypes.INTELLECT, repairDetails.repairAmount / 10);
     }
     
     /**

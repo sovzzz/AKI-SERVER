@@ -583,7 +583,6 @@ export class HideoutController
 
         // check if the recipe is the same as the last one
         const area = pmcData.Hideout.Areas[recipe.areaType];
-
         if (area && request.recipeId !== area.lastRecipe)
         {
             // 1 point per craft upon the end of production for alternating between 2 different crafting recipes in the same module
@@ -607,16 +606,18 @@ export class HideoutController
         {
             // manager Hideout skill
             // ? use a configuration variable for the value?
-            this.playerService.incrementSkillLevel(pmcData, SkillTypes.HIDEOUT_MANAGEMENT, 4);
+            const globals = this.databaseServer.getTables().globals;
+            this.playerService.incrementSkillLevel(pmcData, SkillTypes.HIDEOUT_MANAGEMENT, globals.config.SkillsSettings.HideoutManagement.SkillPointsPerCraft, true);
             //manager Crafting skill
             if (craftingExpAmount > 0)
             {
                 this.playerService.incrementSkillLevel(pmcData, SkillTypes.CRAFTING, craftingExpAmount);
+                this.playerService.incrementSkillLevel(pmcData, SkillTypes.INTELLECT, 0.5 *  (Math.round(craftingExpAmount / 15)));
             }
             area.lastRecipe = request.recipeId;
             counterHoursCrafting.value = hoursCrafting;
 
-            //delete production
+            // Delete production now it's complete
             delete pmcData.Hideout.Production[prodId];
         };
 
