@@ -25,9 +25,7 @@ env:
 #    branches: [ "master" ]
 on:
   schedule:
-    - cron: '0 9 * * *' # every Friday at 17:00pm UTC+8
-  push:
-    branches: [ "master" ]
+    - cron: '0 6 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
