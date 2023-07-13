@@ -1,15 +1,9 @@
 name: Build
 
-#on:
-#  push:
-#    branches: [ "master" ]
-#  pull_request:
-#    branches: [ "master" ]
 on:
-  push:
-    branches: [ "master" ]
-  #schedule:
-   # - cron: '0 9 * * 5' # every Frida at 17:00pm UTC+8
+  schedule:
+    - cron: '0 7 * * *'
+    
 jobs:
   build:
     runs-on: windows-latest
