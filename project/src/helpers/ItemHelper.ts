@@ -563,7 +563,7 @@ class ItemHelper
      * @param items Items to adjust ID values of
      * @param insuredItems insured items to not replace ids for
      * @param fastPanel 
-     * @returns 
+     * @returns Item[]
      */
     public replaceIDs(pmcData: IPmcData, items: Item[], insuredItems: InsuredItem[] = null, fastPanel = null): Item[]
     {
