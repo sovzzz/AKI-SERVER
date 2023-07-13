@@ -34,13 +34,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: git-sync
-        uses: valtech-sd/git-sync@v3
-        with:
-          source_repo: "https://dev.sp-tarkov.com/SPT-AKI/Server.git"
-          source_branch: "master"
-          destination_repo: "https://github.com/sovzzz/AKI-SERVER.git"
-          destination_branch: "master"
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} # optional
-          source_ssh_private_key: ${{ secrets.SOURCE_SSH_PRIVATE_KEY }} # optional, will override `SSH_PRIVATE_KEY`
-          destination_ssh_private_key: ${{ secrets.GITHUB_TOKEN }} # optional, will override `SSH_PRIVATE_KEY`
+      - name: GitHub Sync to Upstream Repository
+        uses: dabreadman/sync-upstream-repo@v1.3.0
+        with: 
+          upstream_repo: ${{ env.UPSTREAM_URL }}
+          upstream_branch: ${{ env.UPSTREAM_BRANCH }}
+          downstream_branch: ${{ env.DOWNSTREAM_BRANCH }}
+          token: ${{ env.WORKFLOW_TOKEN }}
+          fetch_args: ${{ env.FETCH_ARGS }}
+          merge_args: ${{ env.MERGE_ARGS }}
+          push_args: ${{ env.PUSH_ARGS }}
+          spawn_logs: ${{ env.SPAWN_LOGS }}
+      
