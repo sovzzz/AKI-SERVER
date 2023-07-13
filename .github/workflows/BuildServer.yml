@@ -9,7 +9,7 @@ on:
   push:
     branches: [ "master" ]
   #schedule:
-   # - cron: '0 9 * * 5' # every Friday at 17:00pm UTC+8
+   # - cron: '0 9 * * 5' # every Frida at 17:00pm UTC+8
 jobs:
   build:
     runs-on: windows-latest
