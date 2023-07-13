@@ -6,6 +6,7 @@ import { ItemHelper } from "../helpers/ItemHelper";
 import { PaymentHelper } from "../helpers/PaymentHelper";
 import { PresetHelper } from "../helpers/PresetHelper";
 import { ProfileHelper } from "../helpers/ProfileHelper";
+import { QuestHelper } from "../helpers/QuestHelper";
 import { IPmcData } from "../models/eft/common/IPmcData";
 import { Item } from "../models/eft/common/tables/IItem";
 import { IAddItemRequestData } from "../models/eft/inventory/IAddItemRequestData";
@@ -40,6 +41,7 @@ import {
 } from "../models/eft/inventory/IOpenRandomLootContainerRequestData";
 import { IItemEventRouterResponse } from "../models/eft/itemEvent/IItemEventRouterResponse";
 import { BackendErrorCodes } from "../models/enums/BackendErrorCodes";
+import { SkillTypes } from "../models/enums/SkillTypes";
 import { Traders } from "../models/enums/Traders";
 import { ILogger } from "../models/spt/utils/ILogger";
 import { EventOutputHolder } from "../routers/EventOutputHolder";
@@ -65,6 +67,7 @@ export class InventoryController
         @inject("FenceService") protected fenceService: FenceService,
         @inject("PresetHelper") protected presetHelper: PresetHelper,
         @inject("InventoryHelper") protected inventoryHelper: InventoryHelper,
+        @inject("QuestHelper") protected questHelper: QuestHelper,
         @inject("RagfairOfferService") protected ragfairOfferService: RagfairOfferService,
         @inject("ProfileHelper") protected profileHelper: ProfileHelper,
         @inject("PaymentHelper") protected paymentHelper: PaymentHelper,
@@ -550,6 +553,9 @@ export class InventoryController
 
             pmcData.Info.Experience += item._props.ExamineExperience;
             pmcData.Encyclopedia[itemId] = true;
+
+            // TODO: update this with correct calculation using values from globals json
+            this.questHelper.rewardSkillPoints(sessionID, pmcData, SkillTypes.INTELLECT, 0.5);
         }
 
         return this.eventOutputHolder.getOutput(sessionID);

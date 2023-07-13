@@ -128,6 +128,7 @@ export class QuestHelper
 
     /**
      * Increase skill points of a skill on player profile
+     * Dupe of PlayerService.incrementSkillLevel()
      * @param sessionID Session id
      * @param pmcData Player profile
      * @param skillName Name of skill to increase skill points of
@@ -136,7 +137,6 @@ export class QuestHelper
     public rewardSkillPoints(sessionID: string, pmcData: IPmcData, skillName: string, progressAmount: number): void
     {
         const indexOfSkillToUpdate = pmcData.Skills.Common.findIndex(s => s.Id === skillName);
-
         if (indexOfSkillToUpdate === -1)
         {
             this.logger.error(this.localisationService.getText("quest-no_skill_found", skillName));
@@ -145,6 +145,12 @@ export class QuestHelper
         }
 
         const profileSkill = pmcData.Skills.Common[indexOfSkillToUpdate];
+        if (!profileSkill)
+        {
+            this.logger.error(this.localisationService.getText("quest-no_skill_found", skillName));
+
+            return;
+        }
 
         profileSkill.Progress += progressAmount;
         profileSkill.LastAccess = this.timeUtil.getTimestamp();
