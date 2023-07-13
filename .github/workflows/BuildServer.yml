@@ -17,7 +17,7 @@ jobs:
       - name: NASM
         uses: ilammy/setup-nasm@v1
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: nschloe/action-cached-lfs-checkout@v1
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
