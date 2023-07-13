@@ -1,5 +1,6 @@
 {
     "runIntervalSeconds": 15,
     "hoursForSkillCrafting": 28800,
-	"hideoutWallAppearTimeSeconds": 86400
+	"hideoutWallAppearTimeSeconds": 86400,
+	"expCraftAmount": 10
 }

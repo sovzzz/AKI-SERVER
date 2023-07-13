@@ -587,7 +587,7 @@ export class HideoutController
         if (area && request.recipeId !== area.lastRecipe)
         {
             // 1 point per craft upon the end of production for alternating between 2 different crafting recipes in the same module
-            craftingExpAmount += 10;
+            craftingExpAmount += this.hideoutConfig.expCraftAmount; // Default is 10
         }
 
         // 1 point per 8 hours of crafting
