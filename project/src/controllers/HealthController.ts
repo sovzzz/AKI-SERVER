@@ -140,6 +140,7 @@ export class HealthController
     }
     
     /**
+     * Handle RestoreHealth event
      * Occurs on post-raid healing page
      * @param pmcData player profile
      * @param healthTreatmentRequest Request data from client
@@ -150,7 +151,7 @@ export class HealthController
     {
         let output = this.eventOutputHolder.getOutput(sessionID);
         const payMoneyRequest: IProcessBuyTradeRequestData = {
-            Action: "RestoreHealth",
+            Action: healthTreatmentRequest.Action,
             tid: Traders.THERAPIST,
             // eslint-disable-next-line @typescript-eslint/naming-convention
             scheme_items: healthTreatmentRequest.items,
