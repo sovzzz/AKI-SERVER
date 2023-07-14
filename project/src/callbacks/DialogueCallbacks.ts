@@ -3,7 +3,7 @@ import { inject, injectable } from "tsyringe";
 import { DialogueController } from "../controllers/DialogueController";
 import { OnUpdate } from "../di/OnUpdate";
 import { IEmptyRequestData } from "../models/eft/common/IEmptyRequestData";
-import { IAcceptFriendRequestData } from "../models/eft/dialog/IAcceptFriendRequestData";
+import { IAcceptFriendRequestData, ICancelFriendRequestData } from "../models/eft/dialog/IAcceptFriendRequestData";
 import { IChatServer } from "../models/eft/dialog/IChatServer";
 import { IClearMailMessageRequest } from "../models/eft/dialog/IClearMailMessageRequest";
 import { IDeleteFriendRequest } from "../models/eft/dialog/IDeleteFriendRequest";
@@ -140,20 +140,38 @@ export class DialogueCallbacks implements OnUpdate
         return this.httpResponse.getBody([]);
     }
 
+    /**
+     * Handle client/friend/request/list/inbox
+     */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public listInbox(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<any[]>
     {
         return this.httpResponse.getBody([]);
     }
 
+    /**
+     * Handle client/friend/request/send
+     */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public sendFriendRequest(url: string, request: IFriendRequestData, sessionID: string): IGetBodyResponseData<IFriendRequestSendResponse>
     {
         return this.httpResponse.getBody({status: 0, requestid: "12345", retryAfter: 600});
     }
 
+    /**
+     * Handle client/friend/request/accept
+     */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public acceptFriendRequest(url: string, request: IAcceptFriendRequestData, sessionID: string): IGetBodyResponseData<boolean>
+    {
+        return this.httpResponse.getBody(true);
+    }
+
+    /**
+     * Handle client/friend/request/cancel
+     */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public cancelFriendRequest(url: string, request: ICancelFriendRequestData, sessionID: string): IGetBodyResponseData<boolean>
     {
         return this.httpResponse.getBody(true);
     }

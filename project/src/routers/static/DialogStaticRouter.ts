@@ -149,6 +149,14 @@ export class DialogStaticRouter extends StaticRouter
                     }
                 ),
                 new RouteAction(
+                    "/client/friend/request/cancel",
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    (url: string, info: any, sessionID: string, output: string): any => 
+                    {
+                        return this.dialogueCallbacks.cancelFriendRequest(url, info, sessionID);
+                    }
+                ),
+                new RouteAction(
                     "/client/friend/delete",
                     // eslint-disable-next-line @typescript-eslint/no-unused-vars
                     (url: string, info: any, sessionID: string, output: string): any => 
