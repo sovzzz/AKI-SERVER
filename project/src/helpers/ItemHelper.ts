@@ -558,14 +558,14 @@ class ItemHelper
     }
 
     /**
-     * 
-     * @param pmcData 
-     * @param items 
+     * Regenerate all guids with new ids, exceptions are for items that cannot be altered (e.g. stash/sorting table)
+     * @param pmcData Player profile
+     * @param items Items to adjust ID values of
      * @param insuredItems insured items to not replace ids for
      * @param fastPanel 
-     * @returns 
+     * @returns Item[]
      */
-    public replaceIDs(pmcData: IPmcData, items: Item[], insuredItems: InsuredItem[] = null, fastPanel = null): any[]
+    public replaceIDs(pmcData: IPmcData, items: Item[], insuredItems: InsuredItem[] = null, fastPanel = null): Item[]
     {
         // replace bsg shit long ID with proper one
         let serialisedInventory = this.jsonUtil.serialize(items);
