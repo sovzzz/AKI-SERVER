@@ -66,6 +66,8 @@
 	"hideout-unable_to_find_scavcase_requested_item_in_profile_inventory": "Unable to find item: %s requested by ScavCase",
 	"hideout-unhandled_remove_item_from_area_request": "Unhandled attempt to remove item from hideout area: %s",
 	"http-unknown_error": "An unknown error occurred",
+	"health-healing_item_not_found": "Unable to find healing item %s in player inventory",
+	"health-unable_to_find_item_to_consume": "Unable to find consumable item %s in player inventory",
 	"importing_database": "Importing database...",
 	"importing_database_finish": "Database import finished",
 	"validation_not_found": "The file checks.dat was not found. File validation skipped.",
