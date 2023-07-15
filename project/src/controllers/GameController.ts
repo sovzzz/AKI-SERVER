@@ -73,10 +73,20 @@ export class GameController
         // Store start time in app context
         this.applicationContext.addValue(ContextVariableType.CLIENT_START_TIMESTAMP, startTimeStampMS);
 
-        this.fixShotgunDispersions();
+        if (this.coreConfig.fixes.fixShotgunDispersion)
+        {
+            this.fixShotgunDispersions();
+        }
 
-        this.openZoneService.applyZoneChangesToAllMaps();
-        this.customLocationWaveService.applyWaveChangesToAllMaps();
+        if (this.locationConfig.addOpenZonesToAllMaps)
+        {
+            this.openZoneService.applyZoneChangesToAllMaps();
+        }
+
+        if (this.locationConfig.addCustomBotWavesToMaps)
+        {
+            this.customLocationWaveService.applyWaveChangesToAllMaps();
+        }
 
         // repeatableQuests are stored by in profile.Quests due to the responses of the client (e.g. Quests in offraidData)
         // Since we don't want to clutter the Quests list, we need to remove all completed (failed / successful) repeatable quests.
@@ -126,7 +136,7 @@ export class GameController
 
             if (pmcProfile.Inventory)
             {
-                this.profileFixerService.checkForOrphanedModdedItems(pmcProfile);
+                this.profileFixerService.checkForOrphanedModdedItems(sessionID, pmcProfile);
             }
             
             this.logProfileDetails(fullProfile);

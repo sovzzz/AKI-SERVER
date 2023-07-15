@@ -1,6 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
 import { HideoutHelper } from "../helpers/HideoutHelper";
+import { InventoryHelper } from "../helpers/InventoryHelper";
 import { IPmcData } from "../models/eft/common/IPmcData";
 import { Bonus, HideoutSlot } from "../models/eft/common/tables/IBotBase";
 import {
@@ -8,10 +9,13 @@ import {
 } from "../models/eft/common/tables/IRepeatableQuests";
 import { StageBonus } from "../models/eft/hideout/IHideoutArea";
 import { IAkiProfile } from "../models/eft/profile/IAkiProfile";
+import { ConfigTypes } from "../models/enums/ConfigTypes";
 import { HideoutAreas } from "../models/enums/HideoutAreas";
 import { QuestStatus } from "../models/enums/QuestStatus";
 import { Traders } from "../models/enums/Traders";
+import { ICoreConfig } from "../models/spt/config/ICoreConfig";
 import { ILogger } from "../models/spt/utils/ILogger";
+import { ConfigServer } from "../servers/ConfigServer";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { TimeUtil } from "../utils/TimeUtil";
 import { Watermark } from "../utils/Watermark";
@@ -20,15 +24,21 @@ import { LocalisationService } from "./LocalisationService";
 @injectable()
 export class ProfileFixerService
 {
+    protected coreConfig: ICoreConfig;
+
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
         @inject("Watermark") protected watermark: Watermark,
         @inject("HideoutHelper") protected hideoutHelper: HideoutHelper,
+        @inject("InventoryHelper") protected inventoryHelper: InventoryHelper,
         @inject("LocalisationService") protected localisationService: LocalisationService,
         @inject("TimeUtil") protected timeUtil: TimeUtil,
-        @inject("DatabaseServer") protected databaseServer: DatabaseServer
+        @inject("DatabaseServer") protected databaseServer: DatabaseServer,
+        @inject("ConfigServer") protected configServer: ConfigServer
     )
-    { }
+    {
+        this.coreConfig = this.configServer.getConfig(ConfigTypes.CORE);
+    }
 
     /**
      * Find issues in the pmc profile data that may cause issues and fix them
@@ -580,9 +590,10 @@ export class ProfileFixerService
 
     /**
      * Checks profile inventiory for items that do not exist inside the items db
+     * @param sessionId Session id
      * @param pmcProfile Profile to check inventory of
      */
-    public checkForOrphanedModdedItems(pmcProfile: IPmcData): void
+    public checkForOrphanedModdedItems(sessionId: string, pmcProfile: IPmcData): void
     {
         const itemsDb = this.databaseServer.getTables().templates.items;
 
@@ -594,13 +605,22 @@ export class ProfileFixerService
             return;
         }
 
+        // Check each item in inventory to ensure item exists in itemdb
         for (const item of inventoryItemsToCheck)
         {
             if (!itemsDb[item._tpl])
             {
                 this.logger.error(this.localisationService.getText("fixer-mod_item_found", item._tpl));
 
-                return;
+                if (this.coreConfig.fixes.removeModItemsFromProfile)
+                {
+                    this.logger.success(`Deleting item from inventory and insurance with id: ${item._id} tpl: ${item._tpl}`);
+
+                    // Also deletes from insured array
+                    this.inventoryHelper.removeItem(pmcProfile, item._id, sessionId);
+
+                    // TODO: delete item from mail
+                }
             }
         }
     }
