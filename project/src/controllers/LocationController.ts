@@ -52,7 +52,7 @@ export class LocationController
     }
 
     /* generates a random location preset to use for local session */
-    public generate(name: string): ILocationBase
+    private generate(name: string): ILocationBase
     {
         const location: ILocation = this.databaseServer.getTables().locations[name];
         const output: ILocationBase = this.jsonUtil.clone(location.base);
@@ -110,35 +110,33 @@ export class LocationController
     }
 
     /**
+     * Handle client/locations
      * Get all maps base location properties without loot data
      * @returns ILocationsGenerateAllResponse
      */
     public generateAll(): ILocationsGenerateAllResponse
     {
-        const locations = this.databaseServer.getTables().locations;
-
-        const returnResult: ILocationsGenerateAllResponse = {
-            locations: undefined,
-            paths: []
-        };
-        // use right id's and strip loot
-        const data: ILocations = {};
-        for (const name in locations)
+        const locationsFromDb = this.jsonUtil.clone(this.databaseServer.getTables().locations);
+        const locations: ILocations = {};
+        for (const mapName in locationsFromDb)
         {
-            if (name === "base")
+            const mapBase = locationsFromDb[mapName]?.base;
+            if (!mapBase)
             {
+                this.logger.debug(`Map: ${mapName} has no base json file, skipping generation`);
                 continue;
             }
 
-            const map = locations[name].base;
-
-            map.Loot = [];
-            data[map._Id] = map;
+            // Clear out loot array
+            mapBase.Loot = [];
+            // Add map base data to dictionary
+            locations[mapBase._Id] = mapBase;
         }
 
-        returnResult.locations = data;
-        returnResult.paths = locations.base.paths;
-        return returnResult;
+        return  {
+            locations: locations,
+            paths: locationsFromDb.base.paths
+        };
     }
 
     /**
