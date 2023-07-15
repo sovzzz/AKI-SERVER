@@ -12,6 +12,7 @@ import { BodyPartHealth } from "../models/eft/common/tables/IBotBase";
 import { ICheckVersionResponse } from "../models/eft/game/ICheckVersionResponse";
 import { ICurrentGroupResponse } from "../models/eft/game/ICurrentGroupResponse";
 import { IGameConfigResponse } from "../models/eft/game/IGameConfigResponse";
+import { IGameKeepAliveResponse } from "../models/eft/game/IGameKeepAliveResponse";
 import { IServerDetails } from "../models/eft/game/IServerDetails";
 import { IAkiProfile } from "../models/eft/profile/IAkiProfile";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
@@ -229,6 +230,19 @@ export class GameController
         return {
             isvalid: true,
             latestVersion: this.coreConfig.compatibleTarkovVersion
+        };
+    }
+
+    /**
+     * Handle client/game/keepalive
+     */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public getKeepAlive(sessionId: string): IGameKeepAliveResponse
+    {
+        return {
+            msg: "OK",
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            utc_time: new Date().getTime() / 1000
         };
     }
 
