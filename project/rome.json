@@ -17,7 +17,8 @@
             "suspicious": {
                 "noExplicitAny": "off",
                 "noDoubleEquals": "warn",
-                "noShadowRestrictedNames": "warn"
+                "noShadowRestrictedNames": "warn",
+                "noEmptyInterface":"off"
             },
             "performance": {
                 "noDelete": "off"
