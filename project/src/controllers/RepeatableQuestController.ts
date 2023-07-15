@@ -111,8 +111,9 @@ export class RepeatableQuestController
         this.questConfig = this.configServer.getConfig(ConfigTypes.QUEST);
     }
 
+
     /**
-     * This is the method reached by the /client/repeatalbeQuests/activityPeriods endpoint
+     * Handle client/repeatalbeQuests/activityPeriods
      * Returns an array of objects in the format of repeatable quests to the client.
      * repeatableQuestObject = {
      *  id: Unique Id,
@@ -274,7 +275,7 @@ export class RepeatableQuestController
      * This method is called by GetClientRepeatableQuests and creates one element of quest type format (see assets/database/templates/repeatableQuests.json).
      * It randomly draws a quest type (currently Elimination, Completion or Exploration) as well as a trader who is providing the quest
      */
-    public generateRepeatableQuest(
+    protected generateRepeatableQuest(
         pmcLevel: number,
         pmcTraderInfo: Record<string, TraderInfo>,
         questTypePool: IQuestTypePool,
@@ -343,7 +344,7 @@ export class RepeatableQuestController
      *                                      (needs to be filled with reward and conditions by called to make a valid quest)
      */
     // @Incomplete: define Type for "type".
-    public generateRepeatableTemplate(type: string, traderId: string, side: string): IRepeatableQuest
+    protected generateRepeatableTemplate(type: string, traderId: string, side: string): IRepeatableQuest
     {
         const quest = this.jsonUtil.clone<IRepeatableQuest>(this.databaseServer.getTables().templates.repeatableQuests.templates[type]);
         quest._id = this.objectId.generate();
@@ -377,7 +378,7 @@ export class RepeatableQuestController
      * @param   {object}    repeatableConfig    The configuration for the repeatably kind (daily, weekly) as configured in QuestConfig for the requestd quest
      * @returns {object}                        object of quest type format for "Exploration" (see assets/database/templates/repeatableQuests.json)
      */
-    public generateExplorationQuest(
+    protected generateExplorationQuest(
         pmcLevel: number,
         traderId: string,
         questTypePool: IQuestTypePool,
@@ -464,7 +465,7 @@ export class RepeatableQuestController
      * @param   {object}    repeatableConfig    The configuration for the repeatably kind (daily, weekly) as configured in QuestConfig for the requestd quest
      * @returns {object}                        object of quest type format for "Completion" (see assets/database/templates/repeatableQuests.json)
      */
-    public generateCompletionQuest(
+    protected generateCompletionQuest(
         pmcLevel: number,
         traderId: string,
         repeatableConfig: IRepeatableQuestConfig
@@ -583,7 +584,7 @@ export class RepeatableQuestController
      * @param   {object}    repeatableConfig    The configuration for the repeatably kind (daily, weekly) as configured in QuestConfig for the requestd quest
      * @returns {object}                        object of quest type format for "Elimination" (see assets/database/templates/repeatableQuests.json)
      */
-    public generateEliminationQuest(
+    protected generateEliminationQuest(
         pmcLevel: number,
         traderId: string,
         questTypePool: IQuestTypePool,
@@ -790,7 +791,7 @@ export class RepeatableQuestController
      * @param   {string}        exit                The exit name to generate the condition for
      * @returns {object}                            Exit condition
      */
-    public generateExplorationExitCondition(exit: Exit): IExplorationCondition
+    protected generateExplorationExitCondition(exit: Exit): IExplorationCondition
     {
         return {
             _parent: "ExitName",
@@ -811,7 +812,7 @@ export class RepeatableQuestController
      * @param   {integer}   value           amount of items of this specific type to request
      * @returns {object}                    object of "Completion"-condition
      */
-    public generateCompletionAvailableForFinish(targetItemId: string, value: number): ICompletionAvailableFor
+    protected generateCompletionAvailableForFinish(targetItemId: string, value: number): ICompletionAvailableFor
     {
         let minDurability = 0;
         let onlyFoundInRaid = true;
@@ -851,7 +852,7 @@ export class RepeatableQuestController
      * @param   {string}    location        the location on which to fulfill the elimination quest
      * @returns {object}                    object of "Elimination"-location-subcondition
      */
-    public generateEliminationLocation(location: string[]): IEliminationCondition
+    protected generateEliminationLocation(location: string[]): IEliminationCondition
     {
 
         return {
@@ -873,7 +874,7 @@ export class RepeatableQuestController
      * @param   {number}    distance        distance from which to kill (currently only >= supported)
      * @returns {object}                    object of "Elimination"-kill-subcondition
      */
-    public generateEliminationCondition(target: string, bodyPart: string[], distance: number): IEliminationCondition
+    protected generateEliminationCondition(target: string, bodyPart: string[], distance: number): IEliminationCondition
     {
         const killConditionProps: IKillConditionProps = {
             target: target,
@@ -915,7 +916,7 @@ export class RepeatableQuestController
      * @param pmcLevel level of pmc generating quest pool
      * @returns IQuestTypePool
      */
-    public generateQuestPool(repeatableConfig: IRepeatableQuestConfig, pmcLevel: number): IQuestTypePool
+    protected generateQuestPool(repeatableConfig: IRepeatableQuestConfig, pmcLevel: number): IQuestTypePool
     {
         const questPool: IQuestTypePool = {
             types: repeatableConfig.types.slice(),
@@ -978,7 +979,7 @@ export class RepeatableQuestController
      * @param   {object}    repeatableConfig    The configuration for the repeatably kind (daily, weekly) as configured in QuestConfig for the requestd quest
      * @returns {object}                        object of "Reward"-type that can be given for a repeatable mission
      */
-    public generateReward(
+    protected generateReward(
         pmcLevel: number,
         difficulty: number,
         traderId: string,
@@ -1129,7 +1130,7 @@ export class RepeatableQuestController
      * @param   {integer}   index           all rewards will be appended to a list, for unkown reasons the client wants the index
      * @returns {object}                    object of "Reward"-item-type
      */
-    public generateRewardItem(tpl: string, value: number, index: number, preset = null): IReward
+    protected generateRewardItem(tpl: string, value: number, index: number, preset = null): IReward
     {
         const id = this.objectId.generate();
         const rewardItem: IReward = {
@@ -1179,7 +1180,7 @@ export class RepeatableQuestController
         }
     }
 
-    public probabilityObjectArray<K, V>(configArrayInput: ProbabilityObject<K, V>[]): ProbabilityObjectArray<K, V>
+    protected probabilityObjectArray<K, V>(configArrayInput: ProbabilityObject<K, V>[]): ProbabilityObjectArray<K, V>
     {
         const configArray = this.jsonUtil.clone(configArrayInput);
         const probabilityArray = new ProbabilityObjectArray<K, V>(this.mathUtil);
@@ -1190,6 +1191,9 @@ export class RepeatableQuestController
         return probabilityArray;
     }
 
+    /**
+     * Handle RepeatableQuestChange event
+     */
     public changeRepeatableQuest(pmcData: IPmcData, body: IRepeatableQuestChangeRequest, sessionID: string): IItemEventRouterResponse
     {
         let repeatableToChange: IPmcDataRepeatableQuest;
@@ -1301,7 +1305,7 @@ export class RepeatableQuestController
      * @param {string} tpl template id of item to check
      * @returns boolean: true if item is valid reward
      */
-    public isValidRewardItem(tpl: string, repeatableQuestConfig: IRepeatableQuestConfig): boolean
+    protected isValidRewardItem(tpl: string, repeatableQuestConfig: IRepeatableQuestConfig): boolean
     {
         let valid = this.itemHelper.isValidItem(tpl);
         if (!valid)

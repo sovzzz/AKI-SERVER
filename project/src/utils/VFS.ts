@@ -296,17 +296,17 @@ export class VFS
         await this.rmdirPromisify(filepath);
     }
 
-    private lockFileSync(filepath: any): void 
+    protected lockFileSync(filepath: any): void 
     {
         lockfile.lockSync(filepath);
     }
 
-    private checkFileSync(filepath: any): any 
+    protected checkFileSync(filepath: any): any 
     {
         return lockfile.checkSync(filepath);
     }
 
-    private unlockFileSync(filepath: any): void 
+    protected unlockFileSync(filepath: any): void 
     {
         lockfile.unlockSync(filepath);
     }
