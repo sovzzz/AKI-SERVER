@@ -146,6 +146,7 @@ export class InsuranceController
     }
 
     /**
+     * Handle Insure event
      * Add insurance to an item
      * @param pmcData Player profile
      * @param body Insurance request
@@ -205,6 +206,7 @@ export class InsuranceController
     }
 
     /**
+     * Handle client/insurance/items/list/cost
      * Calculate insurance cost
      * @param info request object
      * @param sessionID session id

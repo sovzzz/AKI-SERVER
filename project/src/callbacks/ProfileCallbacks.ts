@@ -31,6 +31,9 @@ export class ProfileCallbacks
         @inject("ProfileController") protected profileController: ProfileController)
     { }
 
+    /**
+     * Handle client/game/profile/create
+     */
     public createProfile(url: string, info: IProfileCreateRequestData, sessionID: string): IGetBodyResponseData<any>
     {
         this.profileController.createProfile(info, sessionID);
@@ -38,11 +41,8 @@ export class ProfileCallbacks
     }
 
     /**
+     * Handle client/game/profile/list
      * Get the complete player profile (scav + pmc character)
-     * @param url 
-     * @param info Empty
-     * @param sessionID Session id
-     * @returns Profile object
      */
     public getProfileData(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<IPmcData[]>
     {
@@ -50,6 +50,7 @@ export class ProfileCallbacks
     }
 
     /**
+     * Handle client/game/profile/savage/regenerate
      * Handle the creation of a scav profile for player
      * Occurs post-raid and when profile first created immediately after character details are confirmed by player
      * @param url 
@@ -64,10 +65,6 @@ export class ProfileCallbacks
 
     /**
      * Handle client/game/profile/voice/change event
-     * @param url 
-     * @param info Change voice request object
-     * @param sessionID Session id
-     * @returns Client response
      */
     public changeVoice(url: string, info: IProfileChangeVoiceRequestData, sessionID: string): INullResponseData
     {
@@ -78,10 +75,6 @@ export class ProfileCallbacks
     /**
      * Handle client/game/profile/nickname/change event
      * Client allows player to adjust their profile name
-     * @param url 
-     * @param info Change nickname request object
-     * @param sessionID Session id
-     * @returns client response
      */
     public changeNickname(url: string, info: IProfileChangeNicknameRequestData, sessionID: string): IGetBodyResponseData<any>
     {
@@ -103,6 +96,9 @@ export class ProfileCallbacks
         });
     }
 
+    /**
+     * Handle client/game/profile/nickname/validate
+     */
     public validateNickname(url: string, info: IValidateNicknameRequestData, sessionID: string): IGetBodyResponseData<any>
     {
         const output = this.profileController.validateNickname(info, sessionID);
@@ -120,6 +116,9 @@ export class ProfileCallbacks
         return this.httpResponse.getBody({ "status": "ok" });
     }
 
+    /**
+     * Handle client/game/profile/nickname/reserved
+     */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getReservedNickname(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<string>
     {
@@ -127,11 +126,8 @@ export class ProfileCallbacks
     }
 
     /**
+     * Handle client/profile/status
      * Called when creating a character when choosing a character face/voice
-     * @param url 
-     * @param info response (empty)
-     * @param sessionID 
-     * @returns 
      */
     public getProfileStatus(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<GetProfileStatusResponseData>
     {
@@ -166,22 +162,34 @@ export class ProfileCallbacks
         return this.httpResponse.getBody(response);
     }
 
+    /**
+     * Handle client/profile/settings
+     */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getProfileSettings(url: string, info: IGetProfileSettingsRequest, sessionId: string): IGetBodyResponseData<string>
     {
         return this.httpResponse.emptyResponse();
     }
 
+    /**
+     * Handle client/game/profile/search
+     */
     public searchFriend(url: string, info: ISearchFriendRequestData, sessionID: string): IGetBodyResponseData<ISearchFriendResponse[]>
     {
         return this.httpResponse.getBody(this.profileController.getFriends(info, sessionID));
     }
 
+    /**
+     * Handle launcher/profile/info
+     */
     public getMiniProfile(url: string, info: IGetMiniProfileRequestData, sessionID: string): string
     {
         return this.httpResponse.noBody(this.profileController.getMiniProfile(sessionID));
     }
 
+    /**
+     * Handle /launcher/profiles
+     */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getAllMiniProfiles(url: string, info: any, sessionID: string): string
     {

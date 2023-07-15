@@ -24,11 +24,17 @@ export class QuestCallbacks
         @inject("RepeatableQuestController") protected repeatableQuestController: RepeatableQuestController)
     { }
 
+    /**
+     * Handle RepeatableQuestChange event
+     */
     public changeRepeatableQuest(pmcData: IPmcData, body: IRepeatableQuestChangeRequest, sessionID: string): IItemEventRouterResponse
     {
         return this.repeatableQuestController.changeRepeatableQuest(pmcData, body, sessionID);
     }
 
+    /**
+     * Handle QuestAccept event
+     */
     public acceptQuest(pmcData: IPmcData, body: IAcceptQuestRequestData, sessionID: string): IItemEventRouterResponse
     {
         if (body.type === "repeatable")
@@ -39,11 +45,17 @@ export class QuestCallbacks
         return this.questController.acceptQuest(pmcData, body, sessionID);
     }
 
+    /**
+     * Handle QuestComplete event
+     */
     public completeQuest(pmcData: IPmcData, body: ICompleteQuestRequestData, sessionID: string): IItemEventRouterResponse
     {
         return this.questController.completeQuest(pmcData, body, sessionID);
     }
 
+    /**
+     * Handle QuestHandover event
+     */
     public handoverQuest(pmcData: IPmcData, body: IHandoverQuestRequestData, sessionID: string): IItemEventRouterResponse
     {
         return this.questController.handoverQuest(pmcData, body, sessionID);
@@ -51,16 +63,15 @@ export class QuestCallbacks
 
     /**
      * Handle client/quest/list
-     * @param url 
-     * @param info 
-     * @param sessionID 
-     * @returns 
      */
     public listQuests(url: string, info: IListQuestsRequestData, sessionID: string): IGetBodyResponseData<IQuest[]>
     {
         return this.httpResponse.getBody(this.questController.getClientQuests(sessionID));
     }
 
+    /**
+     * Handle client/repeatalbeQuests/activityPeriods
+     */
     public activityPeriods(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<IPmcDataRepeatableQuest[]>
     {
         return this.httpResponse.getBody(this.repeatableQuestController.getClientRepeatableQuests(info, sessionID));

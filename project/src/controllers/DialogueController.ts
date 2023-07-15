@@ -21,6 +21,7 @@ export class DialogueController
     )
     { }
 
+    /** Handle onUpdate spt event */
     public update(): void
     {
         const profiles = this.saveServer.getProfiles();
@@ -30,6 +31,10 @@ export class DialogueController
         }
     }
 
+    /**
+     * Handle client/friend/list
+     * @returns IGetFriendListDataResponse
+     */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getFriendList(sessionID: string): IGetFriendListDataResponse
     {
@@ -41,6 +46,7 @@ export class DialogueController
     }
 
     /**
+     * Handle client/mail/dialog/list
      * Create array holding trader dialogs and mail interactions with player
      * Set the content of the dialogue on the list tab.
      * @param sessionID Session Id
@@ -81,6 +87,7 @@ export class DialogueController
     }
 
     /**
+     * Handle client/mail/dialog/view
      * Handle player clicking 'messenger' and seeing all the messages they've recieved
      * Set the content of the dialogue on the details panel, showing all the messages
      * for the specified dialogue.
@@ -156,6 +163,7 @@ export class DialogueController
         return messages.some(x => x.items?.data?.length > 0);
     }
 
+    /** Handle client/mail/dialog/remove */
     public removeDialogue(dialogueID: string, sessionID: string): void
     {
         delete this.saveServer.getProfile(sessionID).dialogues[dialogueID];
@@ -166,6 +174,7 @@ export class DialogueController
         this.saveServer.getProfile(sessionID).dialogues[dialogueID].pinned = shouldPin;
     }
 
+    /** Handle client/mail/dialog/read */
     public setRead(dialogueIDs: string[], sessionID: string): void
     {
         const dialogueData = this.saveServer.getProfile(sessionID).dialogues;
@@ -177,6 +186,7 @@ export class DialogueController
     }
 
     /**
+     * Handle client/mail/dialog/getAllAttachments
      * Get all uncollected items attached to mail in a particular dialog
      * @param dialogueID Dialog to get mail attachments from
      * @param sessionID Session id
