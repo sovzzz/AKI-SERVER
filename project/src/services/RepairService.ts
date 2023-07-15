@@ -241,7 +241,7 @@ export class RepairService
         const globalRepairSettings = globals.config.RepairSettings;
 
         const intellectRepairPointsPerLevel = globals.config.SkillsSettings.Intellect.RepairPointsCostReduction;
-        const profileIntellectLevel = pmcData.Skills?.Common?.find(s => s.Id === "Intellect")?.Progress ?? 0;
+        const profileIntellectLevel = pmcData.Skills?.Common?.find(s => s.Id === SkillTypes.INTELLECT)?.Progress ?? 0;
         const intellectPointReduction = intellectRepairPointsPerLevel * Math.trunc(profileIntellectLevel / 100);
 
         if (isArmor)
