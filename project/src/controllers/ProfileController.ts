@@ -23,6 +23,7 @@ import { ISearchFriendResponse } from "../models/eft/profile/ISearchFriendRespon
 import { IValidateNicknameRequestData } from "../models/eft/profile/IValidateNicknameRequestData";
 import { MessageType } from "../models/enums/MessageType";
 import { QuestStatus } from "../models/enums/QuestStatus";
+import { ILogger } from "../models/spt/utils/ILogger";
 import { EventOutputHolder } from "../routers/EventOutputHolder";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { SaveServer } from "../servers/SaveServer";
@@ -34,6 +35,7 @@ import { TimeUtil } from "../utils/TimeUtil";
 export class ProfileController
 {
     constructor(
+        @inject("WinstonLogger") protected logger: ILogger,
         @inject("HashUtil") protected hashUtil: HashUtil,
         @inject("TimeUtil") protected timeUtil: TimeUtil,
         @inject("SaveServer") protected saveServer: SaveServer,
@@ -123,11 +125,8 @@ export class ProfileController
         const profile: TemplateSide = this.databaseServer.getTables().templates.profiles[account.edition][info.side.toLowerCase()];
         const pmcData = profile.character;
 
-        // delete existing profile
-        if (sessionID in this.saveServer.getProfiles())
-        {
-            this.saveServer.deleteProfileById(sessionID);
-        }
+        // Delete existing profile
+        this.deleteProfileBySessionId(sessionID);
 
         // PMC
         pmcData._id = `pmc${sessionID}`;
@@ -188,10 +187,7 @@ export class ProfileController
 
         this.saveServer.getProfile(sessionID).characters.scav = this.generatePlayerScav(sessionID);
 
-        for (const traderID in this.databaseServer.getTables().traders)
-        {
-            this.traderHelper.resetTrader(sessionID, traderID);
-        }
+        this.resetAllTradersInProfile(sessionID);
 
         // Store minimal profile and reload it
         this.saveServer.saveProfile(sessionID);
@@ -202,6 +198,29 @@ export class ProfileController
         this.saveServer.saveProfile(sessionID);
     }
 
+    /**
+     * Delete a profile
+     * @param sessionID Id of profile to delete
+     */
+    protected deleteProfileBySessionId(sessionID: string): void
+    {
+        if (sessionID in this.saveServer.getProfiles())
+        {
+            this.saveServer.deleteProfileById(sessionID);
+        }
+        else
+        {
+            this.logger.warning(`Unable to delete profile with id: ${sessionID}, no profile with that id found`);
+        }
+    }
+
+    /**
+     * Iterate over all quests in player profile, inspect rewards for the quests current state (accepted/completed)
+     * and send rewards to them in mail
+     * @param profileDetails Player profile
+     * @param sessionID Session id
+     * @param response Event router response
+     */
     protected givePlayerStartingQuestRewards(profileDetails: IAkiProfile, sessionID: string, response: IItemEventRouterResponse): void 
     {
         for (const quest of profileDetails.characters.pmc.Quests) 
@@ -214,6 +233,18 @@ export class ProfileController
             const messageContent = this.dialogueHelper.createMessageContext(messageId, MessageType.QUEST_START, 99999);
             const itemRewards = this.questHelper.applyQuestReward(profileDetails.characters.pmc, quest.qid, QuestStatus.Started, sessionID, response);
             this.dialogueHelper.addDialogueMessage(questFromDb.traderId, messageContent, sessionID, itemRewards);
+        }
+    }
+
+    /**
+     * For each trader reset their state to what a level 1 player would see
+     * @param sessionID Session id of profile to reset
+     */
+    protected resetAllTradersInProfile(sessionID: string): void
+    {
+        for (const traderID in this.databaseServer.getTables().traders)
+        {
+            this.traderHelper.resetTrader(sessionID, traderID);
         }
     }
 
