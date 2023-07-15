@@ -49,6 +49,9 @@ export class ProfileController
     )
     { }
 
+    /**
+     * Handle /launcher/profiles
+     */
     public getMiniProfiles(): IMiniProfile[]
     {
         const miniProfiles: IMiniProfile[] = [];
@@ -61,6 +64,9 @@ export class ProfileController
         return miniProfiles;
     }
 
+    /**
+     * Handle launcher/profile/info
+     */
     public getMiniProfile(sessionID: string): any
     {
         const maxlvl = this.profileHelper.getMaxLevel();
@@ -100,11 +106,17 @@ export class ProfileController
         return result;
     }
 
+    /**
+     * Handle client/game/profile/list
+     */
     public getCompleteProfile(sessionID: string): IPmcData[]
     {
         return this.profileHelper.getCompleteProfile(sessionID);
     }
 
+    /**
+     * Handle client/game/profile/create
+     */
     public createProfile(info: IProfileCreateRequestData, sessionID: string): void
     {
         const account = this.saveServer.getProfile(sessionID).info;
@@ -117,7 +129,7 @@ export class ProfileController
             this.saveServer.deleteProfileById(sessionID);
         }
 
-        // pmc
+        // PMC
         pmcData._id = `pmc${sessionID}`;
         pmcData.aid = sessionID;
         pmcData.savage = `scav${sessionID}`;
@@ -181,11 +193,11 @@ export class ProfileController
             this.traderHelper.resetTrader(sessionID, traderID);
         }
 
-        // store minimal profile and reload it
+        // Store minimal profile and reload it
         this.saveServer.saveProfile(sessionID);
         this.saveServer.loadProfile(sessionID);
 
-        // completed account creation
+        // Completed account creation
         this.saveServer.getProfile(sessionID).info.wipe = false;
         this.saveServer.saveProfile(sessionID);
     }
@@ -207,7 +219,7 @@ export class ProfileController
 
     /**
      * Generate a player scav object
-     * pmc profile MUST exist first before pscav can be generated
+     * PMC profile MUST exist first before pscav can be generated
      * @param sessionID 
      * @returns IPmcData object
      */
@@ -216,6 +228,9 @@ export class ProfileController
         return this.playerScavGenerator.generate(sessionID);
     }
 
+    /**
+     * Handle client/game/profile/nickname/validate
+     */
     public validateNickname(info: IValidateNicknameRequestData, sessionID: string): string
     {
         if (info.nickname.length < 3)
@@ -231,6 +246,10 @@ export class ProfileController
         return "OK";
     }
 
+    /**
+     * Handle client/game/profile/nickname/change event
+     * Client allows player to adjust their profile name
+     */
     public changeNickname(info: IProfileChangeNicknameRequestData, sessionID: string): string
     {
         const output = this.validateNickname(info, sessionID);
@@ -246,12 +265,18 @@ export class ProfileController
         return output;
     }
 
+    /**
+     * Handle client/game/profile/voice/change event
+     */
     public changeVoice(info: IProfileChangeVoiceRequestData, sessionID: string): void
     {
         const pmcData = this.profileHelper.getPmcProfile(sessionID);
         pmcData.Info.Voice = info.voice;
     }
 
+    /**
+     * Handle client/game/profile/search
+     */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getFriends(info: ISearchFriendRequestData, sessionID: string): ISearchFriendResponse[]
     {
