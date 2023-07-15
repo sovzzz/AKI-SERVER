@@ -78,6 +78,7 @@ export class NotifierController
         return `${this.httpServerHelper.getBackendUrl()}/notifierServer/get/${sessionID}`;
     }
 
+    /** Handle client/notifier/channel/create */
     public getChannel(sessionID: string): INotifierChannel
     {
         return {

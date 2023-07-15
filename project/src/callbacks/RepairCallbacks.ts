@@ -16,26 +16,28 @@ export class RepairCallbacks
     { }
 
     /**
+     * Handle TraderRepair event
      * use trader to repair item
-     * @param pmcData 
-     * @param body 
-     * @param sessionID 
-     * @returns 
+     * @param pmcData Player profile
+     * @param traderRepairRequest Request object
+     * @param sessionID Session id
+     * @returns IItemEventRouterResponse
      */
-    public traderRepair(pmcData: IPmcData, body: ITraderRepairActionDataRequest, sessionID: string): IItemEventRouterResponse
+    public traderRepair(pmcData: IPmcData, traderRepairRequest: ITraderRepairActionDataRequest, sessionID: string): IItemEventRouterResponse
     {
-        return this.repairController.traderRepair(sessionID, body, pmcData);
+        return this.repairController.traderRepair(sessionID, traderRepairRequest, pmcData);
     }
 
     /**
+     * Handle Repair event
      * Use repair kit to repair item
-     * @param pmcData 
-     * @param body 
-     * @param sessionID 
-     * @returns 
+     * @param pmcData Player profile
+     * @param repairRequest Request object
+     * @param sessionID Session id
+     * @returns IItemEventRouterResponse
      */
-    public repair(pmcData: IPmcData, body: IRepairActionDataRequest, sessionID: string): IItemEventRouterResponse
+    public repair(pmcData: IPmcData, repairRequest: IRepairActionDataRequest, sessionID: string): IItemEventRouterResponse
     {
-        return this.repairController.repairWithKit(sessionID, body, pmcData);
+        return this.repairController.repairWithKit(sessionID, repairRequest, pmcData);
     }
 }

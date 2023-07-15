@@ -179,12 +179,14 @@ export class DialogueCallbacks implements OnUpdate
         return this.httpResponse.getBody(true);
     }
 
+    /** Handle client/friend/delete */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public deleteFriend(url: string, request: IDeleteFriendRequest, sessionID: string): INullResponseData
     {
         return this.httpResponse.nullResponse();
     }
 
+    /** Handle client/friend/ignore/set */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public sendMessage(url: string, request: ISendMessageRequest, sessionID: string): IGetBodyResponseData<number>
     {

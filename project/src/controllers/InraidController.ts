@@ -74,6 +74,7 @@ export class InraidController
     }
 
     /**
+     * Handle raid/profile/save
      * Save profile state to disk
      * Handles pmc/pscav
      * @param offraidData post-raid request data

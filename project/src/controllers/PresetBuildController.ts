@@ -22,12 +22,13 @@ export class PresetBuildController
     )
     { }
 
-
+    /** Handle client/handbook/builds/my/list */
     public getUserBuilds(sessionID: string): WeaponBuild[]
     {
         return Object.values(this.saveServer.getProfile(sessionID).weaponbuilds);
     }
 
+    /** Handle SaveBuild event */
     public saveBuild(pmcData: IPmcData, body: IPresetBuildActionRequestData, sessionID: string): IItemEventRouterResponse
     {
         delete body.Action;
@@ -47,7 +48,8 @@ export class PresetBuildController
         output.profileChanges[sessionID].builds.push(body);
         return output;
     }
-
+    
+    /** Handle RemoveBuild event*/
     public removeBuild(pmcData: IPmcData, body: IPresetBuildActionRequestData, sessionID: string): IItemEventRouterResponse
     {
         const savedBuilds = this.saveServer.getProfile(sessionID).weaponbuilds;

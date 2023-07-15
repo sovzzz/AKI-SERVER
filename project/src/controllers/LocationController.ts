@@ -44,7 +44,14 @@ export class LocationController
         this.airdropConfig = this.configServer.getConfig(ConfigTypes.AIRDROP);
     }
 
-    /* get a location with generated loot data */
+    /*  */
+
+    /**
+     * Handle client/location/getLocalloot
+     * Get a location (map) with generated loot data
+     * @param location Map to generate loot for
+     * @returns ILocationBase
+     */
     public get(location: string): ILocationBase
     {
         const name = location.toLowerCase().replace(" ", "");
@@ -140,6 +147,7 @@ export class LocationController
     }
 
     /**
+     * Handle client/location/getAirdropLoot
      * Get loot for an airdop container
      * Generates it randomly based on config/airdrop.json values
      * @returns Array of LootItem objects

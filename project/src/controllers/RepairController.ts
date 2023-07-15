@@ -34,6 +34,7 @@ export class RepairController
     { }
 
     /**
+     * Handle TraderRepair event
      * Repair with trader
      * @param sessionID session id
      * @param body endpoint request data
@@ -67,6 +68,7 @@ export class RepairController
     }
 
     /**
+     * Handle Repair event
      * Repair with repair kit
      * @param sessionID session id
      * @param body endpoint request data

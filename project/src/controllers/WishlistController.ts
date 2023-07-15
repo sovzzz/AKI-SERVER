@@ -13,10 +13,7 @@ export class WishlistController
     )
     { }
 
-    /* Adding item to wishlist
-    *  input: playerProfileData, Request body
-    *  output: OK (saved profile)
-    * */
+    /** Handle AddToWishList */
     public addToWishList(pmcData: IPmcData, body: IWishlistActionData, sessionID: string): IItemEventRouterResponse
     {
         for (const item in pmcData.WishList)
@@ -33,10 +30,7 @@ export class WishlistController
         return this.eventOutputHolder.getOutput(sessionID);
     }
 
-    /* Removing item to wishlist
-    *  input: playerProfileData, Request body
-    *  output: OK (saved profile)
-    * */
+    /** Handle RemoveFromWishList event */
     public removeFromWishList(pmcData: IPmcData, body: IWishlistActionData, sessionID: string): IItemEventRouterResponse
     {
         for (let i = 0; i < pmcData.WishList.length; i++)

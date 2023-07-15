@@ -37,6 +37,7 @@ export class MatchCallbacks
     )
     { }
 
+    /** Handle client/match/updatePing */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public updatePing(url: string, info: IUpdatePingRequestData, sessionID: string): INullResponseData
     {
@@ -50,6 +51,7 @@ export class MatchCallbacks
         return this.httpResponse.nullResponse();
     }
 
+    /** Handle client/match/group/exit_from_menu */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public exitToMenu(url: string, info: IEmptyRequestData, sessionID: string): INullResponseData
     {
@@ -68,6 +70,7 @@ export class MatchCallbacks
         return this.httpResponse.nullResponse();
     }
 
+    /** Handle client/match/group/invite/send */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public sendGroupInvite(url: string, info: ISendGroupInviteRequest, sessionID: string): IGetBodyResponseData<string>
     {
@@ -97,6 +100,7 @@ export class MatchCallbacks
         return this.httpResponse.getBody(true);
     }
 
+    /** Handle client/match/group/invite/cancel-all */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public cancelAllGroupInvite(url: string, info: any, sessionID: string): INullResponseData
     {
@@ -109,6 +113,7 @@ export class MatchCallbacks
         return this.httpResponse.nullResponse();
     }
 
+    /** Handle raid/profile/list */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getProfile(url: string, info: IGetProfileRequestData, sessionID: string): IGetBodyResponseData<IPmcData[]>
     {
@@ -129,12 +134,13 @@ export class MatchCallbacks
         return this.httpResponse.getBody(output);
     }
 
-    // Handle match/group/start_game
+    /** Handle match/group/start_game */
     public joinMatch(url: string, info: IJoinMatchRequestData, sessionID: string): IGetBodyResponseData<IJoinMatchResult>
     {
         return this.httpResponse.getBody(this.matchController.joinMatch(info, sessionID));
     }
 
+    /** Handle client/getMetricsConfig */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getMetrics(url: string, info: any, sessionID: string): IGetBodyResponseData<string>
     {
@@ -151,11 +157,13 @@ export class MatchCallbacks
         return this.httpResponse.getBody(this.matchController.getGroupStatus(info));
     }
 
+    /** Handle client/match/group/create */
     public createGroup(url: string, info: ICreateGroupRequestData, sessionID: string): IGetBodyResponseData<any>
     {
         return this.httpResponse.getBody(this.matchController.createGroup(sessionID, info));
     }
 
+    /** Handle client/match/group/delete */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public deleteGroup(url: string, info: any, sessionID: string): INullResponseData
     {
@@ -170,18 +178,21 @@ export class MatchCallbacks
         return this.httpResponse.getBody(true);
     }
 
+    /** Handle client/match/group/player/remove */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public removePlayerFromGroup(url: string, info: IRemovePlayerFromGroupRequest, sessionID: string): INullResponseData
     {
         return this.httpResponse.nullResponse();
     }
 
+    /** Handle client/match/offline/end */
     public endOfflineRaid(url: string, info: IEndOfflineRaidRequestData, sessionID: string): INullResponseData
     {
         this.matchController.endOfflineRaid(info, sessionID);
         return this.httpResponse.nullResponse();
     }
 
+    /** Handle client/raid/configuration */
     public getRaidConfiguration(url: string, info: IGetRaidConfigurationRequestData, sessionID: string): INullResponseData
     {
         this.matchController.startOfflineRaid(info, sessionID);

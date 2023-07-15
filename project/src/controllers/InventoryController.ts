@@ -778,6 +778,7 @@ export class InventoryController
     }
 
     /**
+     * Handle OpenRandomLootContainer event
      * Handle event fired when a container is unpacked (currently only the halloween pumpkin)
      * @param pmcData Profile data
      * @param body open loot container request data

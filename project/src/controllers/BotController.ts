@@ -61,6 +61,7 @@ export class BotController
     }
 
     /**
+     * Handle singleplayer/settings/bot/difficulty
      * Get the core.json difficulty settings from database\bots
      * @returns IBotCore
      */

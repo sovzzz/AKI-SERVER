@@ -31,17 +31,20 @@ export class TraderCallbacks implements OnLoad, OnUpdate
         return "aki-traders";
     }
 
+    /** Handle client/trading/api/traderSettings */
     public getTraderSettings(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<ITraderBase[]>
     {
         return this.httpResponse.getBody(this.traderController.getAllTraders(sessionID));
     }
 
+    /** Handle client/trading/api/getTrader */
     public getTrader(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<ITraderBase>
     {
         const traderID = url.replace("/client/trading/api/getTrader/", "");
         return this.httpResponse.getBody(this.traderController.getTrader(sessionID, traderID));
     }
 
+    /** Handle client/trading/api/getTraderAssort */
     public getAssort(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<ITraderAssort>
     {
         const traderID = url.replace("/client/trading/api/getTraderAssort/", "");

@@ -52,42 +52,6 @@ export class RagfairCallbacks implements OnLoad, OnUpdate
         return "aki-ragfair";
     }
 
-    public search(url: string, info: ISearchRequestData, sessionID: string): IGetBodyResponseData<IGetOffersResult>
-    {
-        return this.httpResponse.getBody(this.ragfairController.getOffers(sessionID, info));
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    public getMarketPrice(url: string, info: IGetMarketPriceRequestData, sessionID: string): IGetBodyResponseData<IGetItemPriceResult>
-    {
-        return this.httpResponse.getBody(this.ragfairController.getItemMinAvgMaxFleaPriceValues(info));
-    }
-
-    public addOffer(pmcData: IPmcData, info: IAddOfferRequestData, sessionID: string): IItemEventRouterResponse
-    {
-        return this.ragfairController.addPlayerOffer(pmcData, info, sessionID);
-    }
-
-    public removeOffer(pmcData: IPmcData, info: IRemoveOfferRequestData, sessionID: string): IItemEventRouterResponse
-    {
-        return this.ragfairController.removeOffer(info.offerId, sessionID);
-    }
-
-    public extendOffer(pmcData: IPmcData, info: IExtendOfferRequestData, sessionID: string): IItemEventRouterResponse
-    {
-        return this.ragfairController.extendOffer(info, sessionID);
-    }
-
-    /**
-     * Handle /client/items/prices
-     * Called when clicking an item to list on flea
-     */
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    public getFleaPrices(url: string, request: IEmptyRequestData, sessionID: string): IGetBodyResponseData<Record<string, number>>
-    {
-        return this.httpResponse.getBody(this.ragfairController.getAllFleaPrices());
-    }
-
     public async onUpdate(timeSinceLastRun: number): Promise<boolean>
     {
         if (timeSinceLastRun > this.ragfairConfig.runIntervalSeconds)
@@ -104,6 +68,51 @@ export class RagfairCallbacks implements OnLoad, OnUpdate
         return false;
     }
 
+    /**
+     * Handle client/ragfair/search
+     * Handle client/ragfair/find
+     */
+    public search(url: string, info: ISearchRequestData, sessionID: string): IGetBodyResponseData<IGetOffersResult>
+    {
+        return this.httpResponse.getBody(this.ragfairController.getOffers(sessionID, info));
+    }
+
+    /** Handle client/ragfair/itemMarketPrice */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public getMarketPrice(url: string, info: IGetMarketPriceRequestData, sessionID: string): IGetBodyResponseData<IGetItemPriceResult>
+    {
+        return this.httpResponse.getBody(this.ragfairController.getItemMinAvgMaxFleaPriceValues(info));
+    }
+
+    /** Handle RagFairAddOffer event */
+    public addOffer(pmcData: IPmcData, info: IAddOfferRequestData, sessionID: string): IItemEventRouterResponse
+    {
+        return this.ragfairController.addPlayerOffer(pmcData, info, sessionID);
+    }
+
+    /** \Handle RagFairRemoveOffer event */
+    public removeOffer(pmcData: IPmcData, info: IRemoveOfferRequestData, sessionID: string): IItemEventRouterResponse
+    {
+        return this.ragfairController.removeOffer(info.offerId, sessionID);
+    }
+
+    /** Handle RagFairRenewOffer event */
+    public extendOffer(pmcData: IPmcData, info: IExtendOfferRequestData, sessionID: string): IItemEventRouterResponse
+    {
+        return this.ragfairController.extendOffer(info, sessionID);
+    }
+
+    /**
+     * Handle /client/items/prices
+     * Called when clicking an item to list on flea
+     */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public getFleaPrices(url: string, request: IEmptyRequestData, sessionID: string): IGetBodyResponseData<Record<string, number>>
+    {
+        return this.httpResponse.getBody(this.ragfairController.getAllFleaPrices());
+    }
+
+    /** Handle client/reports/ragfair/send */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public sendReport(url: string, info: ISendRagfairReportRequestData, sessionID: string): INullResponseData
     {

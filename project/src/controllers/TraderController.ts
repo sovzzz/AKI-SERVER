@@ -108,6 +108,7 @@ export class TraderController
     }
 
     /**
+     * Handle client/trading/api/traderSettings
      * Return an array of all traders
      * @param sessionID Session id
      * @returns array if ITraderBase objects
@@ -155,11 +156,13 @@ export class TraderController
         return 0;
     }
 
+    /** Handle client/trading/api/getTrader */
     public getTrader(sessionID: string, traderID: string): ITraderBase
     {
         return this.traderHelper.getTrader(sessionID, traderID);
     }
 
+    /** Handle client/trading/api/getTraderAssort */
     public getAssort(sessionId: string, traderId: string): ITraderAssort
     {
         return this.traderAssortHelper.getAssort(sessionId, traderId);

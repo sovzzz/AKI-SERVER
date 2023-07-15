@@ -45,12 +45,13 @@ class TradeController
         this.traderConfig = this.configServer.getConfig(ConfigTypes.TRADER);
     }
 
+    /** Handle TradingConfirm event */
     public confirmTrading(pmcData: IPmcData, request: IProcessBaseTradeRequestData, sessionID: string): IItemEventRouterResponse
     {
         return this.confirmTradingInternal(pmcData, request, sessionID, this.traderConfig.purchasesAreFoundInRaid);
     }
 
-    // Ragfair trading
+    /** Handle RagFairBuyOffer event */
     public confirmRagfairTrading(pmcData: IPmcData, body: IProcessRagfairTradeRequestData, sessionID: string): IItemEventRouterResponse
     {
         let output = this.eventOutputHolder.getOutput(sessionID);
