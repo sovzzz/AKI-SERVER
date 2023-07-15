@@ -126,10 +126,7 @@ export class InRaidHelper
     public updateProfileBaseStats(profileData: IPmcData, saveProgressRequest: ISaveProgressRequestData, sessionID: string): IPmcData
     {
         // remove old skill fatigue
-        for (const skill of saveProgressRequest.profile.Skills.Common)
-        {
-            skill.PointsEarnedDuringSession = 0.0;
-        }
+        this.resetSkillPointsEarnedDuringRaid(saveProgressRequest.profile);
 
         // set profile data
         profileData.Info.Level = saveProgressRequest.profile.Info.Level;
@@ -159,6 +156,14 @@ export class InRaidHelper
         }
 
         return profileData;
+    }
+
+    protected resetSkillPointsEarnedDuringRaid(profile: IPmcData): void
+    {
+        for (const skill of profile.Skills.Common)
+        {
+            skill.PointsEarnedDuringSession = 0.0;
+        }
     }
 
     /**

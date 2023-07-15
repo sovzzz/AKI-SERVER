@@ -97,7 +97,7 @@ export class GameController
             const fullProfile = this.profileHelper.getFullProfile(sessionID);
             const pmcProfile = fullProfile.characters.pmc;
 
-            this.logger.debug(`Started game with sessionId: ${sessionID}`);
+            this.logger.debug(`Started game with sessionId: ${sessionID} ${pmcProfile.Info?.Nickname}`);
 
             if (pmcProfile.Health)
             {
