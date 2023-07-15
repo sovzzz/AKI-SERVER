@@ -7,6 +7,7 @@ import {
     IGetMailDialogViewResponseData
 } from "../models/eft/dialog/IGetMailDialogViewResponseData";
 import { DialogueInfo, IAkiProfile, IUserDialogInfo, Message } from "../models/eft/profile/IAkiProfile";
+import { MemberCategory } from "../models/enums/MemberCategory";
 import { MessageType } from "../models/enums/MessageType";
 import { SaveServer } from "../servers/SaveServer";
 import { TimeUtil } from "../utils/TimeUtil";
@@ -39,7 +40,17 @@ export class DialogueController
     public getFriendList(sessionID: string): IGetFriendListDataResponse
     {
         return {
-            "Friends": [],
+            "Friends": [
+                {
+                    _id: "123456789abc",
+                    Info: {
+                        Level: 1,
+                        MemberCategory: MemberCategory.DEVELOPER,
+                        Nickname: "SPT",
+                        Side: "usec"
+                    }
+                }
+            ],
             "Ignore": [],
             "InIgnoreList": []
         };
