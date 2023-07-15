@@ -76,22 +76,30 @@ class GameCallbacks
         return this.httpResponse.getBody(this.gameController.getGameConfig(sessionID));
     }
 
+    /**
+     * Handle client/server/list
+     */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getServer(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<IServerDetails[]>
     {
-        return this.httpResponse.getBody(this.gameController.getServer());
+        return this.httpResponse.getBody(this.gameController.getServer(sessionID));
     }
 
-    // Handle client/match/group/current
+    /**
+     * Handle client/match/group/current
+     */
     public getCurrentGroup(url: string, info: IEmptyRequestData, sessionID: string): any 
     {
         return this.httpResponse.getBody(this.gameController.getCurrentGroup(sessionID));
     }
 
+    /**
+     * Handle client/checkVersion
+     */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public validateGameVersion(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<ICheckVersionResponse>
     {
-        return this.httpResponse.getBody(this.gameController.getValidGameVersion());
+        return this.httpResponse.getBody(this.gameController.getValidGameVersion(sessionID));
     }
 
     /**

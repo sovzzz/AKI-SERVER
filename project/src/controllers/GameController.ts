@@ -65,6 +65,9 @@ export class GameController
         this.locationConfig = this.configServer.getConfig(ConfigTypes.LOCATION);
     }
 
+    /**
+     * Handle client/game/start
+     */
     public gameStart(_url: string, _info: IEmptyRequestData, sessionID: string, startTimeStampMS: number): void
     {
         // Store start time in app context
@@ -152,36 +155,71 @@ export class GameController
             }
         }
     }
-    
-    /** Check for any missing assorts inside each traders assort.json data, checking against traders qeustassort.json */
-    protected validateQuestAssortUnlocksExist(): void
+
+    /**
+     * Handle client/game/config
+     */
+    public getGameConfig(sessionID: string): IGameConfigResponse
     {
-        const db = this.databaseServer.getTables();
-        const traders = db.traders;
-        const quests = db.templates.quests;
-        for (const traderId of Object.values(Traders))
-        {
-            const traderData = traders[traderId];
-            const traderAssorts = traderData?.assort;
-            if (!traderAssorts)
-            {
-                continue;
-            }
+        const config: IGameConfigResponse = {
+            languages: this.databaseServer.getTables().locales.languages,
+            ndaFree: false,
+            reportAvailable: false,
+            twitchEventMember: false,
+            lang: "en",
+            aid: sessionID,
+            taxonomy: 6,
+            activeProfileId: `pmc${sessionID}`,
+            backend: {
+                Lobby: this.httpServerHelper.getBackendUrl(),
+                Trading: this.httpServerHelper.getBackendUrl(),
+                Messaging: this.httpServerHelper.getBackendUrl(),
+                Main: this.httpServerHelper.getBackendUrl(),
+                RagFair: this.httpServerHelper.getBackendUrl()
+            },
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            utc_time: new Date().getTime() / 1000,
+            totalInGame: 1
+        };
 
-            // Merge started/success/fail quest assorts into one dictionary
-            const mergedQuestAssorts = Object.assign({}, traderData.questassort["started"], traderData.questassort["success"], traderData.questassort["fail"]);
+        return config;
+    }
 
-            // loop over all assorts for trader
-            for (const [assortKey, questKey] of Object.entries(mergedQuestAssorts))
+    /**
+     * Handle client/server/list
+     */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public getServer(sessionId: string): IServerDetails[]
+    {
+        return [
             {
-                // Does assort key exist in trader assort file
-                if (!traderAssorts.loyal_level_items[assortKey])
-                {
-                    // reverse lookup of enum key by value 
-                    this.logger.warning(this.localisationService.getText("assort-missing_quest_assort_unlock", {traderName: Object.keys(Traders)[Object.values(Traders).indexOf(traderId)], questName: quests[questKey].QuestName}));
-                }
+                ip: this.httpConfig.ip,
+                port: this.httpConfig.port
             }
-        }
+        ];
+    }
+
+    /**
+     * Handle client/match/group/current
+     */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public getCurrentGroup(sessionId: string): ICurrentGroupResponse
+    {
+        return {
+            squad: []
+        };
+    }
+
+    /**
+     * Handle client/checkVersion
+     */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public getValidGameVersion(sessionId: string): ICheckVersionResponse
+    {
+        return {
+            isvalid: true,
+            latestVersion: this.coreConfig.compatibleTarkovVersion
+        };
     }
 
     /**
@@ -447,6 +485,39 @@ export class GameController
     }
 
     /**
+     * Check for any missing assorts inside each traders assort.json data, checking against traders qeustassort.json
+     */
+    protected validateQuestAssortUnlocksExist(): void
+    {
+        const db = this.databaseServer.getTables();
+        const traders = db.traders;
+        const quests = db.templates.quests;
+        for (const traderId of Object.values(Traders))
+        {
+            const traderData = traders[traderId];
+            const traderAssorts = traderData?.assort;
+            if (!traderAssorts)
+            {
+                continue;
+            }
+
+            // Merge started/success/fail quest assorts into one dictionary
+            const mergedQuestAssorts = Object.assign({}, traderData.questassort["started"], traderData.questassort["success"], traderData.questassort["fail"]);
+
+            // loop over all assorts for trader
+            for (const [assortKey, questKey] of Object.entries(mergedQuestAssorts))
+            {
+                // Does assort key exist in trader assort file
+                if (!traderAssorts.loyal_level_items[assortKey])
+                {
+                    // reverse lookup of enum key by value 
+                    this.logger.warning(this.localisationService.getText("assort-missing_quest_assort_unlock", {traderName: Object.keys(Traders)[Object.values(Traders).indexOf(traderId)], questName: quests[questKey].QuestName}));
+                }
+            }
+        }
+    }
+
+    /**
      * Add the logged in players name to PMC name pool
      * @param pmcProfile 
      */
@@ -512,57 +583,5 @@ export class GameController
         this.logger.debug(`RAM: ${this.os.totalmem() / 1024 / 1024 / 1024}GB`);
         this.logger.debug(`PATH: ${this.encodingUtil.toBase64(process.argv[0])}`);
         this.logger.debug(`PATH: ${this.encodingUtil.toBase64(process.execPath)}`);
-    }
-
-    public getGameConfig(sessionID: string): IGameConfigResponse
-    {
-        const config: IGameConfigResponse = {
-            languages: this.databaseServer.getTables().locales.languages,
-            ndaFree: false,
-            reportAvailable: false,
-            twitchEventMember: false,
-            lang: "en",
-            aid: sessionID,
-            taxonomy: 6,
-            activeProfileId: `pmc${sessionID}`,
-            backend: {
-                Lobby: this.httpServerHelper.getBackendUrl(),
-                Trading: this.httpServerHelper.getBackendUrl(),
-                Messaging: this.httpServerHelper.getBackendUrl(),
-                Main: this.httpServerHelper.getBackendUrl(),
-                RagFair: this.httpServerHelper.getBackendUrl()
-            },
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            utc_time: new Date().getTime() / 1000,
-            totalInGame: 1
-        };
-
-        return config;
-    }
-
-    public getServer(): IServerDetails[]
-    {
-        return [
-            {
-                ip: this.httpConfig.ip,
-                port: this.httpConfig.port
-            }
-        ];
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    public getCurrentGroup(sessionId: string): ICurrentGroupResponse
-    {
-        return {
-            squad: []
-        };
-    }
-
-    public getValidGameVersion(): ICheckVersionResponse
-    {
-        return {
-            isvalid: true,
-            latestVersion: this.coreConfig.compatibleTarkovVersion
-        };
     }
 }

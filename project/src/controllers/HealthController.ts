@@ -18,6 +18,7 @@ import { ILogger } from "../models/spt/utils/ILogger";
 import { EventOutputHolder } from "../routers/EventOutputHolder";
 import { LocalisationService } from "../services/LocalisationService";
 import { PaymentService } from "../services/PaymentService";
+import { HttpResponseUtil } from "../utils/HttpResponseUtil";
 import { JsonUtil } from "../utils/JsonUtil";
 
 @injectable()
@@ -31,6 +32,7 @@ export class HealthController
         @inject("PaymentService") protected paymentService: PaymentService,
         @inject("InventoryHelper") protected inventoryHelper: InventoryHelper,
         @inject("LocalisationService") protected localisationService: LocalisationService,
+        @inject("HttpResponseUtil") protected httpResponse: HttpResponseUtil,
         @inject("HealthHelper") protected healthHelper: HealthHelper
     )
     {}
@@ -92,6 +94,7 @@ export class HealthController
     }
 
     /**
+     * Handle Eat event
      * Consume food/water outside of a raid
      * @param pmcData Player profile
      * @param body request Object
@@ -102,35 +105,33 @@ export class HealthController
     {
         let output = this.eventOutputHolder.getOutput(sessionID);
         let resourceLeft = 0;
-        let maxResource = 0;
+        let consumedItemMaxResource = 0;
 
-        for (const item of pmcData.Inventory.items)
+        const itemToConsume = pmcData.Inventory.items.find(x => x._id === body.item);
+        if (!itemToConsume)
         {
-            if (item._id !== body.item)
+            // Item not found, very bad
+            return this.httpResponse.appendErrorToOutput(output, this.localisationService.getText("health-unable_to_find_item_to_consume", body.item));
+        }
+
+        consumedItemMaxResource = this.itemHelper.getItem(itemToConsume._tpl)[1]._props.MaxResource;
+        if (consumedItemMaxResource > 1)
+        {
+            if (itemToConsume.upd.FoodDrink === undefined)
             {
-                continue;
+                itemToConsume.upd.FoodDrink = {
+                    "HpPercent": consumedItemMaxResource - body.count };
+            }
+            else
+            {
+                itemToConsume.upd.FoodDrink.HpPercent -= body.count;
             }
 
-            maxResource = this.itemHelper.getItem(item._tpl)[1]._props.MaxResource;
-            if (maxResource > 1)
-            {
-                if (item.upd.FoodDrink === undefined)
-                {
-                    item.upd.FoodDrink = { "HpPercent": maxResource - body.count };
-                }
-                else
-                {
-                    item.upd.FoodDrink.HpPercent -= body.count;
-                }
-
-                resourceLeft = item.upd.FoodDrink.HpPercent;
-            }
-
-            break;
+            resourceLeft = itemToConsume.upd.FoodDrink.HpPercent;
         }
 
         // Remove item from inventory if resource has dropped below threshold
-        if (maxResource === 1 || resourceLeft < 1)
+        if (consumedItemMaxResource === 1 || resourceLeft < 1)
         {
             output = this.inventoryHelper.removeItem(pmcData, body.item, sessionID, output);
         }
@@ -139,6 +140,7 @@ export class HealthController
     }
     
     /**
+     * Handle RestoreHealth event
      * Occurs on post-raid healing page
      * @param pmcData player profile
      * @param healthTreatmentRequest Request data from client
@@ -149,7 +151,7 @@ export class HealthController
     {
         let output = this.eventOutputHolder.getOutput(sessionID);
         const payMoneyRequest: IProcessBuyTradeRequestData = {
-            Action: "RestoreHealth",
+            Action: healthTreatmentRequest.Action,
             tid: Traders.THERAPIST,
             // eslint-disable-next-line @typescript-eslint/naming-convention
             scheme_items: healthTreatmentRequest.items,
