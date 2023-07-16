@@ -3,5 +3,9 @@
     "projectName": "SPT-AKI",
     "compatibleTarkovVersion": "0.13.1.24742",
     "serverName": "SPT Server",
-    "profileSaveIntervalSeconds": 15
+    "profileSaveIntervalSeconds": 15,
+	"fixes": {
+		"fixShotgunDispersion": true,
+		"removeModItemsFromProfile": false
+	}
 }

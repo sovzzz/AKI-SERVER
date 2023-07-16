@@ -998,10 +998,10 @@
 			"edge_of_darkness": 3
 		},
 		"accountTypeWeight": {
-			0: 15,
-			1: 1,
-			256: 3,
-			512: 3
+			"0": 15,
+			"1": 1,
+			"256": 3,
+			"512": 3
 		},
         "vestLoot": {
             "whitelist": [

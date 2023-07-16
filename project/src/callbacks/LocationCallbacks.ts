@@ -19,18 +19,21 @@ export class LocationCallbacks
     )
     { }
 
+    /** Handle client/locations */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getLocationData(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<ILocationsGenerateAllResponse>
     {
         return this.httpResponse.getBody(this.locationController.generateAll());
     }
 
+    /** Handle client/location/getLocalloot */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getLocation(url: string, info: IGetLocationRequestData, sessionID: string): IGetBodyResponseData<ILocationBase>
     {
         return this.httpResponse.getBody(this.locationController.get(info.locationId));
     }
     
+    /** Handle client/location/getAirdropLoot */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getAirdropLoot(url: string, info: IEmptyRequestData, sessionID: string): string
     {

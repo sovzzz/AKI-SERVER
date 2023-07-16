@@ -163,6 +163,22 @@ export class DialogStaticRouter extends StaticRouter
                     {
                         return this.dialogueCallbacks.deleteFriend(url, info, sessionID);
                     }
+                ),
+                new RouteAction(
+                    "/client/friend/ignore/set",
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    (url: string, info: any, sessionID: string, output: string): any => 
+                    {
+                        return this.dialogueCallbacks.ignoreFriend(url, info, sessionID);
+                    }
+                ),
+                new RouteAction(
+                    "/client/friend/ignore/remove",
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    (url: string, info: any, sessionID: string, output: string): any => 
+                    {
+                        return this.dialogueCallbacks.unIgnoreFriend(url, info, sessionID);
+                    }
                 )
             ]
         );

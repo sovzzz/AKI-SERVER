@@ -12,6 +12,7 @@ import { BodyPartHealth } from "../models/eft/common/tables/IBotBase";
 import { ICheckVersionResponse } from "../models/eft/game/ICheckVersionResponse";
 import { ICurrentGroupResponse } from "../models/eft/game/ICurrentGroupResponse";
 import { IGameConfigResponse } from "../models/eft/game/IGameConfigResponse";
+import { IGameKeepAliveResponse } from "../models/eft/game/IGameKeepAliveResponse";
 import { IServerDetails } from "../models/eft/game/IServerDetails";
 import { IAkiProfile } from "../models/eft/profile/IAkiProfile";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
@@ -73,10 +74,20 @@ export class GameController
         // Store start time in app context
         this.applicationContext.addValue(ContextVariableType.CLIENT_START_TIMESTAMP, startTimeStampMS);
 
-        this.fixShotgunDispersions();
+        if (this.coreConfig.fixes.fixShotgunDispersion)
+        {
+            this.fixShotgunDispersions();
+        }
 
-        this.openZoneService.applyZoneChangesToAllMaps();
-        this.customLocationWaveService.applyWaveChangesToAllMaps();
+        if (this.locationConfig.addOpenZonesToAllMaps)
+        {
+            this.openZoneService.applyZoneChangesToAllMaps();
+        }
+
+        if (this.locationConfig.addCustomBotWavesToMaps)
+        {
+            this.customLocationWaveService.applyWaveChangesToAllMaps();
+        }
 
         // repeatableQuests are stored by in profile.Quests due to the responses of the client (e.g. Quests in offraidData)
         // Since we don't want to clutter the Quests list, we need to remove all completed (failed / successful) repeatable quests.
@@ -86,7 +97,7 @@ export class GameController
             const fullProfile = this.profileHelper.getFullProfile(sessionID);
             const pmcProfile = fullProfile.characters.pmc;
 
-            this.logger.debug(`Started game with sessionId: ${sessionID}`);
+            this.logger.debug(`Started game with sessionId: ${sessionID} ${pmcProfile.Info?.Nickname}`);
 
             if (pmcProfile.Health)
             {
@@ -126,7 +137,7 @@ export class GameController
 
             if (pmcProfile.Inventory)
             {
-                this.profileFixerService.checkForOrphanedModdedItems(pmcProfile);
+                this.profileFixerService.checkForOrphanedModdedItems(sessionID, pmcProfile);
             }
             
             this.logProfileDetails(fullProfile);
@@ -219,6 +230,19 @@ export class GameController
         return {
             isvalid: true,
             latestVersion: this.coreConfig.compatibleTarkovVersion
+        };
+    }
+
+    /**
+     * Handle client/game/keepalive
+     */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public getKeepAlive(sessionId: string): IGameKeepAliveResponse
+    {
+        return {
+            msg: "OK",
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            utc_time: new Date().getTime() / 1000
         };
     }
 

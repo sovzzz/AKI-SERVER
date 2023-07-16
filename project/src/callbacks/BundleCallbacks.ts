@@ -36,6 +36,9 @@ export class BundleCallbacks
         this.httpFileUtil.sendFile(resp, bundle.path);
     }
 
+    /**
+     * Handle singleplayer/bundles
+     */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getBundles(url: string, info: any, sessionID: string): string
     {

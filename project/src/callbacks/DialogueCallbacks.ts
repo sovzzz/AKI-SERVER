@@ -44,7 +44,7 @@ export class DialogueCallbacks implements OnUpdate
     }
 
     /**
-     * Handles client/friend/list
+     * Handle client/friend/list
      * @returns IGetFriendListDataResponse
      */
     public getFriendList(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<IGetFriendListDataResponse>
@@ -53,8 +53,8 @@ export class DialogueCallbacks implements OnUpdate
     }
 
     /**
-     * Handles client/chatServer/list
-     * @returns 
+     * Handle client/chatServer/list
+     * @returns IChatServer[]
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getChatServerList(url: string, info: IGetChatServerListRequestData, sessionID: string): IGetBodyResponseData<IChatServer[]>
@@ -90,7 +90,7 @@ export class DialogueCallbacks implements OnUpdate
     /** Handle client/mail/dialog/view */
     public getMailDialogView(url: string, info: IGetMailDialogViewRequestData, sessionID: string): IGetBodyResponseData<IGetMailDialogViewResponseData>
     {
-        return this.httpResponse.getBody(this.dialogueController.generateDialogueView(info.dialogId, sessionID));
+        return this.httpResponse.getBody(this.dialogueController.generateDialogueView(info, sessionID));
     }
 
     /** Handle client/mail/dialog/info */
@@ -106,18 +106,21 @@ export class DialogueCallbacks implements OnUpdate
         return this.httpResponse.emptyArrayResponse();
     }
 
+    /** Handle client/mail/dialog/pin */
     public pinDialog(url: string, info: IPinDialogRequestData, sessionID: string): IGetBodyResponseData<any[]>
     {
         this.dialogueController.setDialoguePin(info.dialogId, true, sessionID);
         return this.httpResponse.emptyArrayResponse();
     }
 
+    /** Handle client/mail/dialog/unpin */
     public unpinDialog(url: string, info: IPinDialogRequestData, sessionID: string): IGetBodyResponseData<any[]>
     {
         this.dialogueController.setDialoguePin(info.dialogId, false, sessionID);
         return this.httpResponse.emptyArrayResponse();
     }
 
+    /** Handle client/mail/dialog/read */
     public setRead(url: string, info: ISetDialogReadRequestData, sessionID: string): IGetBodyResponseData<any[]>
     {
         this.dialogueController.setRead(info.dialogs, sessionID);
@@ -125,12 +128,18 @@ export class DialogueCallbacks implements OnUpdate
     }
 
     /**
-     * Handles client/mail/dialog/getAllAttachments
+     * Handle client/mail/dialog/getAllAttachments
      * @returns IGetAllAttachmentsResponse
      */
     public getAllAttachments(url: string, info: IGetAllAttachmentsRequestData, sessionID: string): IGetBodyResponseData<IGetAllAttachmentsResponse>
     {
         return this.httpResponse.getBody(this.dialogueController.getAllAttachments(info.dialogId, sessionID));
+    }
+
+    /** Handle client/mail/msg/send */
+    public sendMessage(url: string, request: ISendMessageRequest, sessionID: string): IGetBodyResponseData<string>
+    {
+        return this.httpResponse.getBody(this.dialogueController.sendMessage(sessionID, request));
     }
 
     /** Handle client/friend/request/list/outbox */
@@ -176,16 +185,25 @@ export class DialogueCallbacks implements OnUpdate
         return this.httpResponse.getBody(true);
     }
 
+    /** Handle client/friend/delete */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public deleteFriend(url: string, request: IDeleteFriendRequest, sessionID: string): INullResponseData
     {
         return this.httpResponse.nullResponse();
     }
 
+    /** Handle client/friend/ignore/set */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    public sendMessage(url: string, request: ISendMessageRequest, sessionID: string): IGetBodyResponseData<number>
+    public ignoreFriend(url: string, request: {uid: string}, sessionID: string): any
     {
-        return this.httpResponse.getBody(1);
+        return this.httpResponse.nullResponse();
+    }
+
+    /** Handle client/friend/ignore/set */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public unIgnoreFriend(url: string, request: {uid: string}, sessionID: string): any
+    {
+        return this.httpResponse.nullResponse();
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -57,6 +57,7 @@ export class MatchController
         return this.matchConfig.enabled;
     }
 
+    /** Handle raid/profile/list */
     public getProfile(info: IGetProfileRequestData): IPmcData[]
     {
         if (info.profileId.includes("pmcAID"))
@@ -72,16 +73,20 @@ export class MatchController
         return [];
     }
 
+    /** Handle client/match/group/create */
     public createGroup(sessionID: string, info: ICreateGroupRequestData): any
     {
         return this.matchLocationService.createGroup(sessionID, info);
     }
 
+    /** Handle client/match/group/delete */
     public deleteGroup(info: any): void
     {
         this.matchLocationService.deleteGroup(info);
     }
 
+    /** Handle match/group/start_game */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public joinMatch(info: IJoinMatchRequestData, sessionId: string): IJoinMatchResult
     {
         const output: IJoinMatchResult = {
@@ -109,22 +114,24 @@ export class MatchController
         return output;
     }
 
+    /** Handle client/match/group/status */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getGroupStatus(info: IGetGroupStatusRequestData): any
     {
         return {
-            "players": [],
+            players: [],
             maxPveCountExceeded: false
         };
     }
 
     /**
      * Handle /client/raid/configuration
-     * @param request 
-     * @param sessionID 
+     * @param request Raid config request
+     * @param sessionID Session id
      */
     public startOfflineRaid(request: IGetRaidConfigurationRequestData, sessionID: string): void
     {
+        // Store request data for access during bot generation
         this.applicationContext.addValue(ContextVariableType.RAID_CONFIGURATION, request);
 
         //TODO: add code to strip PMC of equipment now they've started the raid
@@ -156,6 +163,7 @@ export class MatchController
         return botDifficulty;
     }
 
+    /** Handle client/match/offline/end */
     public endOfflineRaid(info: IEndOfflineRaidRequestData, sessionId: string): void
     {       
         const pmcData: IPmcData = this.profileHelper.getPmcProfile(sessionId);

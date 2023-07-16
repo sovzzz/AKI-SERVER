@@ -23,6 +23,7 @@ import { ISearchFriendResponse } from "../models/eft/profile/ISearchFriendRespon
 import { IValidateNicknameRequestData } from "../models/eft/profile/IValidateNicknameRequestData";
 import { MessageType } from "../models/enums/MessageType";
 import { QuestStatus } from "../models/enums/QuestStatus";
+import { ILogger } from "../models/spt/utils/ILogger";
 import { EventOutputHolder } from "../routers/EventOutputHolder";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { SaveServer } from "../servers/SaveServer";
@@ -34,6 +35,7 @@ import { TimeUtil } from "../utils/TimeUtil";
 export class ProfileController
 {
     constructor(
+        @inject("WinstonLogger") protected logger: ILogger,
         @inject("HashUtil") protected hashUtil: HashUtil,
         @inject("TimeUtil") protected timeUtil: TimeUtil,
         @inject("SaveServer") protected saveServer: SaveServer,
@@ -49,6 +51,9 @@ export class ProfileController
     )
     { }
 
+    /**
+     * Handle /launcher/profiles
+     */
     public getMiniProfiles(): IMiniProfile[]
     {
         const miniProfiles: IMiniProfile[] = [];
@@ -61,6 +66,9 @@ export class ProfileController
         return miniProfiles;
     }
 
+    /**
+     * Handle launcher/profile/info
+     */
     public getMiniProfile(sessionID: string): any
     {
         const maxlvl = this.profileHelper.getMaxLevel();
@@ -100,24 +108,27 @@ export class ProfileController
         return result;
     }
 
+    /**
+     * Handle client/game/profile/list
+     */
     public getCompleteProfile(sessionID: string): IPmcData[]
     {
         return this.profileHelper.getCompleteProfile(sessionID);
     }
 
+    /**
+     * Handle client/game/profile/create
+     */
     public createProfile(info: IProfileCreateRequestData, sessionID: string): void
     {
         const account = this.saveServer.getProfile(sessionID).info;
         const profile: TemplateSide = this.databaseServer.getTables().templates.profiles[account.edition][info.side.toLowerCase()];
         const pmcData = profile.character;
 
-        // delete existing profile
-        if (sessionID in this.saveServer.getProfiles())
-        {
-            this.saveServer.deleteProfileById(sessionID);
-        }
+        // Delete existing profile
+        this.deleteProfileBySessionId(sessionID);
 
-        // pmc
+        // PMC
         pmcData._id = `pmc${sessionID}`;
         pmcData.aid = sessionID;
         pmcData.savage = `scav${sessionID}`;
@@ -176,20 +187,40 @@ export class ProfileController
 
         this.saveServer.getProfile(sessionID).characters.scav = this.generatePlayerScav(sessionID);
 
-        for (const traderID in this.databaseServer.getTables().traders)
-        {
-            this.traderHelper.resetTrader(sessionID, traderID);
-        }
+        this.resetAllTradersInProfile(sessionID);
 
-        // store minimal profile and reload it
+        // Store minimal profile and reload it
         this.saveServer.saveProfile(sessionID);
         this.saveServer.loadProfile(sessionID);
 
-        // completed account creation
+        // Completed account creation
         this.saveServer.getProfile(sessionID).info.wipe = false;
         this.saveServer.saveProfile(sessionID);
     }
 
+    /**
+     * Delete a profile
+     * @param sessionID Id of profile to delete
+     */
+    protected deleteProfileBySessionId(sessionID: string): void
+    {
+        if (sessionID in this.saveServer.getProfiles())
+        {
+            this.saveServer.deleteProfileById(sessionID);
+        }
+        else
+        {
+            this.logger.warning(`Unable to delete profile with id: ${sessionID}, no profile with that id found`);
+        }
+    }
+
+    /**
+     * Iterate over all quests in player profile, inspect rewards for the quests current state (accepted/completed)
+     * and send rewards to them in mail
+     * @param profileDetails Player profile
+     * @param sessionID Session id
+     * @param response Event router response
+     */
     protected givePlayerStartingQuestRewards(profileDetails: IAkiProfile, sessionID: string, response: IItemEventRouterResponse): void 
     {
         for (const quest of profileDetails.characters.pmc.Quests) 
@@ -206,8 +237,20 @@ export class ProfileController
     }
 
     /**
+     * For each trader reset their state to what a level 1 player would see
+     * @param sessionID Session id of profile to reset
+     */
+    protected resetAllTradersInProfile(sessionID: string): void
+    {
+        for (const traderID in this.databaseServer.getTables().traders)
+        {
+            this.traderHelper.resetTrader(sessionID, traderID);
+        }
+    }
+
+    /**
      * Generate a player scav object
-     * pmc profile MUST exist first before pscav can be generated
+     * PMC profile MUST exist first before pscav can be generated
      * @param sessionID 
      * @returns IPmcData object
      */
@@ -216,6 +259,9 @@ export class ProfileController
         return this.playerScavGenerator.generate(sessionID);
     }
 
+    /**
+     * Handle client/game/profile/nickname/validate
+     */
     public validateNickname(info: IValidateNicknameRequestData, sessionID: string): string
     {
         if (info.nickname.length < 3)
@@ -231,6 +277,10 @@ export class ProfileController
         return "OK";
     }
 
+    /**
+     * Handle client/game/profile/nickname/change event
+     * Client allows player to adjust their profile name
+     */
     public changeNickname(info: IProfileChangeNicknameRequestData, sessionID: string): string
     {
         const output = this.validateNickname(info, sessionID);
@@ -246,12 +296,18 @@ export class ProfileController
         return output;
     }
 
+    /**
+     * Handle client/game/profile/voice/change event
+     */
     public changeVoice(info: IProfileChangeVoiceRequestData, sessionID: string): void
     {
         const pmcData = this.profileHelper.getPmcProfile(sessionID);
         pmcData.Info.Voice = info.voice;
     }
 
+    /**
+     * Handle client/game/profile/search
+     */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getFriends(info: ISearchFriendRequestData, sessionID: string): ISearchFriendResponse[]
     {

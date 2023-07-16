@@ -39,12 +39,15 @@ export class NotifierCallbacks
             .then((text) => this.httpServerHelper.sendTextJson(resp, text));
     }
 
+    /** Handle push/notifier/get */
+    /** Handle push/notifier/getwebsocket */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getNotifier(url: string, info: any, sessionID: string): IGetBodyResponseData<any[]>
     {
         return this.httpResponse.emptyArrayResponse();
     }
 
+    /** Handle client/notifier/channel/create */
     public createNotifierChannel(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<INotifierChannel>
     {
         return this.httpResponse.getBody(this.notifierController.getChannel(sessionID));

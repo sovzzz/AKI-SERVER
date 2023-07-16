@@ -58,6 +58,7 @@ export class QuestController
     }
 
     /**
+     * Handle client/quest/list
      * Get all quests visible to player
      * Exclude quests with incomplete preconditions (level/loyalty)
      * @param sessionID session id
@@ -237,6 +238,7 @@ export class QuestController
     }
 
     /**
+     * Handle QuestAccept event
      * Handle the client accepting a quest and starting it
      * Send starting rewards if any to player and
      * Send start notification if any to player
@@ -359,9 +361,10 @@ export class QuestController
     }
 
     /**
+     * Handle QuestComplete event
      * Update completed quest in profile
      * Add newly unlocked quests to profile
-     * Also recalculate thier level due to exp rewards
+     * Also recalculate their level due to exp rewards
      * @param pmcData Player profile
      * @param body Completed quest request
      * @param sessionID Session id
@@ -535,7 +538,7 @@ export class QuestController
     }
 
     /**
-     * 
+     * Handle QuestHandover event
      * @param pmcData Player profile
      * @param handoverQuestRequest handover item request
      * @param sessionID Session id

@@ -12,11 +12,13 @@ export class WishlistCallbacks
         @inject("WishlistController") protected wishlistController: WishlistController)
     { }
 
+    /** Handle AddToWishList event */
     public addToWishlist(pmcData: IPmcData, body: IWishlistActionData, sessionID: string): IItemEventRouterResponse
     {
         return this.wishlistController.addToWishList(pmcData, body, sessionID);
     }
 
+    /** Handle RemoveFromWishList event */
     public removeFromWishlist(pmcData: IPmcData, body: IWishlistActionData, sessionID: string): IItemEventRouterResponse
     {
         return this.wishlistController.removeFromWishList(pmcData, body, sessionID);

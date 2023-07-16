@@ -34,6 +34,9 @@ export class BundleLoader
     )
     { }
 
+    /**
+     * Handle singleplayer/bundles
+     */
     public getBundles(local: boolean): BundleInfo[]
     {
         const result: BundleInfo[] = [];
@@ -71,7 +74,8 @@ export class BundleLoader
         }
     }
 
-    public addBundle(key: string, b: BundleInfo): void {
+    public addBundle(key: string, b: BundleInfo): void 
+    {
         this.bundles[key] = b;
     }
 }

@@ -161,18 +161,18 @@ export class DialogueHelper
         // The last message of the dialogue should be shown on the preview.
         const message = dialogue.messages[dialogue.messages.length - 1];
         const result: MessagePreview = {
-            dt: message.dt,
-            type: message.type,
-            templateId: message.templateId,
+            dt: message?.dt,
+            type: message?.type,
+            templateId: message?.templateId,
             uid: dialogue._id
         };
 
-        if (message.text)
+        if (message?.text)
         {
             result.text = message.text;
         }
 
-        if (message.systemData)
+        if (message?.systemData)
         {
             result.systemData = message.systemData;
         }

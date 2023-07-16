@@ -19,16 +19,19 @@ export class PresetBuildCallbacks
         @inject("PresetBuildController") protected presetBuildController: PresetBuildController)
     { }
 
+    /** Handle client/handbook/builds/my/list */
     public getHandbookUserlist(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<WeaponBuild[]>
     {
         return this.httpResponse.getBody(this.presetBuildController.getUserBuilds(sessionID));
     }
 
+    /** Handle SaveBuild event */
     public saveBuild(pmcData: IPmcData, body: IPresetBuildActionRequestData, sessionID: string): IItemEventRouterResponse
     {
         return this.presetBuildController.saveBuild(pmcData, body, sessionID);
     }
 
+    /** Handle RemoveBuild event*/
     public removeBuild(pmcData: IPmcData, body: IPresetBuildActionRequestData, sessionID: string): IItemEventRouterResponse
     {
         return this.presetBuildController.removeBuild(pmcData, body, sessionID);

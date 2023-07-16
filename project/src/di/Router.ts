@@ -5,7 +5,7 @@ import { IAkiProfile } from "../models/eft/profile/IAkiProfile";
 export class Router 
 {
 
-    private handledRoutes: HandledRoute[] = [];
+    protected handledRoutes: HandledRoute[] = [];
 
     public getTopLevelRoute(): string 
     {
@@ -17,7 +17,7 @@ export class Router
         throw new Error("This method needs to be overrode by the router classes");
     }
 
-    private getInternalHandledRoutes(): HandledRoute[] 
+    protected getInternalHandledRoutes(): HandledRoute[] 
     {
         if (this.handledRoutes.length === 0) 
         {

@@ -21,6 +21,7 @@ export class WeatherController
         this.weatherConfig = this.configServer.getConfig(ConfigTypes.WEATHER);
     }
 
+    /** Handle client/weather */
     public generate(): IWeatherData
     {
         let result: IWeatherData = {

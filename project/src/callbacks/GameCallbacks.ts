@@ -109,11 +109,7 @@ class GameCallbacks
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public gameKeepalive(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<IGameKeepAliveResponse>
     {
-        return this.httpResponse.getBody({
-            msg: "OK",
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            utc_time: new Date().getTime() / 1000
-        });
+        return this.httpResponse.getBody(this.gameController.getKeepAlive(sessionID));
     }
 
     /**

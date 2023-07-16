@@ -88,6 +88,7 @@ export class HideoutController
     }
 
     /**
+     * Handle HideoutUpgrade event
      * Start a hideout area upgrade
      * @param pmcData Player profile
      * @param request upgrade start request
@@ -158,6 +159,7 @@ export class HideoutController
     }
 
     /**
+     * Handle HideoutUpgradeComplete event
      * Complete a hideout area upgrade
      * @param pmcData Player profile
      * @param request Completed upgrade request
@@ -259,6 +261,7 @@ export class HideoutController
     }
 
     /**
+     * Handle HideoutTakeItemsFromAreaSlots event
      * Remove item from hideout area and place into player inventory
      * @param pmcData Player profile
      * @param request Take item out of area request
@@ -333,6 +336,7 @@ export class HideoutController
     }
 
     /**
+     * Handle HideoutToggleArea event
      * Toggle area on/off
      * @param pmcData Player profile
      * @param request Toggle area request
@@ -356,6 +360,7 @@ export class HideoutController
     }
 
     /**
+     * Handle HideoutSingleProductionStart event
      * Start production for an item from hideout area
      * @param pmcData Player profile
      * @param body Start prodution of single item request
@@ -392,6 +397,7 @@ export class HideoutController
     }
 
     /**
+     * Handle HideoutScavCaseProductionStart event
      * Handles event after clicking 'start' on the scav case hideout page
      * @param pmcData player profile
      * @param body client request object
@@ -486,6 +492,7 @@ export class HideoutController
     }
 
     /**
+     * Handle HideoutTakeProduction event
      * Take completed item out of hideout area and place into player inventory
      * @param pmcData Player profile
      * @param request Remove production from area request

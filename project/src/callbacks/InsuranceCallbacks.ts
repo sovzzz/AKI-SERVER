@@ -40,7 +40,7 @@ export class InsuranceCallbacks implements OnUpdate
     }
 
     /**
-     * Handle Insure
+     * Handle Insure event
      * @returns IItemEventRouterResponse
      */
     public insure(pmcData: IPmcData, body: IInsureRequestData, sessionID: string): IItemEventRouterResponse

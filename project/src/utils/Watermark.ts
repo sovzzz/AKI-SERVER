@@ -125,6 +125,7 @@ export class Watermark
     }
 
     /**
+     * Handle singleplayer/settings/version
      * Get text shown in game on screen, can't be translated as it breaks bsgs client when certian characters are used
      * @returns string
      */
@@ -138,19 +139,19 @@ export class Watermark
     }
 
     /** Set window title */
-    public setTitle(): void
+    protected setTitle(): void
     {
         process.title = this.versionLabel;
     }
 
     /** Reset console cursor to top */
-    public resetCursor(): void
+    protected resetCursor(): void
     {
         process.stdout.write("\u001B[2J\u001B[0;0f");
     }
 
     /** Draw the watermark */
-    public draw(): void
+    protected draw(): void
     {
         const result = [];
 

@@ -648,4 +648,6 @@
         "ignoreMaps": ["base", "develop", "hideout", "privatearea", "suburbs", "terminal", "town"]
     },
     "fitLootIntoContainerAttempts": 2
+	"addOpenZonesToAllMaps": true,
+	"addCustomBotWavesToMaps": true,
 }

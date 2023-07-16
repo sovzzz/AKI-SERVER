@@ -23,8 +23,8 @@ export class CustomizationCallbacks
     { }
 
     /**
-     * Handles client/trading/customization/storage
-     * @returns 
+     * Handle client/trading/customization/storage
+     * @returns IGetSuitsResponse
      */
     public getSuits(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<IGetSuitsResponse>
     {
@@ -36,7 +36,7 @@ export class CustomizationCallbacks
     }
 
     /**
-     * Handles client/trading/customization
+     * Handle client/trading/customization
      * @returns ISuit[]
      */
     public getTraderSuits(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<ISuit[]>
@@ -47,11 +47,17 @@ export class CustomizationCallbacks
         return this.httpResponse.getBody(this.customizationController.getTraderSuits(traderID, sessionID));
     }
 
+    /**
+     * Handle CustomizationWear event
+     */
     public wearClothing(pmcData: IPmcData, body: IWearClothingRequestData, sessionID: string): IItemEventRouterResponse
     {
         return this.customizationController.wearClothing(pmcData, body, sessionID);
     }
 
+    /**
+     * Handle CustomizationBuy event
+     */
     public buyClothing(pmcData: IPmcData, body: IBuyClothingRequestData, sessionID: string): IItemEventRouterResponse
     {
         return this.customizationController.buyClothing(pmcData, body, sessionID);

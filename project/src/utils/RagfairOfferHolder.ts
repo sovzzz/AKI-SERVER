@@ -2,9 +2,9 @@ import { IRagfairOffer } from "../models/eft/ragfair/IRagfairOffer";
 
 export class RagfairOfferHolder
 {
-    private offersById: Map<string, IRagfairOffer>;
-    private offersByTemplate: Map<string, Map<string, IRagfairOffer>>;
-    private offersByTrader: Map<string, Map<string, IRagfairOffer>>;
+    protected offersById: Map<string, IRagfairOffer>;
+    protected offersByTemplate: Map<string, Map<string, IRagfairOffer>>;
+    protected offersByTrader: Map<string, Map<string, IRagfairOffer>>;
 
     constructor()
     {
@@ -96,7 +96,7 @@ export class RagfairOfferHolder
         return this.getOffers().filter(o => this.isStale(o, time));
     }
 
-    private addOfferByTemplates(template: string, offer: IRagfairOffer) 
+    protected addOfferByTemplates(template: string, offer: IRagfairOffer): void
     {
         if (this.offersByTemplate.has(template))
         {
@@ -110,7 +110,7 @@ export class RagfairOfferHolder
         }
     }
 
-    private addOfferByTrader(trader: string, offer: IRagfairOffer): void
+    protected addOfferByTrader(trader: string, offer: IRagfairOffer): void
     {
         if (this.offersByTrader.has(trader))
         {

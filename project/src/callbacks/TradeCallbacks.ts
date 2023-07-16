@@ -17,7 +17,7 @@ export class TradeCallbacks
     { }
 
     /**
-     * Handle client/game/profile/items/moving TradingConfirm
+     * Handle client/game/profile/items/moving TradingConfirm event
      */
     public processTrade(pmcData: IPmcData, body: IProcessBaseTradeRequestData, sessionID: string): IItemEventRouterResponse
     {
@@ -25,6 +25,7 @@ export class TradeCallbacks
         return this.tradeController.confirmTrading(pmcData, body, sessionID);
     }
 
+    /** Handle RagFairBuyOffer event */
     public processRagfairTrade(pmcData: IPmcData, body: IProcessRagfairTradeRequestData, sessionID: string): IItemEventRouterResponse
     {
         return this.tradeController.confirmRagfairTrading(pmcData, body, sessionID);

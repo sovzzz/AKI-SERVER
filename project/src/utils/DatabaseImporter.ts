@@ -111,7 +111,7 @@ export class DatabaseImporter implements OnLoad
         this.databaseServer.setTables(dataToImport);
     }
     
-    private onReadValidate(fileWithPath: string, data: string): void
+    protected onReadValidate(fileWithPath: string, data: string): void
     {
         // Validate files
         if (globalThis.G_RELEASE_CONFIGURATION && this.hashedFile && !this.validateFile(fileWithPath, data))
@@ -123,7 +123,7 @@ export class DatabaseImporter implements OnLoad
         return "aki-database";
     }
     
-    private validateFile(filePathAndName: string, fileData: any): boolean
+    protected validateFile(filePathAndName: string, fileData: any): boolean
     {
         try 
         {

@@ -6,7 +6,6 @@ import { IEmptyRequestData } from "../models/eft/common/IEmptyRequestData";
 import { IGlobals } from "../models/eft/common/IGlobals";
 import { ICustomizationItem } from "../models/eft/common/tables/ICustomizationItem";
 import { IHandbookBase } from "../models/eft/common/tables/IHandbookBase";
-import { IQuest } from "../models/eft/common/tables/IQuest";
 import { IGetItemPricesResponse } from "../models/eft/game/IGetItemPricesResponse";
 import { IHideoutArea } from "../models/eft/hideout/IHideoutArea";
 import { IHideoutProduction } from "../models/eft/hideout/IHideoutProduction";
@@ -33,7 +32,7 @@ export class DataCallbacks
     { }
 
     /**
-     * Handles client/settings
+     * Handle client/settings
      * @returns ISettingsBase
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -43,7 +42,7 @@ export class DataCallbacks
     }
 
     /**
-     * Handles client/globals
+     * Handle client/globals
      * @returns IGlobals
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -54,7 +53,7 @@ export class DataCallbacks
     }
 
     /**
-     * Handles client/items
+     * Handle client/items
      * @returns string
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -64,7 +63,7 @@ export class DataCallbacks
     }
 
     /**
-     * Handles client/handbook/templates
+     * Handle client/handbook/templates
      * @returns IHandbookBase
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -74,7 +73,7 @@ export class DataCallbacks
     }
 
     /**
-     * Handles client/customization
+     * Handle client/customization
      * @returns Record<string, ICustomizationItem
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -84,7 +83,7 @@ export class DataCallbacks
     }
 
     /**
-     * Handles client/account/customization
+     * Handle client/account/customization
      * @returns string[]
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -93,12 +92,10 @@ export class DataCallbacks
         return this.httpResponse.getBody(this.databaseServer.getTables().templates.character);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    public getTemplateQuests(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<IQuest[]>
-    {
-        return this.httpResponse.getBody(Object.values(this.databaseServer.getTables().templates.quests));
-    }
-
+    /**
+     * Handle client/hideout/settings
+     * @returns IHideoutSettingsBase
+     */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getHideoutSettings(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<IHideoutSettingsBase>
     {
@@ -123,18 +120,27 @@ export class DataCallbacks
         return this.httpResponse.getBody(this.databaseServer.getTables().hideout.scavcase);
     }
 
+    /**
+     * Handle client/languages
+     */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getLocalesLanguages(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<Record<string, string>>
     {
         return this.httpResponse.getBody(this.databaseServer.getTables().locales.languages);
     }
 
+    /**
+     * Handle client/menu/locale
+     */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getLocalesMenu(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<string>
     {
         return this.httpResponse.getBody(this.databaseServer.getTables().locales.menu[url.replace("/client/menu/locale/", "")]);
     }
 
+    /**
+     * Handle client/locale
+     */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getLocalesGlobal(url: string, info: IEmptyRequestData, sessionID: string): string
     {

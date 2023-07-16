@@ -66,6 +66,7 @@ export class InventoryCallbacks
         return this.inventoryController.transferItem(pmcData, body, sessionID);
     }
 
+    /** Handle Swap */
     // TODO: how is this triggered
     public swapItem(pmcData: IPmcData, body: IInventorySwapRequestData, sessionID: string): IItemEventRouterResponse
     {
@@ -97,11 +98,13 @@ export class InventoryCallbacks
         return this.inventoryController.examineItem(pmcData, body, sessionID);
     }
 
+    /** Handle ReadEncyclopedia */
     public readEncyclopedia(pmcData: IPmcData, body: IInventoryReadEncyclopediaRequestData, sessionID: string): IItemEventRouterResponse
     {
         return this.inventoryController.readEncyclopedia(pmcData, body, sessionID);
     }
 
+    /** Handle ApplyInventoryChanges */
     public sortInventory(pmcData: IPmcData, body: IInventorySortRequestData, sessionID: string): IItemEventRouterResponse
     {
         return this.inventoryController.sortInventory(pmcData, body, sessionID);
@@ -122,6 +125,7 @@ export class InventoryCallbacks
         return this.inventoryController.editMapMarker(pmcData, body, sessionID);
     }
 
+    /** Handle OpenRandomLootContainer */
     public openRandomLootContainer(pmcData: IPmcData, body: IOpenRandomLootContainerRequestData, sessionID: string): IItemEventRouterResponse
     {
         return this.inventoryController.openRandomLootContainer(pmcData, body, sessionID);
