@@ -169,6 +169,9 @@ export class MatchController
         const pmcData: IPmcData = this.profileHelper.getPmcProfile(sessionId);
         const extractName = info.exitName;
 
+        // Save time spent in raid
+        pmcData.Stats.TotalInGameTime += info.raidSeconds;
+
         // clean up cached bots now raid is over
         this.botGenerationCacheService.clearStoredBots();
 
@@ -182,7 +185,7 @@ export class MatchController
     }
 
     /**
-     * Is extract by car
+     * Was extract by car
      * @param extractName name of extract
      * @returns true if car extract
      */

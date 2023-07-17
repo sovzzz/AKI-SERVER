@@ -247,6 +247,10 @@ export class ProfileHelper
         return this.saveServer.getProfile(sessionID).characters.scav;
     }
 
+    /**
+     * Get baseline counter values for a fresh profile
+     * @returns Stats
+     */
     public getDefaultCounters(): Stats
     {
         return {
