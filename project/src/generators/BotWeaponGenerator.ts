@@ -5,7 +5,7 @@ import { BotWeaponGeneratorHelper } from "../helpers/BotWeaponGeneratorHelper";
 import { ItemHelper } from "../helpers/ItemHelper";
 import { WeightedRandomHelper } from "../helpers/WeightedRandomHelper";
 import { MinMax } from "../models/common/MinMax";
-import { Preset } from "../models/eft/common/IGlobals";
+import { IPreset } from "../models/eft/common/IGlobals";
 import { Inventory as PmcInventory } from "../models/eft/common/tables/IBotBase";
 import { Inventory, ModsChances } from "../models/eft/common/tables/IBotType";
 import { Item } from "../models/eft/common/tables/IItem";
@@ -193,7 +193,7 @@ export class BotWeaponGenerator
         const weaponMods = [];
 
         // TODO: Right now, preset weapons trigger a lot of warnings regarding missing ammo in magazines & such
-        let preset: Preset;
+        let preset: IPreset;
         for (const presetObj of Object.values(this.databaseServer.getTables().globals.ItemPresets))
         {
             if (presetObj._items[0]._tpl === weaponTpl)

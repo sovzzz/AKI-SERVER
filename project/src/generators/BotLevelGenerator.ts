@@ -2,7 +2,7 @@ import { inject, injectable } from "tsyringe";
 
 import { MinMax } from "../models/common/MinMax";
 import { IRandomisedBotLevelResult } from "../models/eft/bot/IRandomisedBotLevelResult";
-import { ExpTable } from "../models/eft/common/IGlobals";
+import { IExpTable } from "../models/eft/common/IGlobals";
 import { IBotBase } from "../models/eft/common/tables/IBotBase";
 import { BotGenerationDetails } from "../models/spt/bots/BotGenerationDetails";
 import { ILogger } from "../models/spt/utils/ILogger";
@@ -56,7 +56,7 @@ export class BotLevelGenerator
      * @param relativeDeltaMax max delta above player level to go
      * @returns highest level possible for bot
      */
-    protected getHighestRelativeBotLevel(playerLevel: number, relativeDeltaMax: number, levelDetails: MinMax, expTable: ExpTable[]): number
+    protected getHighestRelativeBotLevel(playerLevel: number, relativeDeltaMax: number, levelDetails: MinMax, expTable: IExpTable[]): number
     {
         const maxPossibleLevel = Math.min(levelDetails.max, expTable.length);
 

@@ -1,5 +1,5 @@
 import { inject, injectable } from "tsyringe";
-import { Preset } from "../models/eft/common/IGlobals";
+import { IPreset } from "../models/eft/common/IGlobals";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { JsonUtil } from "../utils/JsonUtil";
 
@@ -7,7 +7,7 @@ import { JsonUtil } from "../utils/JsonUtil";
 export class PresetHelper
 {
     protected lookup: Record<string, string[]> = {};
-    protected defaultPresets: Record<string, Preset>;
+    protected defaultPresets: Record<string, IPreset>;
 
     constructor(
         @inject("JsonUtil") protected jsonUtil: JsonUtil,
@@ -20,7 +20,7 @@ export class PresetHelper
         this.lookup = input;
     }
 
-    public getDefaultPresets(): Record<string, Preset>
+    public getDefaultPresets(): Record<string, IPreset>
     {
         if (!this.defaultPresets)
         {
@@ -46,12 +46,12 @@ export class PresetHelper
         return templateId in this.lookup;
     }
 
-    public getPreset(id: string): Preset
+    public getPreset(id: string): IPreset
     {
         return this.jsonUtil.clone(this.databaseServer.getTables().globals.ItemPresets[id]);
     }
 
-    public getPresets(templateId: string): Preset[]
+    public getPresets(templateId: string): IPreset[]
     {
         if (!this.hasPreset(templateId))
         {
@@ -69,7 +69,7 @@ export class PresetHelper
         return presets;
     }
 
-    public getDefaultPreset(templateId: string): Preset
+    public getDefaultPreset(templateId: string): IPreset
     {
         if (!this.hasPreset(templateId))
         {

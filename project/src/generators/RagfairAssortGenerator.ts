@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
 import { ItemHelper } from "../helpers/ItemHelper";
-import { Preset } from "../models/eft/common/IGlobals";
+import { IPreset } from "../models/eft/common/IGlobals";
 import { Item } from "../models/eft/common/tables/IItem";
 import { BaseClasses } from "../models/enums/BaseClasses";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
@@ -104,7 +104,7 @@ export class RagfairAssortGenerator
      * Get presets from globals.json
      * @returns Preset object array
      */
-    protected getPresets(): Preset[]
+    protected getPresets(): IPreset[]
     {
         const presets = Object.values(this.databaseServer.getTables().globals.ItemPresets);
         return presets;
@@ -114,7 +114,7 @@ export class RagfairAssortGenerator
      * Get default presets from globals.json
      * @returns Preset object array
      */
-    protected getDefaultPresets(): Preset[]
+    protected getDefaultPresets(): IPreset[]
     {
         return this.getPresets().filter(x => x._encyclopedia);
     }

@@ -4,7 +4,7 @@ import { InventoryHelper } from "../helpers/InventoryHelper";
 import { ItemHelper } from "../helpers/ItemHelper";
 import { PresetHelper } from "../helpers/PresetHelper";
 import { WeightedRandomHelper } from "../helpers/WeightedRandomHelper";
-import { Preset } from "../models/eft/common/IGlobals";
+import { IPreset } from "../models/eft/common/IGlobals";
 import { ITemplateItem } from "../models/eft/common/tables/ITemplateItem";
 import { AddItem } from "../models/eft/inventory/IAddItemRequestData";
 import { BaseClasses } from "../models/enums/BaseClasses";
@@ -211,7 +211,7 @@ export class LootGenerator
      * @returns true if preset was valid and added to pool
      */
     protected findAndAddRandomPresetToLoot(
-        globalDefaultPresets: [string, Preset][],
+        globalDefaultPresets: [string, IPreset][],
         itemTypeCounts: Record<string, { current: number; max: number; }>,
         itemBlacklist: string[],
         result: LootItem[]): boolean
@@ -385,7 +385,7 @@ export class LootGenerator
      * @param chosenWeaponPreset The weapon preset given to player as reward
      * @returns AddItem array
      */
-    protected getSealedContainerWeaponModRewards(containerSettings: ISealedAirdropContainerSettings, linkedItemsToWeapon: ITemplateItem[], chosenWeaponPreset: Preset): AddItem[]
+    protected getSealedContainerWeaponModRewards(containerSettings: ISealedAirdropContainerSettings, linkedItemsToWeapon: ITemplateItem[], chosenWeaponPreset: IPreset): AddItem[]
     {
         const modRewards: AddItem[] = [];
         for (const rewardTypeId in containerSettings.weaponModRewardLimits)

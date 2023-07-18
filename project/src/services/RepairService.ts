@@ -5,7 +5,7 @@ import { QuestHelper } from "../helpers/QuestHelper";
 import { RepairHelper } from "../helpers/RepairHelper";
 import { TraderHelper } from "../helpers/TraderHelper";
 import { WeightedRandomHelper } from "../helpers/WeightedRandomHelper";
-import { ArmorType } from "../models/eft/common/IGlobals";
+import { IArmorType } from "../models/eft/common/IGlobals";
 import { IPmcData } from "../models/eft/common/IPmcData";
 import { Item } from "../models/eft/common/tables/IItem";
 import { ITemplateItem } from "../models/eft/common/tables/ITemplateItem";
@@ -250,7 +250,7 @@ export class RepairService
             const repairArmorBonus = this.getBonusMultiplierValue("RepairArmorBonus", pmcData);
             const armorBonus = (1.0 - (repairArmorBonus - 1.0) - intellectPointReduction);
             const materialType = itemToRepairDetails._props.ArmorMaterial ?? "";
-            const armorMaterial = globals.config.ArmorMaterials[materialType] as ArmorType;
+            const armorMaterial = globals.config.ArmorMaterials[materialType] as IArmorType;
             const destructability = (1 + armorMaterial.Destructibility);
             const armorClass = parseInt(`${itemToRepairDetails._props.armorClass}`);
             const armorClassDivisor = globals.config.RepairSettings.armorClassDivisor;
