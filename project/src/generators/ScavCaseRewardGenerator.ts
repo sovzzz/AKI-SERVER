@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 
 import { ItemHelper } from "../helpers/ItemHelper";
 import { Product } from "../models/eft/common/tables/IBotBase";
+import { Upd } from "../models/eft/common/tables/IItem";
 import { ITemplateItem } from "../models/eft/common/tables/ITemplateItem";
 import { IHideoutScavCase } from "../models/eft/hideout/IHideoutScavCase";
 import { BaseClasses } from "../models/enums/BaseClasses";
@@ -239,7 +240,7 @@ export class ScavCaseRewardGenerator
      * @param item money or ammo item
      * @param resultItem money or ammo item with a randomise stack size
      */
-    protected addStackCountToAmmoAndMoney(item: ITemplateItem, resultItem: { _id: string; _tpl: string; upd: any; }, rarity: string): void
+    protected addStackCountToAmmoAndMoney(item: ITemplateItem, resultItem: { _id: string; _tpl: string; upd: Upd; }, rarity: string): void
     {
         if (item._parent === BaseClasses.AMMO || item._parent === BaseClasses.MONEY)
         {

@@ -107,6 +107,7 @@ export class MatchCallbacks
         return this.httpResponse.nullResponse();
     }
 
+    /** @deprecated - not called on raid start/end or game start/exit */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public putMetrics(url: string, info: IPutMetricsRequestData, sessionID: string): INullResponseData
     {
@@ -148,6 +149,7 @@ export class MatchCallbacks
     }
 
     /**
+     * @deprecated - not called on raid start/end or game start/exit
      * Handle client/match/group/status
      * @returns 
      */

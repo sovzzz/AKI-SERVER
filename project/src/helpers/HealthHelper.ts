@@ -244,7 +244,7 @@ export class HealthHelper
         }
     }
 
-    protected isEmpty(map: any): boolean
+    protected isEmpty(map: Record<string, { Time: number }>): boolean
     {
         for (const key in map)
         {
