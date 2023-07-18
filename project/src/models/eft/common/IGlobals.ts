@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+import { Ixyz } from "./Ixyz";
 import { Item } from "./tables/IItem";
 
 export interface IGlobals 
 {
     time: number
     config: Config
-    bot_presets: BotPreset[]
+    bot_presets: IBotPreset[]
     AudioSettings: IAudioSettings
-    BotWeaponScatterings: BotWeaponScattering[]
+    BotWeaponScatterings: IBotWeaponScattering[]
     ItemPresets: Record<string, Preset>
 }
 
@@ -74,15 +75,15 @@ export interface Config
     SkillFatigueReset: number
     DiscardLimitsEnabled: boolean
     EventType: string[]
-    WalkSpeed: xyz
-    SprintSpeed: xyz
+    WalkSpeed: Ixyz
+    SprintSpeed: Ixyz
     SquadSettings: ISquadSettings
     SkillEnduranceWeightThreshold: number
     TeamSearchingTimeout: number
     Insurance: Insurance
     SkillExpPerLevel: number
     GameSearchingTimeout: number
-    WallContusionAbsorption: xyz
+    WallContusionAbsorption: Ixyz
     SkillsSettings: SkillsSettings
     AzimuthPanelShowsPlayerOrientation: boolean
     Aiming: Aiming
@@ -903,27 +904,27 @@ export interface Stamina
     AimRangeFinderDrainRate: number
     OxygenCapacity: number
     OxygenRestoration: number
-    WalkOverweightLimits: xyz
-    BaseOverweightLimits: xyz
-    SprintOverweightLimits: xyz
-    WalkSpeedOverweightLimits: xyz
-    CrouchConsumption: xyz
-    WalkConsumption: xyz
-    StandupConsumption: xyz
-    TransitionSpeed: xyz
+    WalkOverweightLimits: Ixyz
+    BaseOverweightLimits: Ixyz
+    SprintOverweightLimits: Ixyz
+    WalkSpeedOverweightLimits: Ixyz
+    CrouchConsumption: v
+    WalkConsumption: Ixyz
+    StandupConsumption: Ixyz
+    TransitionSpeed: Ixyz
     SprintAccelerationLowerLimit: number
     SprintSpeedLowerLimit: number
     SprintSensitivityLowerLimit: number
-    AimConsumptionByPose: xyz
-    RestorationMultiplierByPose: xyz
-    OverweightConsumptionByPose: xyz
+    AimConsumptionByPose: Ixyz
+    RestorationMultiplierByPose: Ixyz
+    OverweightConsumptionByPose: Ixyz
     AimingSpeedMultiplier: number
     WalkVisualEffectMultiplier: number
     HandsCapacity: number
     HandsRestoration: number
     ProneConsumption: number
     BaseHoldBreathConsumption: number
-    SoundRadius: xyz
+    SoundRadius: Ixyz
     ExhaustedMeleeSpeed: number
     FatigueRestorationRate: number
     FatigueAmountToCreateEffect: number
@@ -934,10 +935,10 @@ export interface Stamina
     StaminaExhaustionCausesJiggle: boolean
     StaminaExhaustionStartsBreathSound: boolean
     StaminaExhaustionRocksCamera: boolean
-    HoldBreathStaminaMultiplier: xyz
-    PoseLevelIncreaseSpeed: xyz
-    PoseLevelDecreaseSpeed: xyz
-    PoseLevelConsumptionPerNotch: xyz
+    HoldBreathStaminaMultiplier: Ixyz
+    PoseLevelIncreaseSpeed: Ixyz
+    PoseLevelDecreaseSpeed: Ixyz
+    PoseLevelConsumptionPerNotch: Ixyz
 }
 
 export interface StaminaRestoration 
@@ -1386,7 +1387,7 @@ export interface TroubleShooting
 
 export interface Aiming 
 {
-    ProceduralIntensityByPose: xyz
+    ProceduralIntensityByPose: Ixyz
     AimProceduralIntensity: number
     HeavyWeight: number
     LightWeight: number
@@ -1397,9 +1398,9 @@ export interface Aiming
     RecoilScaling: number
     RecoilDamping: number
     CameraSnapGlobalMult: number
-    RecoilXIntensityByPose: xyz
-    RecoilYIntensityByPose: xyz
-    RecoilZIntensityByPose: xyz
+    RecoilXIntensityByPose: Ixyz
+    RecoilYIntensityByPose: Ixyz
+    RecoilZIntensityByPose: Ixyz
     RecoilCrank: boolean
     RecoilHandDamping: number
     RecoilConvergenceMult: number
@@ -1420,7 +1421,7 @@ export interface Malfunction
     OutToIdleSpeedMultForPistol: number
     IdleToOutSpeedMultOnMalf: number
     TimeToQuickdrawPistol: number
-    DurRangeToIgnoreMalfs: xyz
+    DurRangeToIgnoreMalfs: Ixyz
     DurFeedWt: number
     DurMisfireWt: number
     DurJamWt: number
@@ -1494,51 +1495,44 @@ export interface FenceLevel
 
 export interface Inertia 
 {
-    InertiaLimits: xyz
+    InertiaLimits: Ixyz
     InertiaLimitsStep: number
-    ExitMovementStateSpeedThreshold: xyz
-    WalkInertia: xyz
+    ExitMovementStateSpeedThreshold: Ixyz
+    WalkInertia: Ixyz
     FallThreshold: number
-    SpeedLimitAfterFallMin: xyz
-    SpeedLimitAfterFallMax: xyz
-    SpeedLimitDurationMin: xyz
-    SpeedLimitDurationMax: xyz
-    SpeedInertiaAfterJump: xyz
+    SpeedLimitAfterFallMin: Ixyz
+    SpeedLimitAfterFallMax: Ixyz
+    SpeedLimitDurationMin: Ixyz
+    SpeedLimitDurationMax: Ixyz
+    SpeedInertiaAfterJump: Ixyz
     BaseJumpPenaltyDuration: number
     DurationPower: number
     BaseJumpPenalty: number
     PenaltyPower: number
-    InertiaTiltCurveMin: xyz
-    InertiaTiltCurveMax: xyz
-    InertiaBackwardCoef: xyz
-    TiltInertiaMaxSpeed: xyz
-    TiltStartSideBackSpeed: xyz
-    TiltMaxSideBackSpeed: xyz
-    TiltAcceleration: xyz
+    InertiaTiltCurveMin: Ixyz
+    InertiaTiltCurveMax: Ixyz
+    InertiaBackwardCoef: Ixyz
+    TiltInertiaMaxSpeed: Ixyz
+    TiltStartSideBackSpeed: Ixyz
+    TiltMaxSideBackSpeed: Ixyz
+    TiltAcceleration: Ixyz
     AverageRotationFrameSpan: number
-    SprintSpeedInertiaCurveMin: xyz
-    SprintSpeedInertiaCurveMax: xyz
-    SprintBrakeInertia: xyz
-    SprintTransitionMotionPreservation: xyz
-    WeaponFlipSpeed: xyz
-    PreSprintAccelerationLimits: xyz
-    SprintAccelerationLimits: xyz
-    SideTime: xyz
-    DiagonalTime: xyz
-    MaxTimeWithoutInput: xyz
+    SprintSpeedInertiaCurveMin: Ixyz
+    SprintSpeedInertiaCurveMax: Ixyz
+    SprintBrakeInertia: Ixyz
+    SprintTransitionMotionPreservation: Ixyz
+    WeaponFlipSpeed: Ixyz
+    PreSprintAccelerationLimits: Ixyz
+    SprintAccelerationLimits: Ixyz
+    SideTime: Ixyz
+    DiagonalTime: Ixyz
+    MaxTimeWithoutInput: Ixyz
     MinDirectionBlendTime: number
-    MoveTimeRange: xyz
-    ProneDirectionAccelerationRange: xyz
-    ProneSpeedAccelerationRange: xyz
-    MinMovementAccelerationRangeRight: xyz
-    MaxMovementAccelerationRangeRight: xyz
-}
-
-export interface xyz 
-{
-    x: number
-    y: number
-    z: number
+    MoveTimeRange: Ixyz
+    ProneDirectionAccelerationRange: Ixyz
+    ProneSpeedAccelerationRange: Ixyz
+    MinMovementAccelerationRangeRight: Ixyz
+    MaxMovementAccelerationRangeRight: Ixyz
 }
 
 export interface Ballistic 

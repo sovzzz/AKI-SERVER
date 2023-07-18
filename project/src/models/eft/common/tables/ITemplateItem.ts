@@ -1,3 +1,5 @@
+import { Ixyz } from "../Ixyz";
+
 export interface ITemplateItem 
 {
     _id: string
@@ -204,11 +206,11 @@ export interface Props
     CameraSnap?: number
     ReloadMode?: string
     AimPlane?: number
-    TacticalReloadStiffnes?: Xyz
+    TacticalReloadStiffnes?: Ixyz
     TacticalReloadFixation?: number
-    RecoilCenter?: Xyz
-    RotationCenter?: Xyz
-    RotationCenterNoStock?: Xyz
+    RecoilCenter?: Ixyz
+    RotationCenter?: Ixyz
+    RotationCenterNoStock?: Ixyz
     FoldedSlot?: string
     CompactHandling?: boolean
     MinRepairDegradation?: number
@@ -250,7 +252,7 @@ export interface Props
     FaceShieldComponent?: boolean
     FaceShieldMask?: string
     MaterialType?: string
-    RicochetParams?: Xyz
+    RicochetParams?: Ixyz
     DeafStrength?: string
     BlindnessProtection?: number
     Distortion?: number
@@ -288,12 +290,12 @@ export interface Props
     PrimaryConsumption?: number
     SecondryConsumption?: number
     DeflectionConsumption?: number
-    AppliedTrunkRotation?: Xyz
-    AppliedHeadRotation?: Xyz
+    AppliedTrunkRotation?: Ixyz
+    AppliedHeadRotation?: Ixyz
     DisplayOnModel?: boolean
     AdditionalAnimationLayer?: number
     StaminaBurnRate?: number
-    ColliderScaleMultiplier?: Xyz
+    ColliderScaleMultiplier?: Ixyz
     ConfigPathStr?: string
     MaxMarkersCount?: number
     scaleMin?: number
@@ -358,9 +360,9 @@ export interface Props
     ShowHitEffectOnExplode?: boolean
     ExplosionType?: string
     AmmoLifeTimeSec?: number
-    Contusion?: Xyz
-    ArmorDistanceDistanceDamage?: Xyz
-    Blindness?: Xyz
+    Contusion?: Ixyz
+    ArmorDistanceDistanceDamage?: Ixyz
+    Blindness?: Ixyz
     IsLightAndSoundShot?: boolean
     LightAndSoundShotAngle?: number
     LightAndSoundShotSelfContusionTime?: number
@@ -448,13 +450,6 @@ export interface SlotFilter
     Shift?: number
     Filter: string[]
     AnimationIndex?: number
-}
-
-export interface Xyz 
-{
-    x: number
-    y: number
-    z: number
 }
 
 export interface StackSlot

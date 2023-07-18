@@ -36,11 +36,9 @@ export interface Chance
     underpriced: number
 }
   
-export interface Time 
+export interface Time extends MinMax
 {
     base: number
-    min: number
-    max: number
 }
   
 export interface Reputation 
@@ -119,12 +117,10 @@ export interface OfferAdjustment
     priceThreshholdRub: number
 }
   
-export interface Condition 
+export interface Condition extends MinMax
 {
     /** Percentage change durability is altered */
     conditionChance: number
-    min: number
-    max: number
 }
   
 export interface Blacklist 

@@ -1,3 +1,4 @@
+import { Ixyz } from "../Ixyz";
 import { Item } from "./IItem";
 
 export interface ILootBase 
@@ -26,8 +27,8 @@ export interface IStaticWeaponProps
     IsStatic: boolean
     useGravity: boolean
     randomRotation: boolean
-    Position: Xyz
-    Rotation: Xyz
+    Position: Ixyz
+    Rotation: Ixyz
     IsGroupPosition: boolean
     GroupPositions: any[]
     Root: string
@@ -40,24 +41,17 @@ export interface IStaticContainerProps
     IsStatic: boolean
     useGravity: boolean
     randomRotation: boolean
-    Position: Xyz
-    Rotation: Xyz
+    Position: Ixyz
+    Rotation: Ixyz
     IsGroupPosition: boolean
     GroupPositions: any[]
-    Root: any
+    Root: string
     Items: StaticItem[]
-}
-
-export interface Xyz 
-{
-    x: number
-    y: number
-    z: number
 }
 
 export interface StaticItem 
 {
-    _id: any
+    _id: string
     _tpl: string
 }
 

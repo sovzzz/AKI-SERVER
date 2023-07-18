@@ -1,3 +1,4 @@
+import { MinMax } from "../../../models/common/MinMax";
 import { BossLocationSpawn, Wave } from "../../../models/eft/common/ILocationBase";
 import { IBaseConfig } from "./IBaseConfig";
 
@@ -50,11 +51,9 @@ export interface CustomWaves
     normal: Record<string, Wave[]>
 }
 
-export interface IBotTypeLimit
+export interface IBotTypeLimit extends MinMax
 {
     type: string
-    min: number
-    max: number
 }
 
 export interface LootMultiplier 
