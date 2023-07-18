@@ -172,6 +172,7 @@ export class GameController
         }
     }
 
+    /** Apply custom limits on bot types as defined in configs/location.json/botTypeLimits */
     protected adjustMapBotLimits(): void
     {
         const mapsDb = this.databaseServer.getTables().locations;
