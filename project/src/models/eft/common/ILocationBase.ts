@@ -160,7 +160,7 @@ export interface BotLocationModifier
   
 export interface MinMaxBot 
 {
-    WildSpawnType: WildSpawnType
+    WildSpawnType: WildSpawnType | string
     max: number
     min: number
 }
@@ -250,5 +250,6 @@ export interface Wave
 export enum WildSpawnType
     {
     ASSAULT = "assault",
-    MARKSMAN = "marksman"
+    MARKSMAN = "marksman",
+    PMCBOT = "pmcbot"
 }

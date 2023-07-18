@@ -647,7 +647,13 @@
         "enabled": true,
         "ignoreMaps": ["base", "develop", "hideout", "privatearea", "suburbs", "terminal", "town"]
     },
-    "fitLootIntoContainerAttempts": 2
+    "fitLootIntoContainerAttempts": 2,
 	"addOpenZonesToAllMaps": true,
 	"addCustomBotWavesToMaps": true,
+    "enableBotTypeLimits": true,
+    "botTypeLimits": {
+        "tarkovstreets": [{"type": "marksman", "min": 2, "max": 4}],
+        "woods": [{"type": "marksman", "min": 2, "max": 5}],
+        "bigmap": [{"type": "marksman", "min": 2, "max": 4}]
+    }
 }

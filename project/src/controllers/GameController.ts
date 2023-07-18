@@ -89,6 +89,11 @@ export class GameController
             this.customLocationWaveService.applyWaveChangesToAllMaps();
         }
 
+        if (this.locationConfig.enableBotTypeLimits)
+        {
+            this.adjustMapBotLimits();
+        }
+
         // repeatableQuests are stored by in profile.Quests due to the responses of the client (e.g. Quests in offraidData)
         // Since we don't want to clutter the Quests list, we need to remove all completed (failed / successful) repeatable quests.
         // We also have to remove the Counters from the repeatableQuests
@@ -164,6 +169,49 @@ export class GameController
             {
                 this.warnOnActiveBotReloadSkill(pmcProfile);
             }
+        }
+    }
+
+    protected adjustMapBotLimits(): void
+    {
+        const mapsDb = this.databaseServer.getTables().locations;
+        if (!this.locationConfig.botTypeLimits)
+        {
+            return;
+        }
+
+        for (const mapId in this.locationConfig.botTypeLimits)
+        {
+            const map: ILocationData = mapsDb[mapId];
+            if (!map)
+            {
+                this.logger.warning(`Unable to edit bot limits of map: ${mapId} as it cannot be found`);
+            }
+
+            for (const botToLimit of this.locationConfig.botTypeLimits[mapId])
+            {
+                const index = map.base.MinMaxBots.findIndex(x => x.WildSpawnType === botToLimit.type);
+                if (index !== -1)
+                {
+                    // Existing bot type found in MinMaxBots array, edit
+                    const limitObjectToUpdate = map.base.MinMaxBots[index];
+                    limitObjectToUpdate.min = botToLimit.min;
+                    limitObjectToUpdate.max = botToLimit.max;
+                }
+                else
+                {
+                    map.base.MinMaxBots.push(
+                        {
+                            // Bot type not found, add new object
+                            WildSpawnType: botToLimit.type,
+                            min: botToLimit.min,
+                            max: botToLimit.max
+                        }
+                    );
+                }
+                
+            }
+            
         }
     }
 

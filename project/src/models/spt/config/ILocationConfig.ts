@@ -20,6 +20,9 @@ export interface ILocationConfig extends IBaseConfig
     addOpenZonesToAllMaps: boolean
     /** Allow addition of custom bot waves designed by SPT to be added to maps - defined in  configs/location.json.customWaves*/
     addCustomBotWavesToMaps: boolean
+    enableBotTypeLimits: boolean
+    /** Add limits to a maps base.MinMaxBots array*/
+    botTypeLimits: Record<string, IBotTypeLimit[]>
 }
 
 export interface IFixEmptyBotWavesSettings
@@ -45,6 +48,13 @@ export interface CustomWaves
 {
     boss: Record<string, BossLocationSpawn[]>
     normal: Record<string, Wave[]>
+}
+
+export interface IBotTypeLimit
+{
+    type: string
+    min: number
+    max: number
 }
 
 export interface LootMultiplier 
