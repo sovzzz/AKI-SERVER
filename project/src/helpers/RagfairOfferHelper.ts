@@ -20,6 +20,7 @@ import { ConfigServer } from "../servers/ConfigServer";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { SaveServer } from "../servers/SaveServer";
 import { LocaleService } from "../services/LocaleService";
+import { LocalisationService } from "../services/LocalisationService";
 import { RagfairOfferService } from "../services/RagfairOfferService";
 import { HashUtil } from "../utils/HashUtil";
 import { TimeUtil } from "../utils/TimeUtil";
@@ -58,6 +59,7 @@ export class RagfairOfferHelper
         @inject("RagfairHelper") protected ragfairHelper: RagfairHelper,
         @inject("RagfairOfferService") protected ragfairOfferService: RagfairOfferService,
         @inject("LocaleService") protected localeService: LocaleService,
+        @inject("LocalisationService") protected localisationService: LocalisationService,
         @inject("ConfigServer") protected configServer: ConfigServer
     )
     {
@@ -419,7 +421,7 @@ export class RagfairOfferHelper
         const soldMessageLocaleGuid = globalLocales[RagfairOfferHelper.goodSoldTemplate];
         if (!soldMessageLocaleGuid)
         {
-            this.logger.error(`Unable to find locale with key of ${RagfairOfferHelper.goodSoldTemplate}`);
+            this.logger.error(this.localisationService.getText("ragfair-unable_to_find_locale_by_key", RagfairOfferHelper.goodSoldTemplate));
         }
 
         // Used to replace tokens in sold message sent to player

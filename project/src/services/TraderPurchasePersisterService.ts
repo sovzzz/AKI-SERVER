@@ -7,6 +7,7 @@ import { ITraderConfig } from "../models/spt/config/ITraderConfig";
 import { ILogger } from "../models/spt/utils/ILogger";
 import { ConfigServer } from "../servers/ConfigServer";
 import { TimeUtil } from "../utils/TimeUtil";
+import { LocalisationService } from "./LocalisationService";
 
 /**
  * Help with storing limited item purchases from traders in profile to persist them over server restarts
@@ -20,6 +21,7 @@ export class TraderPurchasePersisterService
         @inject("WinstonLogger") protected logger: ILogger,
         @inject("TimeUtil") protected timeUtil: TimeUtil,
         @inject("ProfileHelper") protected profileHelper: ProfileHelper,
+        @inject("LocalisationService") protected localisationService: LocalisationService,
         @inject("ConfigServer") protected configServer: ConfigServer
     )
     {
@@ -96,7 +98,7 @@ export class TraderPurchasePersisterService
                 const traderUpdateDetails = this.traderConfig.updateTime.find(x => x.traderId === traderId);
                 if (!traderUpdateDetails)
                 {
-                    this.logger.error(`Unable to process trader purchases in profile: ${profile.info.id} as trader: ${traderId} cannot be found`);
+                    this.logger.error(this.localisationService.getText("trader-unable_to_delete_stale_purchases", {profileId: profile.info.id, traderId: traderId}));
 
                     continue;
                 }

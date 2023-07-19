@@ -758,7 +758,7 @@ export class BotEquipmentModGenerator
 
         if (!itemModPool)
         {
-            this.logger.error(`mod pool for item ${parentTemplate._name} was empty, weapon gen will fail`);
+            this.logger.error(this.localisationService.getText("bot-unable_to_fill_camora_slot_mod_pool_empty", {weaponId: parentTemplate._id, weaponName: parentTemplate._name}));
         }
 
         let exhaustableModPool = null;

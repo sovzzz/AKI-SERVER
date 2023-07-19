@@ -10,6 +10,7 @@ import { ILogger } from "../models/spt/utils/ILogger";
 import { ConfigServer } from "../servers/ConfigServer";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { VFS } from "../utils/VFS";
+import { LocalisationService } from "./LocalisationService";
 
 /** Store a mapping between weapons, their slots and the items that fit those slots */
 @injectable()
@@ -26,6 +27,7 @@ export class BotEquipmentModPoolService
         @inject("VFS") protected vfs: VFS,
         @inject("ItemHelper") protected itemHelper: ItemHelper,
         @inject("DatabaseServer") protected databaseServer: DatabaseServer,
+        @inject("LocalisationService") protected localisationService: LocalisationService,
         @inject("ConfigServer") protected configServer: ConfigServer
     )
     {
@@ -44,7 +46,7 @@ export class BotEquipmentModPoolService
         {
             if (!item._props)
             {
-                this.logger.error(`Item ${item._id} ${item._name} is missing a _props property`);
+                this.logger.error(this.localisationService.getText("bot-item_missing_props_property", {itemTpl: item._id, name: item._name}));
 
                 continue;
             }
