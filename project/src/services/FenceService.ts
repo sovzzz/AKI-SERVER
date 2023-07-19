@@ -3,7 +3,7 @@ import { inject, injectable } from "tsyringe";
 import { HandbookHelper } from "../helpers/HandbookHelper";
 import { ItemHelper } from "../helpers/ItemHelper";
 import { PresetHelper } from "../helpers/PresetHelper";
-import { FenceLevel, Preset } from "../models/eft/common/IGlobals";
+import { IFenceLevel, IPreset } from "../models/eft/common/IGlobals";
 import { IPmcData } from "../models/eft/common/IPmcData";
 import { Item } from "../models/eft/common/tables/IItem";
 import { ITemplateItem } from "../models/eft/common/tables/ITemplateItem";
@@ -447,7 +447,7 @@ export class FenceService
      * @param assorts object to add presets to
      * @param loyaltyLevel loyalty level to requre item at
      */
-    protected addPresets(desiredPresetCount: number, defaultWeaponPresets: Record<string, Preset>, assorts: ITraderAssort, loyaltyLevel: number): void
+    protected addPresets(desiredPresetCount: number, defaultWeaponPresets: Record<string, IPreset>, assorts: ITraderAssort, loyaltyLevel: number): void
     {
         let presetCount = 0;
         const presetKeys = Object.keys(defaultWeaponPresets);
@@ -628,7 +628,7 @@ export class FenceService
      * @param pmcData Player profile
      * @returns FenceLevel object
      */
-    public getFenceInfo(pmcData: IPmcData): FenceLevel
+    public getFenceInfo(pmcData: IPmcData): IFenceLevel
     {
         const fenceSettings = this.databaseServer.getTables().globals.config.FenceSettings;
         const pmcFenceInfo = pmcData.TradersInfo[fenceSettings.FenceId];

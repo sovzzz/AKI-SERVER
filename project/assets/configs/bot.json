@@ -1500,7 +1500,7 @@
                 "max": 5
             }
         },
-        "enemyTypes": ["assault", "marksman", "pmcBot", "bossBully", "bossKilla", "bossKojaniy", "bossGluhar", "bossSanitar", "bossTagilla", "bossKnight", "followerBully", "followerKojaniy", "followerGluharAssault", "followerGluharSecurity", "followerGluharScout", "followerGluharSnipe", "followerSanitar", "followerBirdEye", "followerBigPipe", "sectantWarrior", "sectantPriest"]
+        "enemyTypes": ["assault", "marksman", "pmcBot", "bossBully", "bossKilla", "bossKojaniy", "bossGluhar", "bossSanitar", "bossTagilla", "bossKnight", "bossZryachiy", "followerBully", "followerKojaniy", "followerGluharAssault", "followerGluharSecurity", "followerGluharScout", "followerGluharSnipe", "followerSanitar", "followerBirdEye", "followerBigPipe", "followerZryachiy", "sectantWarrior", "sectantPriest"]
     },
     "showTypeInNickname": false,
     "maxBotCap": {

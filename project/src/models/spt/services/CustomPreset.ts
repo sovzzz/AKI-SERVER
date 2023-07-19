@@ -1,7 +1,7 @@
-import { Preset } from "../../eft/common/IGlobals";
+import { IPreset } from "../../eft/common/IGlobals";
 
 export interface CustomPreset
 {
     key: string,
-    preset: Preset
+    preset: IPreset
 }

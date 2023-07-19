@@ -3,6 +3,7 @@ import { inject, injectable } from "tsyringe";
 import { GameController } from "../controllers/GameController";
 import { IEmptyRequestData } from "../models/eft/common/IEmptyRequestData";
 import { ICheckVersionResponse } from "../models/eft/game/ICheckVersionResponse";
+import { ICurrentGroupResponse } from "../models/eft/game/ICurrentGroupResponse";
 import { IGameConfigResponse } from "../models/eft/game/IGameConfigResponse";
 import { IGameEmptyCrcRequestData } from "../models/eft/game/IGameEmptyCrcRequestData";
 import { IGameKeepAliveResponse } from "../models/eft/game/IGameKeepAliveResponse";
@@ -88,7 +89,7 @@ class GameCallbacks
     /**
      * Handle client/match/group/current
      */
-    public getCurrentGroup(url: string, info: IEmptyRequestData, sessionID: string): any 
+    public getCurrentGroup(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<ICurrentGroupResponse> 
     {
         return this.httpResponse.getBody(this.gameController.getCurrentGroup(sessionID));
     }

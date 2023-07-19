@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
 import { BotHelper } from "../helpers/BotHelper";
-import { Config } from "../models/eft/common/IGlobals";
+import { IConfig } from "../models/eft/common/IGlobals";
 import { Inventory } from "../models/eft/common/tables/IBotType";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
 import { SeasonalEventType } from "../models/enums/SeasonalEventType";
@@ -275,7 +275,7 @@ export class SeasonalEventService
      * @param globalConfig globals.json
      * @param eventName Name of the event to enable. e.g. Christmas
      */
-    protected updateGlobalEvents(globalConfig: Config, eventType: SeasonalEventType): void
+    protected updateGlobalEvents(globalConfig: IConfig, eventType: SeasonalEventType): void
     {
         switch (eventType.toLowerCase())
         {

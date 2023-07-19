@@ -1,3 +1,6 @@
+import { MinMax } from "../../../models/common/MinMax";
+import { Ixyz } from "./Ixyz";
+
 /* eslint-disable @typescript-eslint/naming-convention */
 export interface ILocationBase 
 {
@@ -84,10 +87,8 @@ export interface ILocationBase
     waves: Wave[]
 }
 
-export interface ILimit
+export interface ILimit extends MinMax
 {
-    min: number
-    max: number
     items: any[]
 
 }
@@ -158,11 +159,9 @@ export interface BotLocationModifier
     VisibleDistance: number
 }
   
-export interface MinMaxBot 
+export interface MinMaxBot extends MinMax
 {
     WildSpawnType: WildSpawnType | string
-    max: number
-    min: number
 }
   
 export interface Preview 
@@ -185,7 +184,7 @@ export interface SpawnPointParam
     DelayToCanSpawnSec: number
     Id: string
     Infiltration: string
-    Position: xyz
+    Position: Ixyz
     Rotation: number
     Sides: string[]
 }
@@ -198,16 +197,10 @@ export interface ColliderParams
   
 export interface Props 
 {
-    Center: xyz
+    Center: Ixyz
     Radius: number
 }
-  
-export interface xyz 
-{
-    x: number
-    y: number
-    z: number
-}
+
   
 export interface Exit 
 {
