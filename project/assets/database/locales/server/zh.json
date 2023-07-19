@@ -1,4 +1,5 @@
 {
+	"watermark-paid_scammed": "想协助翻译SPT吗？加入我们的Discord服务器问问吧",
     "bleeding_edge_build": "血色边缘版本",
     "bot-no_bot_cap_found_for_location": "没有找到与%s类别的AI对应的生成上限，已使用默认值替代",
     "bot-single_bot_generation_not_found_in_cache": "没有在缓存中找到%s类别的AI，正在重新生成相关数据",
