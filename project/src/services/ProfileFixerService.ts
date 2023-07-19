@@ -206,7 +206,7 @@ export class ProfileFixerService
             const trader = pmcProfile.TradersInfo[traderId];
             if (trader && trader.salesSum === null) 
             {
-                this.logger.warning(`trader ${traderId} has a null salesSum value, resetting to 0.`);
+                this.logger.warning(`trader ${traderId} has a null salesSum value, resetting to 0`);
                 trader.salesSum = 0;
             }
         }

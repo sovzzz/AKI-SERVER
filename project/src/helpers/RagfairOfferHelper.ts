@@ -187,7 +187,7 @@ export class RagfairOfferHelper
         // No trader assort data
         if (!assortData)
         {
-            this.logger.warning(`Unable to find trader ${offer.user.nickname} assort for item ${this.itemHelper.getItemName(offer.items[0]._tpl)} ${offer.items[0]._tpl}`);
+            this.logger.warning(`Unable to find trader: ${offer.user.nickname} assort for item: ${this.itemHelper.getItemName(offer.items[0]._tpl)} ${offer.items[0]._tpl}, cannot check if buy restriction reached`);
             return false;
         }
 

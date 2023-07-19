@@ -16,6 +16,7 @@ import { ILogger } from "../models/spt/utils/ILogger";
 import { ConfigServer } from "../servers/ConfigServer";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { RandomUtil } from "../utils/RandomUtil";
+import { LocalisationService } from "./LocalisationService";
 
 /**
  * Stores flea prices for items as well as methods to interact with them
@@ -40,6 +41,7 @@ export class RagfairPriceService implements OnLoad
         @inject("PresetHelper") protected presetHelper: PresetHelper,
         @inject("TraderHelper") protected traderHelper: TraderHelper,
         @inject("RandomUtil") protected randomUtil: RandomUtil,
+        @inject("LocalisationService") protected localisationService: LocalisationService,
         @inject("ConfigServer") protected configServer: ConfigServer
     )
     {
@@ -123,7 +125,7 @@ export class RagfairPriceService implements OnLoad
         let itemPrice = this.getDynamicPriceForItem(tplId) || this.getStaticPriceForItem(tplId);
         if (!itemPrice)
         {
-            this.logger.warning(`Missing live flea or handbook item price for ${tplId}, defaulting to 1, if this is a modded item contact the mods author`);
+            this.logger.warning(this.localisationService.getText("ragfair-unable_to_find_item_price_for_item_in_flea_handbook", tplId));
         }
 
         // If no price in dynamic/static, set to 1
@@ -327,7 +329,7 @@ export class RagfairPriceService implements OnLoad
      * @param item base weapon
      * @param items weapon plus mods
      * @param existingPrice price of existing base weapon
-     * @returns 
+     * @returns price of weapon in roubles
      */
     protected getWeaponPresetPrice(item: Item, items: Item[], existingPrice: number): number
     {
@@ -336,7 +338,7 @@ export class RagfairPriceService implements OnLoad
         const presets = this.presetHelper.getPresets(item._tpl);
         if (!presets || presets.length === 0)
         {
-            this.logger.warning(`Item Id: ${item._tpl} has no presets`);
+            this.logger.warning(this.localisationService.getText("ragfair-unable_to_find_preset_with_id", item._tpl));
 
             return existingPrice;
         }

@@ -257,7 +257,8 @@ export class RagfairController
         const assortPurchased = traderAssorts.find(x => x._id === offer._id);
         if (!assortPurchased)
         {
-            this.logger.warning(`Flea offer ${offer._id} could not have its stack count adjusted to match trader ${offer.user.id} value`);
+            this.logger.warning(this.localisationService.getText("ragfair-unable_to_adjust_stack_count_assort_not_found", {offerId: offer._id, traderId: offer.user.id}));
+
             return;
         }
 
@@ -551,13 +552,15 @@ export class RagfairController
         const offers = this.saveServer.getProfile(sessionID).characters.pmc.RagfairInfo.offers;
         if (!offers)
         {
-            this.logger.warning(`No offers found in profile ${sessionID}, unable to remove offer ${offerId}`);
+            this.logger.warning(this.localisationService.getText("ragfair-unable_to_remove_offer_not_found_in_profile", {profileId: sessionID, offerId: offerId}));
+
+            this.saveServer.getProfile(sessionID).characters.pmc.RagfairInfo.offers = [];
         }
 
         const index = offers.findIndex(offer => offer._id === offerId);
         if (index === -1)
         {
-            this.logger.warning(this.localisationService.getText("ragfair-offer_not_found_in_profile", {offerId: offerId}));
+            this.logger.error(this.localisationService.getText("ragfair-offer_not_found_in_profile", {offerId: offerId}));
             return this.httpResponse.appendErrorToOutput(this.eventOutputHolder.getOutput(sessionID), this.localisationService.getText("ragfair-offer_not_found_in_profile_short"));
         }
 
