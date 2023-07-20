@@ -63,7 +63,7 @@
   ],
   "BossLocationSpawn": [
     {
-      "BossChance": 24,
+      "BossChance": 35,
       "BossDifficult": "normal",
       "BossEscortAmount": "0",
       "BossEscortDifficult": "normal",
@@ -72,6 +72,7 @@
       "BossPlayer": false,
       "BossZone": "BotZone",
       "RandomTimeSpawn": false,
+      "Supports": null,
       "Time": -1
     }
   ],
@@ -118,6 +119,24 @@
   "IsSecret": false,
   "Locked": false,
   "Loot": [],
+  "MatchMakerMinPlayersByWaitTime": [
+    {
+      "minPlayers": 4,
+      "time": 60
+    },
+    {
+      "minPlayers": 3,
+      "time": 65
+    },
+    {
+      "minPlayers": 2,
+      "time": 500
+    },
+    {
+      "minPlayers": 1,
+      "time": 840
+    }
+  ],
   "MaxBotPerZone": 4,
   "MaxCoopGroup": 6,
   "MaxDistToFreePoint": 900,
@@ -126,7 +145,7 @@
   "MinDistToFreePoint": 10,
   "MinMaxBots": [],
   "MinPlayerLvlAccessKeys": 0,
-  "MinPlayers": 4,
+  "MinPlayers": 5,
   "Name": "Factory",
   "NewSpawn": false,
   "OcculsionCullingEnabled": true,
@@ -134,6 +153,7 @@
   "OfflineOldSpawn": true,
   "OldSpawn": true,
   "OpenZones": "BotZone",
+  "PlayersRequestCount": -1,
   "PmcMaxPlayersInGroup": 5,
   "Preview": {
     "path": "",
@@ -205,8 +225,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -236,8 +255,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -354,8 +372,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -385,8 +402,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -474,8 +490,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -534,8 +549,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -599,7 +613,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Bot"
+        "Bot",
+        "Boss"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -652,8 +667,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -683,8 +697,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -714,8 +727,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -948,8 +960,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1037,8 +1048,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1068,8 +1078,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1099,8 +1108,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1130,8 +1138,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1190,8 +1197,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1366,8 +1372,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1397,8 +1402,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1486,8 +1490,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1666,8 +1669,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1817,8 +1819,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1935,8 +1936,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -2169,8 +2169,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -2233,8 +2232,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -2264,8 +2262,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -2324,8 +2321,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -2471,8 +2467,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -2502,8 +2497,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -2620,8 +2614,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -2685,7 +2678,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Bot"
+        "Bot",
+        "Boss"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -2738,8 +2732,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -2832,7 +2825,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Bot"
+        "Bot",
+        "Boss"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -2943,8 +2937,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3008,7 +3001,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Bot"
+        "Bot",
+        "Boss"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -3123,8 +3117,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3154,8 +3147,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3218,8 +3210,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3249,8 +3240,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3280,8 +3270,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3311,8 +3300,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3400,8 +3388,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3547,8 +3534,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3583,7 +3569,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Bot"
+        "Bot",
+        "Boss"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -3636,8 +3623,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3667,8 +3653,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3698,8 +3683,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
