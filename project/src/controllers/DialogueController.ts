@@ -12,6 +12,7 @@ import { Dialogue, DialogueInfo, IAkiProfile, IUserDialogInfo, Message } from ".
 import { MemberCategory } from "../models/enums/MemberCategory";
 import { MessageType } from "../models/enums/MessageType";
 import { SaveServer } from "../servers/SaveServer";
+import { HashUtil } from "../utils/HashUtil";
 import { TimeUtil } from "../utils/TimeUtil";
 
 @injectable()
