@@ -202,7 +202,7 @@ export class RepeatableQuestController
                             lifeline++;
                             if (lifeline > 10)
                             {
-                                this.logger.debug("We were stuck in repeatable quest generation. This should never happen. Please report.");
+                                this.logger.debug("We were stuck in repeatable quest generation. This should never happen. Please report");
                                 break;
                             }
                         }
@@ -1233,7 +1233,7 @@ export class RepeatableQuestController
                     lifeline++;
                     if (lifeline > 10)
                     {
-                        this.logger.debug("We were stuck in repeatable quest generation. This should never happen. Please report.");
+                        this.logger.debug("We were stuck in repeatable quest generation. This should never happen. Please report");
                         break;
                     }
                 }

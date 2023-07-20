@@ -184,7 +184,7 @@ export class LocationController
         let lootSettingsByType = this.airdropConfig.loot[airdropType];
         if (!lootSettingsByType)
         {
-            this.logger.error(`Unable to find airdrop config settings for type: ${airdropType}, falling back to mixed`);
+            this.logger.error(this.localisationService.getText("location-unable_to_find_airdrop_drop_config_of_type", airdropType));
             lootSettingsByType = this.airdropConfig.loot[AirdropTypeEnum.MIXED];
         }
 

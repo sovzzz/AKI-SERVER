@@ -95,7 +95,7 @@ export class QuestHelper
                 case "=":
                     return playerLevel === <number>condition._props.value;
                 default:
-                    this.logger.error(`Unrecognised Comparison Method: ${condition._props.compareMethod}`);
+                    this.logger.error(this.localisationService.getText("quest-unable_to_find_compare_condition", condition._props.compareMethod));
                     return false;
             }
         }

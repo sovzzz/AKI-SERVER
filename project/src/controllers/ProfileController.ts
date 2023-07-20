@@ -27,6 +27,7 @@ import { ILogger } from "../models/spt/utils/ILogger";
 import { EventOutputHolder } from "../routers/EventOutputHolder";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { SaveServer } from "../servers/SaveServer";
+import { LocalisationService } from "../services/LocalisationService";
 import { ProfileFixerService } from "../services/ProfileFixerService";
 import { HashUtil } from "../utils/HashUtil";
 import { TimeUtil } from "../utils/TimeUtil";
@@ -42,6 +43,7 @@ export class ProfileController
         @inject("DatabaseServer") protected databaseServer: DatabaseServer,
         @inject("ItemHelper") protected itemHelper: ItemHelper,
         @inject("ProfileFixerService") protected profileFixerService: ProfileFixerService,
+        @inject("LocalisationService") protected localisationService: LocalisationService,
         @inject("PlayerScavGenerator") protected playerScavGenerator: PlayerScavGenerator,
         @inject("EventOutputHolder") protected eventOutputHolder: EventOutputHolder,
         @inject("TraderHelper") protected traderHelper: TraderHelper,
@@ -210,7 +212,7 @@ export class ProfileController
         }
         else
         {
-            this.logger.warning(`Unable to delete profile with id: ${sessionID}, no profile with that id found`);
+            this.logger.warning(this.localisationService.getText("profile-unable_to_find_profile_by_id_cannot_delete", sessionID));
         }
     }
 

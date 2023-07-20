@@ -421,7 +421,7 @@ export class InventoryController
         {
             if (!itemToToggle.upd)
             {
-                this.logger.warning(`Item with _id: ${itemToToggle._id} is missing a upd object, adding`);
+                this.logger.warning(this.localisationService.getText("inventory-item_to_toggle_missing_upd", itemToToggle._id));
                 itemToToggle.upd = {};
             }
 
@@ -431,7 +431,7 @@ export class InventoryController
         }
         else
         {
-            this.logger.warning(`Unable to find inventory item with _id to toggle: ${body.item}`);
+            this.logger.warning(this.localisationService.getText("inventory-unable_to_toggle_item_not_found", body.item));
         }
 
         return {

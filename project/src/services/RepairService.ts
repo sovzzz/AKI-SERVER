@@ -21,6 +21,7 @@ import { ILogger } from "../models/spt/utils/ILogger";
 import { ConfigServer } from "../servers/ConfigServer";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { RandomUtil } from "../utils/RandomUtil";
+import { LocalisationService } from "./LocalisationService";
 import { PaymentService } from "./PaymentService";
 
 @injectable()
@@ -37,6 +38,7 @@ export class RepairService
         @inject("WeightedRandomHelper") protected weightedRandomHelper: WeightedRandomHelper,
         @inject("PaymentService") protected paymentService: PaymentService,
         @inject("RepairHelper") protected repairHelper: RepairHelper,
+        @inject("LocalisationService") protected localisationService: LocalisationService,
         @inject("ConfigServer") protected configServer: ConfigServer
     )
     {
@@ -156,7 +158,7 @@ export class RepairService
             const itemDetails = this.itemHelper.getItem(repairDetails.repairedItem._tpl);
             if (!itemDetails[0])
             {
-                this.logger.error(`Unable to find item ${repairDetails.repairedItem._tpl} in items db, cannot add skill points`);
+                this.logger.error(this.localisationService.getText("repair-unable_to_find_item_in_db", repairDetails.repairedItem._tpl));
 
                 return;
             }

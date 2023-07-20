@@ -273,7 +273,7 @@ export class LootGenerator
         const weaponDetailsDb = this.itemHelper.getItem(chosenWeaponTpl);
         if (!weaponDetailsDb[0])
         {
-            this.logger.warning(`Non-item was picked as reward ${chosenWeaponTpl}, unable to continue`);
+            this.logger.error(this.localisationService.getText("loot-non_item_picked_as_sealed_weapon_crate_reward", chosenWeaponTpl));
 
             return itemsToReturn;
         }

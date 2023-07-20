@@ -118,7 +118,7 @@ export class RagfairOfferService
         const offer = this.ragfairOfferHandler.getOfferById(offerId);
         if (!offer)
         {
-            this.logger.warning(`Unable to remove offer with offer id: ${offerId} as it cannot be found in flea market`);
+            this.logger.warning(this.localisationService.getText("ragfair-unable_to_remove_offer_doesnt_exist", offerId));
 
             return;
         }

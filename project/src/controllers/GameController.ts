@@ -186,7 +186,7 @@ export class GameController
             const map: ILocationData = mapsDb[mapId];
             if (!map)
             {
-                this.logger.warning(`Unable to edit bot limits of map: ${mapId} as it cannot be found`);
+                this.logger.warning(this.localisationService.getText("bot-unable_to_edit_limits_of_unknown_map", mapId));
             }
 
             for (const botToLimit of this.locationConfig.botTypeLimits[mapId])
@@ -428,7 +428,7 @@ export class GameController
             const location: ILocationData = this.databaseServer.getTables().locations[locationKey];
             if (!location.base)
             {
-                this.logger.warning(`Map ${locationKey} lacks a base json, skipping map wave fixes`);
+                this.logger.warning(this.localisationService.getText("location-unable_to_fix_broken_waves_missing_base", locationKey));
                 continue;
             }
 

@@ -121,7 +121,7 @@ export class PmcChatResponseService
         const possibleResponseLocaleKeys = this.getResponseLocaleKeys(responseType, isVictim);
         if (possibleResponseLocaleKeys.length === 0)
         {
-            this.logger.warning(`No pmc response keys found for type: ${responseType}`);
+            this.logger.warning(this.localisationService.getText("pmcresponse-unable_to_find_key", responseType));
 
             return undefined;
         }

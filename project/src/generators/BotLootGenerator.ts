@@ -332,7 +332,7 @@ export class BotLootGenerator
         const result = this.botConfig.lootNValue[botRole];
         if (!result)
         {
-            this.logger.warning(`Bot ${botRole} loot n value missing, using scav value instead`);
+            this.logger.warning(this.localisationService.getText("bot-unable_to_find_loot_n_value_for_bot", botRole));
 
             return this.botConfig.lootNValue["scav"];
         }

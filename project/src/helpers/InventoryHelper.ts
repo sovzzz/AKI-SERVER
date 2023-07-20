@@ -549,10 +549,10 @@ export class InventoryHelper
             this.logger.error(this.localisationService.getText("inventory-invalid_item_missing_from_db", itemTpl));
         }
 
-        // item found but no _props property
+        // Item found but no _props property
         if (tmpItem && !tmpItem._props)
         {
-            this.logger.error(`Item ${itemTpl} ${tmpItem?._name} is missing a props field, a size for it cannot be acquired`);
+            this.localisationService.getText("inventory-item_missing_props_property", {itemTpl: itemTpl, itemName: tmpItem?._name});
         }
 
         // No item object or getItem() returned false
@@ -612,7 +612,7 @@ export class InventoryHelper
                         const itemResult = this.itemHelper.getItem(item._tpl);
                         if (!itemResult[0])
                         {
-                            this.logger.error(`getSizeByInventoryItemHash() Item with tpl: ${item._tpl} not found`);
+                            this.logger.error(this.localisationService.getText("inventory-get_item_size_item_not_found_by_tpl", item._tpl));
                         }
 
                         const itm = itemResult[1];

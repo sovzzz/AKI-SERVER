@@ -95,7 +95,7 @@ export class CustomizationController
         const traderOffer = this.getTraderClothingOffer(sessionId, buyClothingRequest.offer);
         if (!traderOffer)
         {
-            this.logger.error(`Unable to find trader suit offer with id: ${buyClothingRequest.offer}`);
+            this.logger.error(this.localisationService.getText("customisation-unable_to_find_suit_by_id", buyClothingRequest.offer));
 
             return output;
         }
@@ -161,7 +161,7 @@ export class CustomizationController
         const relatedItem = pmcData.Inventory.items.find(x => x._id === clothingItem.id);
         if (!relatedItem)
         {
-            this.logger.error(`Clothing item not found in inventory with id: ${clothingItem.id}`);
+            this.logger.error(this.localisationService.getText("customisation-unable_to_find_clothing_item_in_inventory", clothingItem.id));
 
             return;
         }

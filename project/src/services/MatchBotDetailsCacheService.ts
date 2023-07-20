@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 
 import { IBotBase } from "../models/eft/common/tables/IBotBase";
 import { ILogger } from "../models/spt/utils/ILogger";
+import { LocalisationService } from "./LocalisationService";
 
 /** Cache bots in a dictionary, keyed by the bots name, keying by name isnt idea as its not unique but this is used by the post-raid system which doesnt have any bot ids, only name */
 
@@ -11,7 +12,8 @@ export class MatchBotDetailsCacheService
     protected botDetailsCache: Record<string, IBotBase> = {};
 
     constructor(
-        @inject("WinstonLogger") protected logger: ILogger
+        @inject("WinstonLogger") protected logger: ILogger,
+        @inject("LocalisationService") protected localisationService: LocalisationService
     )
     {}
 
@@ -42,7 +44,7 @@ export class MatchBotDetailsCacheService
         const botInCache = this.botDetailsCache[botName];
         if (!botInCache)
         {
-            this.logger.warning(`Bot not found in cache with name ${botName}`);
+            this.logger.warning(this.localisationService.getText("", botName));
         }
 
         return botInCache;
