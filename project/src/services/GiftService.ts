@@ -1,6 +1,7 @@
 import { inject, injectable } from "tsyringe";
 import { DialogueHelper } from "../helpers/DialogueHelper";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
+import { MessageType } from "../models/enums/MessageType";
 import { ILogger } from "../models/spt/utils/ILogger";
 import { ConfigServer } from "../servers/ConfigServer";
 
@@ -25,6 +26,12 @@ export class GiftService
      */
     public sendGiftToPlayer(playerId: string, giftId: string): void
     {
-        return;
+        //TODO: get gift items
+        const giftItems = [];
+        const maxStoreTime = 999999;
+
+        const messageContent = this.dialogueHelper.createMessageContext(null, MessageType.SYSTEM_MESSAGE, maxStoreTime);
+
+        this.dialogueHelper.addDialogueMessage("traderId", messageContent, playerId, giftItems, MessageType.SYSTEM_MESSAGE);
     }
 }
