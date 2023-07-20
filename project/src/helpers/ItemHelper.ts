@@ -105,30 +105,55 @@ class ItemHelper
     /**
      * Returns the item price based on the handbook or as a fallback from the prices.json if the item is not
      * found in the handbook. If the price can't be found at all return 0
-     *
-     * @param {string}      tpl           the item template to check
-     * @returns {integer}                   The price of the item or 0 if not found
+     * @param tpl Item to look price up of
+     * @returns Price in roubles
      */
     public getItemPrice(tpl: string): number
     {
-        const handbookPrice = this.handbookHelper.getTemplatePrice(tpl);
-        if (handbookPrice > 1)
+        const handbookPrice = this.getStaticItemPrice(tpl);
+        if (handbookPrice >= 1)
         {
             return handbookPrice;
         }
 
+        const dynamicPrice = this.getDynamicItemPrice[tpl];
+        if (dynamicPrice)
+        {
+            return dynamicPrice;
+        }
+    }
+
+    /**
+     * Get the static (handbook) price in roubles for an item by tpl
+     * @param tpl Items tpl id to look up price
+     * @returns Price in roubles (0 if not found)
+     */
+    public getStaticItemPrice(tpl: string): number
+    {
+        const handbookPrice = this.handbookHelper.getTemplatePrice(tpl);
+        if (handbookPrice >= 1)
+        {
+            return handbookPrice;
+        }
+
+        return 0;
+    }
+
+    /**
+     * Get the dynamic (flea) price in roubles for an item by tpl
+     * @param tpl Items tpl id to look up price
+     * @returns Price in roubles (undefined if not found)
+     */
+    public getDynamicItemPrice(tpl: string): number
+    {
         const dynamicPrice = this.databaseServer.getTables().templates.prices[tpl];
         if (dynamicPrice)
         {
             return dynamicPrice;
         }
 
-        // we don't need to spam the logs as we know there are some items which are not priced yet
-        // we check in ItemsHelper.getRewardableItems() for ItemPrice > 0, only then is it a valid
-        // item to be given as reward or requested in a Completion quest
-        //Logger.warning(`DailyQuest - No price found for tpl: ${tpl} price defaulting to 0`);
         return 0;
-    }
+    }  
 
     public fixItemStackCount(item: Item): Item
     {

@@ -3,6 +3,7 @@ import { ITraderBase } from "../models/eft/common/tables/ITrader";
 
 import { DialogueHelper } from "../helpers/DialogueHelper";
 import { HandbookHelper } from "../helpers/HandbookHelper";
+import { ItemHelper } from "../helpers/ItemHelper";
 import { NotificationSendHelper } from "../helpers/NotificationSendHelper";
 import { SecureContainerHelper } from "../helpers/SecureContainerHelper";
 import { TraderHelper } from "../helpers/TraderHelper";
@@ -36,6 +37,7 @@ export class InsuranceService
         @inject("DatabaseServer") protected databaseServer: DatabaseServer,
         @inject("SecureContainerHelper") protected secureContainerHelper: SecureContainerHelper,
         @inject("RandomUtil") protected randomUtil: RandomUtil,
+        @inject("ItemHelper") protected itemHelper: ItemHelper,
         @inject("TimeUtil") protected timeUtil: TimeUtil,
         @inject("SaveServer") protected saveServer: SaveServer,
         @inject("TraderHelper") protected traderHelper: TraderHelper,
@@ -55,16 +57,22 @@ export class InsuranceService
         return this.insured[sessionId] !== undefined;
     }
 
-    public insuranceTraderArrayExists(sessionId: string, traderId: string): boolean
-    {
-        return this.insured[sessionId][traderId] !== undefined;
-    }
-
+    /**
+     * Get all insured items by all traders for a profile
+     * @param sessionId Profile id (session id)
+     * @returns Item array
+     */
     public getInsurance(sessionId: string): Record<string, Item[]>
     {
         return this.insured[sessionId];
     }
 
+    /**
+     * Get insured items by profile id + trader id
+     * @param sessionId Profile id (session id)
+     * @param traderId Trader items were insured with
+     * @returns Item array
+     */
     public getInsuranceItems(sessionId: string, traderId: string): Item[]
     {
         return this.insured[sessionId][traderId];
@@ -75,35 +83,9 @@ export class InsuranceService
         this.insured[sessionId] = {};
     }
 
-    public resetInsuranceTraderArray(sessionId: string, traderId: string): void
-    {
-        this.insured[sessionId][traderId] = [];
-    }
-
-    public addInsuranceItemToArray(sessionId: string, traderId: string, itemToAdd: any): void
-    {
-        this.insured[sessionId][traderId].push(itemToAdd);
-    }
-
-    /**
-     * Get the rouble price for an item by templateId
-     * @param itemTpl item tpl to get handbook price for
-     * @returns handbook price in roubles, Return 0 if not found
-     */
-    public getItemPrice(itemTpl: string): number
-    {
-        const handbookPrice = this.handbookHelper.getTemplatePrice(itemTpl);
-        if (handbookPrice > 1)
-        {
-            return handbookPrice;
-        }
-
-        return 0; 
-    }
-
     /**
      * Sends stored insured items as message to player
-     * @param pmcData profile to modify
+     * @param pmcData profile to send insured items to
      * @param sessionID SessionId of current player
      * @param mapId Id of the map player died/exited that caused the insurance to be issued on
      */
@@ -111,13 +93,13 @@ export class InsuranceService
     {
         for (const traderId in this.getInsurance(sessionID))
         {
-            const trader = this.traderHelper.getTrader(traderId, sessionID);
-            const insuranceReturnTimestamp = this.getInsuranceReturnTimestamp(pmcData, trader);
+            const traderBase = this.traderHelper.getTrader(traderId, sessionID);
+            const insuranceReturnTimestamp = this.getInsuranceReturnTimestamp(pmcData, traderBase);
             const dialogueTemplates = this.databaseServer.getTables().traders[traderId].dialogue;
 
-            // Send "i will go look for your stuff" message
-            const messageContent = this.dialogueHelper.createMessageContext(this.randomUtil.getArrayValue(dialogueTemplates.insuranceStart), MessageType.NPC_TRADER, trader.insurance.max_storage_time);
-            messageContent.text = ""; // live insurance returns have an empty string for the text property
+            // Construct "i will go look for your stuff" message
+            const messageContent = this.dialogueHelper.createMessageContext(this.randomUtil.getArrayValue(dialogueTemplates.insuranceStart), MessageType.NPC_TRADER, traderBase.insurance.max_storage_time);
+            messageContent.text = ""; // Live insurance returns have an empty string for the text property
             messageContent.profileChangeEvents = [];
             messageContent.systemData = {
                 date: this.timeUtil.getDateMailFormat(),
@@ -125,7 +107,8 @@ export class InsuranceService
                 location: mapId
             };
 
-            // Must occur after systemData is hydrated
+            // MUST occur after systemData is hydrated
+            // Store "i will go look for your stuff" message in player profile
             this.dialogueHelper.addDialogueMessage(traderId, messageContent, sessionID);
 
             // Remove 'hideout' slotid property on all insurance items
@@ -169,14 +152,21 @@ export class InsuranceService
         this.notificationSendHelper.sendMessageToPlayer(sessionID, senderDetails, failedText, MessageType.NPC_TRADER);
     }
 
+    /**
+     * Check all root insured items and remove location property + set slotId to 'hideout'
+     * @param sessionId Session id
+     * @param traderId Trader id
+     */
     protected removeLocationProperty(sessionId: string, traderId: string): void
     {
         const insuredItems = this.getInsurance(sessionId)[traderId];
         for (const insuredItem of this.getInsurance(sessionId)[traderId])
         {
-            const isParentHere = insuredItems.find(isParent => isParent._id === insuredItem.parentId);
-            if (!isParentHere)
+            // Find insured items parent
+            const insuredItemsParent = insuredItems.find(x => x._id === insuredItem.parentId);
+            if (!insuredItemsParent)
             {
+                // Remove location + set slotId of insured items parent
                 insuredItem.slotId = "hideout";
                 delete insuredItem.location;
             }
@@ -184,9 +174,10 @@ export class InsuranceService
     }
 
     /**
-     * Get a timestamp of what insurance items should be sent to player based on the type of trader used to insure
+     * Get a timestamp of when insurance items should be sent to player based on trader used to insure
+     * Apply insurance return bonus if found in profile
      * @param pmcData Player profile
-     * @param trader Trader used to insure items
+     * @param trader Trader base used to insure items
      * @returns Timestamp to return items to player in seconds
      */
     protected getInsuranceReturnTimestamp(pmcData: IPmcData, trader: ITraderBase): number
@@ -199,12 +190,15 @@ export class InsuranceService
         }
 
         const insuranceReturnTimeBonus = pmcData.Bonuses.find(b => b.type === "InsuranceReturnTime");
-        const insuranceReturnTimeBonusPercent = 1.0 - (insuranceReturnTimeBonus ? Math.abs(insuranceReturnTimeBonus.value) : 0) / 100;
+        const insuranceReturnTimeBonusPercent = 1.0 - (insuranceReturnTimeBonus
+            ? Math.abs(insuranceReturnTimeBonus.value)
+            : 0) / 100;
 
         const traderMinReturnAsSeconds = trader.insurance.min_return_hour * TimeUtil.oneHourAsSeconds;
         const traderMaxReturnAsSeconds = trader.insurance.max_return_hour * TimeUtil.oneHourAsSeconds;
         const randomisedReturnTimeSeconds = this.randomUtil.getInt(traderMinReturnAsSeconds, traderMaxReturnAsSeconds);
 
+        // Current time + randomised time calculated above
         return this.timeUtil.getTimestamp() + (randomisedReturnTimeSeconds * insuranceReturnTimeBonusPercent);
     }
 
@@ -330,6 +324,45 @@ export class InsuranceService
         });
     }
 
+    /**
+     * Does insurance exist for a player and by trader
+     * @param sessionId Player id (session id)
+     * @param traderId Trader items insured with
+     * @returns True if exists
+     */
+    protected insuranceTraderArrayExists(sessionId: string, traderId: string): boolean
+    {
+        return this.insured[sessionId][traderId] !== undefined;
+    }
+
+    /**
+     * Empty out array holding insured items by sessionid + traderid
+     * @param sessionId Player id (session id)
+     * @param traderId Trader items insured with
+     */
+    public resetInsuranceTraderArray(sessionId: string, traderId: string): void
+    {
+        this.insured[sessionId][traderId] = [];
+    }
+
+    /**
+     * Store insured item
+     * @param sessionId Player id (session id)
+     * @param traderId Trader item insured with
+     * @param itemToAdd Insured item
+     */
+    public addInsuranceItemToArray(sessionId: string, traderId: string, itemToAdd: Item): void
+    {
+        this.insured[sessionId][traderId].push(itemToAdd);
+    }
+
+    /**
+     * Get price of insurance * multiplier from config
+     * @param pmcData Player profile
+     * @param inventoryItem Item to be insured
+     * @param traderId Trader item is insured with
+     * @returns price in roubles
+     */
     public getPremium(pmcData: IPmcData, inventoryItem: Item, traderId: string): number
     {
         let insuranceMultiplier = this.insuranceConfig.insuranceMultiplier[traderId];
@@ -339,14 +372,15 @@ export class InsuranceService
             this.logger.warning(this.localisationService.getText("insurance-missing_insurance_price_multiplier", traderId));
         }
 
-        let premium = this.getItemPrice(inventoryItem._tpl) * insuranceMultiplier;
+        // Multiply item handbook price by multiplier in config to get the new insurance price
+        let pricePremium = this.itemHelper.getStaticItemPrice(inventoryItem._tpl) * insuranceMultiplier;
         const coef = this.traderHelper.getLoyaltyLevel(traderId, pmcData).insurance_price_coef;
 
         if (coef > 0)
         {
-            premium *= (1 - this.traderHelper.getLoyaltyLevel(traderId, pmcData).insurance_price_coef / 100);
+            pricePremium *= (1 - this.traderHelper.getLoyaltyLevel(traderId, pmcData).insurance_price_coef / 100);
         }
 
-        return Math.round(premium);
+        return Math.round(pricePremium);
     }
 }
