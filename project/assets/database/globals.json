@@ -19918,7 +19918,7 @@
         ]
       }
     ],
-    "MaxBotsAliveOnMap": 40,
+    "MaxBotsAliveOnMap": 36,
     "MaxLoyaltyLevelForAll": false,
     "Overheat": {
       "AutoshotChance": 0.2,

@@ -199,7 +199,7 @@ export class DialogueCallbacks implements OnUpdate
         return this.httpResponse.nullResponse();
     }
 
-    /** Handle client/friend/ignore/set */
+    /** Handle client/friend/ignore/remove */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public unIgnoreFriend(url: string, request: {uid: string}, sessionID: string): any
     {

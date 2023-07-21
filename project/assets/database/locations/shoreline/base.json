@@ -77,7 +77,7 @@
       "BossEscortType": "followerSanitar",
       "BossName": "bossSanitar",
       "BossPlayer": false,
-      "BossZone": "ZonePort,ZoneGreenHouses,ZoneGreenHouses,ZoneSanatorium1,ZoneSanatorium2",
+      "BossZone": "ZoneGreenHouses",
       "RandomTimeSpawn": false,
       "Supports": null,
       "Time": -1
@@ -90,7 +90,7 @@
       "BossEscortType": "sectantWarrior",
       "BossName": "sectantPriest",
       "BossPlayer": false,
-      "BossZone": "ZoneForestGasStation,ZoneForestSpawn",
+      "BossZone": "ZoneForestGasStation",
       "RandomTimeSpawn": false,
       "Supports": null,
       "Time": -1
@@ -103,7 +103,7 @@
       "BossEscortType": "sectantWarrior",
       "BossName": "sectantPriest",
       "BossPlayer": false,
-      "BossZone": "ZoneSanatorium1,ZoneSanatorium2",
+      "BossZone": "ZoneForestSpawn",
       "RandomTimeSpawn": false,
       "Supports": null,
       "Time": -1
@@ -165,6 +165,36 @@
   "IsSecret": false,
   "Locked": false,
   "Loot": [],
+  "MatchMakerMinPlayersByWaitTime": [
+    {
+      "minPlayers": 7,
+      "time": 60
+    },
+    {
+      "minPlayers": 6,
+      "time": 140
+    },
+    {
+      "minPlayers": 5,
+      "time": 240
+    },
+    {
+      "minPlayers": 4,
+      "time": 360
+    },
+    {
+      "minPlayers": 3,
+      "time": 500
+    },
+    {
+      "minPlayers": 2,
+      "time": 660
+    },
+    {
+      "minPlayers": 1,
+      "time": 840
+    }
+  ],
   "MaxBotPerZone": 4,
   "MaxCoopGroup": 13,
   "MaxDistToFreePoint": 200,
@@ -181,6 +211,7 @@
   "OfflineOldSpawn": false,
   "OldSpawn": false,
   "OpenZones": "ZoneSanatorium1,ZoneSanatorium2,ZoneIsland,ZoneGasStation,ZoneMeteoStation,ZonePowerStation,ZoneBusStation,ZoneRailWays,ZonePort,ZoneBunkeSniper,ZonePowerStationSniper,ZoneForestTruck,ZoneForestSpawn",
+  "PlayersRequestCount": -1,
   "PmcMaxPlayersInGroup": 5,
   "Preview": {
     "path": "",

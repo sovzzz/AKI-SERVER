@@ -249,6 +249,36 @@
   "IsSecret": false,
   "Locked": false,
   "Loot": [],
+  "MatchMakerMinPlayersByWaitTime": [
+    {
+      "minPlayers": 7,
+      "time": 60
+    },
+    {
+      "minPlayers": 6,
+      "time": 140
+    },
+    {
+      "minPlayers": 5,
+      "time": 240
+    },
+    {
+      "minPlayers": 4,
+      "time": 360
+    },
+    {
+      "minPlayers": 3,
+      "time": 500
+    },
+    {
+      "minPlayers": 2,
+      "time": 660
+    },
+    {
+      "minPlayers": 1,
+      "time": 840
+    }
+  ],
   "MaxBotPerZone": 8,
   "MaxCoopGroup": 12,
   "MaxDistToFreePoint": 200,
@@ -257,7 +287,7 @@
   "MinDistToFreePoint": 70,
   "MinMaxBots": [],
   "MinPlayerLvlAccessKeys": 0,
-  "MinPlayers": 9,
+  "MinPlayers": 10,
   "Name": "Lighthouse",
   "NewSpawn": true,
   "OcculsionCullingEnabled": false,
@@ -265,6 +295,7 @@
   "OfflineOldSpawn": false,
   "OldSpawn": false,
   "OpenZones": "Zone_Containers,Zone_Rocks,Zone_Chalet,Zone_Village,Zone_Bridge,Zone_OldHouse,Zone_LongRoad,Zone_DestroyedHouse,Zone_SniperPeak,Zone_Island",
+  "PlayersRequestCount": -1,
   "PmcMaxPlayersInGroup": 5,
   "Preview": {
     "path": "",
@@ -610,7 +641,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -667,6 +699,36 @@
       ]
     },
     {
+      "BotZoneName": "",
+      "Categories": [
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "119b220b-ec7f-41a8-bdb2-eeb831e2c17b",
+      "Infiltration": "North",
+      "Position": {
+        "x": -7.76003075,
+        "y": 10.89,
+        "z": -802.78
+      },
+      "Rotation": 358.2052,
+      "Sides": [
+        "Pmc"
+      ]
+    },
+    {
       "BotZoneName": "Zone_Village",
       "Categories": [
         "Player",
@@ -699,7 +761,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -728,7 +791,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -870,6 +934,66 @@
       "Rotation": 260.715424,
       "Sides": [
         "All"
+      ]
+    },
+    {
+      "BotZoneName": "",
+      "Categories": [
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "1ae5dc66-b54c-4584-bc24-174f5b3194ec",
+      "Infiltration": "North",
+      "Position": {
+        "x": -7.620077,
+        "y": 10.89,
+        "z": -804.54
+      },
+      "Rotation": 358.2052,
+      "Sides": [
+        "Pmc"
+      ]
+    },
+    {
+      "BotZoneName": "",
+      "Categories": [
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "1b65286c-52e8-48ef-a369-e89bfd0ab95e",
+      "Infiltration": "North",
+      "Position": {
+        "x": 6.73,
+        "y": 6.16,
+        "z": -18.99
+      },
+      "Rotation": 179.094986,
+      "Sides": [
+        "Pmc"
       ]
     },
     {
@@ -1019,6 +1143,36 @@
       "Rotation": 236.87,
       "Sides": [
         "Savage"
+      ]
+    },
+    {
+      "BotZoneName": "",
+      "Categories": [
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "222800ad-50c8-4c75-b94b-ff1ec3d807d0",
+      "Infiltration": "North",
+      "Position": {
+        "x": -13.07,
+        "y": 10.89,
+        "z": -801.9
+      },
+      "Rotation": 358.2052,
+      "Sides": [
+        "Pmc"
       ]
     },
     {
@@ -1319,7 +1473,38 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "2e02fd39-ee4a-4c26-bb44-12324b433a02",
+      "Infiltration": "North",
+      "Position": {
+        "x": 6.91000462,
+        "y": 6.16,
+        "z": -24.889986
+      },
+      "Rotation": 179.094986,
+      "Sides": [
+        "Pmc"
+      ]
+    },
+    {
+      "BotZoneName": "",
+      "Categories": [
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -1789,7 +1974,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -2055,7 +2241,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -2109,6 +2296,36 @@
       "Rotation": 256.404022,
       "Sides": [
         "Savage"
+      ]
+    },
+    {
+      "BotZoneName": "",
+      "Categories": [
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "4e876370-2396-4517-81c1-c535811d18e0",
+      "Infiltration": "North",
+      "Position": {
+        "x": 6.819993,
+        "y": 6.16,
+        "z": -20.65999
+      },
+      "Rotation": 179.094986,
+      "Sides": [
+        "Pmc"
       ]
     },
     {
@@ -2291,7 +2508,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -2618,6 +2836,36 @@
     {
       "BotZoneName": "",
       "Categories": [
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "61aba24c-79d9-445f-8a1c-f887b36a8417",
+      "Infiltration": "North",
+      "Position": {
+        "x": -7.6000576,
+        "y": 10.72,
+        "z": -800.92
+      },
+      "Rotation": 358.2052,
+      "Sides": [
+        "Pmc"
+      ]
+    },
+    {
+      "BotZoneName": "",
+      "Categories": [
         "Player"
       ],
       "ColliderParams": {
@@ -2795,7 +3043,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -2817,6 +3066,36 @@
         "z": -86.49
       },
       "Rotation": 266.5001,
+      "Sides": [
+        "Pmc"
+      ]
+    },
+    {
+      "BotZoneName": "",
+      "Categories": [
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "677581fc-5c9f-4e13-913d-e32798dfd61c",
+      "Infiltration": "North",
+      "Position": {
+        "x": -5.76,
+        "y": 10.89,
+        "z": -801.87
+      },
+      "Rotation": 358.2052,
       "Sides": [
         "Pmc"
       ]
@@ -3058,6 +3337,36 @@
       ]
     },
     {
+      "BotZoneName": "",
+      "Categories": [
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "6e3ad315-21c1-4816-84f5-e6d5ad0568af",
+      "Infiltration": "North",
+      "Position": {
+        "x": -1.5,
+        "y": 10.6,
+        "z": -801.74
+      },
+      "Rotation": 358.2052,
+      "Sides": [
+        "Pmc"
+      ]
+    },
+    {
       "BotZoneName": "Zone_TreatmentContainers",
       "Categories": [
         "Bot",
@@ -3119,7 +3428,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -3232,6 +3542,36 @@
       "Rotation": 81.6740341,
       "Sides": [
         "Savage"
+      ]
+    },
+    {
+      "BotZoneName": "",
+      "Categories": [
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "751ed8cb-d9c5-4c3a-ad31-7ae979f66316",
+      "Infiltration": "North",
+      "Position": {
+        "x": 7.01300144,
+        "y": 6.3,
+        "z": -26.49399
+      },
+      "Rotation": 179.094986,
+      "Sides": [
+        "Pmc"
       ]
     },
     {
@@ -3356,7 +3696,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -3593,6 +3934,36 @@
     {
       "BotZoneName": "",
       "Categories": [
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "8464e389-d91c-45d4-9e99-5b61d5bcdc69",
+      "Infiltration": "North",
+      "Position": {
+        "x": 6.85998631,
+        "y": 6.16,
+        "z": -23.4999866
+      },
+      "Rotation": 179.094986,
+      "Sides": [
+        "Pmc"
+      ]
+    },
+    {
+      "BotZoneName": "",
+      "Categories": [
         "Player"
       ],
       "ColliderParams": {
@@ -3680,7 +4051,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -3857,6 +4229,36 @@
     {
       "BotZoneName": "",
       "Categories": [
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "93427305-4f03-44d6-8690-7c24dbbb4128",
+      "Infiltration": "North",
+      "Position": {
+        "x": 6.92999363,
+        "y": 6.16,
+        "z": -22.1199818
+      },
+      "Rotation": 179.094986,
+      "Sides": [
+        "Pmc"
+      ]
+    },
+    {
+      "BotZoneName": "",
+      "Categories": [
         "Player"
       ],
       "ColliderParams": {
@@ -3976,7 +4378,38 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "97513a7b-d467-454a-8232-2e77f3e386ef",
+      "Infiltration": "North",
+      "Position": {
+        "x": -3.76,
+        "y": 10.920001,
+        "z": -802.2
+      },
+      "Rotation": 358.2052,
+      "Sides": [
+        "Pmc"
+      ]
+    },
+    {
+      "BotZoneName": "",
+      "Categories": [
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -4088,6 +4521,36 @@
       "Rotation": 81.6740341,
       "Sides": [
         "Savage"
+      ]
+    },
+    {
+      "BotZoneName": "",
+      "Categories": [
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "999c413b-05eb-4c30-a4ef-4e0c95c838ef",
+      "Infiltration": "North",
+      "Position": {
+        "x": -7.51003075,
+        "y": 10.72,
+        "z": -799.37
+      },
+      "Rotation": 358.2052,
+      "Sides": [
+        "Pmc"
       ]
     },
     {
@@ -4328,6 +4791,36 @@
       ]
     },
     {
+      "BotZoneName": "",
+      "Categories": [
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "9f6cbe96-7d68-45bf-8f4b-4ccac2550961",
+      "Infiltration": "North",
+      "Position": {
+        "x": -10.31,
+        "y": 10.63,
+        "z": -802.38
+      },
+      "Rotation": 358.2052,
+      "Sides": [
+        "Pmc"
+      ]
+    },
+    {
       "BotZoneName": "Zone_Village",
       "Categories": [
         "Player",
@@ -4360,7 +4853,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -4773,7 +5267,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -5097,7 +5592,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -5420,6 +5916,66 @@
     {
       "BotZoneName": "",
       "Categories": [
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "cdabcf05-fa38-4640-89a6-294133b99a5c",
+      "Infiltration": "North",
+      "Position": {
+        "x": 8.798004,
+        "y": 6.16,
+        "z": -25.9239826
+      },
+      "Rotation": 179.094986,
+      "Sides": [
+        "Pmc"
+      ]
+    },
+    {
+      "BotZoneName": "",
+      "Categories": [
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "cec675dc-0443-44f1-90bb-61b0fc25b2fc",
+      "Infiltration": "North",
+      "Position": {
+        "x": 8.569992,
+        "y": 6.16,
+        "z": -20.7299824
+      },
+      "Rotation": 179.094986,
+      "Sides": [
+        "Pmc"
+      ]
+    },
+    {
+      "BotZoneName": "",
+      "Categories": [
         "Player"
       ],
       "ColliderParams": {
@@ -5597,7 +6153,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -5745,7 +6302,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -5774,7 +6332,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -5796,6 +6355,36 @@
         "z": -87.37
       },
       "Rotation": 266.5001,
+      "Sides": [
+        "Pmc"
+      ]
+    },
+    {
+      "BotZoneName": "",
+      "Categories": [
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "df949703-1471-4367-a395-3afa78fcf886",
+      "Infiltration": "North",
+      "Position": {
+        "x": 6.52999973,
+        "y": 6.16,
+        "z": -17.28998
+      },
+      "Rotation": 179.094986,
       "Sides": [
         "Pmc"
       ]
@@ -5917,6 +6506,36 @@
       "Rotation": 4.104724,
       "Sides": [
         "Savage"
+      ]
+    },
+    {
+      "BotZoneName": "",
+      "Categories": [
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "e5da63fb-4d33-4ebb-a621-dd414deecab5",
+      "Infiltration": "North",
+      "Position": {
+        "x": -5.28,
+        "y": 10.71,
+        "z": -804.34
+      },
+      "Rotation": 358.2052,
+      "Sides": [
+        "Pmc"
       ]
     },
     {
@@ -6071,7 +6690,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -6244,6 +6864,36 @@
       "Rotation": 116.208389,
       "Sides": [
         "Savage"
+      ]
+    },
+    {
+      "BotZoneName": "",
+      "Categories": [
+        "Coop",
+        "Opposite"
+      ],
+      "ColliderParams": {
+        "_parent": "SpawnSphereParams",
+        "_props": {
+          "Center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "Radius": 77
+        }
+      },
+      "DelayToCanSpawnSec": 4,
+      "Id": "f0113a3b-12cd-4801-ad39-c5ebc9578d38",
+      "Infiltration": "North",
+      "Position": {
+        "x": 8.755005,
+        "y": 6.16,
+        "z": -23.86899
+      },
+      "Rotation": 179.094986,
+      "Sides": [
+        "Pmc"
       ]
     },
     {
@@ -6454,7 +7104,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -6483,7 +7134,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Coop"
+        "Coop",
+        "Group"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",

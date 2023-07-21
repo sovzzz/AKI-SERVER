@@ -191,7 +191,7 @@ export class ProfileCallbacks
      * Handle /launcher/profiles
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    public getAllMiniProfiles(url: string, info: any, sessionID: string): string
+    public getAllMiniProfiles(url: string, info: IEmptyRequestData, sessionID: string): string
     {
         return this.httpResponse.noBody(this.profileController.getMiniProfiles());
     }

@@ -428,7 +428,7 @@ export class FenceService
 
                 this.randomiseItemUpdProperties(itemDbDetails, toPush);
 
-                toPush.upd.StackObjectsCount = 1;
+                toPush.upd.StackObjectsCount = this.getSingleItemStackCount(itemDbDetails);
                 toPush.upd.BuyRestrictionCurrent = 0;
                 toPush.upd.UnlimitedCount = false;
 
@@ -438,6 +438,30 @@ export class FenceService
                 assorts.loyal_level_items[toPush._id] = loyaltyLevel;
             }
         }
+    }
+
+    /**
+     * Get stack size ofr a singular item (no mods)
+     * @param itemDbDetails item being added to fence
+     * @returns Stack size
+     */
+    protected getSingleItemStackCount(itemDbDetails: ITemplateItem): number
+    {
+        // Check for override in config, use values if exists
+        const overrideValues = this.traderConfig.fence.itemStackSizeOverrideMinMax[itemDbDetails._id];
+        if (overrideValues)
+        {
+            return this.randomUtil.getInt(overrideValues.min, overrideValues.max);
+        }
+
+        // Fence doesn't sell ammo by default, but handle it as players mod fence
+        if (this.itemHelper.isOfBaseclass(itemDbDetails._id, BaseClasses.AMMO))
+        {
+            // No override, use stack max size from item db
+            return this.randomUtil.getInt(1, itemDbDetails._props.StackMaxSize);
+        }
+        
+        return 1;
     }
 
     /**

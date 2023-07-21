@@ -30,6 +30,8 @@ export interface FenceConfig
     presetPriceMult: number
     armorMaxDurabilityPercentMinMax: MinMax
     presetMaxDurabilityPercentMinMax: MinMax
+    /** Key: item tpl */
+    itemStackSizeOverrideMinMax: Record<string, MinMax>
     itemTypeLimits: Record<string, number>
     regenerateAssortsOnRefresh: boolean
     blacklist: string[]

@@ -42,7 +42,7 @@
       "BossEscortType": "followerTagilla",
       "BossName": "bossKilla",
       "BossPlayer": false,
-      "BossZone": "ZoneCenterBot,ZoneCenter,ZoneOLI,ZoneIDEA,ZoneGoshan,ZoneIDEAPark,ZoneOLIPark",
+      "BossZone": "ZoneCenter",
       "RandomTimeSpawn": false,
       "Supports": null,
       "Time": -1
@@ -88,6 +88,36 @@
   "IsSecret": false,
   "Locked": false,
   "Loot": [],
+  "MatchMakerMinPlayersByWaitTime": [
+    {
+      "minPlayers": 7,
+      "time": 60
+    },
+    {
+      "minPlayers": 6,
+      "time": 140
+    },
+    {
+      "minPlayers": 5,
+      "time": 240
+    },
+    {
+      "minPlayers": 4,
+      "time": 360
+    },
+    {
+      "minPlayers": 3,
+      "time": 500
+    },
+    {
+      "minPlayers": 2,
+      "time": 660
+    },
+    {
+      "minPlayers": 1,
+      "time": 840
+    }
+  ],
   "MaxBotPerZone": 2,
   "MaxCoopGroup": 14,
   "MaxDistToFreePoint": 170,
@@ -104,6 +134,7 @@
   "OfflineOldSpawn": false,
   "OldSpawn": false,
   "OpenZones": "ZoneCenter,ZoneCenterBot,ZoneOLI,ZoneIDEA,ZoneRoad,ZoneIDEAPark,ZoneGoshan,ZonePowerStation,ZoneTrucks,ZoneOLIPark",
+  "PlayersRequestCount": -1,
   "PmcMaxPlayersInGroup": 5,
   "Preview": {
     "path": "",

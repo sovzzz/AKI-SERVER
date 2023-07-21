@@ -42,7 +42,7 @@
       "BossEscortType": "followerGluharAssault",
       "BossName": "bossGluhar",
       "BossPlayer": false,
-      "BossZone": "ZoneRailStrorage,ZoneRailStrorage,ZoneRailStrorage,ZonePTOR1,ZonePTOR2,ZoneBarrack,ZoneBarrack,ZoneBarrack,ZoneSubStorage",
+      "BossZone": "ZoneRailStrorage",
       "RandomTimeSpawn": false,
       "Supports": [
         {
@@ -174,6 +174,36 @@
   "IsSecret": false,
   "Locked": false,
   "Loot": [],
+  "MatchMakerMinPlayersByWaitTime": [
+    {
+      "minPlayers": 7,
+      "time": 60
+    },
+    {
+      "minPlayers": 6,
+      "time": 140
+    },
+    {
+      "minPlayers": 5,
+      "time": 240
+    },
+    {
+      "minPlayers": 4,
+      "time": 360
+    },
+    {
+      "minPlayers": 3,
+      "time": 500
+    },
+    {
+      "minPlayers": 2,
+      "time": 660
+    },
+    {
+      "minPlayers": 1,
+      "time": 840
+    }
+  ],
   "MaxBotPerZone": 4,
   "MaxCoopGroup": 12,
   "MaxDistToFreePoint": 200,
@@ -182,7 +212,7 @@
   "MinDistToFreePoint": 60,
   "MinMaxBots": [],
   "MinPlayerLvlAccessKeys": 0,
-  "MinPlayers": 9,
+  "MinPlayers": 10,
   "Name": "ReserveBase",
   "NewSpawn": false,
   "OcculsionCullingEnabled": false,
@@ -190,6 +220,7 @@
   "OfflineOldSpawn": true,
   "OldSpawn": true,
   "OpenZones": "ZoneRailStrorage,ZonePTOR1,ZonePTOR2,ZoneBarrack,ZoneBunkerStorage,ZoneSubStorage",
+  "PlayersRequestCount": -1,
   "PmcMaxPlayersInGroup": 5,
   "Preview": {
     "path": "",
@@ -5967,7 +5998,7 @@
       ]
     }
   ],
-  "UnixDateTime": 1636384173,
+  "UnixDateTime": 1634148599,
   "_Id": "5704e5fad2720bc05b8b4567",
   "doors": [],
   "exit_access_time": 50,
