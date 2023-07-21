@@ -1,6 +1,5 @@
 import { inject, injectable } from "tsyringe";
 
-import { GiftSentResult } from "@spt-aki/models/enums/GiftSentResult";
 import { DialogueHelper } from "../helpers/DialogueHelper";
 import { IGetAllAttachmentsResponse } from "../models/eft/dialog/IGetAllAttachmentsResponse";
 import { IGetFriendListDataResponse } from "../models/eft/dialog/IGetFriendListDataResponse";
@@ -10,6 +9,7 @@ import {
 } from "../models/eft/dialog/IGetMailDialogViewResponseData";
 import { ISendMessageRequest } from "../models/eft/dialog/ISendMessageRequest";
 import { Dialogue, DialogueInfo, IAkiProfile, IUserDialogInfo, Message } from "../models/eft/profile/IAkiProfile";
+import { GiftSentResult } from "../models/enums/GiftSentResult";
 import { MemberCategory } from "../models/enums/MemberCategory";
 import { MessageType } from "../models/enums/MessageType";
 import { ILogger } from "../models/spt/utils/ILogger";
