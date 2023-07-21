@@ -29,27 +29,25 @@ export class DialogueHelper
     { }
 
     /**
-     * Create basic message context template
-     * @param templateId 
-     * @param messageType 
-     * @param maxStoreTime 
-     * @returns 
+     * @deprecated Use MailSendService.sendMessage() or helpers
      */
-    public createMessageContext(templateId: string, messageType: MessageType, maxStoreTime: number): MessageContent
+    public createMessageContext(templateId: string, messageType: MessageType, maxStoreTime = null): MessageContent
     {
-        return {
+        const result: MessageContent = {
             templateId: templateId,
-            type: messageType,
-            maxStorageTime: maxStoreTime * TimeUtil.oneHourAsSeconds
+            type: messageType
         };
+
+        if (maxStoreTime)
+        {
+            result.maxStorageTime = maxStoreTime * TimeUtil.oneHourAsSeconds;
+        }
+
+        return result;
     }
 
     /**
-     * Add a templated message to the dialogue.
-     * @param dialogueID 
-     * @param messageContent 
-     * @param sessionID 
-     * @param rewards 
+     * @deprecated Use MailSendService.sendMessage() or helpers
      */
     public addDialogueMessage(dialogueID: string, messageContent: MessageContent, sessionID: string, rewards: Item[] = [], messageType = MessageType.NPC_TRADER): void
     {
@@ -129,13 +127,18 @@ export class DialogueHelper
             dt: Math.round(Date.now() / 1000),
             text: messageContent.text ?? "",
             templateId: messageContent.templateId,
-            hasRewards: rewards.length > 0,
+            hasRewards: items.data?.length > 0,
             rewardCollected: false,
             items: items,
             maxStorageTime: messageContent.maxStorageTime,
             systemData: messageContent.systemData ? messageContent.systemData : undefined,
             profileChangeEvents: (messageContent.profileChangeEvents?.length === 0) ? messageContent.profileChangeEvents : undefined
         };
+
+        if (!message.templateId)
+        {
+            delete message.templateId;
+        }
 
         dialogue.messages.push(message);
 
