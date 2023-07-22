@@ -104,7 +104,7 @@ export class RagfairServerHelper
      * @param itemTemplateId Item tpl to check is blacklisted
      * @returns True if its blacklsited
      */
-    protected isItemOnCustomBlacklist(itemTemplateId: string): boolean
+    protected isItemOnCustomFleaBlacklist(itemTemplateId: string): boolean
     {
         if (!this.itemHelper.isValidItem(itemTemplateId))
         {
