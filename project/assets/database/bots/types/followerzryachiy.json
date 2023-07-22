@@ -37,15 +37,15 @@
       "TacticalVest": 100
     },
     "mods": {
-      "mod_charge": 37,
-      "mod_foregrip": 96,
+      "mod_charge": 38,
+      "mod_foregrip": 97,
       "mod_handguard": 100,
       "mod_launcher": 0,
       "mod_magazine": 100,
-      "mod_mount": 87,
+      "mod_mount": 91,
       "mod_mount_000": 72,
-      "mod_mount_001": 93,
-      "mod_mount_002": 96,
+      "mod_mount_001": 96,
+      "mod_mount_002": 97,
       "mod_muzzle": 100,
       "mod_reciever": 100,
       "mod_scope": 45,
@@ -53,7 +53,7 @@
       "mod_scope_001": 100,
       "mod_scope_002": 0,
       "mod_sight_front": 8,
-      "mod_sight_rear": 97,
+      "mod_sight_rear": 98,
       "mod_stock": 75,
       "mod_stock_000": 100,
       "mod_tactical": 14,
@@ -61,7 +61,7 @@
       "mod_tactical002": 0,
       "mod_tactical_000": 3,
       "mod_tactical_001": 0,
-      "mod_tactical_002": 93
+      "mod_tactical_002": 95
     }
   },
   "difficulty": {
