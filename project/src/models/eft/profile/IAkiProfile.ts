@@ -81,7 +81,7 @@ export interface DialogueInfo
     _id: string
     type: MessageType
     pinned: boolean
-    Users?: any[]
+    Users?: IUserDialogInfo[]
     message: MessagePreview
 }
 
@@ -97,7 +97,7 @@ export interface Message
     text?: string
     hasRewards: boolean
     rewardCollected: boolean
-    items: MessageItems
+    items?: MessageItems
     maxStorageTime?: number
     systemData?: ISystemData
     profileChangeEvents?: any[]
@@ -149,6 +149,7 @@ export interface Aki
 {
     version: string
     mods?: ModDetails[]
+    receivedGifts: ReceivedGift[]
 }
 
 export interface ModDetails
@@ -157,6 +158,12 @@ export interface ModDetails
     version: string
     author: string
     dateAdded: number
+}
+
+export interface ReceivedGift
+{
+    giftId: string
+    timestampAccepted: number
 }
 
 export interface Vitality
