@@ -18,6 +18,7 @@ import { MailSendService } from "../services/MailSendService";
 import { HashUtil } from "../utils/HashUtil";
 import { JsonUtil } from "../utils/JsonUtil";
 import { RandomUtil } from "../utils/RandomUtil";
+import { TimeUtil } from "../utils/TimeUtil";
 import { DialogueHelper } from "./DialogueHelper";
 import { ItemHelper } from "./ItemHelper";
 import { ProfileHelper } from "./ProfileHelper";
@@ -35,6 +36,7 @@ export class RagfairServerHelper
     constructor(
         @inject("RandomUtil") protected randomUtil: RandomUtil,
         @inject("HashUtil") protected hashUtil: HashUtil,
+        @inject("timeUtil") protected timeUtil: TimeUtil,
         @inject("SaveServer") protected saveServer: SaveServer,
         @inject("DatabaseServer") protected databaseServer: DatabaseServer,
         @inject("ProfileHelper") protected profileHelper: ProfileHelper,
@@ -157,7 +159,7 @@ export class RagfairServerHelper
             MessageType.MESSAGE_WITH_ITEMS,
             this.localeService.getLocaleDb()[RagfairServerHelper.goodsReturnedTemplate],
             returnedItems,
-            this.questConfig.redeemTime
+            this.timeUtil.getHoursAsSeconds(this.questConfig.redeemTime)
         );
     }
 

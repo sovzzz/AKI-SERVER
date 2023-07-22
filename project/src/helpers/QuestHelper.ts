@@ -528,7 +528,7 @@ export class QuestHelper
             MessageType.QUEST_FAIL,
             quest.failMessageText,
             questRewards,
-            this.questConfig.redeemTime
+            this.timeUtil.getHoursAsSeconds(this.questConfig.redeemTime)
         );
 
         failedQuestResponse.profileChanges[sessionID].quests = this.failedUnlocked(failRequest.qid, sessionID);
