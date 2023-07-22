@@ -147,12 +147,6 @@ export class RagfairServerHelper
      */
     public returnItems(sessionID: string, returnedItems: Item[]): void
     {
-        //const messageContent = this.dialogueHelper.createMessageContext(undefined, MessageType.MESSAGE_WITH_ITEMS, this.questConfig.redeemTime);
-        //const locale = this.localeService.getLocaleDb();
-        //messageContent.text = locale[RagfairServerHelper.goodsReturnedTemplate];
-
-        //this.dialogueHelper.addDialogueMessage(Traders.RAGMAN, messageContent, sessionID, returnedItems);
-
         this.mailSendService.sendLocalisedNpcMessageToPlayer(
             sessionID,
             Traders.RAGMAN,

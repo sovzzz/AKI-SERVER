@@ -519,9 +519,6 @@ export class QuestHelper
         // Create a dialog message for completing the quest.
         const quest = this.getQuestFromDb(failRequest.qid, pmcData);
 
-        //const messageContent = this.dialogueHelper.createMessageContext(quest.failMessageText, MessageType.QUEST_FAIL, this.questConfig.redeemTime);
-        //this.dialogueHelper.addDialogueMessage(quest.traderId, messageContent, sessionID, questRewards);
-
         this.mailSendService.sendLocalisedNpcMessageToPlayer(
             sessionID,
             this.traderHelper.getTraderById(quest.traderId),
