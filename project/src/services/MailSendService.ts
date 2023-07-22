@@ -392,6 +392,12 @@ export class MailSendService
             return messageDetails.senderDetails?._id;
         }
 
+        /** Dialog is from a trader, return trader */
+        if (messageDetails.dialogType === MessageType.NPC_TRADER)
+        {
+            return messageDetails.trader;
+        }
+
         if (messageDetails.senderDetails?._id)
         {
             return messageDetails.senderDetails._id;
