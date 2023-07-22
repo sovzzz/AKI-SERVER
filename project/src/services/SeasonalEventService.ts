@@ -118,7 +118,7 @@ export class SeasonalEventService
     }
 
     /**
-     * Get an array of seasonal items that should be blocked as seasonal is not active
+     * Get an array of seasonal items that should be blocked as season is not currently active
      * @returns Array of tpl strings
      */
     public getSeasonalEventItemsToBlock(): string[]
