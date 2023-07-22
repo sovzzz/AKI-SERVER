@@ -48,33 +48,25 @@
 
             ]
         },
-        "Halloween 2023": {
-            "items": [{
-                    "_id": "1274650827982e40930946f4",
-                    "_tpl": "6389c6463485cf0eeb260715",
-                    "upd": {
-                        "StackObjectsCount": 30
-                    },
-                    "parentId": "64b99751053fc8a45106fa55"
-                }
-            ],
-            "sender": "System",
-            "messageText": "Halloween Event Text",
-            "timestampToSend": 42069,
-            "collectionTimeHours": 48,
-            "associatedEvent": "Halloween"
-        },
-        "Christmas 2022": {
-            "items": [{
+        "Christmas2022": {
+            "items": [
+				{
                     "_id": "a89075c1a18874dd6404a6d7",
                     "_tpl": "5aafbde786f774389d0cbc0f",
                     "upd": {
-                        "StackObjectsCount": 5
+                        "StackObjectsCount": 1
                     }
-                }
+                },
+				{
+                    "_id": "a89075c1b188g4dd6404a3d7",
+                    "_tpl": "6389c6463485cf0eeb260715",
+                    "upd": {
+                        "StackObjectsCount": 1
+                    }
+                },
             ],
             "sender": "System",
-            "messageText": "Christmas Event Text",
+            "messageText": "Merry christmas!",
             "timestampToSend": 42069,
             "associatedEvent": "Christmas"
         },
