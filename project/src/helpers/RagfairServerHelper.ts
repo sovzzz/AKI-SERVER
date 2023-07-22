@@ -36,7 +36,7 @@ export class RagfairServerHelper
     constructor(
         @inject("RandomUtil") protected randomUtil: RandomUtil,
         @inject("HashUtil") protected hashUtil: HashUtil,
-        @inject("timeUtil") protected timeUtil: TimeUtil,
+        @inject("TimeUtil") protected timeUtil: TimeUtil,
         @inject("SaveServer") protected saveServer: SaveServer,
         @inject("DatabaseServer") protected databaseServer: DatabaseServer,
         @inject("ProfileHelper") protected profileHelper: ProfileHelper,
