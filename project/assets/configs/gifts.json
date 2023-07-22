@@ -63,7 +63,7 @@
                     "upd": {
                         "StackObjectsCount": 1
                     }
-                },
+                }
             ],
             "sender": "System",
             "messageText": "Merry christmas!",
@@ -501,6 +501,60 @@
             "messageText": "HESOYAM",
             "collectionTimeHours": 48,
             "associatedEvent": "Promo"
-        }
+        },
+		"PraporGiftDay1": {
+			"items": [
+				{
+					"_id": "a89275c1b18874ed6402a6d7",
+                    "_tpl": "544fb45d4bdc2dee738b4568",
+                    "upd": {
+                        "StackObjectsCount": 1
+                    }
+				},{
+					"_id": "a8927tryb15624ed6d02a6d7",
+                    "_tpl": "5d02778e86f774203e7dedbe",
+                    "upd": {
+                        "StackObjectsCount": 1
+                    }
+				},{
+					"_id": "a8927tgyg55674ed6d02a6d7",
+                    "_tpl": "6034d0230ca681766b6a0fb5",
+                    "upd": {
+                        "StackObjectsCount": 1
+                    }
+				}
+			],
+			"sender": "Trader",
+			"trader": "PRAPOR",
+			"localeTextId": "5fd4c8b59e4b2a58b34bbd28 0",
+			"collectionTimeHours": 48
+		},
+		"PraporGiftDay2": {
+			"items": [
+				{
+					"_id": "a89275c1b18874ed7452a6d7",
+                    "_tpl": "5751a25924597722c463c472",
+                    "upd": {
+                        "StackObjectsCount": 2
+                    }
+				},{
+					"_id": "a8927tgyb15674ed6d02a6d7",
+                    "_tpl": "5ca20d5986f774331e7c9602",
+                    "upd": {
+                        "StackObjectsCount": 1
+                    }
+				},{
+					"_id": "a8927tgyb15674ed6d02oyj7",
+                    "_tpl": "5755356824597772cb798962",
+                    "upd": {
+                        "StackObjectsCount": 3
+                    }
+				}
+			],
+			"sender": "Trader",
+			"trader": "PRAPOR",
+			"localeTextId": "5fd4c8d49e4b2a58b34bbd29 0",
+			"collectionTimeHours": 48
+		}
     }
 }

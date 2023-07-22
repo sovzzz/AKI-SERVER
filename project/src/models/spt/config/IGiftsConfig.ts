@@ -23,6 +23,8 @@ export interface Gift
     /** Optional - supply a trader type to send from, not necessary when sending from SYSTEM or USER */
     trader?: Traders
     messageText: string
+    /** Optional - if sending text from the client locale file */
+    localeTextId?: string
     /** Optional - Used by Seasonal events to send on specific day */
     timestampToSend?: number
     associatedEvent: SeasonalEventType

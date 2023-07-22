@@ -4,6 +4,7 @@ import { ConfigTypes } from "../models/enums/ConfigTypes";
 import { GiftSenderType } from "../models/enums/GiftSenderType";
 import { GiftSentResult } from "../models/enums/GiftSentResult";
 import { MessageType } from "../models/enums/MessageType";
+import { Traders } from "../models/enums/Traders";
 import { Gift, IGiftsConfig } from "../models/spt/config/IGiftsConfig";
 import { ISendMessageDetails } from "../models/spt/dialog/ISendMessageDetails";
 import { ILogger } from "../models/spt/utils/ILogger";
@@ -81,13 +82,28 @@ export class GiftService
         }
         else if (giftData.sender === GiftSenderType.TRADER)
         {
-            this.mailSendService.sendDirectNpcMessageToPlayer(
-                playerId,
-                giftData.trader,
-                MessageType.MESSAGE_WITH_ITEMS,
-                giftData.messageText,
-                giftData.items,
-                this.timeUtil.getHoursAsSeconds(giftData.collectionTimeHours));
+            if (giftData.localeTextId)
+            {
+                this.mailSendService.sendLocalisedNpcMessageToPlayer(
+                    playerId,
+                    giftData.trader,
+                    MessageType.MESSAGE_WITH_ITEMS,
+                    giftData.localeTextId,
+                    giftData.items,
+                    this.timeUtil.getHoursAsSeconds(giftData.collectionTimeHours));
+            }
+            else
+            {
+                this.mailSendService.sendDirectNpcMessageToPlayer(
+                    playerId,
+                    giftData.trader,
+                    MessageType.MESSAGE_WITH_ITEMS,
+                    giftData.messageText,
+                    giftData.items,
+                    this.timeUtil.getHoursAsSeconds(giftData.collectionTimeHours));
+            }
+
+            
         }
         else
         {
@@ -124,7 +140,7 @@ export class GiftService
     {
         if (giftData.sender === GiftSenderType.TRADER)
         {
-            return giftData.trader;
+            return Traders[giftData.trader];
         }
 
         if (giftData.sender === GiftSenderType.USER)
@@ -152,5 +168,24 @@ export class GiftService
                 this.logger.error(`Gift message type: ${giftData.sender} not handled`);
                 break;
         }
+    }
+
+    /**
+     * Prapor sends gifts to player for first week after profile creation
+     * @param sessionId Player id
+     * @param day What day to give gift for
+     */
+    public sendPraporStartingGift(sessionId: string, day: number): void
+    {
+        switch (day) 
+        {
+            case 1:
+                this.sendGiftToPlayer(sessionId, "PraporGiftDay1");
+                break;
+            case 2:
+                this.sendGiftToPlayer(sessionId, "PraporGiftDay2");
+                break;
+        }
+        
     }
 }
