@@ -124,7 +124,7 @@
 	"modloader-invalid_version_property": "Mod %s package.json contains an invalid version string",
 	"modloader-is_client_mod": "Mod (%s) is a client mod and should be placed in the following folder: /spt/bepinex/plugins",
 	"modloader-loaded_mod": "Mod: {{name}} version: {{version}} by: {{author}} loaded",
-	"modloader-loading_mods": "ModLoader: loading %s mods...",
+	"modloader-loading_mods": "ModLoader: loading %s server mods...",
 	"modloader-main_property_not_js": "Mod %s package.json main property must be a .js file",
 	"modloader-main_property_points_to_nothing": "Mod %s package.json main property points to non-existing file",
 	"modloader-missing_akiversion_field": "Mod %s is missing the akiVersion field, most likely due to being out of date and incompatible with the current version of AKI",
