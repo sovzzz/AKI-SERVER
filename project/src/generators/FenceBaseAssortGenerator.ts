@@ -73,7 +73,7 @@ export class FenceBaseAssortGenerator
             }
 
             // Skip seasonal event items when not in seasonal event
-            if (blockedSeasonalItems.includes(item._id))
+            if (this.traderConfig.fence.blacklistSeasonalItems && blockedSeasonalItems.includes(item._id))
             {
                 continue;
             }
