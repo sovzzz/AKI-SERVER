@@ -382,20 +382,14 @@ export class MailSendService
             return this.systemSenderId;
         }
 
-        if (messageDetails.sender === MessageType.NPC_TRADER)
+        if (messageDetails.sender === MessageType.NPC_TRADER || messageDetails.dialogType === MessageType.NPC_TRADER)
         {
-            return messageDetails.trader;
+            return Traders[messageDetails.trader];
         }
 
         if (messageDetails.sender === MessageType.USER_MESSAGE)
         {
             return messageDetails.senderDetails?._id;
-        }
-
-        /** Dialog is from a trader, return trader */
-        if (messageDetails.dialogType === MessageType.NPC_TRADER)
-        {
-            return messageDetails.trader;
         }
 
         if (messageDetails.senderDetails?._id)
