@@ -14,9 +14,11 @@ import { DatabaseServer } from "../servers/DatabaseServer";
 import { SaveServer } from "../servers/SaveServer";
 import { ItemFilterService } from "../services/ItemFilterService";
 import { LocaleService } from "../services/LocaleService";
+import { MailSendService } from "../services/MailSendService";
 import { HashUtil } from "../utils/HashUtil";
 import { JsonUtil } from "../utils/JsonUtil";
 import { RandomUtil } from "../utils/RandomUtil";
+import { TimeUtil } from "../utils/TimeUtil";
 import { DialogueHelper } from "./DialogueHelper";
 import { ItemHelper } from "./ItemHelper";
 import { ProfileHelper } from "./ProfileHelper";
@@ -34,6 +36,7 @@ export class RagfairServerHelper
     constructor(
         @inject("RandomUtil") protected randomUtil: RandomUtil,
         @inject("HashUtil") protected hashUtil: HashUtil,
+        @inject("TimeUtil") protected timeUtil: TimeUtil,
         @inject("SaveServer") protected saveServer: SaveServer,
         @inject("DatabaseServer") protected databaseServer: DatabaseServer,
         @inject("ProfileHelper") protected profileHelper: ProfileHelper,
@@ -41,6 +44,7 @@ export class RagfairServerHelper
         @inject("LocaleService") protected localeService: LocaleService,
         @inject("DialogueHelper") protected dialogueHelper: DialogueHelper,
         @inject("JsonUtil") protected jsonUtil: JsonUtil,
+        @inject("MailSendService") protected mailSendService: MailSendService,
         @inject("ItemFilterService") protected itemFilterService: ItemFilterService,
         @inject("ConfigServer") protected configServer: ConfigServer
     )
@@ -77,7 +81,7 @@ export class RagfairServerHelper
         }
 
         // Skip custom blacklisted items
-        if (this.isItemBlacklisted(itemDetails[1]._id))
+        if (this.isItemOnCustomFleaBlacklist(itemDetails[1]._id))
         {
             return false;
         }
@@ -97,7 +101,12 @@ export class RagfairServerHelper
         return true;
     }
 
-    protected isItemBlacklisted(itemTemplateId: string): boolean
+    /**
+     * Is supplied item tpl on the ragfair custom blacklist from configs/ragfair.json/dynamic
+     * @param itemTemplateId Item tpl to check is blacklisted
+     * @returns True if its blacklsited
+     */
+    protected isItemOnCustomFleaBlacklist(itemTemplateId: string): boolean
     {
         if (!this.itemHelper.isValidItem(itemTemplateId))
         {
@@ -107,27 +116,45 @@ export class RagfairServerHelper
         return this.ragfairConfig.dynamic.blacklist.custom.includes(itemTemplateId);
     }
 
-    public isTrader(userID: string): boolean
+    /**
+     * is supplied id a trader
+     * @param traderId 
+     * @returns True if id was a trader
+     */
+    public isTrader(traderId: string): boolean
     {
-        return userID in this.databaseServer.getTables().traders;
+        return traderId in this.databaseServer.getTables().traders;
     }
 
-    public isPlayer(userID: string): boolean
+    /**
+     * Is this user id the logged in player
+     * @param userId Id to test
+     * @returns True is the current player
+     */
+    public isPlayer(userId: string): boolean
     {
-        if (this.profileHelper.getPmcProfile(userID) !== undefined)
+        if (this.profileHelper.getPmcProfile(userId) !== undefined)
         {
             return true;
         }
         return false;
     }
 
-    public returnItems(sessionID: string, items: Item[]): void
+    /**
+     * Send items back to player
+     * @param sessionID Player to send items to
+     * @param returnedItems Items to send to player
+     */
+    public returnItems(sessionID: string, returnedItems: Item[]): void
     {
-        const messageContent = this.dialogueHelper.createMessageContext(undefined, MessageType.MESSAGE_WITH_ITEMS, this.questConfig.redeemTime);
-        const locale = this.localeService.getLocaleDb();
-        messageContent.text = locale[RagfairServerHelper.goodsReturnedTemplate];
-
-        this.dialogueHelper.addDialogueMessage(Traders.RAGMAN, messageContent, sessionID, items);
+        this.mailSendService.sendLocalisedNpcMessageToPlayer(
+            sessionID,
+            Traders.RAGMAN,
+            MessageType.MESSAGE_WITH_ITEMS,
+            this.localeService.getLocaleDb()[RagfairServerHelper.goodsReturnedTemplate],
+            returnedItems,
+            this.timeUtil.getHoursAsSeconds(this.questConfig.redeemTime)
+        );
     }
 
     public calculateDynamicStackCount(tplId: string, isWeaponPreset: boolean): number

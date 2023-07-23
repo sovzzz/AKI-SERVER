@@ -21,6 +21,7 @@ import { ConfigServer } from "../servers/ConfigServer";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { LocaleService } from "../services/LocaleService";
 import { LocalisationService } from "../services/LocalisationService";
+import { MailSendService } from "../services/MailSendService";
 import { HashUtil } from "../utils/HashUtil";
 import { JsonUtil } from "../utils/JsonUtil";
 import { TimeUtil } from "../utils/TimeUtil";
@@ -51,6 +52,7 @@ export class QuestHelper
         @inject("PaymentHelper") protected paymentHelper: PaymentHelper,
         @inject("LocalisationService") protected localisationService: LocalisationService,
         @inject("TraderHelper") protected traderHelper: TraderHelper,
+        @inject("MailSendService") protected mailSendService: MailSendService,
         @inject("ConfigServer") protected configServer: ConfigServer
     )
     {
@@ -517,9 +519,14 @@ export class QuestHelper
         // Create a dialog message for completing the quest.
         const quest = this.getQuestFromDb(failRequest.qid, pmcData);
 
-        const messageContent = this.dialogueHelper.createMessageContext(quest.failMessageText, MessageType.QUEST_FAIL, this.questConfig.redeemTime);
-
-        this.dialogueHelper.addDialogueMessage(quest.traderId, messageContent, sessionID, questRewards);
+        this.mailSendService.sendLocalisedNpcMessageToPlayer(
+            sessionID,
+            this.traderHelper.getTraderById(quest.traderId),
+            MessageType.QUEST_FAIL,
+            quest.failMessageText,
+            questRewards,
+            this.timeUtil.getHoursAsSeconds(this.questConfig.redeemTime)
+        );
 
         failedQuestResponse.profileChanges[sessionID].quests = this.failedUnlocked(failRequest.qid, sessionID);
 

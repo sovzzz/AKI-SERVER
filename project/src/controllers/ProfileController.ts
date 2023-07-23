@@ -28,6 +28,7 @@ import { EventOutputHolder } from "../routers/EventOutputHolder";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { SaveServer } from "../servers/SaveServer";
 import { LocalisationService } from "../services/LocalisationService";
+import { MailSendService } from "../services/MailSendService";
 import { ProfileFixerService } from "../services/ProfileFixerService";
 import { HashUtil } from "../utils/HashUtil";
 import { TimeUtil } from "../utils/TimeUtil";
@@ -44,6 +45,7 @@ export class ProfileController
         @inject("ItemHelper") protected itemHelper: ItemHelper,
         @inject("ProfileFixerService") protected profileFixerService: ProfileFixerService,
         @inject("LocalisationService") protected localisationService: LocalisationService,
+        @inject("MailSendService") protected mailSendService: MailSendService,
         @inject("PlayerScavGenerator") protected playerScavGenerator: PlayerScavGenerator,
         @inject("EventOutputHolder") protected eventOutputHolder: EventOutputHolder,
         @inject("TraderHelper") protected traderHelper: TraderHelper,
@@ -232,9 +234,15 @@ export class ProfileController
             // Get messageId of text to send to player as text message in game
             // Copy of code from QuestController.acceptQuest()
             const messageId = this.questHelper.getMessageIdForQuestStart(questFromDb.startedMessageText, questFromDb.description);
-            const messageContent = this.dialogueHelper.createMessageContext(messageId, MessageType.QUEST_START, 99999);
             const itemRewards = this.questHelper.applyQuestReward(profileDetails.characters.pmc, quest.qid, QuestStatus.Started, sessionID, response);
-            this.dialogueHelper.addDialogueMessage(questFromDb.traderId, messageContent, sessionID, itemRewards);
+
+            this.mailSendService.sendLocalisedNpcMessageToPlayer(
+                sessionID,
+                this.traderHelper.getTraderById(questFromDb.traderId),
+                MessageType.QUEST_START,
+                messageId,
+                itemRewards,
+                this.timeUtil.getHoursAsSeconds(100));
         }
     }
 

@@ -275,10 +275,15 @@ export class QuestController
         const questFromDb = this.questHelper.getQuestFromDb(acceptedQuest.qid, pmcData);
         // Get messageId of text to send to player as text message in game
         const messageId = this.questHelper.getMessageIdForQuestStart(questFromDb.startedMessageText, questFromDb.description);
-        const messageContent = this.dialogueHelper.createMessageContext(messageId, MessageType.QUEST_START, this.questConfig.redeemTime);
-
         const startedQuestRewards = this.questHelper.applyQuestReward(pmcData, acceptedQuest.qid, QuestStatus.Started, sessionID, acceptQuestResponse);
-        this.dialogueHelper.addDialogueMessage(questFromDb.traderId, messageContent, sessionID, startedQuestRewards);
+
+        this.mailSendService.sendLocalisedNpcMessageToPlayer(
+            sessionID,
+            this.traderHelper.getTraderById(questFromDb.traderId),
+            MessageType.QUEST_START,
+            messageId,
+            startedQuestRewards,
+            this.timeUtil.getHoursAsSeconds(this.questConfig.redeemTime));
 
         acceptQuestResponse.profileChanges[sessionID].quests = this.questHelper.acceptedUnlocked(acceptedQuest.qid, sessionID);
 
@@ -334,9 +339,14 @@ export class QuestController
         }
 
         const questRewards = this.questHelper.getQuestRewardItems(<IQuest><unknown>repeatableQuestProfile, state);
-        const messageContent = this.dialogueHelper.createMessageContext(questStartedMessageKey, MessageType.QUEST_START, this.questConfig.redeemTime);
 
-        this.dialogueHelper.addDialogueMessage(repeatableQuestProfile.traderId, messageContent, sessionID, questRewards);
+        this.mailSendService.sendLocalisedNpcMessageToPlayer(
+            sessionID,
+            this.traderHelper.getTraderById(repeatableQuestProfile.traderId),
+            MessageType.QUEST_START,
+            questStartedMessageKey,
+            questRewards,
+            this.timeUtil.getHoursAsSeconds(this.questConfig.redeemTime));
 
         acceptQuestResponse.profileChanges[sessionID].quests = this.questHelper.acceptedUnlocked(acceptedQuest.qid, sessionID);
         return acceptQuestResponse;

@@ -25,6 +25,7 @@ import { ILogger } from "../models/spt/utils/ILogger";
 import { ConfigServer } from "../servers/ConfigServer";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { CustomLocationWaveService } from "../services/CustomLocationWaveService";
+import { GiftService } from "../services/GiftService";
 import { LocalisationService } from "../services/LocalisationService";
 import { OpenZoneService } from "../services/OpenZoneService";
 import { ProfileFixerService } from "../services/ProfileFixerService";
@@ -57,6 +58,7 @@ export class GameController
         @inject("CustomLocationWaveService") protected customLocationWaveService: CustomLocationWaveService,
         @inject("OpenZoneService") protected openZoneService: OpenZoneService,
         @inject("SeasonalEventService") protected seasonalEventService: SeasonalEventService,
+        @inject("GiftService") protected giftService: GiftService,
         @inject("ApplicationContext") protected applicationContext: ApplicationContext,
         @inject("ConfigServer") protected configServer: ConfigServer
     )
@@ -124,6 +126,8 @@ export class GameController
                 this.splitBotWavesIntoSingleWaves();
             }
 
+            this.sendPraporGiftsToNewProfiles(pmcProfile);
+
             this.profileFixerService.removeLegacyScavCaseProductionCrafts(pmcProfile);
 
             this.profileFixerService.addMissingHideoutAreasToProfile(fullProfile);
@@ -162,7 +166,7 @@ export class GameController
 
             if (this.seasonalEventService.isAutomaticEventDetectionEnabled())
             {
-                this.seasonalEventService.checkForAndEnableSeasonalEvents();
+                this.seasonalEventService.checkForAndEnableSeasonalEvents(sessionID);
             }
 
             if (pmcProfile?.Skills?.Common)
@@ -456,6 +460,25 @@ export class GameController
             {
                 wave.Time = this.locationConfig.rogueLighthouseSpawnTimeSettings.waitTimeSeconds;
             }
+        }
+    }
+
+    protected sendPraporGiftsToNewProfiles(pmcProfile: IPmcData): void
+    {
+        const timeStampProfileCreated = pmcProfile.Info.RegistrationDate;
+        const oneDaySeconds = this.timeUtil.getHoursAsSeconds(24);
+        const currentTimeStamp = this.timeUtil.getTimestamp();
+
+        // One day post-profile creation
+        if ((timeStampProfileCreated + oneDaySeconds) > currentTimeStamp)
+        {
+            this.giftService.sendPraporStartingGift(pmcProfile.aid, 1);
+        }
+
+        // Two day post-profile creation
+        if ((timeStampProfileCreated + (oneDaySeconds * 2)) > currentTimeStamp)
+        {
+            this.giftService.sendPraporStartingGift(pmcProfile.aid, 2);
         }
     }
 

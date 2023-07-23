@@ -90,6 +90,7 @@
 		{
 			"59e690b686f7746c9f75e848": {"min": 5, "max": 15}
 		},
+		"blacklistSeasonalItems": true,
         "blacklist": [
             "5661632d4bdc2d903d8b456b",
             "543be5e94bdc2df1348b4568",

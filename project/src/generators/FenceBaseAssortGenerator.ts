@@ -13,6 +13,7 @@ import { ILogger } from "../models/spt/utils/ILogger";
 import { ConfigServer } from "../servers/ConfigServer";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { ItemFilterService } from "../services/ItemFilterService";
+import { SeasonalEventService } from "../services/SeasonalEventService";
 
 @injectable()
 export class FenceBaseAssortGenerator
@@ -25,6 +26,7 @@ export class FenceBaseAssortGenerator
         @inject("HandbookHelper") protected handbookHelper: HandbookHelper,
         @inject("ItemHelper") protected itemHelper: ItemHelper,
         @inject("ItemFilterService") protected itemFilterService: ItemFilterService,
+        @inject("SeasonalEventService") protected seasonalEventService: SeasonalEventService,
         @inject("ConfigServer") protected configServer: ConfigServer
     )
     {
@@ -36,6 +38,8 @@ export class FenceBaseAssortGenerator
      */
     public generateFenceBaseAssorts(): void
     {
+        const blockedSeasonalItems = this.seasonalEventService.getSeasonalEventItemsToBlock();
+
         const baseFenceAssort = this.databaseServer.getTables().traders[Traders.FENCE].assort;
 
         const dbItems = Object.values(this.databaseServer.getTables().templates.items);
@@ -66,6 +70,12 @@ export class FenceBaseAssortGenerator
                 {
                     continue;
                 }
+            }
+
+            // Skip seasonal event items when not in seasonal event
+            if (this.traderConfig.fence.blacklistSeasonalItems && blockedSeasonalItems.includes(item._id))
+            {
+                continue;
             }
 
             // Create barter scheme object

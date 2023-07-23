@@ -1,6 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
 import { BotHelper } from "../helpers/BotHelper";
+import { ProfileHelper } from "../helpers/ProfileHelper";
 import { IConfig } from "../models/eft/common/IGlobals";
 import { Inventory } from "../models/eft/common/tables/IBotType";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
@@ -13,6 +14,7 @@ import { ILogger } from "../models/spt/utils/ILogger";
 import { ConfigServer } from "../servers/ConfigServer";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { DatabaseImporter } from "../utils/DatabaseImporter";
+import { GiftService } from "./GiftService";
 import { LocalisationService } from "./LocalisationService";
 
 @injectable()
@@ -26,8 +28,10 @@ export class SeasonalEventService
         @inject("WinstonLogger") protected logger: ILogger,
         @inject("DatabaseServer") protected databaseServer: DatabaseServer,
         @inject("DatabaseImporter") protected databaseImporter: DatabaseImporter,
+        @inject("GiftService") protected giftService: GiftService,
         @inject("LocalisationService") protected localisationService: LocalisationService,
         @inject("BotHelper") protected botHelper: BotHelper,
+        @inject("ProfileHelper") protected profileHelper: ProfileHelper,
         @inject("ConfigServer") protected configServer: ConfigServer
     )
     {
@@ -118,7 +122,7 @@ export class SeasonalEventService
     }
 
     /**
-     * Get an array of seasonal items that should be blocked as seasonal is not active
+     * Get an array of seasonal items that should be blocked as season is not currently active
      * @returns Array of tpl strings
      */
     public getSeasonalEventItemsToBlock(): string[]
@@ -213,8 +217,9 @@ export class SeasonalEventService
 
     /**
      * Check if current date falls inside any of the seasons events pased in, if so, handle them
+     * @param sessionId Players id
      */
-    public checkForAndEnableSeasonalEvents(): void
+    public checkForAndEnableSeasonalEvents(sessionId: string): void
     {
         const globalConfig = this.databaseServer.getTables().globals.config;
         const currentDate = new Date();
@@ -229,7 +234,7 @@ export class SeasonalEventService
             if (currentDate >= eventStartDate
                 && currentDate <= eventEndDate)
             {
-                this.updateGlobalEvents(globalConfig, event.type);
+                this.updateGlobalEvents(sessionId, globalConfig, event.type);
             }
         }
     }
@@ -272,10 +277,11 @@ export class SeasonalEventService
 
     /**
      * Make adjusted to server code based on the name of the event passed in
+     * @param sessionId Player id
      * @param globalConfig globals.json
      * @param eventName Name of the event to enable. e.g. Christmas
      */
-    protected updateGlobalEvents(globalConfig: IConfig, eventType: SeasonalEventType): void
+    protected updateGlobalEvents(sessionId: string, globalConfig: IConfig, eventType: SeasonalEventType): void
     {
         switch (eventType.toLowerCase())
         {
@@ -286,7 +292,7 @@ export class SeasonalEventService
                 globalConfig.Health.ProfileHealthSettings.DefaultStimulatorBuff = "Buffs_Halloween";
                 this.addEventGearToBots(eventType);
                 this.addPumpkinsToScavBackpacks();
-                //this.adjustTraderIcons(eventType);
+                this.adjustTraderIcons(eventType);
                 break;
             case SeasonalEventType.CHRISTMAS.toLowerCase():
                 globalConfig.EventType = globalConfig.EventType.filter(x => x !== "None");
@@ -295,6 +301,10 @@ export class SeasonalEventService
                 this.addGifterBotToMaps();
                 this.addLootItemsToGifterDropItemsList();
                 this.enableDancingTree();
+                this.giveGift(sessionId, "Christmas2022");
+                break;
+            case SeasonalEventType.NEW_YEARS.toLowerCase():
+                this.giveGift(sessionId, "NewYear2021");
                 break;
             default:
                 // Likely a mod event
@@ -435,5 +445,19 @@ export class SeasonalEventService
                 RandomTimeSpawn: false
             });
         }
+    }
+
+    /**
+     * Send gift to player if they'e not already received it
+     * @param playerId Player to send gift to
+     * @param giftkey Key of gift to give
+     */
+    protected giveGift(playerId: string, giftkey: string): void
+    {
+        if (!this.profileHelper.playerHasRecievedGift(playerId, giftkey))
+        {
+            this.giftService.sendGiftToPlayer(playerId, giftkey);
+        }
+        
     }
 }
