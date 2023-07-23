@@ -22,6 +22,7 @@ import { TimeUtil } from "../utils/TimeUtil";
 import { DialogueHelper } from "./DialogueHelper";
 import { ItemHelper } from "./ItemHelper";
 import { ProfileHelper } from "./ProfileHelper";
+import { TraderHelper } from "./TraderHelper";
 
 /**
  * Helper class for common ragfair server actions
@@ -43,6 +44,7 @@ export class RagfairServerHelper
         @inject("ItemHelper") protected itemHelper: ItemHelper,
         @inject("LocaleService") protected localeService: LocaleService,
         @inject("DialogueHelper") protected dialogueHelper: DialogueHelper,
+        @inject("TraderHelper") protected traderHelper: TraderHelper,
         @inject("JsonUtil") protected jsonUtil: JsonUtil,
         @inject("MailSendService") protected mailSendService: MailSendService,
         @inject("ItemFilterService") protected itemFilterService: ItemFilterService,
@@ -149,9 +151,9 @@ export class RagfairServerHelper
     {
         this.mailSendService.sendLocalisedNpcMessageToPlayer(
             sessionID,
-            Traders.RAGMAN,
+            this.traderHelper.getTraderById(Traders.RAGMAN),
             MessageType.MESSAGE_WITH_ITEMS,
-            this.localeService.getLocaleDb()[RagfairServerHelper.goodsReturnedTemplate],
+            RagfairServerHelper.goodsReturnedTemplate,
             returnedItems,
             this.timeUtil.getHoursAsSeconds(this.questConfig.redeemTime)
         );
