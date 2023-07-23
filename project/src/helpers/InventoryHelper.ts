@@ -101,7 +101,7 @@ export class InventoryHelper
                     return this.httpResponse.appendErrorToOutput(output, message);
                 }
                 
-                // handle when item being bought is a preset
+                // Handle when item being bought is a preset
                 const item = fenceItems[itemIndex];
                 if (item.upd?.sptPresetId)
                 {
@@ -137,6 +137,7 @@ export class InventoryHelper
 
         // Find an empty slot in stash for each of the items being added
         let stashFS2D = this.getStashSlotMap(pmcData, sessionID);
+        let sortingTableFS2D = this.getStashSlotMap(pmcData, sessionID);
 
         for (const itemToAdd of itemsToAdd)
         {
@@ -161,7 +162,8 @@ export class InventoryHelper
 
                     return this.httpResponse.appendErrorToOutput(output, this.localisationService.getText("inventory-no_stash_space"));
                 }
-
+                // Store details for object, incuding container item will be placed in
+                itemToAdd.containerId = pmcData.Inventory.stash;
                 itemToAdd.location = {
                     x: findSlotResult.x,
                     y: findSlotResult.y,
@@ -170,7 +172,28 @@ export class InventoryHelper
             }
             else
             {
-                return this.httpResponse.appendErrorToOutput(output, this.localisationService.getText("inventory-no_stash_space"));
+                const findStashSlotResult = this.containerHelper.findSlotForItem(stashFS2D, itemSize[0], itemSize[1]);
+                const itemSizeX = findStashSlotResult.rotation ? itemSize[1] : itemSize[0];
+                const itemSizeY = findStashSlotResult.rotation ? itemSize[0] : itemSize[1];
+                try
+                {
+                    sortingTableFS2D = this.containerHelper.fillContainerMapWithItem(sortingTableFS2D, findStashSlotResult.x, findStashSlotResult.y, itemSizeX, itemSizeY, false); // TODO: rotation not passed in, bad?
+                }
+                catch (err)
+                {
+                    const errorText = typeof err === "string" ? ` -> ${err}` : "";
+                    this.logger.error(this.localisationService.getText("inventory-fill_container_failed", errorText));
+
+                    return this.httpResponse.appendErrorToOutput(output, this.localisationService.getText("inventory-no_stash_space"));
+                }
+
+                // Store details for object, incuding container item will be placed in
+                itemToAdd.containerId = pmcData.Inventory.sortingTable;
+                itemToAdd.location = {
+                    x: findStashSlotResult.x,
+                    y: findStashSlotResult.y,
+                    r: findStashSlotResult.rotation ? 1 : 0,
+                    rotation: findStashSlotResult.rotation};
             }
         }
 
@@ -235,7 +258,7 @@ export class InventoryHelper
             output.profileChanges[sessionID].items.new.push({
                 _id: idForItemToAdd,
                 _tpl: itemToAdd.itemRef._tpl,
-                parentId: pmcData.Inventory.stash,
+                parentId: itemToAdd.containerId,
                 slotId: "hideout",
                 location: { x: itemToAdd.location.x, y: itemToAdd.location.y, r: itemToAdd.location.rotation ? 1 : 0 },
                 upd: upd
@@ -244,7 +267,7 @@ export class InventoryHelper
             pmcData.Inventory.items.push({
                 _id: idForItemToAdd,
                 _tpl: itemToAdd.itemRef._tpl,
-                parentId: pmcData.Inventory.stash,
+                parentId: itemToAdd.containerId,
                 slotId: "hideout",
                 location: { x: itemToAdd.location.x, y: itemToAdd.location.y, r: itemToAdd.location.rotation ? 1 : 0 },
                 upd: this.jsonUtil.clone(upd) // Clone upd to prevent multi-purchases of same item referencing same upd object in memory
@@ -785,19 +808,10 @@ export class InventoryHelper
         return this.getContainerMap(playerStashSize[0], playerStashSize[1], pmcData.Inventory.items, pmcData.Inventory.stash);
     }
 
-    protected getStashType(sessionID: string): string
+    protected getSortingTableSlotMap(pmcData: IPmcData): number[][]
     {
-        const pmcData = this.profileHelper.getPmcProfile(sessionID);
-        const stashObj = pmcData.Inventory.items.find(item => item._id === pmcData.Inventory.stash);
-        if (!stashObj)
-        {
-            this.logger.error(this.localisationService.getText("inventory-unable_to_find_stash"));
-
-            return "";
-        }
-        return stashObj._tpl;
+        return this.getContainerMap(10, 45, pmcData.Inventory.items, pmcData.Inventory.stash);
     }
-
 
     /* Get Player Stash Proper Size
         * input: null
@@ -814,6 +828,19 @@ export class InventoryHelper
             ? this.databaseServer.getTables().templates.items[stashTPL]._props.Grids[0]._props.cellsV
             : 66;
         return [stashX, stashY];
+    }
+
+    protected getStashType(sessionID: string): string
+    {
+        const pmcData = this.profileHelper.getPmcProfile(sessionID);
+        const stashObj = pmcData.Inventory.items.find(item => item._id === pmcData.Inventory.stash);
+        if (!stashObj)
+        {
+            this.logger.error(this.localisationService.getText("inventory-unable_to_find_stash"));
+
+            return "";
+        }
+        return stashObj._tpl;
     }
 
     /**
