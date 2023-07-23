@@ -149,7 +149,7 @@ export class RagfairServerHelper
     {
         this.mailSendService.sendLocalisedNpcMessageToPlayer(
             sessionID,
-            Traders.RAGMAN,
+            Traders[Traders.RAGMAN],
             MessageType.MESSAGE_WITH_ITEMS,
             this.localeService.getLocaleDb()[RagfairServerHelper.goodsReturnedTemplate],
             returnedItems,
