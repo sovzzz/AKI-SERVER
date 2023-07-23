@@ -69,9 +69,10 @@ export class InventoryHelper
      * @param callback Code to execute later (function)
      * @param foundInRaid Will results added to inventory be set as found in raid
      * @param addUpd Additional upd properties for items being added to inventory
+     * @param useSortingTable Allow items to go into sorting table when stash has no space
      * @returns IItemEventRouterResponse
      */
-    public addItem(pmcData: IPmcData, request: IAddItemRequestData, output: IItemEventRouterResponse, sessionID: string, callback: { (): void }, foundInRaid = false, addUpd = null): IItemEventRouterResponse
+    public addItem(pmcData: IPmcData, request: IAddItemRequestData, output: IItemEventRouterResponse, sessionID: string, callback: { (): void }, foundInRaid = false, addUpd = null, useSortingTable = false): IItemEventRouterResponse
     {
         const itemLib: Item[] = []; // TODO: what is the purpose of this property
         const itemsToAdd: IAddItemTempObject[] = [];
@@ -137,7 +138,7 @@ export class InventoryHelper
 
         // Find an empty slot in stash for each of the items being added
         let stashFS2D = this.getStashSlotMap(pmcData, sessionID);
-        let sortingTableFS2D = this.getStashSlotMap(pmcData, sessionID);
+        let sortingTableFS2D = this.getSortingTableSlotMap(pmcData);
 
         for (const itemToAdd of itemsToAdd)
         {
@@ -172,28 +173,37 @@ export class InventoryHelper
             }
             else
             {
-                const findStashSlotResult = this.containerHelper.findSlotForItem(stashFS2D, itemSize[0], itemSize[1]);
-                const itemSizeX = findStashSlotResult.rotation ? itemSize[1] : itemSize[0];
-                const itemSizeY = findStashSlotResult.rotation ? itemSize[0] : itemSize[1];
-                try
+                // Space not foundin main stash, use sorting table or just error out
+                if (useSortingTable)
                 {
-                    sortingTableFS2D = this.containerHelper.fillContainerMapWithItem(sortingTableFS2D, findStashSlotResult.x, findStashSlotResult.y, itemSizeX, itemSizeY, false); // TODO: rotation not passed in, bad?
+                    const findSortingSlotResult = this.containerHelper.findSlotForItem(sortingTableFS2D, itemSize[0], itemSize[1]);
+                    const itemSizeX = findSortingSlotResult.rotation ? itemSize[1] : itemSize[0];
+                    const itemSizeY = findSortingSlotResult.rotation ? itemSize[0] : itemSize[1];
+                    try
+                    {
+                        sortingTableFS2D = this.containerHelper.fillContainerMapWithItem(sortingTableFS2D, findSortingSlotResult.x, findSortingSlotResult.y, itemSizeX, itemSizeY, false); // TODO: rotation not passed in, bad?
+                    }
+                    catch (err)
+                    {
+                        const errorText = typeof err === "string" ? ` -> ${err}` : "";
+                        this.logger.error(this.localisationService.getText("inventory-fill_container_failed", errorText));
+    
+                        return this.httpResponse.appendErrorToOutput(output, this.localisationService.getText("inventory-no_stash_space"));
+                    }
+    
+                    // Store details for object, incuding container item will be placed in
+                    itemToAdd.containerId = pmcData.Inventory.sortingTable;
+                    itemToAdd.location = {
+                        x: findSortingSlotResult.x,
+                        y: findSortingSlotResult.y,
+                        r: findSortingSlotResult.rotation ? 1 : 0,
+                        rotation: findSortingSlotResult.rotation};
                 }
-                catch (err)
+                else
                 {
-                    const errorText = typeof err === "string" ? ` -> ${err}` : "";
-                    this.logger.error(this.localisationService.getText("inventory-fill_container_failed", errorText));
-
                     return this.httpResponse.appendErrorToOutput(output, this.localisationService.getText("inventory-no_stash_space"));
                 }
-
-                // Store details for object, incuding container item will be placed in
-                itemToAdd.containerId = pmcData.Inventory.sortingTable;
-                itemToAdd.location = {
-                    x: findStashSlotResult.x,
-                    y: findStashSlotResult.y,
-                    r: findStashSlotResult.rotation ? 1 : 0,
-                    rotation: findStashSlotResult.rotation};
+                
             }
         }
 
@@ -810,7 +820,7 @@ export class InventoryHelper
 
     protected getSortingTableSlotMap(pmcData: IPmcData): number[][]
     {
-        return this.getContainerMap(10, 45, pmcData.Inventory.items, pmcData.Inventory.stash);
+        return this.getContainerMap(10, 45, pmcData.Inventory.items, pmcData.Inventory.sortingTable);
     }
 
     /* Get Player Stash Proper Size

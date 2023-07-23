@@ -365,15 +365,6 @@ export class InventoryController
     }
 
     /**
-    * Give Item
-    * its used for "add" item like gifts etc.
-    */
-    public addItem(pmcData: IPmcData, body: IAddItemRequestData, output: IItemEventRouterResponse, sessionID: string, callback: any, foundInRaid = false, addUpd = null): IItemEventRouterResponse
-    {
-        return this.inventoryHelper.addItem(pmcData, body, output, sessionID, callback, foundInRaid, addUpd);
-    }
-
-    /**
      * Handles folding of Weapons
      */
     public foldItem(pmcData: IPmcData, body: IInventoryFoldRequestData, sessionID: string): IItemEventRouterResponse
@@ -819,7 +810,7 @@ export class InventoryController
         this.inventoryHelper.removeItem(pmcData, body.item, sessionID, output);
 
         // Add reward items to player inventory
-        this.inventoryHelper.addItem(pmcData, newItemRequest, output, sessionID, null, foundInRaid);
+        this.inventoryHelper.addItem(pmcData, newItemRequest, output, sessionID, null, foundInRaid, null, true);
 
         return output;
     }

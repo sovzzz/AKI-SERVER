@@ -98,6 +98,16 @@ export class ContainerHelper
         return new FindSlotResult();
     }
 
+    /**
+     * Find a free slot for an item to be placed at
+     * @param container2D Container to palce item in
+     * @param x Container x size
+     * @param y Container y size
+     * @param itemW Items width
+     * @param itemH Items height
+     * @param rotate is item rotated
+     * @returns Location to place item
+     */
     public fillContainerMapWithItem(container2D: number[][], x: number, y: number, itemW: number, itemH: number, rotate: boolean): number[][]
     {
         const itemWidth = rotate ? itemH : itemW;
