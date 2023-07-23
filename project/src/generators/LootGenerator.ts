@@ -279,9 +279,15 @@ export class LootGenerator
         }
         
         // Get weapon preset - default or choose a random one from all possible
-        const chosenWeaponPreset = containerSettings.defaultPresetsOnly
+        let chosenWeaponPreset = containerSettings.defaultPresetsOnly
             ? this.presetHelper.getDefaultPreset(chosenWeaponTpl)
             : this.randomUtil.getArrayValue(this.presetHelper.getPresets(chosenWeaponTpl));
+
+        if (!chosenWeaponPreset)
+        {
+            this.logger.warning(`Default preset for weapon ${chosenWeaponTpl} not found, choosing random instead`);
+            chosenWeaponPreset = this.randomUtil.getArrayValue(this.presetHelper.getPresets(chosenWeaponTpl));
+        }
 
         // Add preset to return object
         itemsToReturn.push({
