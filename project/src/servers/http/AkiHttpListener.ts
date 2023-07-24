@@ -1,5 +1,5 @@
 import { IncomingHttpHeaders, IncomingMessage, ServerResponse } from "http";
-import { inject, injectable, injectAll } from "tsyringe";
+import { inject, injectAll, injectable } from "tsyringe";
 import zlib from "zlib";
 
 import { Serializer } from "../../di/Serializer";
@@ -139,7 +139,7 @@ export class AkiHttpListener implements IHttpListener
     
     public getResponse(sessionID: string, req: IncomingMessage, body: Buffer): string
     {
-        const info = this.getBodyInfo(body);
+        const info = this.getBodyInfo(body, req.url);
         if (globalThis.G_LOG_REQUESTS)
         {
             // Parse quest info into object
@@ -162,10 +162,10 @@ export class AkiHttpListener implements IHttpListener
         return output;
     }
 
-    protected  getBodyInfo(body: Buffer): any
+    protected  getBodyInfo(body: Buffer, requestUrl = null): any
     {
         const text = (body) ? body.toString() : "{}";
-        const info = (text) ? this.jsonUtil.deserialize<any>(text) : {};
+        const info = (text) ? this.jsonUtil.deserialize<any>(text, requestUrl) : {};
         return info;
     }
 

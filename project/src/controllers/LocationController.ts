@@ -119,9 +119,11 @@ export class LocationController
     /**
      * Handle client/locations
      * Get all maps base location properties without loot data
+     * @param sessionId Players Id
      * @returns ILocationsGenerateAllResponse
      */
-    public generateAll(): ILocationsGenerateAllResponse
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public generateAll(sessionId: string): ILocationsGenerateAllResponse
     {
         const locationsFromDb = this.jsonUtil.clone(this.databaseServer.getTables().locations);
         const locations: ILocations = {};

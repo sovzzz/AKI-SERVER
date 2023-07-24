@@ -23,7 +23,7 @@ export class LocationCallbacks
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getLocationData(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<ILocationsGenerateAllResponse>
     {
-        return this.httpResponse.getBody(this.locationController.generateAll());
+        return this.httpResponse.getBody(this.locationController.generateAll(sessionID));
     }
 
     /** Handle client/location/getLocalloot */

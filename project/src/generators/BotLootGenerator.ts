@@ -125,22 +125,27 @@ export class BotLootGenerator
             0,
             isPmc);
 
-        if (isPmc && this.randomUtil.getChance100(this.botConfig.pmc.looseWeaponInBackpackChancePercent))
+
+        // Backpack - generate loot if they have one
+        if (botInventory.items.find(x => x.slotId === EquipmentSlots.BACKPACK))
         {
-            this.addLooseWeaponsToInventorySlot(sessionId, botInventory, "Backpack", botJsonTemplate.inventory, botJsonTemplate.chances.mods, botRole, isPmc, botLevel);
+            // Add randomly generated weapon to PMC backpacks
+            if (isPmc && this.randomUtil.getChance100(this.botConfig.pmc.looseWeaponInBackpackChancePercent))
+            {
+                this.addLooseWeaponsToInventorySlot(sessionId, botInventory, EquipmentSlots.BACKPACK, botJsonTemplate.inventory, botJsonTemplate.chances.mods, botRole, isPmc, botLevel);
+            }
+
+            this.addLootFromPool(
+                this.botLootCacheService.getLootFromCache(botRole, isPmc, LootCacheType.BACKPACK, botJsonTemplate),
+                [EquipmentSlots.BACKPACK],
+                lootItemCount,
+                botInventory,
+                botRole,
+                true,
+                this.botConfig.pmc.maxBackpackLootTotalRub,
+                isPmc);
         }
-
-        // Backpack
-        this.addLootFromPool(
-            this.botLootCacheService.getLootFromCache(botRole, isPmc, LootCacheType.BACKPACK, botJsonTemplate),
-            [EquipmentSlots.BACKPACK],
-            lootItemCount,
-            botInventory,
-            botRole,
-            true,
-            this.botConfig.pmc.maxBackpackLootTotalRub,
-            isPmc);
-
+        
         // Vest
         this.addLootFromPool(
             this.botLootCacheService.getLootFromCache(botRole, isPmc, LootCacheType.VEST, botJsonTemplate),
