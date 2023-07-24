@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
-import { INotification } from "../models/eft/notifier/INotifier";
+import { INotification, NotificationType } from "../models/eft/notifier/INotifier";
 import { Dialogue, IUserDialogInfo, Message } from "../models/eft/profile/IAkiProfile";
 import { MemberCategory } from "../models/enums/MemberCategory";
 import { MessageType } from "../models/enums/MessageType";
@@ -62,7 +62,7 @@ export class NotificationSendHelper
         dialog.messages.push(message);
 
         const notification: INotification = {
-            type: "new_message",
+            type: NotificationType.NEW_MESSAGE,
             eventId: message._id,
             dialogId: message.uid,
             message: message
