@@ -587,6 +587,14 @@ export class BotWeaponGenerator
         for (const camora of camoras)
         {
             camora._tpl = ammoTpl;
+            if (camora.upd)
+            {
+                camora.upd.StackObjectsCount = 1;
+            }
+            else
+            {
+                camora.upd = { StackObjectsCount: 1 };
+            }
         }
     }
 }
