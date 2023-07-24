@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
 import { IPmcData } from "../models/eft/common/IPmcData";
-import { Stats } from "../models/eft/common/tables/IBotBase";
+import { CounterKeyValue, Stats } from "../models/eft/common/tables/IBotBase";
 import { IAkiProfile } from "../models/eft/profile/IAkiProfile";
 import { IValidateNicknameRequestData } from "../models/eft/profile/IValidateNicknameRequestData";
 import { QuestStatus } from "../models/enums/QuestStatus";
@@ -328,5 +328,19 @@ export class ProfileHelper
         }
 
         return !!profile.aki.receivedGifts.find(x => x.giftId === giftId);
+    }
+
+    /**
+     * Find Stat in profile counters and increment by one
+     * @param counters Counters to search for key
+     * @param keyToIncrement Key
+     */
+    public incrementStatCounter(counters: CounterKeyValue[], keyToIncrement: string): void
+    {
+        const stat = counters.find(x => x.Key.includes(keyToIncrement));
+        if (stat)
+        {
+            stat.Value++;
+        }
     }
 }
