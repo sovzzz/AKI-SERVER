@@ -18,44 +18,12 @@ export class FindSlotResult
 @injectable()
 export class ContainerHelper
 {
-    protected locateSlot(container2D: number[][], containerX: number, containerY: number, x: number, y: number, itemW: number, itemH: number): boolean
-    {
-        let foundSlot = true;
-
-        for (let itemY = 0; itemY < itemH; itemY++)
-        {
-            if (foundSlot && y + itemH - 1 > containerY - 1)
-            {
-                foundSlot = false;
-                break;
-            }
-
-            for (let itemX = 0; itemX < itemW; itemX++)
-            {
-                if (foundSlot && x + itemW - 1 > containerX - 1)
-                {
-                    foundSlot = false;
-                    break;
-                }
-
-                if (container2D[y + itemY][x + itemX] !== 0)
-                {
-                    foundSlot = false;
-                    break;
-                }
-            }
-
-            if (!foundSlot)
-            {
-                break;
-            }
-        }
-
-        return foundSlot;
-    }
-
-    /* Finds a slot for an item in a given 2D container map
-     * Output: { success: boolean, x: number, y: number, rotation: boolean }
+    /**
+     * Finds a slot for an item in a given 2D container map
+     * @param container2D Array of container with slots filled/free
+     * @param itemWidth Width of item
+     * @param itemHeight Height of item
+     * @returns Location to place item in container
      */
     public findSlotForItem(container2D: number[][], itemWidth: number, itemHeight: number): FindSlotResult
     {
@@ -96,6 +64,54 @@ export class ContainerHelper
         }
 
         return new FindSlotResult();
+    }
+
+    /**
+     * Find a slot inside a container an item can be placed in
+     * @param container2D Container to find space in
+     * @param containerX Container x size
+     * @param containerY Container y size
+     * @param x ???
+     * @param y ???
+     * @param itemW Items width
+     * @param itemH Items height
+     * @returns True - slot found
+     */
+    protected locateSlot(container2D: number[][], containerX: number, containerY: number, x: number, y: number, itemW: number, itemH: number): boolean
+    {
+        let foundSlot = true;
+
+        for (let itemY = 0; itemY < itemH; itemY++)
+        {
+            if (foundSlot && y + itemH - 1 > containerY - 1)
+            {
+                foundSlot = false;
+                break;
+            }
+
+            // Does item fit x-ways
+            for (let itemX = 0; itemX < itemW; itemX++)
+            {
+                if (foundSlot && x + itemW - 1 > containerX - 1)
+                {
+                    foundSlot = false;
+                    break;
+                }
+
+                if (container2D[y + itemY][x + itemX] !== 0)
+                {
+                    foundSlot = false;
+                    break;
+                }
+            }
+
+            if (!foundSlot)
+            {
+                break;
+            }
+        }
+
+        return foundSlot;
     }
 
     /**

@@ -39,7 +39,7 @@ export class InRaidHelper
     }
 
     /**
-     * Should quest items be removed from player inventory on death
+     * Lookup quest item loss from lostOnDeath config
      * @returns True if items should be removed from inventory
      */
     public removeQuestItemsOnDeath(): boolean

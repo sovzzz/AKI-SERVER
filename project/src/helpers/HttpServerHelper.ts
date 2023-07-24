@@ -33,16 +33,25 @@ export class HttpServerHelper
         return this.mime[key];
     }
 
+    /**
+     * Combine ip and port into url
+     * @returns url
+     */
     public buildUrl(): string
     {
         return `${this.httpConfig.ip}:${this.httpConfig.port}`;
     }
 
+    /**
+     * Prepend http to the url:port
+     * @returns URI
+     */
     public getBackendUrl(): string
     {
         return `http://${this.buildUrl()}`;
     }
 
+    /** Get websocket url + port */
     public getWebsocketUrl(): string
     {
         return `ws://${this.buildUrl()}`;

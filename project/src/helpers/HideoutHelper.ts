@@ -104,6 +104,11 @@ export class HideoutHelper
         };
     }
 
+    /**
+     * Is the provided object a Production type
+     * @param productive 
+     * @returns 
+     */
     public isProductionType(productive: Productive): productive is Production
     {
         return (productive as Production).Progress !== undefined || (productive as Production).RecipeId !== undefined;

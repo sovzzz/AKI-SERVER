@@ -21,6 +21,12 @@ export class DurabilityLimitsHelper
         this.botConfig = this.configServer.getConfig(ConfigTypes.BOT);
     }
 
+    /**
+     * Get max durability for a weapon based on bot role
+     * @param itemTemplate UNUSED - Item to get durability for
+     * @param botRole Role of bot to get max durability for
+     * @returns Max durability of weapon
+     */
     public getRandomizedMaxWeaponDurability(itemTemplate: ITemplateItem, botRole: string): number
     {
         if (botRole && this.botHelper.isBotPmc(botRole))
@@ -41,6 +47,12 @@ export class DurabilityLimitsHelper
         return this.generateMaxWeaponDurability(botRole);
     }
 
+    /**
+     * Get max durability value for armor based on bot role
+     * @param itemTemplate Item to get max durability for
+     * @param botRole Role of bot to get max durability for
+     * @returns max durability
+     */
     public getRandomizedMaxArmorDurability(itemTemplate: ITemplateItem, botRole: string): number
     {
         const itemMaxDurability = itemTemplate._props.MaxDurability;
@@ -63,6 +75,13 @@ export class DurabilityLimitsHelper
         return itemMaxDurability;
     }
 
+    /**
+     * Get randomised current weapon durability by bot role
+     * @param itemTemplate Unused - Item to get current durability of
+     * @param botRole Role of bot to get current durability for
+     * @param maxDurability Max durability of weapon
+     * @returns Current weapon durability
+     */
     public getRandomizedWeaponDurability(itemTemplate: ITemplateItem, botRole: string, maxDurability: number): number
     {
         if (botRole && (this.botHelper.isBotPmc(botRole)))
@@ -83,6 +102,13 @@ export class DurabilityLimitsHelper
         return this.generateWeaponDurability(botRole, maxDurability);
     }
 
+    /**
+     * Get randomised current armor durability by bot role
+     * @param itemTemplate Unused - Item to get current durability of
+     * @param botRole Role of bot to get current durability for
+     * @param maxDurability Max durability of armor
+     * @returns Current armor durability
+     */
     public getRandomizedArmorDurability(itemTemplate: ITemplateItem, botRole: string, maxDurability: number): number
     {
         if (botRole && (this.botHelper.isBotPmc(botRole)))
