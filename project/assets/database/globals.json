@@ -17616,27 +17616,9 @@
                 "Duration": 900,
                 "SkillName": "",
                 "Value": -0.1
-              },
-              {
-                "AbsoluteValue": false,
-                "BuffType": "DamageModifier",
-                "Chance": 1,
-                "Delay": 1,
-                "Duration": 900,
-                "SkillName": "",
-                "Value": 0.09
               }
             ],
             "Buffs_Meldonin": [
-              {
-                "AbsoluteValue": false,
-                "BuffType": "DamageModifier",
-                "Chance": 1,
-                "Delay": 1,
-                "Duration": 900,
-                "SkillName": "",
-                "Value": -0.1
-              },
               {
                 "AbsoluteValue": true,
                 "BuffType": "SkillRate",
@@ -17895,15 +17877,6 @@
               }
             ],
             "Buffs_P22": [
-              {
-                "AbsoluteValue": false,
-                "BuffType": "DamageModifier",
-                "Chance": 1,
-                "Delay": 1,
-                "Duration": 60,
-                "SkillName": "",
-                "Value": -0.1
-              },
               {
                 "AbsoluteValue": true,
                 "BuffType": "SkillRate",
@@ -21516,8 +21489,8 @@
         "experience": true,
         "inventoryFullCost": true,
         "kd": false,
-        "kills": true,
         "longestShot": true,
+        "pmcKills": true,
         "ragFairStanding": true,
         "raidCount": true,
         "surviveRatio": false,
