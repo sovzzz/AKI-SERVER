@@ -161,7 +161,7 @@ export class PaymentService
                 tid: body.tid
             };
 
-            output = this.inventoryHelper.addItem(pmcData, request, output, sessionID, null, false);
+            output = this.inventoryHelper.addItem(pmcData, request, output, sessionID, null, false, null, true);
         }
 
         // set current sale sum

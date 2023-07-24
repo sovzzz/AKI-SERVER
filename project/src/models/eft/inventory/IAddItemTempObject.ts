@@ -6,4 +6,6 @@ export interface IAddItemTempObject
     count: number
     isPreset: boolean
     location?: Location
+    // Container item will be placed in - stash or sorting table
+    containerId?: string
 }

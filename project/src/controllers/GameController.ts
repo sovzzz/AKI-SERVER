@@ -126,8 +126,6 @@ export class GameController
                 this.splitBotWavesIntoSingleWaves();
             }
 
-            this.sendPraporGiftsToNewProfiles(pmcProfile);
-
             this.profileFixerService.removeLegacyScavCaseProductionCrafts(pmcProfile);
 
             this.profileFixerService.addMissingHideoutAreasToProfile(fullProfile);
@@ -146,6 +144,8 @@ export class GameController
 
             if (pmcProfile.Inventory)
             {
+                this.sendPraporGiftsToNewProfiles(pmcProfile);
+
                 this.profileFixerService.checkForOrphanedModdedItems(sessionID, pmcProfile);
             }
             

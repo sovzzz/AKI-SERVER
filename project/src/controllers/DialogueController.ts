@@ -50,18 +50,9 @@ export class DialogueController
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public getFriendList(sessionID: string): IGetFriendListDataResponse
     {
+        // Force a fake friend called SPT into friend list
         return {
-            "Friends": [
-                {
-                    _id: "sptFriend",
-                    Info: {
-                        Level: 1,
-                        MemberCategory: MemberCategory.DEVELOPER,
-                        Nickname: "SPT",
-                        Side: "Usec"
-                    }
-                }
-            ],
+            "Friends": [this.getSptFriendData()],
             "Ignore": [],
             "InIgnoreList": []
         };
@@ -188,15 +179,7 @@ export class DialogueController
             if (request.type === MessageType.USER_MESSAGE)
             {
                 profile.dialogues[request.dialogId].Users = [];
-                profile.dialogues[request.dialogId].Users.push({
-                    _id: request.dialogId,
-                    info: {
-                        Level:1,
-                        Nickname: "SPT",
-                        Side: "Usec",
-                        MemberCategory: MemberCategory.DEFAULT
-                    }
-                });
+                profile.dialogues[request.dialogId].Users.push(this.getSptFriendData(request.dialogId));
             }
         }
 
@@ -321,15 +304,8 @@ export class DialogueController
 
     protected handleChatWithSPTFriend(sessionId: string, request: ISendMessageRequest): void
     {
-        const sptFriendUser: IUserDialogInfo = {
-            _id: "sptFriend",
-            info: {
-                Level: 1,
-                MemberCategory: MemberCategory.DEVELOPER,
-                Nickname: "SPT",
-                Side: "Usec"
-            }
-        };
+        const sptFriendUser = this.getSptFriendData();
+
         const giftSent = this.giftService.sendGiftToPlayer(sessionId, request.text);
 
         if (giftSent === GiftSentResult.SUCCESS) 
@@ -351,6 +327,19 @@ export class DialogueController
         {
             this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, "its me!!");
         }
+    }
+
+    protected getSptFriendData(friendId = "sptFriend"): IUserDialogInfo
+    {
+        return {
+            _id: friendId,
+            info: {
+                Level: 1,
+                MemberCategory: MemberCategory.DEVELOPER,
+                Nickname: "SPT",
+                Side: "Usec"
+            }
+        };
     }
 
     /**
