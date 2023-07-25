@@ -475,22 +475,16 @@ export class GameController
         const oneDaySeconds = this.timeUtil.getHoursAsSeconds(24);
         const currentTimeStamp = this.timeUtil.getTimestamp();
 
-        if (!this.profileHelper.playerHasRecievedGift(pmcProfile.aid, "PraporGiftDay1"))
+        // One day post-profile creation
+        if (currentTimeStamp > (timeStampProfileCreated + oneDaySeconds))
         {
-            // One day post-profile creation
-            if (currentTimeStamp > (timeStampProfileCreated + oneDaySeconds))
-            {
-                this.giftService.sendPraporStartingGift(pmcProfile.aid, 1);
-            }
+            this.giftService.sendPraporStartingGift(pmcProfile.aid, 1);
         }
 
-        if (!this.profileHelper.playerHasRecievedGift(pmcProfile.aid, "PraporGiftDay2"))
+        // Two day post-profile creation
+        if (currentTimeStamp > (timeStampProfileCreated + (oneDaySeconds * 2)))
         {
-            // Two day post-profile creation
-            if (currentTimeStamp > (timeStampProfileCreated + (oneDaySeconds * 2)))
-            {
-                this.giftService.sendPraporStartingGift(pmcProfile.aid, 2);
-            }
+            this.giftService.sendPraporStartingGift(pmcProfile.aid, 2);
         }
     }
 
