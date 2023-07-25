@@ -465,22 +465,32 @@ export class GameController
         }
     }
 
+    /**
+     * Send starting gifts to profile after x days
+     * @param pmcProfile Profile to add gifts to
+     */
     protected sendPraporGiftsToNewProfiles(pmcProfile: IPmcData): void
     {
         const timeStampProfileCreated = pmcProfile.Info.RegistrationDate;
         const oneDaySeconds = this.timeUtil.getHoursAsSeconds(24);
         const currentTimeStamp = this.timeUtil.getTimestamp();
 
-        // One day post-profile creation
-        if ((timeStampProfileCreated + oneDaySeconds) > currentTimeStamp)
+        if (!this.profileHelper.playerHasRecievedGift(pmcProfile.aid, "PraporGiftDay1"))
         {
-            this.giftService.sendPraporStartingGift(pmcProfile.aid, 1);
+            // One day post-profile creation
+            if (currentTimeStamp > (timeStampProfileCreated + oneDaySeconds))
+            {
+                this.giftService.sendPraporStartingGift(pmcProfile.aid, 1);
+            }
         }
 
-        // Two day post-profile creation
-        if ((timeStampProfileCreated + (oneDaySeconds * 2)) > currentTimeStamp)
+        if (!this.profileHelper.playerHasRecievedGift(pmcProfile.aid, "PraporGiftDay2"))
         {
-            this.giftService.sendPraporStartingGift(pmcProfile.aid, 2);
+            // Two day post-profile creation
+            if (currentTimeStamp > (timeStampProfileCreated + (oneDaySeconds * 2)))
+            {
+                this.giftService.sendPraporStartingGift(pmcProfile.aid, 2);
+            }
         }
     }
 
