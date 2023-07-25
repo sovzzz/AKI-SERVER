@@ -370,7 +370,7 @@ export class QuestHelper
      * Get quests that can be shown to player after failing a quest
      * @param failedQuestId Id of the quest failed by player
      * @param sessionId Session id
-     * @returns 
+     * @returns IQuest array
      */
     public failedUnlocked(failedQuestId: string, sessionId: string): IQuest[]
     {
@@ -394,6 +394,11 @@ export class QuestHelper
 
             return profileQuest && (profileQuest.status === QuestStatus.Fail);
         });
+
+        if (quests.length === 0)
+        {
+            return quests;
+        }
 
         return this.getQuestsWithOnlyLevelRequirementStartCondition(quests);
     }
