@@ -36,6 +36,9 @@ export class HandbookHelper
     constructor(@inject("DatabaseServer") protected databaseServer: DatabaseServer)
     {}
 
+    /**
+     * Create an in-memory cache of all items with associated handbook price in handbookPriceCache class
+     */
     public hydrateLookup(): void
     {
         const handbookDb = this.databaseServer.getTables().templates.handbook;
@@ -94,13 +97,13 @@ export class HandbookHelper
     }
 
     /**
-     * all items in template with the given parent category
-     * @param x 
+     * Get all items in template with the given parent category
+     * @param parentId 
      * @returns string array
      */
-    public templatesWithParent(x: string): string[]
+    public templatesWithParent(parentId: string): string[]
     {
-        return this.handbookPriceCache.items.byParent.get(x) ?? [];
+        return this.handbookPriceCache.items.byParent.get(parentId) ?? [];
     }
 
     /**
@@ -113,9 +116,14 @@ export class HandbookHelper
         return this.handbookPriceCache.categories.byId.has(category);
     }
 
-    public childrenCategories(x: string): string[]
+    /**
+     * Get all items associated with a categories parent
+     * @param categoryParent 
+     * @returns string array
+     */
+    public childrenCategories(categoryParent: string): string[]
     {
-        return this.handbookPriceCache.categories.byParent.get(x) ?? [];
+        return this.handbookPriceCache.categories.byParent.get(categoryParent) ?? [];
     }
 
     /**

@@ -139,6 +139,14 @@ export class BotWeaponGenerator
             this.fillExistingMagazines(weaponWithModsArray, magazine, ammoTpl);
         }
 
+        // Add cartridge to gun chamber if weapon has slot for it
+        if (weaponItemTemplate._props.Chambers?.length === 1
+            && weaponItemTemplate._props.Chambers[0]?._name === "patron_in_weapon" 
+            && weaponItemTemplate._props.Chambers[0]?._props?.filters[0]?.Filter?.includes(ammoTpl))
+        {
+            this.addCartridgeToChamber(weaponWithModsArray, ammoTpl, "patron_in_weapon");
+        }
+
         // Fill UBGL if found
         const ubglMod = weaponWithModsArray.find(x => x.slotId === "mod_launcher");
         let ubglAmmoTpl: string = undefined;
@@ -156,6 +164,37 @@ export class BotWeaponGenerator
             weaponMods: modPool,
             weaponTemplate: weaponItemTemplate
         };
+    }
+
+    /**
+     * Insert a cartridge into a weapon
+     * @param weaponWithModsArray Weapon and mods
+     * @param ammoTpl Cartridge to add to weapon
+     * @param desiredSlotId name of slot, e.g. patron_in_weapon
+     */
+    protected addCartridgeToChamber(weaponWithModsArray: Item[], ammoTpl: string, desiredSlotId: string): void
+    {
+        // Check for slot first
+        const existingItemWithSlot = weaponWithModsArray.find(x => x.slotId === desiredSlotId);
+        if (!existingItemWithSlot)
+        {
+            // Not found, add fresh
+            weaponWithModsArray.push({
+                _id: this.hashUtil.generate(),
+                _tpl: ammoTpl,
+                parentId: weaponWithModsArray[0]._id,
+                slotId: desiredSlotId,
+                upd: {StackObjectsCount: 1}
+            });
+        }
+        else
+        {
+            // ALready exists, update values
+            existingItemWithSlot.upd = {
+                StackObjectsCount: 1
+            };
+            existingItemWithSlot._tpl = ammoTpl;
+        }
     }
 
     /**
@@ -281,10 +320,9 @@ export class BotWeaponGenerator
      */
     public addExtraMagazinesToInventory(generatedWeaponResult: GenerateWeaponResult, magCounts: MinMax, inventory: PmcInventory, botRole: string): void
     {
-        const weaponMods = generatedWeaponResult.weapon;
+        const weaponAndMods = generatedWeaponResult.weapon;
         const weaponTemplate = generatedWeaponResult.weaponTemplate;
-        const ammoTpl = generatedWeaponResult.chosenAmmoTpl;
-        const magazineTpl = this.getMagazineTplFromWeaponTemplate(weaponMods, weaponTemplate, botRole);
+        const magazineTpl = this.getMagazineTplFromWeaponTemplate(weaponAndMods, weaponTemplate, botRole);
         
         const magTemplate = this.itemHelper.getItem(magazineTpl)[1];
         if (!magTemplate)
@@ -294,10 +332,10 @@ export class BotWeaponGenerator
             return;
         }
 
-        const ammoTemplate = this.itemHelper.getItem(ammoTpl)[1];
+        const ammoTemplate = this.itemHelper.getItem(generatedWeaponResult.chosenAmmoTpl)[1];
         if (!ammoTemplate)
         {
-            this.logger.error(this.localisationService.getText("bot-unable_to_find_ammo_item", ammoTpl));
+            this.logger.error(this.localisationService.getText("bot-unable_to_find_ammo_item", generatedWeaponResult.chosenAmmoTpl));
 
             return;
         }
@@ -305,14 +343,14 @@ export class BotWeaponGenerator
         // Has an UBGL
         if (generatedWeaponResult.chosenUbglAmmoTpl)
         {
-            this.addUbglGrenadesToBotInventory(weaponMods, generatedWeaponResult, inventory);
+            this.addUbglGrenadesToBotInventory(weaponAndMods, generatedWeaponResult, inventory);
         }
 
         const inventoryMagGenModel = new InventoryMagGen(magCounts, magTemplate, weaponTemplate, ammoTemplate, inventory);
         this.inventoryMagGenComponents.find(v => v.canHandleInventoryMagGen(inventoryMagGenModel)).process(inventoryMagGenModel);
 
         // Add x stacks of bullets to SecuredContainer (bots use a magic mag packing skill to reload instantly)
-        this.addAmmoToSecureContainer(this.botConfig.secureContainerAmmoStackCount, ammoTpl, 999, inventory);
+        this.addAmmoToSecureContainer(this.botConfig.secureContainerAmmoStackCount, generatedWeaponResult.chosenAmmoTpl, 999, inventory);
     }
 
     /**
@@ -473,7 +511,7 @@ export class BotWeaponGenerator
 
             return;
         }
-
+        // Magazine, usually
         const parentItem = this.itemHelper.getItem(magazineTemplate._parent)[1];
 
         // the revolver shotgun uses a magazine with chambers, not cartridges ("camora_xxx")
@@ -520,8 +558,8 @@ export class BotWeaponGenerator
         const magazineCartridgeChildItem = weaponWithMods.find(m => m.parentId === magazine._id && m.slotId === "cartridges");
         if (magazineCartridgeChildItem)
         {
-            // Easier to delete and create below instaed of modifying existing item
-            weaponWithMods = weaponWithMods.slice(weaponWithMods.indexOf(magazineCartridgeChildItem), 1);
+            // Delete the existing cartridge object and create fresh below
+            weaponWithMods.splice(weaponWithMods.indexOf(magazineCartridgeChildItem), 1);
         }
 
         // Create array with just magazine
@@ -549,6 +587,14 @@ export class BotWeaponGenerator
         for (const camora of camoras)
         {
             camora._tpl = ammoTpl;
+            if (camora.upd)
+            {
+                camora.upd.StackObjectsCount = 1;
+            }
+            else
+            {
+                camora.upd = { StackObjectsCount: 1 };
+            }
         }
     }
 }

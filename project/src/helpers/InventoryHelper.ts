@@ -203,11 +203,10 @@ export class InventoryHelper
                 {
                     return this.httpResponse.appendErrorToOutput(output, this.localisationService.getText("inventory-no_stash_space"));
                 }
-                
             }
         }
 
-        // Successfully found slot for every item, run callback, catch if it fails (e.g. payMoney() might fail)
+        // Successfully found slot for every item (stash or sorting table), run callback, catch if it fails (e.g. payMoney() might fail)
         try
         {
             if (typeof callback === "function")
@@ -217,6 +216,7 @@ export class InventoryHelper
         }
         catch (err)
         {
+            // Callback failed
             const message = typeof err === "string"
                 ? err
                 : this.localisationService.getText("http-unknown_error");
@@ -344,6 +344,7 @@ export class InventoryHelper
                         {
                             const itemLocation = {};
 
+                            // Item already has location property, use it
                             if (itemLib[tmpKey]["location"] !== undefined)
                             {
                                 itemLocation["location"] = itemLib[tmpKey]["location"];

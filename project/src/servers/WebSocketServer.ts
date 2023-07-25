@@ -3,7 +3,7 @@ import { inject, injectable } from "tsyringe";
 import WebSocket from "ws";
 
 import { HttpServerHelper } from "../helpers/HttpServerHelper";
-import { INotification } from "../models/eft/notifier/INotifier";
+import { INotification, NotificationType } from "../models/eft/notifier/INotifier";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
 import { IHttpConfig } from "../models/spt/config/IHttpConfig";
 import { ILogger } from "../models/spt/utils/ILogger";
@@ -28,7 +28,7 @@ export class WebSocketServer
 
     protected httpConfig: IHttpConfig;
     protected defaultNotification: INotification = {
-        type: "ping",
+        type: NotificationType.PING,
         eventId: "ping"
     };
 

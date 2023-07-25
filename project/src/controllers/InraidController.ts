@@ -16,6 +16,7 @@ import { Item } from "../models/eft/common/tables/IItem";
 import { IRegisterPlayerRequestData } from "../models/eft/inRaid/IRegisterPlayerRequestData";
 import { ISaveProgressRequestData } from "../models/eft/inRaid/ISaveProgressRequestData";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
+import { PlayerRaidEndState } from "../models/enums/PlayerRaidEndState";
 import { Traders } from "../models/enums/Traders";
 import { IAirdropConfig } from "../models/spt/config/IAirdropConfig";
 import { IInRaidConfig } from "../models/spt/config/IInRaidConfig";
@@ -198,11 +199,11 @@ export class InraidController
     {
         switch (postRaidSaveRequest.exit)
         {
-            case "left":
+            case PlayerRaidEndState.LEFT.toString():
                 // Naughty pmc left the raid early!
                 this.reducePmcHealthToPercent(pmcData, 0.01); // 1%
                 break;
-            case "missinginaction":
+            case PlayerRaidEndState.MISSING_IN_ACTION.toString():
                 // Didn't reach exit in time
                 this.reducePmcHealthToPercent(pmcData, 0.3); // 30%
                 break;
@@ -254,9 +255,9 @@ export class InraidController
      * @param statusOnExit exit value from offraidData object
      * @returns true if dead
      */
-    protected isPlayerDead(statusOnExit: string): boolean
+    protected isPlayerDead(statusOnExit: PlayerRaidEndState): boolean
     {
-        return (statusOnExit !== "survived" && statusOnExit !== "runner");
+        return (statusOnExit !== PlayerRaidEndState.SURVIVED && statusOnExit !== PlayerRaidEndState.RUNNER);
     }
 
     /**
@@ -267,7 +268,7 @@ export class InraidController
      */
     protected markOrRemoveFoundInRaidItems(offraidData: ISaveProgressRequestData, pmcData: IPmcData, isPlayerScav: boolean): void
     {
-        if (offraidData.exit.toLowerCase() === "survived")
+        if (offraidData.exit === PlayerRaidEndState.SURVIVED)
         {
             // Mark found items and replace item ID's if the player survived
             offraidData.profile = this.inRaidHelper.addSpawnedInSessionPropertyToItems(pmcData, offraidData.profile, isPlayerScav);
@@ -327,7 +328,7 @@ export class InraidController
         fenceStanding = this.inRaidHelper.calculateFenceStandingChangeFromKills(fenceStanding, offraidData.profile.Stats.Victims);
 
         // Successful extract with scav adds 0.01 standing
-        if (offraidData.exit === "survived")
+        if (offraidData.exit === PlayerRaidEndState.SURVIVED)
         {
             fenceStanding += this.inraidConfig.scavExtractGain;
         }

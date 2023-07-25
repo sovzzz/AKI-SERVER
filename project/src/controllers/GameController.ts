@@ -225,6 +225,8 @@ export class GameController
      */
     public getGameConfig(sessionID: string): IGameConfigResponse
     {
+        const profile = this.profileHelper.getPmcProfile(sessionID);
+
         const config: IGameConfigResponse = {
             languages: this.databaseServer.getTables().locales.languages,
             ndaFree: false,
@@ -243,7 +245,7 @@ export class GameController
             },
             // eslint-disable-next-line @typescript-eslint/naming-convention
             utc_time: new Date().getTime() / 1000,
-            totalInGame: 1
+            totalInGame: profile.Stats.TotalInGameTime
         };
 
         return config;

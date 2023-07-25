@@ -58,8 +58,12 @@ export class LocationController
         return this.generate(name);
     }
 
-    /* generates a random location preset to use for local session */
-    private generate(name: string): ILocationBase
+    /**
+     * Generate a maps base location without loot
+     * @param name Map name
+     * @returns ILocationBase
+     */
+    protected generate(name: string): ILocationBase
     {
         const location: ILocation = this.databaseServer.getTables().locations[name];
         const output: ILocationBase = this.jsonUtil.clone(location.base);
@@ -101,7 +105,7 @@ export class LocationController
 
         this.logger.success(this.localisationService.getText("location-containers_generated_success", staticContainerCount));
 
-        // dyanmic loot
+        // Dyanmic loot
         const dynamicLootDist: ILooseLoot = this.jsonUtil.clone(location.looseLoot);
         const dynamicLoot: SpawnpointTemplate[] = this.locationGenerator.generateDynamicLoot(dynamicLootDist, staticAmmoDist, name);
         for (const dli of dynamicLoot)
@@ -109,7 +113,7 @@ export class LocationController
             output.Loot.push(dli);
         }
 
-        // done generating
+        // Done generating
         this.logger.success(this.localisationService.getText("location-dynamic_items_spawned_success", dynamicLoot.length));
         this.logger.success(this.localisationService.getText("location-generated_success", name));
 
@@ -119,9 +123,11 @@ export class LocationController
     /**
      * Handle client/locations
      * Get all maps base location properties without loot data
+     * @param sessionId Players Id
      * @returns ILocationsGenerateAllResponse
      */
-    public generateAll(): ILocationsGenerateAllResponse
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public generateAll(sessionId: string): ILocationsGenerateAllResponse
     {
         const locationsFromDb = this.jsonUtil.clone(this.databaseServer.getTables().locations);
         const locations: ILocations = {};

@@ -12,8 +12,15 @@ export interface INotifierChannel
 
 export interface INotification
 {
-    type: "RagfairOfferSold" | "new_message" | "ping";
+    type: NotificationType;
     eventId: string
     dialogId?: string
     message?: Message
+}
+
+export enum NotificationType
+    {
+    RAGFAIR_OFFER_SOLD = "RagfairOfferSold",
+    NEW_MESSAGE = "new_message",
+    PING = "ping"
 }

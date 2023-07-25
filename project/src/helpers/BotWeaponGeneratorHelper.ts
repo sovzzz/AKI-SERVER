@@ -162,7 +162,7 @@ export class BotWeaponGeneratorHelper
             if (!container)
             {
                 // Desired equipment container (e.g. backpack) not found
-                this.logger.warning(`Unable to add items to bot slot: ${slot}, slot missing`);
+                this.logger.debug(`Unable to add item: ${itemWithChildren[0]._tpl} to: ${slot}, slot missing/bot generated without equipment`);
                 continue;
             }
 

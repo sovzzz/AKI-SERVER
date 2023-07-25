@@ -270,9 +270,9 @@
       "TriggerName": "interactObject"
     }
   ],
-  "BotAssault": 0,
+  "BotAssault": 100,
   "BotEasy": 0,
-  "BotHard": 0,
+  "BotHard": 70,
   "BotImpossible": 0,
   "BotLocationModifier": {
     "AccuracySpeed": 1,
@@ -287,16 +287,16 @@
     "VisibleDistance": 1
   },
   "BotMarksman": 0,
-  "BotMax": 0,
-  "BotMaxPlayer": 0,
-  "BotMaxTimePlayer": 0,
-  "BotNormal": 0,
-  "BotSpawnTimeOffMax": 0,
-  "BotSpawnTimeOffMin": 0,
-  "BotSpawnTimeOnMax": 0,
-  "BotSpawnTimeOnMin": 0,
-  "BotStart": 0,
-  "BotStop": 0,
+  "BotMax": 14,
+  "BotMaxPlayer": 14,
+  "BotMaxTimePlayer": 1000,
+  "BotNormal": 30,
+  "BotSpawnTimeOffMax": 30,
+  "BotSpawnTimeOffMin": 20,
+  "BotSpawnTimeOnMax": 330,
+  "BotSpawnTimeOnMin": 300,
+  "BotStart": 120,
+  "BotStop": 1400,
   "Description": "Laboratory description",
   "DisabledForScav": true,
   "DisabledScavExits": "",
@@ -313,22 +313,53 @@
   "IsSecret": true,
   "Locked": false,
   "Loot": [],
-  "MaxBotPerZone": 0,
+  "MatchMakerMinPlayersByWaitTime": [
+    {
+      "minPlayers": 7,
+      "time": 60
+    },
+    {
+      "minPlayers": 6,
+      "time": 140
+    },
+    {
+      "minPlayers": 5,
+      "time": 240
+    },
+    {
+      "minPlayers": 4,
+      "time": 360
+    },
+    {
+      "minPlayers": 3,
+      "time": 480
+    },
+    {
+      "minPlayers": 2,
+      "time": 660
+    },
+    {
+      "minPlayers": 1,
+      "time": 840
+    }
+  ],
+  "MaxBotPerZone": 5,
   "MaxCoopGroup": 10,
   "MaxDistToFreePoint": 900,
   "MaxPlayers": 10,
   "MinDistToExitPoint": 30,
-  "MinDistToFreePoint": 10,
+  "MinDistToFreePoint": 35,
   "MinMaxBots": [],
   "MinPlayerLvlAccessKeys": 0,
-  "MinPlayers": 6,
+  "MinPlayers": 8,
   "Name": "Laboratory",
-  "NewSpawn": false,
+  "NewSpawn": true,
   "OcculsionCullingEnabled": true,
-  "OfflineNewSpawn": false,
-  "OfflineOldSpawn": true,
-  "OldSpawn": true,
+  "OfflineNewSpawn": true,
+  "OfflineOldSpawn": false,
+  "OldSpawn": false,
   "OpenZones": "BotZoneFloor1,BotZoneFloor2",
+  "PlayersRequestCount": -1,
   "PmcMaxPlayersInGroup": 5,
   "Preview": {
     "path": "",
