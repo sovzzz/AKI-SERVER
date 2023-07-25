@@ -165,7 +165,7 @@ export class InRaidHelper
     }
 
     /**
-     * 
+     * Look for quests not are now status = fail that were not failed pre-raid and run the failQuest() function
      * @param sessionId Player id
      * @param pmcData Player profile
      * @param preRaidQuests Quests prior to starting raid
@@ -180,7 +180,8 @@ export class InRaidHelper
             const preRaidQuest = preRaidQuests.find(x => x.qid === postRaidQuest.qid);
             if (preRaidQuest)
             {
-                // post-raid quest is failed but wasn't pre-raid
+                // Post-raid quest is failed but wasn't pre-raid
+                // postRaidQuest.status has a weird value, need to do some nasty casting to compare it
                 if (<string><unknown>postRaidQuest.status === "Fail" && preRaidQuest.status !== QuestStatus.Fail)
                 {
                     // Send failed message
