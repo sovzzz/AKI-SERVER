@@ -397,7 +397,7 @@ export class QuestController
 
         // Check if any of linked quest is failed, and that is unrestartable.
         const questsToFail = this.getQuestsFailedByCompletingQuest(completedQuestId);
-        if (questsToFail && questsToFail.length > 0)
+        if (questsToFail?.length > 0)
         {
             this.failQuests(sessionID, pmcData, questsToFail);
         }
@@ -498,7 +498,8 @@ export class QuestController
      */
     protected getQuestsFailedByCompletingQuest(completedQuestId: string): IQuest[]
     {
-        return this.questHelper.getQuestsFromDb().filter((x) =>
+        const questsInDb = this.questHelper.getQuestsFromDb();
+        return questsInDb.filter((x) =>
         {
             // No fail conditions, exit early
             if (!x.conditions.Fail || x.conditions.Fail.length === 0)
@@ -506,20 +507,12 @@ export class QuestController
                 return false;
             }
 
-            for (const failCondition of x.conditions.Fail)
-            {
-                if (failCondition._props.target === completedQuestId)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return x.conditions.Fail.some(y => y._props.target === completedQuestId);
         });
     }
 
     /**
-     * Fail the quests provided
+     * Fail the provided quests
      * Update quest in profile, otherwise add fresh quest object with failed status
      * @param sessionID session id
      * @param pmcData player profile
@@ -529,7 +522,8 @@ export class QuestController
     {
         for (const questToFail of questsToFail)
         {
-            if (questToFail.conditions.Fail[0]._props.status[0] !== QuestStatus.Success)
+            // Skip failing a quest that has a fail status of something other than success
+            if (questToFail.conditions.Fail?.some(x => x._props.status?.some(y => y !== QuestStatus.Success)))
             {
                 continue;
             }

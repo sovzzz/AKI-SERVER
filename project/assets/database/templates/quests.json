@@ -52036,6 +52036,23 @@
             "visibilityConditions": []
           },
           "dynamicLocale": false
+        },
+        {
+          "_parent": "Quest",
+          "_props": {
+            "availableAfter": 0,
+            "dispersion": 0,
+            "dynamicLocale": false,
+            "id": "5edac4fb16d984318871ba2e",
+            "index": 1,
+            "parentId": "",
+            "status": [
+              4
+            ],
+            "target": "5edab4b1218d181e29451435",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
         }
       ]
     },
