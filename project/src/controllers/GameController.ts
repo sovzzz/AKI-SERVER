@@ -245,7 +245,7 @@ export class GameController
             },
             // eslint-disable-next-line @typescript-eslint/naming-convention
             utc_time: new Date().getTime() / 1000,
-            totalInGame: profile.Stats.TotalInGameTime
+            totalInGame: profile.Stats?.TotalInGameTime ?? 0
         };
 
         return config;
