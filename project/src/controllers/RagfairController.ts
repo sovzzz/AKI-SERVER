@@ -331,7 +331,7 @@ export class RagfairController
     /**
      * List item(s) on flea for sale
      * @param pmcData Player profile
-     * @param offerRequest Flea list creatio offer
+     * @param offerRequest Flea list creation offer
      * @param sessionID Session id
      * @returns IItemEventRouterResponse
      */

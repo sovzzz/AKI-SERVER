@@ -60,7 +60,37 @@ export class RagfairOfferGenerator
         this.ragfairConfig = this.configServer.getConfig(ConfigTypes.RAGFAIR);
     }
 
-    public createOffer(userID: string, time: number, items: Item[], barterScheme: IBarterScheme[], loyalLevel: number, price: number, sellInOnePiece = false): IRagfairOffer
+    /**
+     * Create a flea offer and store it in the Ragfair server offers array
+     * @param userID Owner of the offer
+     * @param time Time offer is listed at
+     * @param items Items in the offer
+     * @param barterScheme Cost of item (currency or barter)
+     * @param loyalLevel Loyalty level needed to buy item
+     * @param price Price of offer
+     * @param sellInOnePiece Set StackObjectsCount to 1
+     * @returns IRagfairOffer
+     */
+    public createFleaOffer(userID: string, time: number, items: Item[], barterScheme: IBarterScheme[], loyalLevel: number, price: number, sellInOnePiece = false): IRagfairOffer
+    {
+        const offer = this.createOffer(userID, time, items, barterScheme, loyalLevel, price, sellInOnePiece);
+        this.ragfairOfferService.addOffer(offer);
+
+        return offer;
+    }
+
+    /**
+     * Create an offer object ready to send to ragfairOfferService.addOffer()
+     * @param userID Owner of the offer
+     * @param time Time offer is listed at
+     * @param items Items in the offer
+     * @param barterScheme Cost of item (currency or barter)
+     * @param loyalLevel Loyalty level needed to buy item
+     * @param price Price of offer
+     * @param sellInOnePiece Set StackObjectsCount to 1
+     * @returns IRagfairOffer
+     */
+    protected createOffer(userID: string, time: number, items: Item[], barterScheme: IBarterScheme[], loyalLevel: number, price: number, sellInOnePiece = false): IRagfairOffer
     {
         const isTrader = this.ragfairServerHelper.isTrader(userID);
 
@@ -163,31 +193,41 @@ export class RagfairOfferGenerator
         }
     }
 
-    protected getTraderId(userID: string): string
+    /**
+     * Check userId, if its a player, return their pmc _id, otherwise return userId parameter
+     * @param userId Users Id to check
+     * @returns Users Id
+     */
+    protected getTraderId(userId: string): string
     {
-        if (this.ragfairServerHelper.isPlayer(userID))
+        if (this.ragfairServerHelper.isPlayer(userId))
         {
-            return this.saveServer.getProfile(userID).characters.pmc._id;
+            return this.saveServer.getProfile(userId).characters.pmc._id;
         }
 
-        return userID;
+        return userId;
     }
 
-    protected getRating(userID: string): number
+    /**
+     * Get a flea trading rating for the passed in user
+     * @param userId User to get flea rating of
+     * @returns Flea rating value
+     */
+    protected getRating(userId: string): number
     {
-        if (this.ragfairServerHelper.isPlayer(userID))
+        if (this.ragfairServerHelper.isPlayer(userId))
         {
-            // player offer
-            return this.saveServer.getProfile(userID).characters.pmc.RagfairInfo.rating;
+            // Player offer
+            return this.saveServer.getProfile(userId).characters.pmc.RagfairInfo.rating;
         }
 
-        if (this.ragfairServerHelper.isTrader(userID))
+        if (this.ragfairServerHelper.isTrader(userId))
         {
-            // trader offer
+            // Trader offer
             return 1;
         }
 
-        // generated offer
+        // Generated pmc offer
         return this.randomUtil.getFloat(this.ragfairConfig.dynamic.rating.min, this.ragfairConfig.dynamic.rating.max);
     }
 
@@ -261,6 +301,14 @@ export class RagfairOfferGenerator
 
         await Promise.all(assorOffersForItemsProcesses);
     }
+
+    /**
+     * 
+     * @param assortItemIndex Index of assort item
+     * @param assortItemsToProcess Item array containing index
+     * @param expiredOffers Currently expired offers on flea
+     * @param config Ragfair dynamic config
+     */
     protected async createOffersForItems(assortItemIndex: string, assortItemsToProcess: Item[], expiredOffers: Item[], config: Dynamic): Promise<void>
     {
         const assortItem = assortItemsToProcess[assortItemIndex];
@@ -301,7 +349,7 @@ export class RagfairOfferGenerator
      * @param items Item to create offer for
      * @param isPreset Is item a weapon preset
      * @param itemDetails raw db item details
-     * @returns 
+     * @returns Item array
      */
     protected async createSingleOfferForItem(items: Item[], isPreset: boolean, itemDetails: [boolean, ITemplateItem]): Promise<Item[]>
     {
@@ -310,7 +358,7 @@ export class RagfairOfferGenerator
 
         const userID = this.hashUtil.generate();
 
-        // get properties
+        // Get properties
         items = this.getItemCondition(userID, items, itemDetails[1]);
         const barterScheme = isBarterOffer
             ? this.createBarterRequirement(items)
@@ -588,7 +636,7 @@ export class RagfairOfferGenerator
     /**
      * Create a barter-based barter scheme, if not possible, fall back to making barter scheme currency based
      * @param offerItems Items for sale in offer
-     * @returns barter scheme
+     * @returns Barter scheme
      */
     protected createBarterRequirement(offerItems: Item[]): IBarterScheme[]
     {
@@ -669,24 +717,5 @@ export class RagfairOfferGenerator
                 _tpl: currency
             }
         ];
-    }
-
-    /**
-     * Create a flea offer and store it in the Ragfair server offers array
-     * @param userID owner of the offer
-     * @param time time offer is put up
-     * @param items items in the offer
-     * @param barterScheme cost of item (currency or barter)
-     * @param loyalLevel Loyalty level needed to buy item
-     * @param price price of offer
-     * @param sellInOnePiece 
-     * @returns Ragfair offer
-     */
-    public createFleaOffer(userID: string, time: number, items: Item[], barterScheme: IBarterScheme[], loyalLevel: number, price: number, sellInOnePiece = false): IRagfairOffer
-    {
-        const offer = this.createOffer(userID, time, items, barterScheme, loyalLevel, price, sellInOnePiece);
-        this.ragfairOfferService.addOffer(offer);
-
-        return offer;
     }
 }
