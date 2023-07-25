@@ -181,7 +181,7 @@ export class InRaidHelper
             if (preRaidQuest)
             {
                 // post-raid quest is failed but wasn't pre-raid
-                if (postRaidQuest.status === QuestStatus.Fail && preRaidQuest.status !== QuestStatus.Fail)
+                if (<string><unknown>postRaidQuest.status === "Fail" && preRaidQuest.status !== QuestStatus.Fail)
                 {
                     // Send failed message
                     const failBody: IFailQuestRequestData = {
