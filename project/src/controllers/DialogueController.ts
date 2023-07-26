@@ -254,41 +254,87 @@ export class DialogueController
         return messages.some(x => x.items?.data?.length > 0);
     }
 
-    /** Handle client/mail/dialog/remove */
-    public removeDialogue(dialogueID: string, sessionID: string): void
+    /**
+     * Handle client/mail/dialog/remove
+     * Remove an entire dialog with an entity (trader/user)
+     * @param dialogueId id of the dialog to remove
+     * @param sessionId Player id
+     */
+    public removeDialogue(dialogueId: string, sessionId: string): void
     {
-        delete this.saveServer.getProfile(sessionID).dialogues[dialogueID];
-    }
-
-    public setDialoguePin(dialogueID: string, shouldPin: boolean, sessionID: string): void
-    {
-        this.saveServer.getProfile(sessionID).dialogues[dialogueID].pinned = shouldPin;
-    }
-
-    /** Handle client/mail/dialog/read */
-    public setRead(dialogueIDs: string[], sessionID: string): void
-    {
-        const dialogueData = this.saveServer.getProfile(sessionID).dialogues;
-        for (const dialogID of dialogueIDs)
+        const profile = this.saveServer.getProfile(sessionId);
+        const dialog = profile.dialogues[dialogueId];
+        if (!dialog)
         {
-            dialogueData[dialogID].new = 0;
-            dialogueData[dialogID].attachmentsNew = 0;
+            this.logger.error(`No dialog in profile: ${sessionId} found with id: ${dialogueId}`);
+
+            return;
+        }
+
+        delete profile.dialogues[dialogueId];
+    }
+
+    /** Handle client/mail/dialog/pin && Handle client/mail/dialog/unpin */
+    public setDialoguePin(dialogueId: string, shouldPin: boolean, sessionId: string): void
+    {
+        const profile = this.saveServer.getProfile(sessionId);
+        const dialog = profile.dialogues[dialogueId];
+        if (!dialog)
+        {
+            this.logger.error(`No dialog in profile: ${sessionId} found with id: ${dialogueId}`);
+
+            return;
+        }
+
+        dialog.pinned = shouldPin;
+    }
+
+    /**
+     * Handle client/mail/dialog/read
+     * Set a dialog to be read (no number alert/attachment alert)
+     * @param dialogueIds Dialog ids to set as read
+     * @param sessionId Player profile id
+     */
+    public setRead(dialogueIds: string[], sessionId: string): void
+    {
+        const profile = this.saveServer.getProfile(sessionId);
+        const dialogs = profile.dialogues;
+        if (!dialogs)
+        {
+            this.logger.error(`No dialog object in profile: ${sessionId}`);
+
+            return;
+        }
+
+        for (const dialogId of dialogueIds)
+        {
+            dialogs[dialogId].new = 0;
+            dialogs[dialogId].attachmentsNew = 0;
         }
     }
 
     /**
      * Handle client/mail/dialog/getAllAttachments
      * Get all uncollected items attached to mail in a particular dialog
-     * @param dialogueID Dialog to get mail attachments from
-     * @param sessionID Session id
+     * @param dialogueId Dialog to get mail attachments from
+     * @param sessionId Session id
      * @returns 
      */
-    public getAllAttachments(dialogueID: string, sessionID: string): IGetAllAttachmentsResponse
+    public getAllAttachments(dialogueId: string, sessionId: string): IGetAllAttachmentsResponse
     {
+        const profile = this.saveServer.getProfile(sessionId);
+        const dialog = profile.dialogues[dialogueId];
+        if (!dialog)
+        {
+            this.logger.error(`No dialog in profile: ${sessionId} found with id: ${dialogueId}`);
+
+            return;
+        }
+
         // Removes corner 'new messages' tag
-        this.saveServer.getProfile(sessionID).dialogues[dialogueID].attachmentsNew = 0;
+        dialog.attachmentsNew = 0;
         
-        const activeMessages = this.getActiveMessagesFromDialog(sessionID, dialogueID);
+        const activeMessages = this.getActiveMessagesFromDialog(sessionId, dialogueId);
         const messagesWithAttachments = this.getMessagesWithAttachments(activeMessages);
 
         return { 
