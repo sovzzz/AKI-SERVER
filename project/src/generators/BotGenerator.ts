@@ -153,6 +153,12 @@ export class BotGenerator
             this.seasonalEventService.removeChristmasItemsFromBotInventory(botJsonTemplate.inventory, botGenerationDetails.role);
         }
 
+        // Remove hideout data if bot is not a PMC or pscav
+        if (!(botGenerationDetails.isPmc || botGenerationDetails.isPlayerScav))
+        {
+            bot.Hideout = null;
+        }
+
         bot.Info.Experience = botLevel.exp;
         bot.Info.Level = botLevel.level;
         bot.Info.Settings.Experience = this.randomUtil.getInt(botJsonTemplate.experience.reward.min, botJsonTemplate.experience.reward.max);

@@ -322,6 +322,12 @@ export class ProfileHelper
     public playerHasRecievedGift(playerId: string, giftId: string): boolean
     {
         const profile = this.getFullProfile(playerId);
+        if (!profile)
+        {
+            this.logger.debug(`Unable to gift ${giftId}, profile: ${playerId} does not exist`);
+            return false;
+        }
+
         if (!profile.aki.receivedGifts)
         {
             return false;

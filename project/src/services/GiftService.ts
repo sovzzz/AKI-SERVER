@@ -180,10 +180,16 @@ export class GiftService
         switch (day) 
         {
             case 1:
-                this.sendGiftToPlayer(sessionId, "PraporGiftDay1");
+                if (this.profileHelper.playerHasRecievedGift(sessionId, "PraporGiftDay1"))
+                {
+                    this.sendGiftToPlayer(sessionId, "PraporGiftDay1");
+                }
                 break;
             case 2:
-                this.sendGiftToPlayer(sessionId, "PraporGiftDay2");
+                if (this.profileHelper.playerHasRecievedGift(sessionId, "PraporGiftDay2"))
+                {
+                    this.sendGiftToPlayer(sessionId, "PraporGiftDay2");
+                }
                 break;
         }
         

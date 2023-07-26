@@ -1,10 +1,12 @@
 import { inject, injectable } from "tsyringe";
 
 import { IPmcData } from "../models/eft/common/IPmcData";
-import { Victim } from "../models/eft/common/tables/IBotBase";
+import { Quest, Victim } from "../models/eft/common/tables/IBotBase";
 import { Item } from "../models/eft/common/tables/IItem";
 import { ISaveProgressRequestData } from "../models/eft/inRaid/ISaveProgressRequestData";
+import { IFailQuestRequestData } from "../models/eft/quests/IFailQuestRequestData";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
+import { QuestStatus } from "../models/enums/QuestStatus";
 import { ILostOnDeathConfig } from "../models/spt/config/ILostOnDeathConfig";
 import { ILogger } from "../models/spt/utils/ILogger";
 import { ConfigServer } from "../servers/ConfigServer";
@@ -16,6 +18,7 @@ import { JsonUtil } from "../utils/JsonUtil";
 import { InventoryHelper } from "./InventoryHelper";
 import { ItemHelper } from "./ItemHelper";
 import { PaymentHelper } from "./PaymentHelper";
+import { QuestHelper } from "./QuestHelper";
 
 @injectable()
 export class InRaidHelper
@@ -29,6 +32,7 @@ export class InRaidHelper
         @inject("ItemHelper") protected itemHelper: ItemHelper,
         @inject("DatabaseServer") protected databaseServer: DatabaseServer,
         @inject("InventoryHelper") protected inventoryHelper: InventoryHelper,
+        @inject("QuestHelper") protected questHelper: QuestHelper,
         @inject("PaymentHelper") protected paymentHelper: PaymentHelper,
         @inject("LocalisationService") protected localisationService: LocalisationService,
         @inject("ProfileFixerService") protected profileFixerService: ProfileFixerService,
@@ -134,6 +138,8 @@ export class InRaidHelper
         profileData.Stats = saveProgressRequest.profile.Stats;
         profileData.Encyclopedia = saveProgressRequest.profile.Encyclopedia;
         profileData.ConditionCounters = saveProgressRequest.profile.ConditionCounters;
+
+        this.processFailedQuests(sessionID, profileData, profileData.Quests, saveProgressRequest.profile.Quests);
         profileData.Quests = saveProgressRequest.profile.Quests;
 
         // Transfer effects from request to profile
@@ -156,6 +162,39 @@ export class InRaidHelper
         }
 
         return profileData;
+    }
+
+    /**
+     * Look for quests not are now status = fail that were not failed pre-raid and run the failQuest() function
+     * @param sessionId Player id
+     * @param pmcData Player profile
+     * @param preRaidQuests Quests prior to starting raid
+     * @param postRaidQuests Quest after raid
+     */
+    protected processFailedQuests(sessionId: string, pmcData: IPmcData, preRaidQuests: Quest[], postRaidQuests: Quest[]): void
+    {
+        // Loop over all quests from post-raid profile
+        for (const postRaidQuest of postRaidQuests)
+        {
+            // Find matching pre-raid quest
+            const preRaidQuest = preRaidQuests.find(x => x.qid === postRaidQuest.qid);
+            if (preRaidQuest)
+            {
+                // Post-raid quest is failed but wasn't pre-raid
+                // postRaidQuest.status has a weird value, need to do some nasty casting to compare it
+                if (<string><unknown>postRaidQuest.status === "Fail" && preRaidQuest.status !== QuestStatus.Fail)
+                {
+                    // Send failed message
+                    const failBody: IFailQuestRequestData = {
+                        Action: "QuestComplete",
+                        qid: postRaidQuest.qid,
+                        removeExcessItems: true
+                    };
+                    this.questHelper.failQuest(pmcData, failBody, sessionId);
+                }
+            }
+
+        }
     }
 
     protected resetSkillPointsEarnedDuringRaid(profile: IPmcData): void

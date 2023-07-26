@@ -99,16 +99,17 @@ export class DialogueController
         return result;
     }
     /**
-     *  Todo
-     * @param users 
-     * @param messageType 
-     * @param sessionID 
-     * @returns 
+     *  Get the users involved in a dialog (player + other party)
+     * @param dialog The dialog to check for users
+     * @param messageType What type of message is being sent
+     * @param sessionID Player id
+     * @returns IUserDialogInfo array
      */
     public getDialogueUsers(dialog: Dialogue, messageType: MessageType, sessionID: string): IUserDialogInfo[]
     {
         const profile = this.saveServer.getProfile(sessionID);
 
+        // User to user messages are special in that they need the player to exist in them, add if they don't
         if (messageType === MessageType.USER_MESSAGE && !dialog.Users?.find(x => x._id === profile.characters.pmc._id))
         {
             if (!dialog.Users)
@@ -142,9 +143,10 @@ export class DialogueController
     public generateDialogueView(request: IGetMailDialogViewRequestData, sessionId: string): IGetMailDialogViewResponseData
     {
         const dialogueId = request.dialogId;
-        const profile = this.saveServer.getProfile(sessionId);
-        const dialogue = this.getDialogByIdFromProfile(profile, request);
+        const fullProfile = this.saveServer.getProfile(sessionId);
+        const dialogue = this.getDialogByIdFromProfile(fullProfile, request);
 
+        // Dialog was opened, remove the little [1] on screen
         dialogue.new = 0;
 
         // Set number of new attachments, but ignore those that have expired.
@@ -152,7 +154,7 @@ export class DialogueController
 
         return { 
             messages: dialogue.messages,
-            profiles: this.getProfilesForMail(profile, dialogue.Users),
+            profiles: this.getProfilesForMail(fullProfile, dialogue.Users),
             hasMessagesWithRewards: this.messagesHaveUncollectedRewards(dialogue.messages)
         };
     }
@@ -186,27 +188,32 @@ export class DialogueController
         return profile.dialogues[request.dialogId];
     }
     /**
-     *  TODO
-     * @param pmcProfile 
-     * @param dialogUsers 
-     * @returns 
+     *  Get the users involved in a mail between two entities
+     * @param fullProfile Player profile
+     * @param dialogUsers The participants of the mail
+     * @returns IUserDialogInfo array
      */
-    protected getProfilesForMail(pmcProfile: IAkiProfile, dialogUsers: IUserDialogInfo[]): IUserDialogInfo[]
+    protected getProfilesForMail(fullProfile: IAkiProfile, dialogUsers: IUserDialogInfo[]): IUserDialogInfo[]
     {
         const result: IUserDialogInfo[] = [];
         if (dialogUsers)
         {
             result.push(...dialogUsers);
-            const profile = pmcProfile.characters.pmc;
-            result.push({
-                _id: pmcProfile.info.id,
-                info: {
-                    Nickname: profile.Info.Nickname,
-                    Side: profile.Info.Side,
-                    Level: profile.Info.Level,
-                    MemberCategory: profile.Info.MemberCategory
-                }
-            });
+
+            // Plyer doesnt exist, add them in before returning
+            if (!result.find(x => x._id === fullProfile.info.id))
+            {
+                const pmcProfile = fullProfile.characters.pmc;
+                result.push({
+                    _id: fullProfile.info.id,
+                    info: {
+                        Nickname: pmcProfile.Info.Nickname,
+                        Side: pmcProfile.Info.Side,
+                        Level: pmcProfile.Info.Level,
+                        MemberCategory: pmcProfile.Info.MemberCategory
+                    }
+                });
+            }
         }
 
         return result;

@@ -245,7 +245,7 @@ export class GameController
             },
             // eslint-disable-next-line @typescript-eslint/naming-convention
             utc_time: new Date().getTime() / 1000,
-            totalInGame: profile.Stats.TotalInGameTime
+            totalInGame: profile.Stats?.TotalInGameTime ?? 0
         };
 
         return config;
@@ -465,6 +465,10 @@ export class GameController
         }
     }
 
+    /**
+     * Send starting gifts to profile after x days
+     * @param pmcProfile Profile to add gifts to
+     */
     protected sendPraporGiftsToNewProfiles(pmcProfile: IPmcData): void
     {
         const timeStampProfileCreated = pmcProfile.Info.RegistrationDate;
@@ -472,13 +476,13 @@ export class GameController
         const currentTimeStamp = this.timeUtil.getTimestamp();
 
         // One day post-profile creation
-        if ((timeStampProfileCreated + oneDaySeconds) > currentTimeStamp)
+        if (currentTimeStamp > (timeStampProfileCreated + oneDaySeconds))
         {
             this.giftService.sendPraporStartingGift(pmcProfile.aid, 1);
         }
 
         // Two day post-profile creation
-        if ((timeStampProfileCreated + (oneDaySeconds * 2)) > currentTimeStamp)
+        if (currentTimeStamp > (timeStampProfileCreated + (oneDaySeconds * 2)))
         {
             this.giftService.sendPraporStartingGift(pmcProfile.aid, 2);
         }

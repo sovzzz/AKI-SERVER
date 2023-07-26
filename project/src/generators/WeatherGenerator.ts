@@ -29,6 +29,11 @@ export class WeatherGenerator
         this.weatherConfig = this.configServer.getConfig(ConfigTypes.WEATHER);
     }
 
+    /**
+     * Get current + raid datetime and format into correct BSG format and return
+     * @param data Weather data
+     * @returns IWeatherData
+     */
     public calculateGameTime(data: IWeatherData): IWeatherData
     {
         const computedDate = new Date();
@@ -75,7 +80,7 @@ export class WeatherGenerator
     /**
      * Get current time formatted to fit BSGs requirement
      * @param date date to format into bsg style
-     * @returns 
+     * @returns Time formatted in BSG format
      */
     protected getBSGFormattedTime(date: Date): string
     {
