@@ -362,7 +362,7 @@ export class DialogueController
 
         if (request.text.toLowerCase() === "are you a bot") 
         {
-            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, this.randomUtil.getArrayValue(["beep boop", "**sad boop**", "probably", "sometimes", "yeah lol", "rude"]));
+            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, this.randomUtil.getArrayValue(["beep boop", "**sad boop**", "probably", "sometimes", "yeah lol"]));
         }
     }
 
