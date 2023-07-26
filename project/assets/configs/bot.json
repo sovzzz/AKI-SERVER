@@ -261,7 +261,7 @@
         "test": 4
     },
     "chanceAssaultScavHasPlayerScavName": 10,
-    "secureContainerAmmoStackCount": 15,
+    "secureContainerAmmoStackCount": 20,
     "revenge": {
         "assault": ["assault", "marksman", "gifter"],
         "marksman": ["assault", "marksman", "gifter"]

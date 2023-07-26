@@ -350,7 +350,7 @@ export class BotWeaponGenerator
         this.inventoryMagGenComponents.find(v => v.canHandleInventoryMagGen(inventoryMagGenModel)).process(inventoryMagGenModel);
 
         // Add x stacks of bullets to SecuredContainer (bots use a magic mag packing skill to reload instantly)
-        this.addAmmoToSecureContainer(this.botConfig.secureContainerAmmoStackCount, generatedWeaponResult.chosenAmmoTpl, 999, inventory);
+        this.addAmmoToSecureContainer(this.botConfig.secureContainerAmmoStackCount, generatedWeaponResult.chosenAmmoTpl, ammoTemplate._props.StackMaxSize, inventory);
     }
 
     /**
