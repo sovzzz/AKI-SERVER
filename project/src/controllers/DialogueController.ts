@@ -192,7 +192,7 @@ export class DialogueController
         return profile.dialogues[request.dialogId];
     }
     /**
-     *  Get the users involved in a mail between two entities
+     * Get the users involved in a mail between two entities
      * @param fullProfile Player profile
      * @param dialogUsers The participants of the mail
      * @returns IUserDialogInfo array
@@ -204,7 +204,7 @@ export class DialogueController
         {
             result.push(...dialogUsers);
 
-            // Plyer doesnt exist, add them in before returning
+            // Player doesnt exist, add them in before returning
             if (!result.find(x => x._id === fullProfile.info.id))
             {
                 const pmcProfile = fullProfile.characters.pmc;
