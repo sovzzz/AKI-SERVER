@@ -1,6 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
 import { DialogueHelper } from "../helpers/DialogueHelper";
+import { ProfileHelper } from "../helpers/ProfileHelper";
 import { IGetAllAttachmentsResponse } from "../models/eft/dialog/IGetAllAttachmentsResponse";
 import { IGetFriendListDataResponse } from "../models/eft/dialog/IGetFriendListDataResponse";
 import { IGetMailDialogViewRequestData } from "../models/eft/dialog/IGetMailDialogViewRequestData";
@@ -17,6 +18,7 @@ import { SaveServer } from "../servers/SaveServer";
 import { GiftService } from "../services/GiftService";
 import { MailSendService } from "../services/MailSendService";
 import { HashUtil } from "../utils/HashUtil";
+import { RandomUtil } from "../utils/RandomUtil";
 import { TimeUtil } from "../utils/TimeUtil";
 
 @injectable()
@@ -27,6 +29,8 @@ export class DialogueController
         @inject("SaveServer") protected saveServer: SaveServer,
         @inject("TimeUtil") protected timeUtil: TimeUtil,
         @inject("DialogueHelper") protected dialogueHelper: DialogueHelper,
+        @inject("ProfileHelper") protected profileHelper: ProfileHelper,
+        @inject("RandomUtil") protected randomUtil: RandomUtil,
         @inject("MailSendService") protected mailSendService: MailSendService,
         @inject("GiftService") protected giftService: GiftService,
         @inject("HashUtil") protected hashUtil: HashUtil
@@ -300,7 +304,7 @@ export class DialogueController
     {
         this.mailSendService.sendPlayerMessageToNpc(sessionId, request.dialogId, request.text);
 
-        // Handle when player types a keyword to sptfriend user
+        // Handle when player types a keyword to sptFriend user
         if (request.dialogId.includes("sptFriend"))
         {
             this.handleChatWithSPTFriend(sessionId, request);
@@ -309,30 +313,56 @@ export class DialogueController
         return request.dialogId;
     }
 
+    /**
+     * Send responses back to player when they communicate with SPT friend on friends list
+     * @param sessionId Session Id
+     * @param request send message request
+     */
     protected handleChatWithSPTFriend(sessionId: string, request: ISendMessageRequest): void
     {
+        const sender = this.profileHelper.getPmcProfile(sessionId);
+
         const sptFriendUser = this.getSptFriendData();
 
         const giftSent = this.giftService.sendGiftToPlayer(sessionId, request.text);
 
         if (giftSent === GiftSentResult.SUCCESS) 
         {
-            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, "hey! you got the right code!");
+            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, this.randomUtil.getArrayValue(["Hey! you got the right code!", "A secret code, how exciting!", "You found a gift code!"]));
+
+            return;
         }
 
         if (giftSent === GiftSentResult.FAILED_GIFT_ALREADY_RECEIVED) 
         {
-            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, "You already have that!!");
+            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, this.randomUtil.getArrayValue(["Looks like you already used that code", "You already have that!!"]));
+
+            return;
         }
 
         if (request.text.toLowerCase().includes("love you")) 
         {
-            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, "I love you too buddy :3!");
+            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, this.randomUtil.getArrayValue(["That's quite forward but i love you too in a purely chatbot-human way", "I love you too buddy :3!", "uwu", `love you too ${sender?.Info?.Nickname}`]));
         }
 
         if (request.text.toLowerCase() === "spt") 
         {
-            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, "its me!!");
+            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, this.randomUtil.getArrayValue(["Its me!!", "spt? i've heard of that project"]));
+        }
+
+        if (request.text.toLowerCase() === "hello") 
+        {
+            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, this.randomUtil.getArrayValue(["Howdy", "Hi", "Greetings", "Hello", "bonjoy", "Yo", "Sup", "Heyyyyy", "Hey there", `Hello ${sender?.Info?.Nickname}`]));
+        }
+
+        if (request.text.toLowerCase() === "nikita") 
+        {
+            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, this.randomUtil.getArrayValue(["I know that guy!", "Cool guy, he made EFT!", "Kegend", "Remember when he said webel-webel-webel-webel, classic nikita moment"]));
+        }
+
+        if (request.text.toLowerCase() === "are you a bot") 
+        {
+            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, this.randomUtil.getArrayValue(["beep boop", "**sad boop**", "probably", "sometimes", "yeah lol", "rude"]));
         }
     }
 
