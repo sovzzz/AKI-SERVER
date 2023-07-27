@@ -11,6 +11,7 @@ import { ITemplateItem } from "../models/eft/common/tables/ITemplateItem";
 import { BaseClasses } from "../models/enums/BaseClasses";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
 import { EquipmentSlots } from "../models/enums/EquipmentSlots";
+import { ItemAddedResult } from "../models/enums/ItemAddedResult";
 import { LootCacheType } from "../models/spt/bots/IBotLootCache";
 import { IBotConfig } from "../models/spt/config/IBotConfig";
 import { ILogger } from "../models/spt/utils/ILogger";
@@ -74,7 +75,7 @@ export class BotLootGenerator
         const grenadeCount = this.getRandomisedCount(itemCounts.grenades.min, itemCounts.grenades.max, 4);
 
         // Forced pmc healing loot
-        if (isPmc)
+        if (isPmc && this.botConfig.pmc.forceHealingItemsIntoSecure)
         {
             this.addForcedMedicalItemsToPmcSecure(botInventory, botRole);
         }
@@ -249,6 +250,7 @@ export class BotLootGenerator
             let currentTotalRub = 0;
             const itemLimits: Record<string, number> = {};
             const itemSpawnLimits: Record<string,Record<string, number>> = {};
+            let fitItemIntoContainerAttempts = 0;
             for (let i = 0; i < totalItemCount; i++)
             {
                 const itemToAddTemplate = this.getRandomItemFromPoolByRole(pool, botRole);
@@ -294,10 +296,25 @@ export class BotLootGenerator
                     this.randomiseAmmoStackSize(isPmc, itemToAddTemplate, itemsToAdd[0]);
                 }
 
-                this.botWeaponGeneratorHelper.addItemWithChildrenToEquipmentSlot(equipmentSlots, id, itemToAddTemplate._id, itemsToAdd, inventoryToAddItemsTo);
+                // Attempt to add item to container(s)
+                const itemAddedResult = this.botWeaponGeneratorHelper.addItemWithChildrenToEquipmentSlot(equipmentSlots, id, itemToAddTemplate._id, itemsToAdd, inventoryToAddItemsTo);
+                if (itemAddedResult === ItemAddedResult.NO_SPACE)
+                {
+                    fitItemIntoContainerAttempts++;
+                    if (fitItemIntoContainerAttempts >= 4)
+                    {
+                        this.logger.debug(`Failed to place item ${i} of ${totalItemCount} item into ${botRole} container: ${equipmentSlots}, ${fitItemIntoContainerAttempts} times, skipping`);
+
+                        break;
+                    }
+                }
+                else
+                {
+                    fitItemIntoContainerAttempts = 0;
+                }
 
                 // Stop adding items to bots pool if rolling total is over total limit
-                if (totalValueLimitRub > 0)
+                if (totalValueLimitRub > 0 && itemAddedResult === ItemAddedResult.SUCCESS)
                 {
                     currentTotalRub += this.handbookHelper.getTemplatePrice(itemToAddTemplate._id);
                     if (currentTotalRub > totalValueLimitRub)

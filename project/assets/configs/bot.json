@@ -1517,5 +1517,6 @@
         "tarkovstreets": 18,
         "default": 15
     },
-    "botGenerationBatchSizePerType": 15
+    "botGenerationBatchSizePerType": 15,
+	"forceHealingItemsIntoSecure": true
 }
