@@ -553,7 +553,7 @@ export class BotEquipmentModGenerator
         {
             if (parentSlot._required)
             {
-                this.logger.warning(`Required slot unable to be filled, ${modSlot} on ${parentTemplate._name} ${parentTemplate._id} for weapon ${weapon[0]._tpl}`);
+                this.logger.warning(`Required slot unable to be filled, ${modSlot} on ${parentTemplate._name} ${parentTemplate._id} for weapon: ${weapon[0]._tpl}`);
             }
 
             return null;

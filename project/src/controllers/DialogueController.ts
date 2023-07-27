@@ -1,6 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
 import { DialogueHelper } from "../helpers/DialogueHelper";
+import { ProfileHelper } from "../helpers/ProfileHelper";
 import { IGetAllAttachmentsResponse } from "../models/eft/dialog/IGetAllAttachmentsResponse";
 import { IGetFriendListDataResponse } from "../models/eft/dialog/IGetFriendListDataResponse";
 import { IGetMailDialogViewRequestData } from "../models/eft/dialog/IGetMailDialogViewRequestData";
@@ -17,6 +18,7 @@ import { SaveServer } from "../servers/SaveServer";
 import { GiftService } from "../services/GiftService";
 import { MailSendService } from "../services/MailSendService";
 import { HashUtil } from "../utils/HashUtil";
+import { RandomUtil } from "../utils/RandomUtil";
 import { TimeUtil } from "../utils/TimeUtil";
 
 @injectable()
@@ -27,6 +29,8 @@ export class DialogueController
         @inject("SaveServer") protected saveServer: SaveServer,
         @inject("TimeUtil") protected timeUtil: TimeUtil,
         @inject("DialogueHelper") protected dialogueHelper: DialogueHelper,
+        @inject("ProfileHelper") protected profileHelper: ProfileHelper,
+        @inject("RandomUtil") protected randomUtil: RandomUtil,
         @inject("MailSendService") protected mailSendService: MailSendService,
         @inject("GiftService") protected giftService: GiftService,
         @inject("HashUtil") protected hashUtil: HashUtil
@@ -188,7 +192,7 @@ export class DialogueController
         return profile.dialogues[request.dialogId];
     }
     /**
-     *  Get the users involved in a mail between two entities
+     * Get the users involved in a mail between two entities
      * @param fullProfile Player profile
      * @param dialogUsers The participants of the mail
      * @returns IUserDialogInfo array
@@ -200,7 +204,7 @@ export class DialogueController
         {
             result.push(...dialogUsers);
 
-            // Plyer doesnt exist, add them in before returning
+            // Player doesnt exist, add them in before returning
             if (!result.find(x => x._id === fullProfile.info.id))
             {
                 const pmcProfile = fullProfile.characters.pmc;
@@ -250,41 +254,87 @@ export class DialogueController
         return messages.some(x => x.items?.data?.length > 0);
     }
 
-    /** Handle client/mail/dialog/remove */
-    public removeDialogue(dialogueID: string, sessionID: string): void
+    /**
+     * Handle client/mail/dialog/remove
+     * Remove an entire dialog with an entity (trader/user)
+     * @param dialogueId id of the dialog to remove
+     * @param sessionId Player id
+     */
+    public removeDialogue(dialogueId: string, sessionId: string): void
     {
-        delete this.saveServer.getProfile(sessionID).dialogues[dialogueID];
-    }
-
-    public setDialoguePin(dialogueID: string, shouldPin: boolean, sessionID: string): void
-    {
-        this.saveServer.getProfile(sessionID).dialogues[dialogueID].pinned = shouldPin;
-    }
-
-    /** Handle client/mail/dialog/read */
-    public setRead(dialogueIDs: string[], sessionID: string): void
-    {
-        const dialogueData = this.saveServer.getProfile(sessionID).dialogues;
-        for (const dialogID of dialogueIDs)
+        const profile = this.saveServer.getProfile(sessionId);
+        const dialog = profile.dialogues[dialogueId];
+        if (!dialog)
         {
-            dialogueData[dialogID].new = 0;
-            dialogueData[dialogID].attachmentsNew = 0;
+            this.logger.error(`No dialog in profile: ${sessionId} found with id: ${dialogueId}`);
+
+            return;
+        }
+
+        delete profile.dialogues[dialogueId];
+    }
+
+    /** Handle client/mail/dialog/pin && Handle client/mail/dialog/unpin */
+    public setDialoguePin(dialogueId: string, shouldPin: boolean, sessionId: string): void
+    {
+        const profile = this.saveServer.getProfile(sessionId);
+        const dialog = profile.dialogues[dialogueId];
+        if (!dialog)
+        {
+            this.logger.error(`No dialog in profile: ${sessionId} found with id: ${dialogueId}`);
+
+            return;
+        }
+
+        dialog.pinned = shouldPin;
+    }
+
+    /**
+     * Handle client/mail/dialog/read
+     * Set a dialog to be read (no number alert/attachment alert)
+     * @param dialogueIds Dialog ids to set as read
+     * @param sessionId Player profile id
+     */
+    public setRead(dialogueIds: string[], sessionId: string): void
+    {
+        const profile = this.saveServer.getProfile(sessionId);
+        const dialogs = profile.dialogues;
+        if (!dialogs)
+        {
+            this.logger.error(`No dialog object in profile: ${sessionId}`);
+
+            return;
+        }
+
+        for (const dialogId of dialogueIds)
+        {
+            dialogs[dialogId].new = 0;
+            dialogs[dialogId].attachmentsNew = 0;
         }
     }
 
     /**
      * Handle client/mail/dialog/getAllAttachments
      * Get all uncollected items attached to mail in a particular dialog
-     * @param dialogueID Dialog to get mail attachments from
-     * @param sessionID Session id
+     * @param dialogueId Dialog to get mail attachments from
+     * @param sessionId Session id
      * @returns 
      */
-    public getAllAttachments(dialogueID: string, sessionID: string): IGetAllAttachmentsResponse
+    public getAllAttachments(dialogueId: string, sessionId: string): IGetAllAttachmentsResponse
     {
+        const profile = this.saveServer.getProfile(sessionId);
+        const dialog = profile.dialogues[dialogueId];
+        if (!dialog)
+        {
+            this.logger.error(`No dialog in profile: ${sessionId} found with id: ${dialogueId}`);
+
+            return;
+        }
+
         // Removes corner 'new messages' tag
-        this.saveServer.getProfile(sessionID).dialogues[dialogueID].attachmentsNew = 0;
+        dialog.attachmentsNew = 0;
         
-        const activeMessages = this.getActiveMessagesFromDialog(sessionID, dialogueID);
+        const activeMessages = this.getActiveMessagesFromDialog(sessionId, dialogueId);
         const messagesWithAttachments = this.getMessagesWithAttachments(activeMessages);
 
         return { 
@@ -300,7 +350,7 @@ export class DialogueController
     {
         this.mailSendService.sendPlayerMessageToNpc(sessionId, request.dialogId, request.text);
 
-        // Handle when player types a keyword to sptfriend user
+        // Handle when player types a keyword to sptFriend user
         if (request.dialogId.includes("sptFriend"))
         {
             this.handleChatWithSPTFriend(sessionId, request);
@@ -309,30 +359,56 @@ export class DialogueController
         return request.dialogId;
     }
 
+    /**
+     * Send responses back to player when they communicate with SPT friend on friends list
+     * @param sessionId Session Id
+     * @param request send message request
+     */
     protected handleChatWithSPTFriend(sessionId: string, request: ISendMessageRequest): void
     {
+        const sender = this.profileHelper.getPmcProfile(sessionId);
+
         const sptFriendUser = this.getSptFriendData();
 
         const giftSent = this.giftService.sendGiftToPlayer(sessionId, request.text);
 
         if (giftSent === GiftSentResult.SUCCESS) 
         {
-            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, "hey! you got the right code!");
+            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, this.randomUtil.getArrayValue(["Hey! you got the right code!", "A secret code, how exciting!", "You found a gift code!"]));
+
+            return;
         }
 
         if (giftSent === GiftSentResult.FAILED_GIFT_ALREADY_RECEIVED) 
         {
-            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, "You already have that!!");
+            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, this.randomUtil.getArrayValue(["Looks like you already used that code", "You already have that!!"]));
+
+            return;
         }
 
         if (request.text.toLowerCase().includes("love you")) 
         {
-            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, "I love you too buddy :3!");
+            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, this.randomUtil.getArrayValue(["That's quite forward but i love you too in a purely chatbot-human way", "I love you too buddy :3!", "uwu", `love you too ${sender?.Info?.Nickname}`]));
         }
 
         if (request.text.toLowerCase() === "spt") 
         {
-            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, "its me!!");
+            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, this.randomUtil.getArrayValue(["Its me!!", "spt? i've heard of that project"]));
+        }
+
+        if (request.text.toLowerCase() === "hello") 
+        {
+            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, this.randomUtil.getArrayValue(["Howdy", "Hi", "Greetings", "Hello", "bonjoy", "Yo", "Sup", "Heyyyyy", "Hey there", `Hello ${sender?.Info?.Nickname}`]));
+        }
+
+        if (request.text.toLowerCase() === "nikita") 
+        {
+            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, this.randomUtil.getArrayValue(["I know that guy!", "Cool guy, he made EFT!", "Kegend", "Remember when he said webel-webel-webel-webel, classic nikita moment"]));
+        }
+
+        if (request.text.toLowerCase() === "are you a bot") 
+        {
+            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, this.randomUtil.getArrayValue(["beep boop", "**sad boop**", "probably", "sometimes", "yeah lol"]));
         }
     }
 
