@@ -215,6 +215,17 @@ export class BotLootGenerator
             false,
             0,
             true);
+
+        const afak = this.itemHelper.getItem("60098ad7c2240c0fe85c570a")[1];
+        this.addLootFromPool(
+            [afak],
+            [EquipmentSlots.SECURED_CONTAINER],
+            2,
+            botInventory,
+            botRole,
+            false,
+            0,
+            true);
     }
 
     protected getRandomisedCount(min: number, max: number, nValue: number): number
