@@ -231,6 +231,10 @@ export class BotWeaponGeneratorHelper
                     inventory.items.push(...itemWithChildren);
                     return true;
                 }
+                else
+                {
+                    this.logger.warning(`Unable to find space in container: ${container.slotId} item: ${itemWithChildren[0]._tpl}`);
+                }
             }
         }
 

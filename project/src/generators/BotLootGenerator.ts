@@ -73,6 +73,12 @@ export class BotLootGenerator
         const stimItemCount = this.getRandomisedCount(itemCounts.stims.min, itemCounts.stims.max, 3);
         const grenadeCount = this.getRandomisedCount(itemCounts.grenades.min, itemCounts.grenades.max, 4);
 
+        // Forced pmc healing loot
+        if (isPmc)
+        {
+            this.addForcedMedicalItemsToPmcSecure(botInventory, botRole);
+        }
+
         // Special items
         this.addLootFromPool(
             this.botLootCacheService.getLootFromCache(botRole, isPmc, LootCacheType.SPECIAL, botJsonTemplate),
@@ -167,6 +173,47 @@ export class BotLootGenerator
             true,
             this.botConfig.pmc.maxPocketLootTotalRub,
             isPmc);
+    }
+
+    /**
+     * Force healing items onto bot to ensure they can heal in-raid
+     * @param botInventory Inventory to add items to
+     * @param botRole Role of bot (sptBear/sptUsec)
+     */
+    protected addForcedMedicalItemsToPmcSecure(botInventory: PmcInventory, botRole: string): void
+    {
+        const grizzly = this.itemHelper.getItem("590c657e86f77412b013051d")[1];
+        this.addLootFromPool(
+            [grizzly],
+            [EquipmentSlots.SECURED_CONTAINER],
+            2,
+            botInventory,
+            botRole,
+            false,
+            0,
+            true);
+
+        const surv12 = this.itemHelper.getItem("5d02797c86f774203f38e30a")[1];
+        this.addLootFromPool(
+            [surv12],
+            [EquipmentSlots.SECURED_CONTAINER],
+            1,
+            botInventory,
+            botRole,
+            false,
+            0,
+            true);
+
+        const morphine = this.itemHelper.getItem("544fb3f34bdc2d03748b456a")[1];
+        this.addLootFromPool(
+            [morphine],
+            [EquipmentSlots.SECURED_CONTAINER],
+            3,
+            botInventory,
+            botRole,
+            false,
+            0,
+            true);
     }
 
     protected getRandomisedCount(min: number, max: number, nValue: number): number
