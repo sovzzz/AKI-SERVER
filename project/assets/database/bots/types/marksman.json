@@ -2594,7 +2594,8 @@
           "59d36a0086f7747e673f3946"
         ],
         "mod_magazine": [
-          "55d480c04bdc2d1d4e8b456a"
+          "55d480c04bdc2d1d4e8b456a",
+          "55d4837c4bdc2d1d4e8b456c"
         ],
         "mod_pistol_grip": [
           "57e3dba62459770f0c32322b"
@@ -2603,7 +2604,8 @@
           "57dc347d245977596754e7a1"
         ],
         "patron_in_weapon": [
-          "56dff3afd2720bba668b4567"
+          "56dff3afd2720bba668b4567",
+          "56dff4a2d2720bbd668b456a"
         ]
       },
       "5839a40f24597726f856b511": {
@@ -2692,7 +2694,8 @@
       },
       "5a957c3fa2750c00137fa5f7": {
         "mod_scope": [
-          "57ac965c24597706be5f975c"
+          "57ac965c24597706be5f975c",
+          "57aca93d2459771f2c7e26db"
         ]
       },
       "5ae08f0a5acfc408fb1398a1": {
@@ -2724,7 +2727,8 @@
           "5ae099875acfc4001714e593"
         ],
         "mod_sight_rear": [
-          "5bc5a372d4351e44f824d17f"
+          "5bc5a372d4351e44f824d17f",
+          "5ae099925acfc4001a5fc7b3"
         ]
       },
       "5b3b6dc75acfc47a8773fb1e": {

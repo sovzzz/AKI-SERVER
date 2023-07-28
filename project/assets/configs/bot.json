@@ -32,6 +32,7 @@
         "exUsec": 30,
         "arenaFighterEvent": 15,
         "arenaFighter": 15,
+		"crazyAssaultEvent": 15,
         "sptUsec": 20,
         "sptBear": 20
     },
