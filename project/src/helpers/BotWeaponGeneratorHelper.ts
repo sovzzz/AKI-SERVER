@@ -6,6 +6,7 @@ import { Item } from "../models/eft/common/tables/IItem";
 import { Grid, ITemplateItem } from "../models/eft/common/tables/ITemplateItem";
 import { BaseClasses } from "../models/enums/BaseClasses";
 import { EquipmentSlots } from "../models/enums/EquipmentSlots";
+import { ItemAddedResult } from "../models/enums/ItemAddedResult";
 import { ILogger } from "../models/spt/utils/ILogger";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { LocalisationService } from "../services/LocalisationService";
@@ -153,7 +154,7 @@ export class BotWeaponGeneratorHelper
      * @param inventory Inventory to add item+children into
      * @returns a `boolean` indicating item was added
      */
-    public addItemWithChildrenToEquipmentSlot(equipmentSlots: string[], parentId: string, parentTpl: string, itemWithChildren: Item[], inventory: Inventory): boolean
+    public addItemWithChildrenToEquipmentSlot(equipmentSlots: string[], parentId: string, parentTpl: string, itemWithChildren: Item[], inventory: Inventory): ItemAddedResult
     {
         for (const slot of equipmentSlots)
         {
@@ -201,8 +202,8 @@ export class BotWeaponGeneratorHelper
                 const containerItems = inventory.items.filter(i => i.parentId === container._id && i.slotId === slotGrid._name);
 
                 // Get a copy of base level items we can iterate over
-                const itemsToCheck = containerItems.filter(x => x.slotId === slotGrid._name);
-                for (const item of itemsToCheck)
+                const containerItemsToCheck = containerItems.filter(x => x.slotId === slotGrid._name);
+                for (const item of containerItemsToCheck)
                 {
                     // Look for children on items, insert into array if found
                     // (used later when figuring out how much space weapon takes up)
@@ -213,13 +214,17 @@ export class BotWeaponGeneratorHelper
                     }
                 }
 
-                const slotMap = this.inventoryHelper.getContainerMap(slotGrid._props.cellsH, slotGrid._props.cellsV, containerItems, container._id);
-                const findSlotResult = this.containerHelper.findSlotForItem(slotMap, itemSize[0], itemSize[1]);
+                // Get rid of items free/used spots in current grid
+                const slotGridMap = this.inventoryHelper.getContainerMap(slotGrid._props.cellsH, slotGrid._props.cellsV, containerItems, container._id);
+                // Try to fit item into grid
+                const findSlotResult = this.containerHelper.findSlotForItem(slotGridMap, itemSize[0], itemSize[1]);
 
+                // Open slot found, add item to inventory
                 if (findSlotResult.success)
                 {
                     const parentItem = itemWithChildren.find(i => i._id === parentId);
 
+                    // Set items parent to container id
                     parentItem.parentId = container._id;
                     parentItem.slotId = slotGrid._name;
                     parentItem.location = {
@@ -229,12 +234,15 @@ export class BotWeaponGeneratorHelper
                     };
 
                     inventory.items.push(...itemWithChildren);
-                    return true;
+
+                    return ItemAddedResult.SUCCESS;
                 }
+
+                // Start loop again in next grid of container
             }
         }
 
-        return false;
+        return ItemAddedResult.NO_SPACE;
     }
 
     /**
