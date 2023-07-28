@@ -78147,10 +78147,10 @@
                 {
                   "_parent": "Kills",
                   "_props": {
-                    "dynamicLocale": false,
                     "id": "64771ecbac21bb41ed1fc8e6",
                     "savageRole": [
-                      "bossTagilla"
+                      "bossTagilla",
+                      "followerTagilla"
                     ],
                     "target": "Savage"
                   }
@@ -79917,5 +79917,118 @@
     "templateId": "649af47d717cb30e7e4b5e26",
     "traderId": "58330581ace78e27b8b10cee",
     "type": "Elimination"
+  },
+  "64b90786bbf5bf2b460ad982": {
+    "QuestName": "TerraGroup Trial Part 1-Event",
+    "_id": "64b90786bbf5bf2b460ad982",
+    "acceptPlayerMessage": "64b90786bbf5bf2b460ad982 acceptPlayerMessage",
+    "canShowNotificationsInGame": true,
+    "changeQuestMessageText": "64b90786bbf5bf2b460ad982 changeQuestMessageText",
+    "completePlayerMessage": "64b90786bbf5bf2b460ad982 completePlayerMessage",
+    "conditions": {
+      "AvailableForFinish": [
+        {
+          "_parent": "CounterCreator",
+          "_props": {
+            "counter": {
+              "conditions": [
+                {
+                  "_parent": "VisitPlace",
+                  "_props": {
+                    "id": "64be92dc39a321a6480fcf63",
+                    "target": "quest_st_1_zone",
+                    "value": "1"
+                  }
+                }
+              ],
+              "id": "64be92cbb0bf3baa6702f46f"
+            },
+            "doNotResetIfCounterCompleted": false,
+            "dynamicLocale": false,
+            "id": "64be92cbb0bf3baa6702f46e",
+            "index": 1,
+            "oneSessionOnly": false,
+            "parentId": "",
+            "type": "Exploration",
+            "value": "1",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        },
+        {
+          "_parent": "CounterCreator",
+          "_props": {
+            "counter": {
+              "conditions": [
+                {
+                  "_parent": "ExitStatus",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "id": "64bdb521769054ef950bdda9",
+                    "status": [
+                      "Survived",
+                      "Runner"
+                    ]
+                  }
+                },
+                {
+                  "_parent": "Location",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "id": "64bdb52d807321a9b905f06a",
+                    "target": [
+                      "Shoreline"
+                    ]
+                  }
+                }
+              ],
+              "id": "64bdb512e2ca8c5236002da6"
+            },
+            "doNotResetIfCounterCompleted": false,
+            "dynamicLocale": false,
+            "id": "64bdb512e2ca8c5236002da5",
+            "index": 2,
+            "oneSessionOnly": false,
+            "parentId": "",
+            "type": "Completion",
+            "value": "1",
+            "visibilityConditions": [
+              {
+                "_parent": "CompleteCondition",
+                "_props": {
+                  "id": "64be930af3a668f08805d078",
+                  "target": "64be92cbb0bf3baa6702f46e"
+                }
+              }
+            ]
+          },
+          "dynamicLocale": false
+        }
+      ],
+      "AvailableForStart": [],
+      "Fail": []
+    },
+    "description": "64b90786bbf5bf2b460ad982 description",
+    "failMessageText": "64b90786bbf5bf2b460ad982 failMessageText",
+    "image": "/files/quest/icon/64c3cd095b03dccf8800271f.jpg",
+    "instantComplete": false,
+    "isKey": false,
+    "location": "any",
+    "name": "64b90786bbf5bf2b460ad982 name",
+    "note": "64b90786bbf5bf2b460ad982 note",
+    "questStatus": {},
+    "restartable": false,
+    "rewards": {
+      "Fail": [],
+      "Started": [],
+      "Success": []
+    },
+    "secretQuest": false,
+    "side": "Pmc",
+    "startedMessageText": "64b90786bbf5bf2b460ad982 startedMessageText",
+    "successMessageText": "64b90786bbf5bf2b460ad982 successMessageText",
+    "templateId": "64b90786bbf5bf2b460ad982",
+    "traderId": "579dc571d53a0658a154fbec",
+    "type": "Completion"
   }
 }
