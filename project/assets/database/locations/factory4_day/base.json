@@ -106,8 +106,8 @@
   "Description": "The industrial estate and facilities of the chemical plant No.16 that were rented out illegally to the TerraGroup company. ",
   "DisabledForScav": false,
   "DisabledScavExits": "Cellars,Gate 0",
+  "EnableCoop": true,
   "Enabled": true,
-  "EnabledCoop": false,
   "EscapeTimeLimit": 20,
   "EscapeTimeLimitCoop": 15,
   "GenerateLocalLootCache": true,
@@ -126,15 +126,15 @@
     },
     {
       "minPlayers": 3,
-      "time": 65
+      "time": 120
     },
     {
       "minPlayers": 2,
-      "time": 500
+      "time": 250
     },
     {
       "minPlayers": 1,
-      "time": 840
+      "time": 330
     }
   ],
   "MaxBotPerZone": 4,

@@ -135,27 +135,27 @@
     },
     {
       "minPlayers": 10,
-      "time": 140
+      "time": 70
     },
     {
       "minPlayers": 8,
-      "time": 240
+      "time": 120
     },
     {
       "minPlayers": 7,
-      "time": 360
+      "time": 180
     },
     {
       "minPlayers": 5,
-      "time": 500
+      "time": 250
     },
     {
       "minPlayers": 3,
-      "time": 660
+      "time": 330
     },
     {
       "minPlayers": 1,
-      "time": 840
+      "time": 420
     }
   ],
   "MaxBotPerZone": 5,
