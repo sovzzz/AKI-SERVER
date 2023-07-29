@@ -17,6 +17,7 @@ export class BotCallbacks
 
     /**
      * Handle singleplayer/settings/bot/limit
+     * Is called by client to define each bot roles wave limit
      * @returns string
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

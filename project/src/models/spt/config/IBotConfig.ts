@@ -66,9 +66,11 @@ export interface PresetBatch
     gifter: number
     test: number
     exUsec: number,
-    arenaFighter: number,
     arenaFighterEvent: number,
-    crazyAssaultEvent: number
+    arenaFighter: number,
+    crazyAssaultEvent: number,
+    sptUsec: number,
+    sptBear: number
 }
 
 export interface LootNvalue 
