@@ -8,5 +8,6 @@ export enum QuestRewardType
     ASSORTMENT_UNLOCK = "AssortmentUnlock",
     PRODUCTIONS_SCHEME = "ProductionScheme",
     TRADER_STANDING_RESET = "TraderStandingReset",
-    TRADER_STANDING_RESTORE = "TraderStandingRestore" 
+    TRADER_STANDING_RESTORE = "TraderStandingRestore",
+    STASH_ROWS = "StashRows"
 }

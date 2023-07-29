@@ -79,7 +79,11 @@ export class BotController
      */
     public getBotDifficulty(type: string, difficulty: string): Difficulty
     {
-        const raidConfig = this.applicationContext.getLatestValue(ContextVariableType.RAID_CONFIGURATION).getValue<IGetRaidConfigurationRequestData>();
+        const raidConfig = this.applicationContext.getLatestValue(ContextVariableType.RAID_CONFIGURATION)?.getValue<IGetRaidConfigurationRequestData>();
+        if (!raidConfig)
+        {
+            this.logger.error("applicationContex could not find RAID_CONFIGURATION value, raidConfig is undefined");
+        }
 
         // Check value chosen in pre-raid difficulty dropdown
         // If value is not 'asonline', change requested difficulty to be what was chosen in dropdown

@@ -2030,8 +2030,8 @@
       "min": 0
     },
     "reward": {
-      "max": 275,
-      "min": 275
+      "max": 250,
+      "min": 250
     },
     "standingForKill": 0
   },
@@ -2599,7 +2599,11 @@
         "5a7d90eb159bd400165484f1",
         "57c55f112459772d28133310",
         "5ab8e79e86f7742d8b372e78",
-        "59fafc5086f7740dbe19f6c3"
+        "59fafc5086f7740dbe19f6c3",
+        "5ae30c9a5acfc408fb139a03",
+        "5a34fbadc4a28200741e230a",
+        "6386120cd6baa055ad1e201c",
+        "588226e62459776e3e094af7"
       ],
       "Pockets": [
         "5f3e77b26cda304dcc634057",

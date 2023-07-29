@@ -127,6 +127,21 @@
 			"startTimestamp": 1701388800000,
 			"endTimestamp": 1703980800000,
 			"yearly": true
+		},
+		"64b90786bbf5bf2b460ad982": {
+			"name": "TerraGroup Trial Part 1",
+			"season": "None",
+			"yearly": false
+		},
+		"64b90792f43eebce7c01e7af": {
+			"name": "TerraGroup Trial Part 2",
+			"season": "None",
+			"yearly": false
+		},
+		"64b907978d327e5bf9085bd9": {
+			"name": "TerraGroup Trial Part 3",
+			"season": "None",
+			"yearly": false
 		}
 	},
     "repeatableQuests": [{

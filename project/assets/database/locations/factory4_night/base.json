@@ -63,7 +63,7 @@
   ],
   "BossLocationSpawn": [
     {
-      "BossChance": 24,
+      "BossChance": 35,
       "BossDifficult": "normal",
       "BossEscortAmount": "0",
       "BossEscortDifficult": "normal",
@@ -93,9 +93,9 @@
   "BotImpossible": 0,
   "BotLocationModifier": {
     "AccuracySpeed": 1,
-    "DistToActivate": 140,
+    "DistToActivate": 100,
     "DistToPersueAxemanCoef": 0.9,
-    "DistToSleep": 150,
+    "DistToSleep": 120,
     "GainSight": 1,
     "KhorovodChance": 0,
     "MagnetPower": 15,
@@ -104,7 +104,7 @@
     "VisibleDistance": 1
   },
   "BotMarksman": 0,
-  "BotMax": 0,
+  "BotMax": 16,
   "BotMaxPlayer": 0,
   "BotMaxTimePlayer": 0,
   "BotNormal": 0,
@@ -117,12 +117,12 @@
   "Description": "The industrial estate and facilities of the chemical plant No.16 that were rented out illegally to the TerraGroup company. ",
   "DisabledForScav": false,
   "DisabledScavExits": "Cellars,Gate 0",
-  "Enabled": true,
-  "EnabledCoop": false,
-  "EscapeTimeLimit": 20,
+  "EnableCoop": true,
+  "Enabled": false,
+  "EscapeTimeLimit": 25,
   "EscapeTimeLimitCoop": 15,
   "GenerateLocalLootCache": true,
-  "GlobalLootChanceModifier": 0.2,
+  "GlobalLootChanceModifier": 0.4,
   "IconX": 318,
   "IconY": 359,
   "Id": "factory4_night",
@@ -130,7 +130,25 @@
   "IsSecret": false,
   "Locked": false,
   "Loot": [],
-  "MaxBotPerZone": 4,
+  "MatchMakerMinPlayersByWaitTime": [
+    {
+      "minPlayers": 4,
+      "time": 60
+    },
+    {
+      "minPlayers": 3,
+      "time": 70
+    },
+    {
+      "minPlayers": 2,
+      "time": 120
+    },
+    {
+      "minPlayers": 1,
+      "time": 330
+    }
+  ],
+  "MaxBotPerZone": 0,
   "MaxCoopGroup": 6,
   "MaxDistToFreePoint": 900,
   "MaxPlayers": 6,
@@ -138,14 +156,15 @@
   "MinDistToFreePoint": 10,
   "MinMaxBots": [],
   "MinPlayerLvlAccessKeys": 0,
-  "MinPlayers": 4,
+  "MinPlayers": 5,
   "Name": "Factory",
   "NewSpawn": false,
   "OcculsionCullingEnabled": true,
   "OfflineNewSpawn": false,
   "OfflineOldSpawn": true,
   "OldSpawn": true,
-  "OpenZones": "BotZone",
+  "OpenZones": "",
+  "PlayersRequestCount": -1,
   "PmcMaxPlayersInGroup": 5,
   "Preview": {
     "path": "",
@@ -217,8 +236,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -248,8 +266,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -366,8 +383,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -397,8 +413,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -486,8 +501,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -546,8 +560,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -611,7 +624,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Bot"
+        "Bot",
+        "Boss"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -664,8 +678,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -695,8 +708,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -726,8 +738,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -960,8 +971,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1049,8 +1059,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1080,8 +1089,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1111,8 +1119,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1142,8 +1149,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1202,8 +1208,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1378,8 +1383,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1409,8 +1413,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1498,8 +1501,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1678,8 +1680,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1829,8 +1830,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -1947,8 +1947,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -2181,8 +2180,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -2245,8 +2243,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -2276,8 +2273,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -2336,8 +2332,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -2483,8 +2478,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -2514,8 +2508,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -2632,8 +2625,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -2697,7 +2689,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Bot"
+        "Bot",
+        "Boss"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -2750,8 +2743,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -2844,7 +2836,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Bot"
+        "Bot",
+        "Boss"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -2955,8 +2948,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3020,7 +3012,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Bot"
+        "Bot",
+        "Boss"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -3135,8 +3128,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3166,8 +3158,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3230,8 +3221,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3261,8 +3251,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3292,8 +3281,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3323,8 +3311,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3412,8 +3399,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3559,8 +3545,7 @@
       },
       "Rotation": 96.73777,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3595,7 +3580,8 @@
     {
       "BotZoneName": "",
       "Categories": [
-        "Bot"
+        "Bot",
+        "Boss"
       ],
       "ColliderParams": {
         "_parent": "SpawnSphereParams",
@@ -3648,8 +3634,7 @@
       },
       "Rotation": 269.225647,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3679,8 +3664,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3710,8 +3694,7 @@
       },
       "Rotation": 3.0047307,
       "Sides": [
-        "Usec",
-        "Bear"
+        "Pmc"
       ]
     },
     {
@@ -3795,12 +3778,7 @@
   "filter_ex": [],
   "limits": [],
   "matching_min_seconds": 45,
-  "maxItemCountInLocation": [
-    {
-      "TemplateId": "54009119af1c881c07000029",
-      "Value": 0
-    }
-  ],
+  "maxItemCountInLocation": [],
   "sav_summon_seconds": 60,
   "tmp_location_field_remove_me": 0,
   "users_gather_seconds": 0,
@@ -3813,11 +3791,11 @@
       "BotSide": "Savage",
       "SpawnPoints": "BotZone",
       "WildSpawnType": "assault",
-      "isPlayers": false,
+      "isPlayers": true,
       "number": 0,
-      "slots_max": 2,
-      "slots_min": 1,
-      "time_max": 100,
+      "slots_max": 4,
+      "slots_min": 2,
+      "time_max": 50,
       "time_min": 15
     },
     {
@@ -3828,9 +3806,9 @@
       "isPlayers": false,
       "number": 1,
       "slots_max": 4,
-      "slots_min": 1,
-      "time_max": -1,
-      "time_min": -1
+      "slots_min": 2,
+      "time_max": 5,
+      "time_min": 0
     },
     {
       "BotPreset": "normal",
@@ -3842,7 +3820,7 @@
       "slots_max": 4,
       "slots_min": 2,
       "time_max": 300,
-      "time_min": 210
+      "time_min": 50
     },
     {
       "BotPreset": "hard",
@@ -3854,7 +3832,7 @@
       "slots_max": 4,
       "slots_min": 2,
       "time_max": 350,
-      "time_min": 260
+      "time_min": 160
     },
     {
       "BotPreset": "hard",
@@ -3887,10 +3865,10 @@
       "WildSpawnType": "assault",
       "isPlayers": false,
       "number": 6,
-      "slots_max": 3,
+      "slots_max": 2,
       "slots_min": 1,
       "time_max": 1500,
-      "time_min": 1200
+      "time_min": 1400
     },
     {
       "BotPreset": "hard",

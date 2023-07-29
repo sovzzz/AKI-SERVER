@@ -65,7 +65,12 @@ export interface PresetBatch
     sectantWarrior: number
     gifter: number
     test: number
-    exUsec: number
+    exUsec: number,
+    arenaFighterEvent: number,
+    arenaFighter: number,
+    crazyAssaultEvent: number,
+    sptUsec: number,
+    sptBear: number
 }
 
 export interface LootNvalue 
