@@ -403,7 +403,7 @@ export class DialogueController
 
         if (request.text.toLowerCase() === "nikita") 
         {
-            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, this.randomUtil.getArrayValue(["I know that guy!", "Cool guy, he made EFT!", "Kegend", "Remember when he said webel-webel-webel-webel, classic nikita moment"]));
+            this.mailSendService.sendUserMessageToPlayer(sessionId, sptFriendUser, this.randomUtil.getArrayValue(["I know that guy!", "Cool guy, he made EFT!", "Legend", "Remember when he said webel-webel-webel-webel, classic nikita moment"]));
         }
 
         if (request.text.toLowerCase() === "are you a bot") 
