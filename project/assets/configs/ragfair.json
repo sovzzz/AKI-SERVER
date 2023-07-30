@@ -150,6 +150,11 @@
             "enableBsgList": true,
             "enableQuestList": true,
             "traderItems": false
-        }
+        },
+		"unreasonableModPrices": {
+			"enabled": true,
+			"handbookPriceOverMultiplier": 8
+			"newPriceHandbookMultiplier": 8
+		}
     }
 }

@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 
 import { HideoutHelper } from "../helpers/HideoutHelper";
 import { InventoryHelper } from "../helpers/InventoryHelper";
+import { ItemHelper } from "../helpers/ItemHelper";
 import { IPmcData } from "../models/eft/common/IPmcData";
 import { Bonus, HideoutSlot } from "../models/eft/common/tables/IBotBase";
 import {
@@ -9,11 +10,13 @@ import {
 } from "../models/eft/common/tables/IRepeatableQuests";
 import { StageBonus } from "../models/eft/hideout/IHideoutArea";
 import { IAkiProfile } from "../models/eft/profile/IAkiProfile";
+import { BaseClasses } from "../models/enums/BaseClasses";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
 import { HideoutAreas } from "../models/enums/HideoutAreas";
 import { QuestStatus } from "../models/enums/QuestStatus";
 import { Traders } from "../models/enums/Traders";
 import { ICoreConfig } from "../models/spt/config/ICoreConfig";
+import { IRagfairConfig } from "../models/spt/config/IRagfairConfig";
 import { ILogger } from "../models/spt/utils/ILogger";
 import { ConfigServer } from "../servers/ConfigServer";
 import { DatabaseServer } from "../servers/DatabaseServer";
@@ -25,12 +28,14 @@ import { LocalisationService } from "./LocalisationService";
 export class ProfileFixerService
 {
     protected coreConfig: ICoreConfig;
+    protected ragfairConfig: IRagfairConfig;
 
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
         @inject("Watermark") protected watermark: Watermark,
         @inject("HideoutHelper") protected hideoutHelper: HideoutHelper,
         @inject("InventoryHelper") protected inventoryHelper: InventoryHelper,
+        @inject("ItemHelper") protected itemHelper: ItemHelper,
         @inject("LocalisationService") protected localisationService: LocalisationService,
         @inject("TimeUtil") protected timeUtil: TimeUtil,
         @inject("DatabaseServer") protected databaseServer: DatabaseServer,
@@ -38,6 +43,7 @@ export class ProfileFixerService
     )
     {
         this.coreConfig = this.configServer.getConfig(ConfigTypes.CORE);
+        this.ragfairConfig = this.configServer.getConfig(ConfigTypes.RAGFAIR);
     }
 
     /**
@@ -93,6 +99,40 @@ export class ProfileFixerService
         this.fixNullTraderSalesSums(pmcProfile);
         this.updateProfilePocketsToNewId(pmcProfile);
         this.updateProfileQuestDataValues(pmcProfile);
+
+        if (this.ragfairConfig.dynamic.unreasonableModPrices.enabled)
+        {
+            this.adjustUnreasonableModFleaPrices();
+        }
+    }
+
+    protected adjustUnreasonableModFleaPrices(): void
+    {
+        const db = this.databaseServer.getTables();
+        const fleaPrices = db.templates.prices;
+        const handbookPrices = db.templates.handbook.Items;
+        for (const itemTpl in fleaPrices)
+        {
+            if (this.itemHelper.isOfBaseclass(itemTpl, BaseClasses.MOD))
+            {
+                const itemHandbookPrice = handbookPrices.find(x => x.Id === itemTpl);
+                if (!itemHandbookPrice)
+                {
+                    continue;
+                }
+
+                if (fleaPrices[itemTpl] > (itemHandbookPrice.Price * this.ragfairConfig.dynamic.unreasonableModPrices.handbookPriceOverMultiplier))
+                {
+                    if (fleaPrices[itemTpl] <= 1)
+                    {
+                        continue; 
+                    }
+
+                    // Price is over limit, adjust
+                    fleaPrices[itemTpl] = itemHandbookPrice.Price * this.ragfairConfig.dynamic.unreasonableModPrices.newPriceHandbookMultiplier;
+                }
+            }
+        }
     }
 
     /**
