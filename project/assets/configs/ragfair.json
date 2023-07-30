@@ -153,8 +153,8 @@
         },
 		"unreasonableModPrices": {
 			"enabled": true,
-			"handbookPriceOverMultiplier": 8
-			"newPriceHandbookMultiplier": 8
+			"handbookPriceOverMultiplier": 9,
+			"newPriceHandbookMultiplier": 9
 		}
     }
 }
