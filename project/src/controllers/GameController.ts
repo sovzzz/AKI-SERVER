@@ -20,6 +20,7 @@ import { Traders } from "../models/enums/Traders";
 import { ICoreConfig } from "../models/spt/config/ICoreConfig";
 import { IHttpConfig } from "../models/spt/config/IHttpConfig";
 import { ILocationConfig } from "../models/spt/config/ILocationConfig";
+import { IRagfairConfig } from "../models/spt/config/IRagfairConfig";
 import { ILocationData } from "../models/spt/server/ILocations";
 import { ILogger } from "../models/spt/utils/ILogger";
 import { ConfigServer } from "../servers/ConfigServer";
@@ -42,6 +43,7 @@ export class GameController
     protected httpConfig: IHttpConfig;
     protected coreConfig: ICoreConfig;
     protected locationConfig: ILocationConfig;
+    protected ragfairConfig: IRagfairConfig;
 
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
@@ -66,6 +68,7 @@ export class GameController
         this.httpConfig = this.configServer.getConfig(ConfigTypes.HTTP);
         this.coreConfig = this.configServer.getConfig(ConfigTypes.CORE);
         this.locationConfig = this.configServer.getConfig(ConfigTypes.LOCATION);
+        this.ragfairConfig = this.configServer.getConfig(ConfigTypes.RAGFAIR);
     }
 
     /**
@@ -172,6 +175,12 @@ export class GameController
             if (pmcProfile?.Skills?.Common)
             {
                 this.warnOnActiveBotReloadSkill(pmcProfile);
+            }
+
+            // Flea bsg blacklist is off
+            if (!this.ragfairConfig.dynamic.blacklist.enableBsgList)
+            {
+                this.flagAllItemsInDbAsSellableOnFlea();
             }
         }
     }
@@ -331,6 +340,18 @@ export class GameController
         if (botReloadSkill?.Progress > 0)
         {
             this.logger.warning(this.localisationService.getText("server_start_player_active_botreload_skill"));
+        }
+    }
+
+    protected flagAllItemsInDbAsSellableOnFlea(): void
+    {
+        const dbItems = Object.values(this.databaseServer.getTables().templates.items);
+        for (const item of dbItems)
+        {
+            if (item._type === "Item" && !item._props?.CanSellOnRagfair)
+            {
+                item._props.CanSellOnRagfair = true;
+            }
         }
     }
 
