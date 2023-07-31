@@ -956,11 +956,17 @@
 								"5d6e68a8a4b9360b6c0d54e2": 12
 							},
 							"Caliber9x18PM": {
-								"573719df2459775a626ccbc2": 2,
+								"573719df2459775a626ccbc2": 3,
 								"57371aab2459775a77142f22": 2
 							},
 							"Caliber9x19PARA": {
 								"5efb0da7a29a85116f6ea05f": 11
+							},
+							"Caliber127x55": {
+								"5cadf6eeae921500134b2799": 11
+							},
+							"Caliber23x75": {
+								"5e85aa1a988a8701445df1f5": 3
 							}
 						}
 					},
