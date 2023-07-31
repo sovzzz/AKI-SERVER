@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
 import { IPmcData } from "../models/eft/common/IPmcData";
-import { Quest, Victim } from "../models/eft/common/tables/IBotBase";
+import { Quest, TraderInfo, Victim } from "../models/eft/common/tables/IBotBase";
 import { Item } from "../models/eft/common/tables/IItem";
 import { ISaveProgressRequestData } from "../models/eft/inRaid/ISaveProgressRequestData";
 import { IFailQuestRequestData } from "../models/eft/quests/IFailQuestRequestData";
@@ -145,6 +145,8 @@ export class InRaidHelper
         // Transfer effects from request to profile
         this.transferPostRaidLimbEffectsToProfile(saveProgressRequest, profileData);
 
+        this.applyTraderStandingAdjustments(profileData.TradersInfo, saveProgressRequest.profile.TradersInfo);
+
         profileData.SurvivorClass = saveProgressRequest.profile.SurvivorClass;
 
         // add experience points
@@ -163,6 +165,7 @@ export class InRaidHelper
 
         return profileData;
     }
+
 
     /**
      * Look for quests not are now status = fail that were not failed pre-raid and run the failQuest() function
@@ -237,6 +240,25 @@ export class InRaidHelper
                 // Add effect to server profile
                 profileBodyPartEffects[effect] = {Time: effectDetails.Time ?? -1};
             }
+        }
+    }
+
+    protected applyTraderStandingAdjustments(preRaid: Record<string, TraderInfo>, postRaid: Record<string, TraderInfo>): void
+    {
+        for (const traderId in postRaid)
+        {
+            const preRaidTrader = preRaid[traderId];
+            const postRaidTrader = postRaid[traderId];
+            if (!(preRaidTrader && postRaidTrader))
+            {
+                continue;
+            }
+
+            if (postRaidTrader.standing !== preRaidTrader.standing)
+            {
+                preRaidTrader.standing = postRaidTrader.standing;
+            }
+
         }
     }
 

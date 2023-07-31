@@ -64207,7 +64207,25 @@
           "dynamicLocale": false
         }
       ],
-      "Fail": []
+      "Fail": [
+        {
+          "_parent": "Quest",
+          "_props": {
+            "availableAfter": 0,
+            "dispersion": 0,
+            "dynamicLocale": false,
+            "id": "64bd186539a321a6480fc6dd",
+            "index": 0,
+            "parentId": "",
+            "status": [
+              2
+            ],
+            "target": "64b907bd55f4156df8007d14",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        }
+      ]
     },
     "description": "625d6ff5ddc94657c21a1625 description",
     "failMessageText": "625d6ff5ddc94657c21a1625 failMessageText",
@@ -64343,7 +64361,25 @@
           "dynamicLocale": false
         }
       ],
-      "Fail": []
+      "Fail": [
+        {
+          "_parent": "Quest",
+          "_props": {
+            "availableAfter": 0,
+            "dispersion": 0,
+            "dynamicLocale": false,
+            "id": "64bd18764c2e9f141400bed3",
+            "index": 0,
+            "parentId": "",
+            "status": [
+              2
+            ],
+            "target": "64b907bd55f4156df8007d14",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        }
+      ]
     },
     "description": "625d6ffaf7308432be1d44c5 description",
     "failMessageText": "625d6ffaf7308432be1d44c5 failMessageText",
@@ -64486,7 +64522,25 @@
           "dynamicLocale": false
         }
       ],
-      "Fail": []
+      "Fail": [
+        {
+          "_parent": "Quest",
+          "_props": {
+            "availableAfter": 0,
+            "dispersion": 0,
+            "dynamicLocale": false,
+            "id": "64bd19548f3a947a990aa489",
+            "index": 0,
+            "parentId": "",
+            "status": [
+              2
+            ],
+            "target": "64b907c29bd0fad76c072e97",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        }
+      ]
     },
     "description": "625d6ffcaa168e51321d69d7 description",
     "failMessageText": "625d6ffcaa168e51321d69d7 failMessageText",
@@ -64622,7 +64676,25 @@
           "dynamicLocale": false
         }
       ],
-      "Fail": []
+      "Fail": [
+        {
+          "_parent": "Quest",
+          "_props": {
+            "availableAfter": 0,
+            "dispersion": 0,
+            "dynamicLocale": false,
+            "id": "64bd196039a321a6480fc6de",
+            "index": 0,
+            "parentId": "",
+            "status": [
+              2
+            ],
+            "target": "64b907c29bd0fad76c072e97",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        }
+      ]
     },
     "description": "625d6fff4149f1149b5b12c9 description",
     "failMessageText": "625d6fff4149f1149b5b12c9 failMessageText",
@@ -64793,7 +64865,25 @@
           "dynamicLocale": false
         }
       ],
-      "Fail": []
+      "Fail": [
+        {
+          "_parent": "Quest",
+          "_props": {
+            "availableAfter": 0,
+            "dispersion": 0,
+            "dynamicLocale": false,
+            "id": "64bd196d329b780ddf025240",
+            "index": 0,
+            "parentId": "",
+            "status": [
+              2
+            ],
+            "target": "64b907c29bd0fad76c072e97",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        }
+      ]
     },
     "description": "625d7001c4874104f230c0c5 description",
     "failMessageText": "625d7001c4874104f230c0c5 failMessageText",
@@ -65002,7 +65092,25 @@
           "dynamicLocale": false
         }
       ],
-      "Fail": []
+      "Fail": [
+        {
+          "_parent": "Quest",
+          "_props": {
+            "availableAfter": 0,
+            "dispersion": 0,
+            "dynamicLocale": false,
+            "id": "64bd1975f2dec80e000e5def",
+            "index": 0,
+            "parentId": "",
+            "status": [
+              2
+            ],
+            "target": "64b907c29bd0fad76c072e97",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        }
+      ]
     },
     "description": "625d70031ed3bb5bcc5bd9e5 description",
     "failMessageText": "625d70031ed3bb5bcc5bd9e5 failMessageText",
@@ -80549,14 +80657,14 @@
           "index": 2,
           "items": [
             {
-              "_id": "64c400871e586a63270cd265",
+              "_id": "64c669dbafe1938ee204ba5b",
               "_tpl": "5449016a4bdc2d6f028b456f",
               "upd": {
                 "StackObjectsCount": 38000
               }
             }
           ],
-          "target": "64c400871e586a63270cd265",
+          "target": "64c669dbafe1938ee204ba5b",
           "type": "Item",
           "value": "38000"
         },
@@ -80566,14 +80674,14 @@
           "index": 3,
           "items": [
             {
-              "_id": "64c400871e586a63270cd266",
+              "_id": "64c669dbafe1938ee204ba5c",
               "_tpl": "590c657e86f77412b013051d",
               "upd": {
                 "StackObjectsCount": 2
               }
             }
           ],
-          "target": "64c400871e586a63270cd266",
+          "target": "64c669dbafe1938ee204ba5c",
           "type": "Item",
           "value": "2"
         },
@@ -80583,14 +80691,14 @@
           "index": 4,
           "items": [
             {
-              "_id": "64c400871e586a63270cd267",
+              "_id": "64c669dbafe1938ee204ba5d",
               "_tpl": "5c0e530286f7747fa1419862",
               "upd": {
                 "StackObjectsCount": 2
               }
             }
           ],
-          "target": "64c400871e586a63270cd267",
+          "target": "64c669dbafe1938ee204ba5d",
           "type": "Item",
           "value": "2"
         }
@@ -80602,6 +80710,3163 @@
     "successMessageText": "64b90792f43eebce7c01e7af successMessageText",
     "templateId": "64b90792f43eebce7c01e7af",
     "traderId": "54cb57776803fa99248b456e",
+    "type": "Completion"
+  },
+  "64b907978d327e5bf9085bd9": {
+    "QuestName": "TerraGroup Trial Part 3-Event",
+    "_id": "64b907978d327e5bf9085bd9",
+    "acceptPlayerMessage": "64b907978d327e5bf9085bd9 acceptPlayerMessage",
+    "canShowNotificationsInGame": true,
+    "changeQuestMessageText": "64b907978d327e5bf9085bd9 changeQuestMessageText",
+    "completePlayerMessage": "64b907978d327e5bf9085bd9 completePlayerMessage",
+    "conditions": {
+      "AvailableForFinish": [
+        {
+          "_parent": "FindItem",
+          "_props": {
+            "countInRaid": false,
+            "dogtagLevel": 0,
+            "dynamicLocale": false,
+            "id": "64b91aa360d47bcb98044d18",
+            "index": 0,
+            "isEncoded": false,
+            "maxDurability": 100,
+            "minDurability": 0,
+            "onlyFoundInRaid": false,
+            "parentId": "",
+            "target": [
+              "64b91627dd13d43b9d01d6d1"
+            ],
+            "value": "1",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        },
+        {
+          "_parent": "HandoverItem",
+          "_props": {
+            "dogtagLevel": 0,
+            "dynamicLocale": false,
+            "id": "64b91ab9e1ed4f11f209e8e7",
+            "index": 1,
+            "isEncoded": false,
+            "maxDurability": 100,
+            "minDurability": 0,
+            "onlyFoundInRaid": false,
+            "parentId": "",
+            "target": [
+              "64b91627dd13d43b9d01d6d1"
+            ],
+            "value": "1",
+            "visibilityConditions": [
+              {
+                "_parent": "CompleteCondition",
+                "_props": {
+                  "id": "64bdb702e2ca8c5236002da7",
+                  "target": "64b91aa360d47bcb98044d18"
+                }
+              }
+            ]
+          },
+          "dynamicLocale": false
+        }
+      ],
+      "AvailableForStart": [
+        {
+          "_parent": "Quest",
+          "_props": {
+            "availableAfter": 0,
+            "dispersion": 0,
+            "dynamicLocale": false,
+            "id": "64bd3d6ef2dec80e000e5df4",
+            "index": 0,
+            "parentId": "",
+            "status": [
+              4
+            ],
+            "target": "64b90792f43eebce7c01e7af",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        }
+      ],
+      "Fail": []
+    },
+    "description": "64b907978d327e5bf9085bd9 description",
+    "failMessageText": "64b907978d327e5bf9085bd9 failMessageText",
+    "image": "/files/quest/icon/64c3cd095b03dccf8800271f.jpg",
+    "instantComplete": false,
+    "isKey": false,
+    "location": "any",
+    "name": "64b907978d327e5bf9085bd9 name",
+    "note": "64b907978d327e5bf9085bd9 note",
+    "questStatus": {},
+    "restartable": false,
+    "rewards": {
+      "Fail": [],
+      "Started": [],
+      "Success": [
+        {
+          "id": "64bd3d008f3a947a990aa490",
+          "index": 0,
+          "type": "Experience",
+          "value": 14600
+        },
+        {
+          "id": "64bd3d07f3a668f08805ce57",
+          "index": 1,
+          "target": "54cb50c76803fa8b248b4571",
+          "type": "TraderStanding",
+          "value": "0.02"
+        },
+        {
+          "id": "64bd3d3039a321a6480fc6e1",
+          "index": 2,
+          "items": [
+            {
+              "_id": "64c669dbafe1938ee204ba5e",
+              "_tpl": "5449016a4bdc2d6f028b456f",
+              "upd": {
+                "StackObjectsCount": 40000
+              }
+            }
+          ],
+          "target": "64c669dbafe1938ee204ba5e",
+          "type": "Item",
+          "value": "40000"
+        },
+        {
+          "findInRaid": true,
+          "id": "64bd3d39f3a668f08805ce58",
+          "index": 3,
+          "items": [
+            {
+              "_id": "64c669dbafe1938ee204ba5f",
+              "_tpl": "62e14904c2699c0ec93adc47",
+              "upd": {
+                "FireMode": {
+                  "FireMode": "single"
+                },
+                "Foldable": {
+                  "Folded": false
+                },
+                "Repairable": {
+                  "Durability": 100,
+                  "MaxDurability": 100
+                },
+                "StackObjectsCount": 1
+              }
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba60",
+              "_tpl": "62e153bcdb1a5c41971c1b5b",
+              "parentId": "64c669dbafe1938ee204ba5f",
+              "slotId": "mod_magazine"
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba61",
+              "_tpl": "62e2a7138e1ac9380579c122",
+              "parentId": "64c669dbafe1938ee204ba5f",
+              "slotId": "mod_muzzle"
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba62",
+              "_tpl": "62e2969582ebf260c20539c2",
+              "parentId": "64c669dbafe1938ee204ba5f",
+              "slotId": "mod_stock"
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba63",
+              "_tpl": "62e27a7865f0b1592a49e17b",
+              "parentId": "64c669dbafe1938ee204ba5f",
+              "slotId": "mod_reciever"
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba64",
+              "_tpl": "62ff9920fe938a24c90c10d2",
+              "parentId": "64c669dbafe1938ee204ba63",
+              "slotId": "mod_mount"
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba65",
+              "_tpl": "637ba19df7ca6372bf2613d7",
+              "parentId": "64c669dbafe1938ee204ba5f",
+              "slotId": "mod_handguard"
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba66",
+              "_tpl": "62ed1921b3608410ef5a2c04",
+              "parentId": "64c669dbafe1938ee204ba65",
+              "slotId": "mod_mount_001"
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba67",
+              "_tpl": "637ba29bf7ca6372bf2613db",
+              "parentId": "64c669dbafe1938ee204ba5f",
+              "slotId": "mod_pistolgrip"
+            }
+          ],
+          "target": "64c669dbafe1938ee204ba5f",
+          "type": "Item",
+          "value": "1"
+        },
+        {
+          "findInRaid": true,
+          "id": "64bd3d4a807321a9b905f05d",
+          "index": 4,
+          "items": [
+            {
+              "_id": "64c669dbafe1938ee204ba68",
+              "_tpl": "62e153bcdb1a5c41971c1b5b",
+              "upd": {
+                "StackObjectsCount": 3
+              }
+            }
+          ],
+          "target": "64c669dbafe1938ee204ba68",
+          "type": "Item",
+          "value": "3"
+        },
+        {
+          "findInRaid": true,
+          "id": "64bd3d584c2e9f141400bed8",
+          "index": 5,
+          "items": [
+            {
+              "_id": "64c669dbafe1938ee204ba69",
+              "_tpl": "6489875745f9ca4ba51c4808",
+              "upd": {
+                "StackObjectsCount": 3
+              }
+            }
+          ],
+          "target": "64c669dbafe1938ee204ba69",
+          "type": "Item",
+          "value": "3"
+        }
+      ]
+    },
+    "secretQuest": false,
+    "side": "Pmc",
+    "startedMessageText": "64b907978d327e5bf9085bd9 startedMessageText",
+    "successMessageText": "64b907978d327e5bf9085bd9 successMessageText",
+    "templateId": "64b907978d327e5bf9085bd9",
+    "traderId": "54cb50c76803fa8b248b4571",
+    "type": "Completion"
+  },
+  "64b9079cdd13d43b9d01d6cd": {
+    "QuestName": "TerraGroup Trial Part 4-Event",
+    "_id": "64b9079cdd13d43b9d01d6cd",
+    "acceptPlayerMessage": "64b9079cdd13d43b9d01d6cd acceptPlayerMessage",
+    "canShowNotificationsInGame": true,
+    "changeQuestMessageText": "64b9079cdd13d43b9d01d6cd changeQuestMessageText",
+    "completePlayerMessage": "64b9079cdd13d43b9d01d6cd completePlayerMessage",
+    "conditions": {
+      "AvailableForFinish": [
+        {
+          "_parent": "CounterCreator",
+          "_props": {
+            "counter": {
+              "conditions": [
+                {
+                  "_parent": "VisitPlace",
+                  "_props": {
+                    "id": "64be938af3a668f08805d079",
+                    "target": "quest_st_4_visit",
+                    "value": "1"
+                  }
+                }
+              ],
+              "id": "64be937c22b6fd6e670ad8b9"
+            },
+            "doNotResetIfCounterCompleted": false,
+            "dynamicLocale": false,
+            "id": "64be937c22b6fd6e670ad8b8",
+            "index": 0,
+            "oneSessionOnly": false,
+            "parentId": "",
+            "type": "Exploration",
+            "value": "1",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        },
+        {
+          "_parent": "CounterCreator",
+          "_props": {
+            "counter": {
+              "conditions": [
+                {
+                  "_parent": "Kills",
+                  "_props": {
+                    "id": "64b94834e1ed4f11f209f778",
+                    "savageRole": [
+                      "bossKnight",
+                      "bossSanitar",
+                      "followerBigPipe",
+                      "followerBirdEye"
+                    ],
+                    "target": "Savage"
+                  }
+                }
+              ],
+              "id": "64b947bb611a0972880b1f11"
+            },
+            "doNotResetIfCounterCompleted": false,
+            "dynamicLocale": false,
+            "id": "64b947bb611a0972880b1f10",
+            "index": 2,
+            "oneSessionOnly": false,
+            "parentId": "",
+            "type": "Elimination",
+            "value": "1",
+            "visibilityConditions": [
+              {
+                "_parent": "CompleteCondition",
+                "_props": {
+                  "id": "64bfb47a03044d532202498c",
+                  "target": "64be937c22b6fd6e670ad8b8"
+                }
+              }
+            ]
+          },
+          "dynamicLocale": false
+        },
+        {
+          "_parent": "CounterCreator",
+          "_props": {
+            "counter": {
+              "conditions": [
+                {
+                  "_parent": "Location",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "id": "64bdb77b4c2e9f141400bf14",
+                    "target": [
+                      "Shoreline"
+                    ]
+                  }
+                },
+                {
+                  "_parent": "ExitStatus",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "id": "64bdb7848f3a947a990aa497",
+                    "status": [
+                      "Survived",
+                      "Runner"
+                    ]
+                  }
+                }
+              ],
+              "id": "64bdb772f2dec80e000e5e01"
+            },
+            "doNotResetIfCounterCompleted": false,
+            "dynamicLocale": false,
+            "id": "64bdb772f2dec80e000e5e00",
+            "index": 3,
+            "oneSessionOnly": false,
+            "parentId": "",
+            "type": "Completion",
+            "value": "1",
+            "visibilityConditions": [
+              {
+                "_parent": "CompleteCondition",
+                "_props": {
+                  "id": "64bdb78cf3a668f08805ce63",
+                  "target": "64b947bb611a0972880b1f10"
+                }
+              }
+            ]
+          },
+          "dynamicLocale": false
+        }
+      ],
+      "AvailableForStart": [
+        {
+          "_parent": "Quest",
+          "_props": {
+            "availableAfter": 0,
+            "dispersion": 0,
+            "dynamicLocale": false,
+            "id": "64bd3d8f329b780ddf025242",
+            "index": 0,
+            "parentId": "",
+            "status": [
+              4
+            ],
+            "target": "64b907978d327e5bf9085bd9",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        }
+      ],
+      "Fail": []
+    },
+    "description": "64b9079cdd13d43b9d01d6cd description",
+    "failMessageText": "64b9079cdd13d43b9d01d6cd failMessageText",
+    "image": "/files/quest/icon/64c3cd095b03dccf8800271f.jpg",
+    "instantComplete": false,
+    "isKey": false,
+    "location": "any",
+    "name": "64b9079cdd13d43b9d01d6cd name",
+    "note": "64b9079cdd13d43b9d01d6cd note",
+    "questStatus": {},
+    "restartable": false,
+    "rewards": {
+      "Fail": [],
+      "Started": [],
+      "Success": [
+        {
+          "id": "64bd3d994c2e9f141400bed9",
+          "index": 0,
+          "type": "Experience",
+          "value": 24300
+        },
+        {
+          "id": "64bd3da08f3a947a990aa492",
+          "index": 1,
+          "target": "54cb50c76803fa8b248b4571",
+          "type": "TraderStanding",
+          "value": "0.03"
+        },
+        {
+          "id": "64bd3db8f2dec80e000e5df5",
+          "index": 2,
+          "items": [
+            {
+              "_id": "64c669dbafe1938ee204ba76",
+              "_tpl": "5449016a4bdc2d6f028b456f",
+              "upd": {
+                "StackObjectsCount": 50000
+              }
+            }
+          ],
+          "target": "64c669dbafe1938ee204ba76",
+          "type": "Item",
+          "value": "50000"
+        },
+        {
+          "findInRaid": true,
+          "id": "64bd3dc4e2ca8c5236002d99",
+          "index": 3,
+          "items": [
+            {
+              "_id": "64c669dbafe1938ee204ba77",
+              "_tpl": "62e7e7bbe6da9612f743f1e0",
+              "upd": {
+                "StackObjectsCount": 1
+              }
+            }
+          ],
+          "target": "64c669dbafe1938ee204ba77",
+          "type": "Item",
+          "value": "1"
+        },
+        {
+          "findInRaid": true,
+          "id": "64bd3dcc807321a9b905f05e",
+          "index": 4,
+          "items": [
+            {
+              "_id": "64c669dbafe1938ee204ba78",
+              "_tpl": "5656eb674bdc2d35148b457c",
+              "upd": {
+                "StackObjectsCount": 5
+              }
+            }
+          ],
+          "target": "64c669dbafe1938ee204ba78",
+          "type": "Item",
+          "value": "5"
+        }
+      ]
+    },
+    "secretQuest": false,
+    "side": "Pmc",
+    "startedMessageText": "64b9079cdd13d43b9d01d6cd startedMessageText",
+    "successMessageText": "64b9079cdd13d43b9d01d6cd successMessageText",
+    "templateId": "64b9079cdd13d43b9d01d6cd",
+    "traderId": "54cb50c76803fa8b248b4571",
+    "type": "Completion"
+  },
+  "64b907a49ff61a79b10fab9c": {
+    "QuestName": "TerraGroup Trial Part 5-Event",
+    "_id": "64b907a49ff61a79b10fab9c",
+    "acceptPlayerMessage": "64b907a49ff61a79b10fab9c acceptPlayerMessage",
+    "canShowNotificationsInGame": true,
+    "changeQuestMessageText": "64b907a49ff61a79b10fab9c changeQuestMessageText",
+    "completePlayerMessage": "64b907a49ff61a79b10fab9c completePlayerMessage",
+    "conditions": {
+      "AvailableForFinish": [
+        {
+          "_parent": "Quest",
+          "_props": {
+            "availableAfter": 0,
+            "dispersion": 0,
+            "dynamicLocale": false,
+            "id": "64b9560be1ed4f11f209f793",
+            "index": 0,
+            "parentId": "",
+            "status": [
+              4
+            ],
+            "target": "64b907a85e9b86ab7a08cf0d",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        }
+      ],
+      "AvailableForStart": [
+        {
+          "_parent": "Quest",
+          "_props": {
+            "availableAfter": 0,
+            "dispersion": 0,
+            "dynamicLocale": false,
+            "id": "64bd3e02014d9a495e09a785",
+            "index": 0,
+            "parentId": "",
+            "status": [
+              4
+            ],
+            "target": "64b9079cdd13d43b9d01d6cd",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        }
+      ],
+      "Fail": []
+    },
+    "description": "64b907a49ff61a79b10fab9c description",
+    "failMessageText": "64b907a49ff61a79b10fab9c failMessageText",
+    "image": "/files/quest/icon/64c3cd095b03dccf8800271f.jpg",
+    "instantComplete": false,
+    "isKey": false,
+    "location": "any",
+    "name": "64b907a49ff61a79b10fab9c name",
+    "note": "64b907a49ff61a79b10fab9c note",
+    "questStatus": {},
+    "restartable": false,
+    "rewards": {
+      "Fail": [],
+      "Started": [],
+      "Success": [
+        {
+          "id": "64bd3de4807321a9b905f05f",
+          "index": 0,
+          "type": "Experience",
+          "value": 5000
+        },
+        {
+          "id": "64bd3debb0bf3baa6702f355",
+          "index": 1,
+          "target": "54cb50c76803fa8b248b4571",
+          "type": "TraderStanding",
+          "value": "0.01"
+        }
+      ]
+    },
+    "secretQuest": false,
+    "side": "Pmc",
+    "startedMessageText": "64b907a49ff61a79b10fab9c startedMessageText",
+    "successMessageText": "64b907a49ff61a79b10fab9c successMessageText",
+    "templateId": "64b907a49ff61a79b10fab9c",
+    "traderId": "54cb50c76803fa8b248b4571",
+    "type": "Completion"
+  },
+  "64b907a85e9b86ab7a08cf0d": {
+    "QuestName": "TerraGroup Trial Part 6-Event",
+    "_id": "64b907a85e9b86ab7a08cf0d",
+    "acceptPlayerMessage": "64b907a85e9b86ab7a08cf0d acceptPlayerMessage",
+    "canShowNotificationsInGame": true,
+    "changeQuestMessageText": "64b907a85e9b86ab7a08cf0d changeQuestMessageText",
+    "completePlayerMessage": "64b907a85e9b86ab7a08cf0d completePlayerMessage",
+    "conditions": {
+      "AvailableForFinish": [
+        {
+          "_parent": "HandoverItem",
+          "_props": {
+            "dogtagLevel": 0,
+            "dynamicLocale": false,
+            "id": "64b957d5a6e4a9dd4507528a",
+            "index": 0,
+            "isEncoded": false,
+            "maxDurability": 100,
+            "minDurability": 0,
+            "onlyFoundInRaid": false,
+            "parentId": "",
+            "target": [
+              "59faff1d86f7746c51718c9c"
+            ],
+            "value": "5",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        }
+      ],
+      "AvailableForStart": [
+        {
+          "_parent": "Quest",
+          "_props": {
+            "availableAfter": 0,
+            "dispersion": 0,
+            "dynamicLocale": false,
+            "id": "64bd3e3af3a668f08805ce59",
+            "index": 0,
+            "parentId": "",
+            "status": [
+              2
+            ],
+            "target": "64b907a49ff61a79b10fab9c",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        }
+      ],
+      "Fail": []
+    },
+    "description": "64b907a85e9b86ab7a08cf0d description",
+    "failMessageText": "64b907a85e9b86ab7a08cf0d failMessageText",
+    "image": "/files/quest/icon/64c3cd095b03dccf8800271f.jpg",
+    "instantComplete": false,
+    "isKey": false,
+    "location": "any",
+    "name": "64b907a85e9b86ab7a08cf0d name",
+    "note": "64b907a85e9b86ab7a08cf0d note",
+    "questStatus": {},
+    "restartable": false,
+    "rewards": {
+      "Fail": [],
+      "Started": [],
+      "Success": [
+        {
+          "id": "64bd3e45b0bf3baa6702f356",
+          "index": 0,
+          "type": "Experience",
+          "value": 19300
+        },
+        {
+          "id": "64bd3e4cf2dec80e000e5df7",
+          "index": 1,
+          "target": "5a7c2eca46aef81a7ca2145d",
+          "type": "TraderStanding",
+          "value": "0.02"
+        },
+        {
+          "id": "64bd432d6de7c555ad051726",
+          "index": 2,
+          "items": [
+            {
+              "_id": "64c669dbafe1938ee204ba6a",
+              "_tpl": "5ac4cd105acfc40016339859",
+              "upd": {
+                "Repairable": {
+                  "Durability": 100,
+                  "MaxDurability": 100
+                }
+              }
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba6b",
+              "_tpl": "59c6633186f7740cf0493bb9",
+              "parentId": "64c669dbafe1938ee204ba6a",
+              "slotId": "mod_gas_block"
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba6c",
+              "_tpl": "5cbda392ae92155f3c17c39f",
+              "parentId": "64c669dbafe1938ee204ba6b",
+              "slotId": "mod_handguard"
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba6d",
+              "_tpl": "5c1bc4812e22164bef5cfde7",
+              "parentId": "64c669dbafe1938ee204ba6c",
+              "slotId": "mod_foregrip"
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba6e",
+              "_tpl": "5c5952732e2216398b5abda2",
+              "parentId": "64c669dbafe1938ee204ba6c",
+              "slotId": "mod_tactical_000"
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba6f",
+              "_tpl": "5beec8ea0db834001a6f9dbf",
+              "parentId": "64c669dbafe1938ee204ba6a",
+              "slotId": "mod_pistol_grip"
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba70",
+              "_tpl": "564caa3d4bdc2d17108b458e",
+              "parentId": "64c669dbafe1938ee204ba6a",
+              "slotId": "mod_muzzle"
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba71",
+              "_tpl": "5d2c76ed48f03532f2136169",
+              "parentId": "64c669dbafe1938ee204ba6a",
+              "slotId": "mod_reciever"
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba72",
+              "_tpl": "609a63b6e2ff132951242d09",
+              "parentId": "64c669dbafe1938ee204ba71",
+              "slotId": "mod_scope"
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba73",
+              "_tpl": "5bed61680db834001d2c45ab",
+              "parentId": "64c669dbafe1938ee204ba6a",
+              "slotId": "mod_magazine"
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba74",
+              "_tpl": "5beec8b20db834001961942a",
+              "parentId": "64c669dbafe1938ee204ba6a",
+              "slotId": "mod_stock"
+            },
+            {
+              "_id": "64c669dbafe1938ee204ba75",
+              "_tpl": "5beec8c20db834001d2c465c",
+              "parentId": "64c669dbafe1938ee204ba74",
+              "slotId": "mod_stock"
+            }
+          ],
+          "loyaltyLevel": 1,
+          "target": "64c669dbafe1938ee204ba6a",
+          "traderId": "5a7c2eca46aef81a7ca2145d",
+          "type": "AssortmentUnlock"
+        }
+      ]
+    },
+    "secretQuest": false,
+    "side": "Pmc",
+    "startedMessageText": "64b907a85e9b86ab7a08cf0d startedMessageText",
+    "successMessageText": "64b907a85e9b86ab7a08cf0d successMessageText",
+    "templateId": "64b907a85e9b86ab7a08cf0d",
+    "traderId": "5a7c2eca46aef81a7ca2145d",
+    "type": "Completion"
+  },
+  "64b907ad60d47bcb98044d10": {
+    "QuestName": "TerraGroup Trial Part 7-Event",
+    "_id": "64b907ad60d47bcb98044d10",
+    "acceptPlayerMessage": "64b907ad60d47bcb98044d10 acceptPlayerMessage",
+    "canShowNotificationsInGame": true,
+    "changeQuestMessageText": "64b907ad60d47bcb98044d10 changeQuestMessageText",
+    "completePlayerMessage": "64b907ad60d47bcb98044d10 completePlayerMessage",
+    "conditions": {
+      "AvailableForFinish": [
+        {
+          "_parent": "Quest",
+          "_props": {
+            "availableAfter": 0,
+            "dispersion": 0,
+            "dynamicLocale": false,
+            "id": "64b9eb1ea6e4a9dd4507529b",
+            "index": 0,
+            "parentId": "",
+            "status": [
+              2
+            ],
+            "target": "64b907b205b23872610c0794",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        }
+      ],
+      "AvailableForStart": [
+        {
+          "_parent": "Quest",
+          "_props": {
+            "availableAfter": 0,
+            "dispersion": 0,
+            "dynamicLocale": false,
+            "id": "64bd43bde2ca8c5236002d9b",
+            "index": 0,
+            "parentId": "",
+            "status": [
+              4
+            ],
+            "target": "64b907a85e9b86ab7a08cf0d",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        }
+      ],
+      "Fail": []
+    },
+    "description": "64b907ad60d47bcb98044d10 description",
+    "failMessageText": "64b907ad60d47bcb98044d10 failMessageText",
+    "image": "/files/quest/icon/64c3cd095b03dccf8800271f.jpg",
+    "instantComplete": false,
+    "isKey": false,
+    "location": "any",
+    "name": "64b907ad60d47bcb98044d10 name",
+    "note": "64b907ad60d47bcb98044d10 note",
+    "questStatus": {},
+    "restartable": false,
+    "rewards": {
+      "Fail": [],
+      "Started": [],
+      "Success": [
+        {
+          "id": "64bd43fe4c2e9f141400bef4",
+          "index": 0,
+          "type": "Experience",
+          "value": 5000
+        },
+        {
+          "id": "64bd440a6de7c555ad051727",
+          "index": 1,
+          "target": "54cb57776803fa99248b456e",
+          "type": "TraderStanding",
+          "value": "0.01"
+        }
+      ]
+    },
+    "secretQuest": false,
+    "side": "Pmc",
+    "startedMessageText": "64b907ad60d47bcb98044d10 startedMessageText",
+    "successMessageText": "64b907ad60d47bcb98044d10 successMessageText",
+    "templateId": "64b907ad60d47bcb98044d10",
+    "traderId": "54cb57776803fa99248b456e",
+    "type": "Completion"
+  },
+  "64b907b205b23872610c0794": {
+    "QuestName": "TerraGroup Trial Part 8-Event",
+    "_id": "64b907b205b23872610c0794",
+    "acceptPlayerMessage": "64b907b205b23872610c0794 acceptPlayerMessage",
+    "canShowNotificationsInGame": true,
+    "changeQuestMessageText": "64b907b205b23872610c0794 changeQuestMessageText",
+    "completePlayerMessage": "64b907b205b23872610c0794 completePlayerMessage",
+    "conditions": {
+      "AvailableForFinish": [
+        {
+          "_parent": "CounterCreator",
+          "_props": {
+            "counter": {
+              "conditions": [
+                {
+                  "_parent": "Location",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "id": "64b9ec30f43eebce7c01ecaf",
+                    "target": [
+                      "TarkovStreets"
+                    ]
+                  }
+                },
+                {
+                  "_parent": "Kills",
+                  "_props": {
+                    "id": "64b9eccf9bd0fad76c074402",
+                    "savageRole": [
+                      "assault",
+                      "marksman",
+                      "savage"
+                    ],
+                    "target": "Savage",
+                    "weapon": [
+                      "5ac66cb05acfc40198510a10",
+                      "587e02ff24597743df3deaeb",
+                      "5c501a4d2e221602b412b540",
+                      "57c44b372459772d2b39b8ce",
+                      "574d967124597745970e7c94",
+                      "5cadfbf7ae92152ac412eeef",
+                      "5ac66d015acfc400180ae6e4",
+                      "5ac66d2e5acfc43b321d4b53",
+                      "5ac66d725acfc43b321d4b60",
+                      "5ac66d9b5acfc4001633997a",
+                      "5bf3e03b0db834001d2c4a9c",
+                      "5ac4cd105acfc40016339859",
+                      "5644bd2b4bdc2d3b4c8b4572",
+                      "59d6088586f774275f37482f",
+                      "5a0ec13bfcdbcb00165aa685",
+                      "5abcbc27d8ce8700182eceeb",
+                      "59ff346386f77477562ff5e2",
+                      "5bf3e0490db83400196199af",
+                      "5ab8e9fcd8ce870019439434",
+                      "57dc2fa62459775949412633",
+                      "5839a40f24597726f856b511",
+                      "583990e32459771419544dd2",
+                      "59e6687d86f77411d949b251",
+                      "59e6152586f77473dc057aa1",
+                      "628b5638ad252a16da6dd245",
+                      "628b9c37a733087d0d7fe84b",
+                      "620109578d82e67e7911abf2",
+                      "5cdeb229d7f00c000e7ce174",
+                      "5beed0f50db834001c062b12",
+                      "5d52cc5ba4b9367408500062",
+                      "5c46fbd72e2216398b5a8c9c",
+                      "57838ad32459774a17445cd2",
+                      "602a9740da11d6478d5a06dc",
+                      "576a581d2459771e7b1bc4f1",
+                      "5448bd6b4bdc2dfc2f8b4569",
+                      "579204f224597773d619e051",
+                      "5a17f98cfcdbcb0980087290",
+                      "56e0598dd2720bb5668b45a6",
+                      "59f98b4986f7746f546d2cef",
+                      "5abccb7dd8ce87001773e277",
+                      "571a12c42459771f627b58a0",
+                      "5b3b713c5acfc4330140bd8d",
+                      "60db29ce99594040e04c4a27",
+                      "633ec7c2a6918cb895019c6c",
+                      "61f7c9e189e6fb1a5e3ea78d",
+                      "576165642459773c7a400233",
+                      "54491c4f4bdc2db1078b4568",
+                      "56dee2bdd2720bc8328b4567",
+                      "5580223e4bdc2d1c128b457f",
+                      "606dae0ab0e443224b421bb7",
+                      "5e848cc2988a8701445df1e8",
+                      "5a38e6bac4a2826c6e06d79b",
+                      "59984ab886f7743e98271174",
+                      "59f9cabd86f7743a10721f46",
+                      "62e14904c2699c0ec93adc47",
+                      "5ea03f7400685063ec28bfa8",
+                      "57f3c6bd24597738e730fa2f",
+                      "57d14d2524597714373db789",
+                      "57f4c844245977379d5c14d1",
+                      "5bfd297f0db834001a669119",
+                      "5ae08f0a5acfc408fb1398a1",
+                      "55801eed4bdc2d89578b4588",
+                      "588892092459774ac91d4b11",
+                      "5de652c31b7e3716273428be",
+                      "5df24cf80dee1b22f862e9bc",
+                      "60339954d62c9b14ed777c06",
+                      "5bead2e00db834001c062938"
+                    ]
+                  }
+                },
+                {
+                  "_parent": "Equipment",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "equipmentInclusive": [
+                      [
+                        "5ab8e79e86f7742d8b372e78"
+                      ],
+                      [
+                        "545cdb794bdc2d3a198b456a"
+                      ],
+                      [
+                        "5c0e53c886f7747fa54205c7"
+                      ],
+                      [
+                        "5c0e51be86f774598e797894"
+                      ],
+                      [
+                        "5df8a2ca86f7740bfe6df777"
+                      ],
+                      [
+                        "5c0e5bab86f77461f55ed1f3"
+                      ],
+                      [
+                        "5c0e57ba86f7747fa141986d"
+                      ],
+                      [
+                        "5e9dacf986f774054d6b89f4"
+                      ],
+                      [
+                        "5b44d22286f774172b0c9de8"
+                      ],
+                      [
+                        "5f5f41476bdad616ad46d631"
+                      ],
+                      [
+                        "5ca2151486f774244a3b8d30"
+                      ],
+                      [
+                        "5ca21c6986f77479963115a7"
+                      ],
+                      [
+                        "5c0e5edb86f77461f55ed1f7"
+                      ],
+                      [
+                        "5c0e625a86f7742d77340f62"
+                      ],
+                      [
+                        "59e7635f86f7742cbf2c1095"
+                      ],
+                      [
+                        "5d5d646386f7742797261fd9"
+                      ],
+                      [
+                        "5c0e446786f7742013381639"
+                      ],
+                      [
+                        "5c0e3eb886f7742015526062"
+                      ]
+                    ],
+                    "id": "64bfba47014d9a495e09bf16"
+                  }
+                },
+                {
+                  "_parent": "Equipment",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "equipmentInclusive": [
+                      [
+                        "59e770f986f7742cbe3164ef"
+                      ],
+                      [
+                        "5645bc214bdc2d363b8b4571"
+                      ],
+                      [
+                        "5aa7cfc0e5b5b00015693143"
+                      ],
+                      [
+                        "5aa7e276e5b5b000171d0647"
+                      ],
+                      [
+                        "5df8a58286f77412631087ed"
+                      ],
+                      [
+                        "59e7711e86f7746cae05fbe1"
+                      ],
+                      [
+                        "5a7c4850e899ef00150be885"
+                      ],
+                      [
+                        "5aa7d193e5b5b000171d063f"
+                      ],
+                      [
+                        "5aa7e454e5b5b0214e506fa2"
+                      ],
+                      [
+                        "5aa7e4a4e5b5b000137b76f2"
+                      ],
+                      [
+                        "5b43271c5acfc432ff4dce65"
+                      ],
+                      [
+                        "5f60e6403b85f6263c14558c"
+                      ],
+                      [
+                        "5f60e7788adaa7100c3adb49"
+                      ],
+                      [
+                        "5f60e784f2bcbb675b00dac7"
+                      ],
+                      [
+                        "60361a7497633951dc245eb4"
+                      ],
+                      [
+                        "5b432d215acfc4771e1c6624"
+                      ],
+                      [
+                        "5d6d3716a4b9361bc8618872"
+                      ],
+                      [
+                        "5d6d3716a4b9361bc8618872"
+                      ],
+                      [
+                        "5c091a4e0db834001d5addc8"
+                      ],
+                      [
+                        "5c0d2727d174af02a012cf58"
+                      ],
+                      [
+                        "5f60c74e3b85f6263c145586"
+                      ],
+                      [
+                        "5c06c6a80db834001b735491"
+                      ],
+                      [
+                        "5ca20ee186f774799474abc2"
+                      ],
+                      [
+                        "59e7708286f7742cbd762753"
+                      ]
+                    ],
+                    "id": "64bfc2dcf3a668f08805d07c"
+                  }
+                }
+              ],
+              "id": "64b9ec238d327e5bf9086dbe"
+            },
+            "doNotResetIfCounterCompleted": false,
+            "dynamicLocale": false,
+            "id": "64b9ec238d327e5bf9086dbd",
+            "index": 0,
+            "oneSessionOnly": false,
+            "parentId": "",
+            "type": "Elimination",
+            "value": "10",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        },
+        {
+          "_parent": "CounterCreator",
+          "_props": {
+            "counter": {
+              "conditions": [
+                {
+                  "_parent": "Location",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "id": "64ba8e4a8d327e5bf9086dea",
+                    "target": [
+                      "Interchange"
+                    ]
+                  }
+                },
+                {
+                  "_parent": "Kills",
+                  "_props": {
+                    "id": "64ba8f0e611a0972880b2762",
+                    "savageRole": [
+                      "assault",
+                      "marksman",
+                      "savage"
+                    ],
+                    "target": "Savage",
+                    "weapon": [
+                      "587e02ff24597743df3deaeb",
+                      "5c501a4d2e221602b412b540",
+                      "57c44b372459772d2b39b8ce",
+                      "574d967124597745970e7c94",
+                      "5cadfbf7ae92152ac412eeef",
+                      "5ac66cb05acfc40198510a10",
+                      "5ac66d015acfc400180ae6e4",
+                      "5ac66d2e5acfc43b321d4b53",
+                      "5ac66d725acfc43b321d4b60",
+                      "5bf3e03b0db834001d2c4a9c",
+                      "5ac66d9b5acfc4001633997a",
+                      "5ac4cd105acfc40016339859",
+                      "59d6088586f774275f37482f",
+                      "5644bd2b4bdc2d3b4c8b4572",
+                      "5a0ec13bfcdbcb00165aa685",
+                      "59ff346386f77477562ff5e2",
+                      "5abcbc27d8ce8700182eceeb",
+                      "5bf3e0490db83400196199af",
+                      "5ab8e9fcd8ce870019439434",
+                      "57dc2fa62459775949412633",
+                      "5839a40f24597726f856b511",
+                      "583990e32459771419544dd2",
+                      "59e6687d86f77411d949b251",
+                      "59e6152586f77473dc057aa1",
+                      "628b5638ad252a16da6dd245",
+                      "628b9c37a733087d0d7fe84b",
+                      "620109578d82e67e7911abf2",
+                      "5cdeb229d7f00c000e7ce174",
+                      "5beed0f50db834001c062b12",
+                      "5d52cc5ba4b9367408500062",
+                      "5c46fbd72e2216398b5a8c9c",
+                      "57838ad32459774a17445cd2",
+                      "602a9740da11d6478d5a06dc",
+                      "576a581d2459771e7b1bc4f1",
+                      "5448bd6b4bdc2dfc2f8b4569",
+                      "579204f224597773d619e051",
+                      "5a17f98cfcdbcb0980087290",
+                      "56d59856d2720bd8418b456a",
+                      "56e0598dd2720bb5668b45a6",
+                      "59f98b4986f7746f546d2cef",
+                      "5abccb7dd8ce87001773e277",
+                      "571a12c42459771f627b58a0",
+                      "5b3b713c5acfc4330140bd8d",
+                      "60db29ce99594040e04c4a27",
+                      "633ec7c2a6918cb895019c6c",
+                      "61f7c9e189e6fb1a5e3ea78d",
+                      "576165642459773c7a400233",
+                      "54491c4f4bdc2db1078b4568",
+                      "5580223e4bdc2d1c128b457f",
+                      "56dee2bdd2720bc8328b4567",
+                      "606dae0ab0e443224b421bb7",
+                      "5e848cc2988a8701445df1e8",
+                      "5a38e6bac4a2826c6e06d79b",
+                      "59984ab886f7743e98271174",
+                      "59f9cabd86f7743a10721f46",
+                      "62e14904c2699c0ec93adc47",
+                      "5ea03f7400685063ec28bfa8",
+                      "57f3c6bd24597738e730fa2f",
+                      "57d14d2524597714373db789",
+                      "57f4c844245977379d5c14d1",
+                      "5bfd297f0db834001a669119",
+                      "5ae08f0a5acfc408fb1398a1",
+                      "55801eed4bdc2d89578b4588",
+                      "588892092459774ac91d4b11",
+                      "5df24cf80dee1b22f862e9bc",
+                      "5de652c31b7e3716273428be",
+                      "60339954d62c9b14ed777c06",
+                      "5bead2e00db834001c062938"
+                    ]
+                  }
+                },
+                {
+                  "_parent": "Equipment",
+                  "_props": {
+                    "equipmentInclusive": [
+                      [
+                        "5ab8e79e86f7742d8b372e78"
+                      ],
+                      [
+                        "545cdb794bdc2d3a198b456a"
+                      ],
+                      [
+                        "5c0e53c886f7747fa54205c7"
+                      ],
+                      [
+                        "5c0e51be86f774598e797894"
+                      ],
+                      [
+                        "5df8a2ca86f7740bfe6df777"
+                      ],
+                      [
+                        "5c0e5bab86f77461f55ed1f3"
+                      ],
+                      [
+                        "5c0e57ba86f7747fa141986d"
+                      ],
+                      [
+                        "5e9dacf986f774054d6b89f4"
+                      ],
+                      [
+                        "5b44d22286f774172b0c9de8"
+                      ],
+                      [
+                        "5f5f41476bdad616ad46d631"
+                      ],
+                      [
+                        "5ca2151486f774244a3b8d30"
+                      ],
+                      [
+                        "5ca21c6986f77479963115a7"
+                      ],
+                      [
+                        "5c0e5edb86f77461f55ed1f7"
+                      ],
+                      [
+                        "5c0e625a86f7742d77340f62"
+                      ],
+                      [
+                        "59e7635f86f7742cbf2c1095"
+                      ],
+                      [
+                        "5d5d646386f7742797261fd9"
+                      ],
+                      [
+                        "5c0e446786f7742013381639"
+                      ],
+                      [
+                        "5c0e3eb886f7742015526062"
+                      ]
+                    ],
+                    "id": "64bfb2004c2e9f141400cbae"
+                  }
+                },
+                {
+                  "_parent": "Equipment",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "equipmentInclusive": [
+                      [
+                        "59e770f986f7742cbe3164ef"
+                      ],
+                      [
+                        "60361a7497633951dc245eb4"
+                      ],
+                      [
+                        "5645bc214bdc2d363b8b4571"
+                      ],
+                      [
+                        "5aa7cfc0e5b5b00015693143"
+                      ],
+                      [
+                        "5a7c4850e899ef00150be885"
+                      ],
+                      [
+                        "5aa7e276e5b5b000171d0647"
+                      ],
+                      [
+                        "5df8a58286f77412631087ed"
+                      ],
+                      [
+                        "59e7711e86f7746cae05fbe1"
+                      ],
+                      [
+                        "5aa7d193e5b5b000171d063f"
+                      ],
+                      [
+                        "5aa7e454e5b5b0214e506fa2"
+                      ],
+                      [
+                        "5aa7e4a4e5b5b000137b76f2"
+                      ],
+                      [
+                        "5b43271c5acfc432ff4dce65"
+                      ],
+                      [
+                        "5f60e6403b85f6263c14558c"
+                      ],
+                      [
+                        "5f60e7788adaa7100c3adb49"
+                      ],
+                      [
+                        "5f60e784f2bcbb675b00dac7"
+                      ],
+                      [
+                        "5b432d215acfc4771e1c6624"
+                      ],
+                      [
+                        "5d6d3716a4b9361bc8618872"
+                      ],
+                      [
+                        "5ca20ee186f774799474abc2"
+                      ],
+                      [
+                        "5c091a4e0db834001d5addc8"
+                      ],
+                      [
+                        "5c0d2727d174af02a012cf58"
+                      ],
+                      [
+                        "5f60c74e3b85f6263c145586"
+                      ],
+                      [
+                        "5c06c6a80db834001b735491"
+                      ],
+                      [
+                        "59e7708286f7742cbd762753"
+                      ]
+                    ],
+                    "id": "64bfc4380297e41dd305001d"
+                  }
+                }
+              ],
+              "id": "64ba8d2a05b23872610c1240"
+            },
+            "doNotResetIfCounterCompleted": false,
+            "dynamicLocale": false,
+            "id": "64ba8d2a05b23872610c123f",
+            "index": 1,
+            "oneSessionOnly": false,
+            "parentId": "",
+            "type": "Elimination",
+            "value": "10",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        },
+        {
+          "_parent": "CounterCreator",
+          "_props": {
+            "counter": {
+              "conditions": [
+                {
+                  "_parent": "Location",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "id": "64ba8fac05b23872610c125f",
+                    "target": [
+                      "bigmap"
+                    ]
+                  }
+                },
+                {
+                  "_parent": "Kills",
+                  "_props": {
+                    "id": "64ba907d8fa645c6e4089783",
+                    "savageRole": [
+                      "assault",
+                      "marksman",
+                      "savage"
+                    ],
+                    "target": "Savage",
+                    "weapon": [
+                      "587e02ff24597743df3deaeb",
+                      "5c501a4d2e221602b412b540",
+                      "57c44b372459772d2b39b8ce",
+                      "574d967124597745970e7c94",
+                      "5cadfbf7ae92152ac412eeef",
+                      "5ac66cb05acfc40198510a10",
+                      "5ac66d015acfc400180ae6e4",
+                      "5ac66d2e5acfc43b321d4b53",
+                      "5ac66d725acfc43b321d4b60",
+                      "5ac66d9b5acfc4001633997a",
+                      "5bf3e03b0db834001d2c4a9c",
+                      "5ac4cd105acfc40016339859",
+                      "5644bd2b4bdc2d3b4c8b4572",
+                      "59d6088586f774275f37482f",
+                      "5a0ec13bfcdbcb00165aa685",
+                      "59ff346386f77477562ff5e2",
+                      "5abcbc27d8ce8700182eceeb",
+                      "5bf3e0490db83400196199af",
+                      "5ab8e9fcd8ce870019439434",
+                      "57dc2fa62459775949412633",
+                      "5839a40f24597726f856b511",
+                      "583990e32459771419544dd2",
+                      "59e6687d86f77411d949b251",
+                      "59e6152586f77473dc057aa1",
+                      "628b5638ad252a16da6dd245",
+                      "628b9c37a733087d0d7fe84b",
+                      "620109578d82e67e7911abf2",
+                      "5cdeb229d7f00c000e7ce174",
+                      "5beed0f50db834001c062b12",
+                      "5d52cc5ba4b9367408500062",
+                      "5c46fbd72e2216398b5a8c9c",
+                      "57838ad32459774a17445cd2",
+                      "602a9740da11d6478d5a06dc",
+                      "576a581d2459771e7b1bc4f1",
+                      "5448bd6b4bdc2dfc2f8b4569",
+                      "579204f224597773d619e051",
+                      "5a17f98cfcdbcb0980087290",
+                      "59f98b4986f7746f546d2cef",
+                      "56e0598dd2720bb5668b45a6",
+                      "5abccb7dd8ce87001773e277",
+                      "571a12c42459771f627b58a0",
+                      "5b3b713c5acfc4330140bd8d",
+                      "60db29ce99594040e04c4a27",
+                      "633ec7c2a6918cb895019c6c",
+                      "61f7c9e189e6fb1a5e3ea78d",
+                      "576165642459773c7a400233",
+                      "54491c4f4bdc2db1078b4568",
+                      "56dee2bdd2720bc8328b4567",
+                      "5580223e4bdc2d1c128b457f",
+                      "606dae0ab0e443224b421bb7",
+                      "5e848cc2988a8701445df1e8",
+                      "5a38e6bac4a2826c6e06d79b",
+                      "59984ab886f7743e98271174",
+                      "59f9cabd86f7743a10721f46",
+                      "60339954d62c9b14ed777c06",
+                      "62e14904c2699c0ec93adc47",
+                      "5ea03f7400685063ec28bfa8",
+                      "57f3c6bd24597738e730fa2f",
+                      "57d14d2524597714373db789",
+                      "57f4c844245977379d5c14d1",
+                      "5bfd297f0db834001a669119",
+                      "5ae08f0a5acfc408fb1398a1",
+                      "55801eed4bdc2d89578b4588",
+                      "588892092459774ac91d4b11",
+                      "5de652c31b7e3716273428be",
+                      "5df24cf80dee1b22f862e9bc",
+                      "5bead2e00db834001c062938"
+                    ]
+                  }
+                },
+                {
+                  "_parent": "Equipment",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "equipmentInclusive": [
+                      [
+                        "5ab8e79e86f7742d8b372e78"
+                      ],
+                      [
+                        "545cdb794bdc2d3a198b456a"
+                      ],
+                      [
+                        "5c0e53c886f7747fa54205c7"
+                      ],
+                      [
+                        "5c0e51be86f774598e797894"
+                      ],
+                      [
+                        "5df8a2ca86f7740bfe6df777"
+                      ],
+                      [
+                        "5c0e5bab86f77461f55ed1f3"
+                      ],
+                      [
+                        "5c0e57ba86f7747fa141986d"
+                      ],
+                      [
+                        "5e9dacf986f774054d6b89f4"
+                      ],
+                      [
+                        "5b44d22286f774172b0c9de8"
+                      ],
+                      [
+                        "5f5f41476bdad616ad46d631"
+                      ],
+                      [
+                        "5ca2151486f774244a3b8d30"
+                      ],
+                      [
+                        "5ca21c6986f77479963115a7"
+                      ],
+                      [
+                        "5c0e5edb86f77461f55ed1f7"
+                      ],
+                      [
+                        "5c0e625a86f7742d77340f62"
+                      ],
+                      [
+                        "59e7635f86f7742cbf2c1095"
+                      ],
+                      [
+                        "5d5d646386f7742797261fd9"
+                      ],
+                      [
+                        "5c0e446786f7742013381639"
+                      ],
+                      [
+                        "5c0e3eb886f7742015526062"
+                      ]
+                    ],
+                    "id": "64bfbb4c8f3a947a990aad37"
+                  }
+                },
+                {
+                  "_parent": "Equipment",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "equipmentInclusive": [
+                      [
+                        "5b43271c5acfc432ff4dce65"
+                      ],
+                      [
+                        "5f60e7788adaa7100c3adb49"
+                      ],
+                      [
+                        "5f60e784f2bcbb675b00dac7"
+                      ],
+                      [
+                        "5f60e6403b85f6263c14558c"
+                      ],
+                      [
+                        "5aa7e276e5b5b000171d0647"
+                      ],
+                      [
+                        "5ca20ee186f774799474abc2"
+                      ],
+                      [
+                        "5c091a4e0db834001d5addc8"
+                      ],
+                      [
+                        "5f60c74e3b85f6263c145586"
+                      ],
+                      [
+                        "59e770f986f7742cbe3164ef"
+                      ],
+                      [
+                        "60361a7497633951dc245eb4"
+                      ],
+                      [
+                        "5aa7cfc0e5b5b00015693143"
+                      ],
+                      [
+                        "5a7c4850e899ef00150be885"
+                      ],
+                      [
+                        "59e7708286f7742cbd762753"
+                      ],
+                      [
+                        "5d6d3716a4b9361bc8618872"
+                      ],
+                      [
+                        "5aa7e454e5b5b0214e506fa2"
+                      ],
+                      [
+                        "5aa7e4a4e5b5b000137b76f2"
+                      ],
+                      [
+                        "5b432d215acfc4771e1c6624"
+                      ],
+                      [
+                        "59e7711e86f7746cae05fbe1"
+                      ],
+                      [
+                        "5c0d2727d174af02a012cf58"
+                      ],
+                      [
+                        "5aa7d193e5b5b000171d063f"
+                      ],
+                      [
+                        "5c06c6a80db834001b735491"
+                      ],
+                      [
+                        "5645bc214bdc2d363b8b4571"
+                      ],
+                      [
+                        "5df8a58286f77412631087ed"
+                      ]
+                    ],
+                    "id": "64bfc50422b6fd6e670ad8bf"
+                  }
+                }
+              ],
+              "id": "64ba8d499ff61a79b10fd004"
+            },
+            "doNotResetIfCounterCompleted": false,
+            "dynamicLocale": false,
+            "id": "64ba8d499ff61a79b10fd003",
+            "index": 2,
+            "oneSessionOnly": false,
+            "parentId": "",
+            "type": "Elimination",
+            "value": "10",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        },
+        {
+          "_parent": "CounterCreator",
+          "_props": {
+            "counter": {
+              "conditions": [
+                {
+                  "_parent": "Location",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "id": "64ba8fb3a6e4a9dd45075a67",
+                    "target": [
+                      "factory4_day",
+                      "factory4_night"
+                    ]
+                  }
+                },
+                {
+                  "_parent": "Kills",
+                  "_props": {
+                    "id": "64ba9113a6e4a9dd45075a6f",
+                    "savageRole": [
+                      "assault",
+                      "marksman",
+                      "savage"
+                    ],
+                    "target": "Savage",
+                    "weapon": [
+                      "587e02ff24597743df3deaeb",
+                      "5c501a4d2e221602b412b540",
+                      "57c44b372459772d2b39b8ce",
+                      "574d967124597745970e7c94",
+                      "5cadfbf7ae92152ac412eeef",
+                      "5ac66cb05acfc40198510a10",
+                      "5ac66d015acfc400180ae6e4",
+                      "5ac66d2e5acfc43b321d4b53",
+                      "5ac66d725acfc43b321d4b60",
+                      "5ac66d9b5acfc4001633997a",
+                      "5bf3e03b0db834001d2c4a9c",
+                      "5ac4cd105acfc40016339859",
+                      "5644bd2b4bdc2d3b4c8b4572",
+                      "59d6088586f774275f37482f",
+                      "5a0ec13bfcdbcb00165aa685",
+                      "59ff346386f77477562ff5e2",
+                      "5abcbc27d8ce8700182eceeb",
+                      "5bf3e0490db83400196199af",
+                      "5ab8e9fcd8ce870019439434",
+                      "57dc2fa62459775949412633",
+                      "5839a40f24597726f856b511",
+                      "583990e32459771419544dd2",
+                      "59e6687d86f77411d949b251",
+                      "59e6152586f77473dc057aa1",
+                      "628b5638ad252a16da6dd245",
+                      "628b9c37a733087d0d7fe84b",
+                      "620109578d82e67e7911abf2",
+                      "5cdeb229d7f00c000e7ce174",
+                      "5beed0f50db834001c062b12",
+                      "5d52cc5ba4b9367408500062",
+                      "6176aca650224f204c1da3fb",
+                      "5c46fbd72e2216398b5a8c9c",
+                      "57838ad32459774a17445cd2",
+                      "602a9740da11d6478d5a06dc",
+                      "576a581d2459771e7b1bc4f1",
+                      "5448bd6b4bdc2dfc2f8b4569",
+                      "579204f224597773d619e051",
+                      "5a17f98cfcdbcb0980087290",
+                      "56e0598dd2720bb5668b45a6",
+                      "59f98b4986f7746f546d2cef",
+                      "5abccb7dd8ce87001773e277",
+                      "571a12c42459771f627b58a0",
+                      "5b3b713c5acfc4330140bd8d",
+                      "60db29ce99594040e04c4a27",
+                      "633ec7c2a6918cb895019c6c",
+                      "61f7c9e189e6fb1a5e3ea78d",
+                      "576165642459773c7a400233",
+                      "54491c4f4bdc2db1078b4568",
+                      "56dee2bdd2720bc8328b4567",
+                      "5580223e4bdc2d1c128b457f",
+                      "606dae0ab0e443224b421bb7",
+                      "5e848cc2988a8701445df1e8",
+                      "5a38e6bac4a2826c6e06d79b",
+                      "59984ab886f7743e98271174",
+                      "59f9cabd86f7743a10721f46",
+                      "60339954d62c9b14ed777c06",
+                      "62e14904c2699c0ec93adc47",
+                      "5ea03f7400685063ec28bfa8",
+                      "57f3c6bd24597738e730fa2f",
+                      "57d14d2524597714373db789",
+                      "57f4c844245977379d5c14d1",
+                      "5bfd297f0db834001a669119",
+                      "5ae08f0a5acfc408fb1398a1",
+                      "55801eed4bdc2d89578b4588",
+                      "588892092459774ac91d4b11",
+                      "5df24cf80dee1b22f862e9bc",
+                      "5de652c31b7e3716273428be",
+                      "5bead2e00db834001c062938"
+                    ]
+                  }
+                },
+                {
+                  "_parent": "Equipment",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "equipmentInclusive": [
+                      [
+                        "5ab8e79e86f7742d8b372e78"
+                      ],
+                      [
+                        "545cdb794bdc2d3a198b456a"
+                      ],
+                      [
+                        "5c0e53c886f7747fa54205c7"
+                      ],
+                      [
+                        "5c0e51be86f774598e797894"
+                      ],
+                      [
+                        "5df8a2ca86f7740bfe6df777"
+                      ],
+                      [
+                        "5c0e5bab86f77461f55ed1f3"
+                      ],
+                      [
+                        "5c0e57ba86f7747fa141986d"
+                      ],
+                      [
+                        "5e9dacf986f774054d6b89f4"
+                      ],
+                      [
+                        "5b44d22286f774172b0c9de8"
+                      ],
+                      [
+                        "5f5f41476bdad616ad46d631"
+                      ],
+                      [
+                        "5ca2151486f774244a3b8d30"
+                      ],
+                      [
+                        "5ca21c6986f77479963115a7"
+                      ],
+                      [
+                        "5c0e5edb86f77461f55ed1f7"
+                      ],
+                      [
+                        "5c0e625a86f7742d77340f62"
+                      ],
+                      [
+                        "59e7635f86f7742cbf2c1095"
+                      ],
+                      [
+                        "5d5d646386f7742797261fd9"
+                      ],
+                      [
+                        "5c0e446786f7742013381639"
+                      ],
+                      [
+                        "5c0e3eb886f7742015526062"
+                      ]
+                    ],
+                    "id": "64bfbc6203044d532202498f"
+                  }
+                },
+                {
+                  "_parent": "Equipment",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "equipmentInclusive": [
+                      [
+                        "5b43271c5acfc432ff4dce65"
+                      ],
+                      [
+                        "5f60e7788adaa7100c3adb49"
+                      ],
+                      [
+                        "5f60e784f2bcbb675b00dac7"
+                      ],
+                      [
+                        "5f60e6403b85f6263c14558c"
+                      ],
+                      [
+                        "5aa7e276e5b5b000171d0647"
+                      ],
+                      [
+                        "5ca20ee186f774799474abc2"
+                      ],
+                      [
+                        "5c091a4e0db834001d5addc8"
+                      ],
+                      [
+                        "5f60c74e3b85f6263c145586"
+                      ],
+                      [
+                        "59e770f986f7742cbe3164ef"
+                      ],
+                      [
+                        "60361a7497633951dc245eb4"
+                      ],
+                      [
+                        "5aa7cfc0e5b5b00015693143"
+                      ],
+                      [
+                        "5a7c4850e899ef00150be885"
+                      ],
+                      [
+                        "59e7708286f7742cbd762753"
+                      ],
+                      [
+                        "5d6d3716a4b9361bc8618872"
+                      ],
+                      [
+                        "5aa7e454e5b5b0214e506fa2"
+                      ],
+                      [
+                        "5aa7e4a4e5b5b000137b76f2"
+                      ],
+                      [
+                        "5b432d215acfc4771e1c6624"
+                      ],
+                      [
+                        "59e7711e86f7746cae05fbe1"
+                      ],
+                      [
+                        "5c0d2727d174af02a012cf58"
+                      ],
+                      [
+                        "5aa7d193e5b5b000171d063f"
+                      ],
+                      [
+                        "5c06c6a80db834001b735491"
+                      ],
+                      [
+                        "5645bc214bdc2d363b8b4571"
+                      ],
+                      [
+                        "5df8a58286f77412631087ed"
+                      ]
+                    ],
+                    "id": "64bfc59cf2dec80e000e69ea"
+                  }
+                }
+              ],
+              "id": "64ba8d56f43eebce7c01ed51"
+            },
+            "doNotResetIfCounterCompleted": false,
+            "dynamicLocale": false,
+            "id": "64ba8d56f43eebce7c01ed50",
+            "index": 3,
+            "oneSessionOnly": false,
+            "parentId": "",
+            "type": "Elimination",
+            "value": "10",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        },
+        {
+          "_parent": "CounterCreator",
+          "_props": {
+            "counter": {
+              "conditions": [
+                {
+                  "_parent": "Location",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "id": "64ba8fbc9bd0fad76c074471",
+                    "target": [
+                      "Woods"
+                    ]
+                  }
+                },
+                {
+                  "_parent": "Kills",
+                  "_props": {
+                    "id": "64ba9162c7317d659200a1ad",
+                    "savageRole": [
+                      "assault",
+                      "marksman",
+                      "savage"
+                    ],
+                    "target": "Savage",
+                    "weapon": [
+                      "587e02ff24597743df3deaeb",
+                      "5c501a4d2e221602b412b540",
+                      "57c44b372459772d2b39b8ce",
+                      "574d967124597745970e7c94",
+                      "5cadfbf7ae92152ac412eeef",
+                      "5ac66cb05acfc40198510a10",
+                      "5ac66d015acfc400180ae6e4",
+                      "5ac66d2e5acfc43b321d4b53",
+                      "5ac66d725acfc43b321d4b60",
+                      "5ac66d9b5acfc4001633997a",
+                      "5bf3e03b0db834001d2c4a9c",
+                      "5ac4cd105acfc40016339859",
+                      "5644bd2b4bdc2d3b4c8b4572",
+                      "59d6088586f774275f37482f",
+                      "5a0ec13bfcdbcb00165aa685",
+                      "59ff346386f77477562ff5e2",
+                      "5abcbc27d8ce8700182eceeb",
+                      "5bf3e0490db83400196199af",
+                      "5ab8e9fcd8ce870019439434",
+                      "57dc2fa62459775949412633",
+                      "5839a40f24597726f856b511",
+                      "583990e32459771419544dd2",
+                      "59e6687d86f77411d949b251",
+                      "59e6152586f77473dc057aa1",
+                      "628b5638ad252a16da6dd245",
+                      "628b9c37a733087d0d7fe84b",
+                      "620109578d82e67e7911abf2",
+                      "5beed0f50db834001c062b12",
+                      "5cdeb229d7f00c000e7ce174",
+                      "5d52cc5ba4b9367408500062",
+                      "5c46fbd72e2216398b5a8c9c",
+                      "57838ad32459774a17445cd2",
+                      "602a9740da11d6478d5a06dc",
+                      "576a581d2459771e7b1bc4f1",
+                      "5448bd6b4bdc2dfc2f8b4569",
+                      "579204f224597773d619e051",
+                      "5a17f98cfcdbcb0980087290",
+                      "56e0598dd2720bb5668b45a6",
+                      "59f98b4986f7746f546d2cef",
+                      "5abccb7dd8ce87001773e277",
+                      "571a12c42459771f627b58a0",
+                      "5b3b713c5acfc4330140bd8d",
+                      "60db29ce99594040e04c4a27",
+                      "633ec7c2a6918cb895019c6c",
+                      "61f7c9e189e6fb1a5e3ea78d",
+                      "576165642459773c7a400233",
+                      "54491c4f4bdc2db1078b4568",
+                      "56dee2bdd2720bc8328b4567",
+                      "5580223e4bdc2d1c128b457f",
+                      "606dae0ab0e443224b421bb7",
+                      "5e848cc2988a8701445df1e8",
+                      "5a38e6bac4a2826c6e06d79b",
+                      "59f9cabd86f7743a10721f46",
+                      "60339954d62c9b14ed777c06",
+                      "62e14904c2699c0ec93adc47",
+                      "5ea03f7400685063ec28bfa8",
+                      "57f3c6bd24597738e730fa2f",
+                      "57d14d2524597714373db789",
+                      "57f4c844245977379d5c14d1",
+                      "5bfd297f0db834001a669119",
+                      "5ae08f0a5acfc408fb1398a1",
+                      "55801eed4bdc2d89578b4588",
+                      "588892092459774ac91d4b11",
+                      "5de652c31b7e3716273428be",
+                      "5df24cf80dee1b22f862e9bc",
+                      "5bead2e00db834001c062938"
+                    ]
+                  }
+                },
+                {
+                  "_parent": "Equipment",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "equipmentInclusive": [
+                      [
+                        "5ab8e79e86f7742d8b372e78"
+                      ],
+                      [
+                        "545cdb794bdc2d3a198b456a"
+                      ],
+                      [
+                        "5c0e53c886f7747fa54205c7"
+                      ],
+                      [
+                        "5c0e51be86f774598e797894"
+                      ],
+                      [
+                        "5df8a2ca86f7740bfe6df777"
+                      ],
+                      [
+                        "5c0e5bab86f77461f55ed1f3"
+                      ],
+                      [
+                        "5c0e57ba86f7747fa141986d"
+                      ],
+                      [
+                        "5e9dacf986f774054d6b89f4"
+                      ],
+                      [
+                        "5b44d22286f774172b0c9de8"
+                      ],
+                      [
+                        "5f5f41476bdad616ad46d631"
+                      ],
+                      [
+                        "5ca2151486f774244a3b8d30"
+                      ],
+                      [
+                        "5ca21c6986f77479963115a7"
+                      ],
+                      [
+                        "5c0e5edb86f77461f55ed1f7"
+                      ],
+                      [
+                        "5c0e625a86f7742d77340f62"
+                      ],
+                      [
+                        "59e7635f86f7742cbf2c1095"
+                      ],
+                      [
+                        "5d5d646386f7742797261fd9"
+                      ],
+                      [
+                        "5c0e446786f7742013381639"
+                      ],
+                      [
+                        "5c0e3eb886f7742015526062"
+                      ]
+                    ],
+                    "id": "64bfbe518f3a947a990aad38"
+                  }
+                },
+                {
+                  "_parent": "Equipment",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "equipmentInclusive": [
+                      [
+                        "5ca20ee186f774799474abc2"
+                      ],
+                      [
+                        "5c091a4e0db834001d5addc8"
+                      ],
+                      [
+                        "5f60c74e3b85f6263c145586"
+                      ],
+                      [
+                        "59e770f986f7742cbe3164ef"
+                      ],
+                      [
+                        "60361a7497633951dc245eb4"
+                      ],
+                      [
+                        "5aa7cfc0e5b5b00015693143"
+                      ],
+                      [
+                        "5a7c4850e899ef00150be885"
+                      ],
+                      [
+                        "59e7708286f7742cbd762753"
+                      ],
+                      [
+                        "5d6d3716a4b9361bc8618872"
+                      ],
+                      [
+                        "5aa7e454e5b5b0214e506fa2"
+                      ],
+                      [
+                        "5aa7e4a4e5b5b000137b76f2"
+                      ],
+                      [
+                        "5b432d215acfc4771e1c6624"
+                      ],
+                      [
+                        "59e7711e86f7746cae05fbe1"
+                      ],
+                      [
+                        "5c0d2727d174af02a012cf58"
+                      ],
+                      [
+                        "5aa7d193e5b5b000171d063f"
+                      ],
+                      [
+                        "5c06c6a80db834001b735491"
+                      ],
+                      [
+                        "5645bc214bdc2d363b8b4571"
+                      ],
+                      [
+                        "5df8a58286f77412631087ed"
+                      ]
+                    ],
+                    "id": "64bfc5f7769054ef950bddf9"
+                  }
+                }
+              ],
+              "id": "64ba8d5f95faaef5e900c9d3"
+            },
+            "doNotResetIfCounterCompleted": false,
+            "dynamicLocale": false,
+            "id": "64ba8d5f95faaef5e900c9d2",
+            "index": 4,
+            "oneSessionOnly": false,
+            "parentId": "",
+            "type": "Elimination",
+            "value": "10",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        },
+        {
+          "_parent": "CounterCreator",
+          "_props": {
+            "counter": {
+              "conditions": [
+                {
+                  "_parent": "Location",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "id": "64ba8fcadda5e5e7050bbedc",
+                    "target": [
+                      "RezervBase"
+                    ]
+                  }
+                },
+                {
+                  "_parent": "Kills",
+                  "_props": {
+                    "id": "64ba91b4838c6445b105cee4",
+                    "savageRole": [
+                      "assault",
+                      "marksman",
+                      "savage"
+                    ],
+                    "target": "Savage",
+                    "weapon": [
+                      "587e02ff24597743df3deaeb",
+                      "5c501a4d2e221602b412b540",
+                      "57c44b372459772d2b39b8ce",
+                      "574d967124597745970e7c94",
+                      "5cadfbf7ae92152ac412eeef",
+                      "5ac66cb05acfc40198510a10",
+                      "5ac66d2e5acfc43b321d4b53",
+                      "5ac66d015acfc400180ae6e4",
+                      "5ac66d725acfc43b321d4b60",
+                      "5ac66d9b5acfc4001633997a",
+                      "5bf3e03b0db834001d2c4a9c",
+                      "5ac4cd105acfc40016339859",
+                      "5644bd2b4bdc2d3b4c8b4572",
+                      "59d6088586f774275f37482f",
+                      "5a0ec13bfcdbcb00165aa685",
+                      "59ff346386f77477562ff5e2",
+                      "5abcbc27d8ce8700182eceeb",
+                      "5bf3e0490db83400196199af",
+                      "5ab8e9fcd8ce870019439434",
+                      "57dc2fa62459775949412633",
+                      "5839a40f24597726f856b511",
+                      "583990e32459771419544dd2",
+                      "59e6687d86f77411d949b251",
+                      "59e6152586f77473dc057aa1",
+                      "628b5638ad252a16da6dd245",
+                      "628b9c37a733087d0d7fe84b",
+                      "620109578d82e67e7911abf2",
+                      "5cdeb229d7f00c000e7ce174",
+                      "5beed0f50db834001c062b12",
+                      "5d52cc5ba4b9367408500062",
+                      "5c46fbd72e2216398b5a8c9c",
+                      "57838ad32459774a17445cd2",
+                      "602a9740da11d6478d5a06dc",
+                      "576a581d2459771e7b1bc4f1",
+                      "5448bd6b4bdc2dfc2f8b4569",
+                      "579204f224597773d619e051",
+                      "5a17f98cfcdbcb0980087290",
+                      "56e0598dd2720bb5668b45a6",
+                      "59f98b4986f7746f546d2cef",
+                      "5abccb7dd8ce87001773e277",
+                      "571a12c42459771f627b58a0",
+                      "5b3b713c5acfc4330140bd8d",
+                      "60db29ce99594040e04c4a27",
+                      "633ec7c2a6918cb895019c6c",
+                      "61f7c9e189e6fb1a5e3ea78d",
+                      "576165642459773c7a400233",
+                      "54491c4f4bdc2db1078b4568",
+                      "56dee2bdd2720bc8328b4567",
+                      "5580223e4bdc2d1c128b457f",
+                      "606dae0ab0e443224b421bb7",
+                      "5e848cc2988a8701445df1e8",
+                      "5a38e6bac4a2826c6e06d79b",
+                      "59984ab886f7743e98271174",
+                      "59f9cabd86f7743a10721f46",
+                      "60339954d62c9b14ed777c06",
+                      "62e14904c2699c0ec93adc47",
+                      "5ea03f7400685063ec28bfa8",
+                      "57f3c6bd24597738e730fa2f",
+                      "57d14d2524597714373db789",
+                      "57f4c844245977379d5c14d1",
+                      "5bfd297f0db834001a669119",
+                      "5ae08f0a5acfc408fb1398a1",
+                      "55801eed4bdc2d89578b4588",
+                      "588892092459774ac91d4b11",
+                      "5de652c31b7e3716273428be",
+                      "5df24cf80dee1b22f862e9bc",
+                      "5bead2e00db834001c062938"
+                    ]
+                  }
+                },
+                {
+                  "_parent": "Equipment",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "equipmentInclusive": [
+                      [
+                        "5ab8e79e86f7742d8b372e78"
+                      ],
+                      [
+                        "545cdb794bdc2d3a198b456a"
+                      ],
+                      [
+                        "5c0e53c886f7747fa54205c7"
+                      ],
+                      [
+                        "5c0e53c886f7747fa54205c7"
+                      ],
+                      [
+                        "5c0e51be86f774598e797894"
+                      ],
+                      [
+                        "5df8a2ca86f7740bfe6df777"
+                      ],
+                      [
+                        "5c0e5bab86f77461f55ed1f3"
+                      ],
+                      [
+                        "5c0e57ba86f7747fa141986d"
+                      ],
+                      [
+                        "5e9dacf986f774054d6b89f4"
+                      ],
+                      [
+                        "5b44d22286f774172b0c9de8"
+                      ],
+                      [
+                        "5f5f41476bdad616ad46d631"
+                      ],
+                      [
+                        "5ca2151486f774244a3b8d30"
+                      ],
+                      [
+                        "5ca21c6986f77479963115a7"
+                      ],
+                      [
+                        "5c0e5edb86f77461f55ed1f7"
+                      ],
+                      [
+                        "5c0e625a86f7742d77340f62"
+                      ],
+                      [
+                        "59e7635f86f7742cbf2c1095"
+                      ],
+                      [
+                        "5d5d646386f7742797261fd9"
+                      ],
+                      [
+                        "5c0e446786f7742013381639"
+                      ],
+                      [
+                        "5c0e3eb886f7742015526062"
+                      ]
+                    ],
+                    "id": "64bfbf4f39a321a6480fcf68"
+                  }
+                },
+                {
+                  "_parent": "Equipment",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "equipmentInclusive": [
+                      [
+                        "5b43271c5acfc432ff4dce65"
+                      ],
+                      [
+                        "5f60e7788adaa7100c3adb49"
+                      ],
+                      [
+                        "5f60e784f2bcbb675b00dac7"
+                      ],
+                      [
+                        "5f60e6403b85f6263c14558c"
+                      ],
+                      [
+                        "5aa7e276e5b5b000171d0647"
+                      ],
+                      [
+                        "5ca20ee186f774799474abc2"
+                      ],
+                      [
+                        "5c091a4e0db834001d5addc8"
+                      ],
+                      [
+                        "5f60c74e3b85f6263c145586"
+                      ],
+                      [
+                        "59e770f986f7742cbe3164ef"
+                      ],
+                      [
+                        "60361a7497633951dc245eb4"
+                      ],
+                      [
+                        "5aa7cfc0e5b5b00015693143"
+                      ],
+                      [
+                        "5a7c4850e899ef00150be885"
+                      ],
+                      [
+                        "59e7708286f7742cbd762753"
+                      ],
+                      [
+                        "5d6d3716a4b9361bc8618872"
+                      ],
+                      [
+                        "5aa7e454e5b5b0214e506fa2"
+                      ],
+                      [
+                        "5aa7e4a4e5b5b000137b76f2"
+                      ],
+                      [
+                        "5b432d215acfc4771e1c6624"
+                      ],
+                      [
+                        "59e7711e86f7746cae05fbe1"
+                      ],
+                      [
+                        "5c0d2727d174af02a012cf58"
+                      ],
+                      [
+                        "5aa7d193e5b5b000171d063f"
+                      ],
+                      [
+                        "5c06c6a80db834001b735491"
+                      ],
+                      [
+                        "5645bc214bdc2d363b8b4571"
+                      ],
+                      [
+                        "5df8a58286f77412631087ed"
+                      ]
+                    ],
+                    "id": "64bfc68df3a668f08805d07d"
+                  }
+                }
+              ],
+              "id": "64ba8d6b9bd0fad76c074458"
+            },
+            "doNotResetIfCounterCompleted": false,
+            "dynamicLocale": false,
+            "id": "64ba8d6b9bd0fad76c074457",
+            "index": 5,
+            "oneSessionOnly": false,
+            "parentId": "",
+            "type": "Elimination",
+            "value": "10",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        },
+        {
+          "_parent": "CounterCreator",
+          "_props": {
+            "counter": {
+              "conditions": [
+                {
+                  "_parent": "Location",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "id": "64ba8fd6a6e4a9dd45075a68",
+                    "target": [
+                      "Lighthouse"
+                    ]
+                  }
+                },
+                {
+                  "_parent": "Kills",
+                  "_props": {
+                    "id": "64ba9213611a0972880b2772",
+                    "savageRole": [
+                      "assault",
+                      "marksman",
+                      "savage"
+                    ],
+                    "target": "Savage",
+                    "weapon": [
+                      "587e02ff24597743df3deaeb",
+                      "574d967124597745970e7c94",
+                      "5c501a4d2e221602b412b540",
+                      "57c44b372459772d2b39b8ce",
+                      "5cadfbf7ae92152ac412eeef",
+                      "5ac66cb05acfc40198510a10",
+                      "5ac66d015acfc400180ae6e4",
+                      "5ac66d2e5acfc43b321d4b53",
+                      "5ac66d725acfc43b321d4b60",
+                      "5bf3e03b0db834001d2c4a9c",
+                      "5ac66d9b5acfc4001633997a",
+                      "5ac4cd105acfc40016339859",
+                      "5644bd2b4bdc2d3b4c8b4572",
+                      "59d6088586f774275f37482f",
+                      "5a0ec13bfcdbcb00165aa685",
+                      "59ff346386f77477562ff5e2",
+                      "5abcbc27d8ce8700182eceeb",
+                      "5bf3e0490db83400196199af",
+                      "5ab8e9fcd8ce870019439434",
+                      "57dc2fa62459775949412633",
+                      "583990e32459771419544dd2",
+                      "5839a40f24597726f856b511",
+                      "59e6687d86f77411d949b251",
+                      "59e6152586f77473dc057aa1",
+                      "628b5638ad252a16da6dd245",
+                      "628b9c37a733087d0d7fe84b",
+                      "620109578d82e67e7911abf2",
+                      "5cdeb229d7f00c000e7ce174",
+                      "5beed0f50db834001c062b12",
+                      "5d52cc5ba4b9367408500062",
+                      "5c46fbd72e2216398b5a8c9c",
+                      "57838ad32459774a17445cd2",
+                      "602a9740da11d6478d5a06dc",
+                      "576a581d2459771e7b1bc4f1",
+                      "5448bd6b4bdc2dfc2f8b4569",
+                      "579204f224597773d619e051",
+                      "5a17f98cfcdbcb0980087290",
+                      "56e0598dd2720bb5668b45a6",
+                      "59f98b4986f7746f546d2cef",
+                      "5abccb7dd8ce87001773e277",
+                      "571a12c42459771f627b58a0",
+                      "5b3b713c5acfc4330140bd8d",
+                      "60db29ce99594040e04c4a27",
+                      "633ec7c2a6918cb895019c6c",
+                      "61f7c9e189e6fb1a5e3ea78d",
+                      "576165642459773c7a400233",
+                      "56dee2bdd2720bc8328b4567",
+                      "54491c4f4bdc2db1078b4568",
+                      "5580223e4bdc2d1c128b457f",
+                      "606dae0ab0e443224b421bb7",
+                      "5e870397991fd70db46995c8",
+                      "5e848cc2988a8701445df1e8",
+                      "5a38e6bac4a2826c6e06d79b",
+                      "62e14904c2699c0ec93adc47",
+                      "5ea03f7400685063ec28bfa8",
+                      "57f3c6bd24597738e730fa2f",
+                      "57d14d2524597714373db789",
+                      "57f4c844245977379d5c14d1",
+                      "59f9cabd86f7743a10721f46",
+                      "59984ab886f7743e98271174",
+                      "60339954d62c9b14ed777c06",
+                      "5bfd297f0db834001a669119",
+                      "5ae08f0a5acfc408fb1398a1",
+                      "55801eed4bdc2d89578b4588",
+                      "588892092459774ac91d4b11",
+                      "5de652c31b7e3716273428be",
+                      "5df24cf80dee1b22f862e9bc",
+                      "5bead2e00db834001c062938"
+                    ]
+                  }
+                },
+                {
+                  "_parent": "Equipment",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "equipmentInclusive": [
+                      [
+                        "5ab8e79e86f7742d8b372e78"
+                      ],
+                      [
+                        "545cdb794bdc2d3a198b456a"
+                      ],
+                      [
+                        "5c0e53c886f7747fa54205c7"
+                      ],
+                      [
+                        "5c0e51be86f774598e797894"
+                      ],
+                      [
+                        "5c0e53c886f7747fa54205c7"
+                      ],
+                      [
+                        "5df8a2ca86f7740bfe6df777"
+                      ],
+                      [
+                        "5c0e5bab86f77461f55ed1f3"
+                      ],
+                      [
+                        "5c0e57ba86f7747fa141986d"
+                      ],
+                      [
+                        "5e9dacf986f774054d6b89f4"
+                      ],
+                      [
+                        "5b44d22286f774172b0c9de8"
+                      ],
+                      [
+                        "5f5f41476bdad616ad46d631"
+                      ],
+                      [
+                        "5ca2151486f774244a3b8d30"
+                      ],
+                      [
+                        "5ca21c6986f77479963115a7"
+                      ],
+                      [
+                        "5c0e5edb86f77461f55ed1f7"
+                      ],
+                      [
+                        "5c0e625a86f7742d77340f62"
+                      ],
+                      [
+                        "59e7635f86f7742cbf2c1095"
+                      ],
+                      [
+                        "5d5d646386f7742797261fd9"
+                      ],
+                      [
+                        "5c0e446786f7742013381639"
+                      ],
+                      [
+                        "5c0e3eb886f7742015526062"
+                      ]
+                    ],
+                    "id": "64bfbfecf2dec80e000e69e9"
+                  }
+                },
+                {
+                  "_parent": "Equipment",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "equipmentInclusive": [
+                      [
+                        "5b43271c5acfc432ff4dce65"
+                      ],
+                      [
+                        "5f60e7788adaa7100c3adb49"
+                      ],
+                      [
+                        "5f60e784f2bcbb675b00dac7"
+                      ],
+                      [
+                        "5f60e6403b85f6263c14558c"
+                      ],
+                      [
+                        "5aa7e276e5b5b000171d0647"
+                      ],
+                      [
+                        "5ca20ee186f774799474abc2"
+                      ],
+                      [
+                        "5c091a4e0db834001d5addc8"
+                      ],
+                      [
+                        "5f60c74e3b85f6263c145586"
+                      ],
+                      [
+                        "59e770f986f7742cbe3164ef"
+                      ],
+                      [
+                        "60361a7497633951dc245eb4"
+                      ],
+                      [
+                        "5aa7cfc0e5b5b00015693143"
+                      ],
+                      [
+                        "5a7c4850e899ef00150be885"
+                      ],
+                      [
+                        "59e7708286f7742cbd762753"
+                      ],
+                      [
+                        "5d6d3716a4b9361bc8618872"
+                      ],
+                      [
+                        "5aa7e454e5b5b0214e506fa2"
+                      ],
+                      [
+                        "5aa7e4a4e5b5b000137b76f2"
+                      ],
+                      [
+                        "5b432d215acfc4771e1c6624"
+                      ],
+                      [
+                        "59e7711e86f7746cae05fbe1"
+                      ],
+                      [
+                        "5c0d2727d174af02a012cf58"
+                      ],
+                      [
+                        "5aa7d193e5b5b000171d063f"
+                      ],
+                      [
+                        "5c06c6a80db834001b735491"
+                      ],
+                      [
+                        "5645bc214bdc2d363b8b4571"
+                      ],
+                      [
+                        "5df8a58286f77412631087ed"
+                      ]
+                    ],
+                    "id": "64bfc70422b6fd6e670ad8c0"
+                  }
+                }
+              ],
+              "id": "64ba8d7995faaef5e900c9d5"
+            },
+            "doNotResetIfCounterCompleted": false,
+            "dynamicLocale": false,
+            "id": "64ba8d7995faaef5e900c9d4",
+            "index": 6,
+            "oneSessionOnly": false,
+            "parentId": "",
+            "type": "Elimination",
+            "value": "10",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        },
+        {
+          "_parent": "CounterCreator",
+          "_props": {
+            "counter": {
+              "conditions": [
+                {
+                  "_parent": "Location",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "id": "64ba8fdd611a0972880b276b",
+                    "target": [
+                      "Shoreline"
+                    ]
+                  }
+                },
+                {
+                  "_parent": "Kills",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "id": "64ba9265611a0972880b2773",
+                    "savageRole": [
+                      "assault",
+                      "marksman",
+                      "savage"
+                    ],
+                    "target": "Savage",
+                    "weapon": [
+                      "587e02ff24597743df3deaeb",
+                      "5c501a4d2e221602b412b540",
+                      "57c44b372459772d2b39b8ce",
+                      "574d967124597745970e7c94",
+                      "5cadfbf7ae92152ac412eeef",
+                      "5ac66cb05acfc40198510a10",
+                      "5ac66d015acfc400180ae6e4",
+                      "5ac66d2e5acfc43b321d4b53",
+                      "5ac66d725acfc43b321d4b60",
+                      "5ac66d9b5acfc4001633997a",
+                      "5bf3e03b0db834001d2c4a9c",
+                      "5ac4cd105acfc40016339859",
+                      "5644bd2b4bdc2d3b4c8b4572",
+                      "59d6088586f774275f37482f",
+                      "5a0ec13bfcdbcb00165aa685",
+                      "59ff346386f77477562ff5e2",
+                      "5abcbc27d8ce8700182eceeb",
+                      "5bf3e0490db83400196199af",
+                      "57dc2fa62459775949412633",
+                      "5ab8e9fcd8ce870019439434",
+                      "5839a40f24597726f856b511",
+                      "583990e32459771419544dd2",
+                      "59e6687d86f77411d949b251",
+                      "59e6152586f77473dc057aa1",
+                      "628b5638ad252a16da6dd245",
+                      "628b9c37a733087d0d7fe84b",
+                      "620109578d82e67e7911abf2",
+                      "5cdeb229d7f00c000e7ce174",
+                      "5beed0f50db834001c062b12",
+                      "5d52cc5ba4b9367408500062",
+                      "5c46fbd72e2216398b5a8c9c",
+                      "57838ad32459774a17445cd2",
+                      "576a581d2459771e7b1bc4f1",
+                      "602a9740da11d6478d5a06dc",
+                      "5448bd6b4bdc2dfc2f8b4569",
+                      "579204f224597773d619e051",
+                      "5a17f98cfcdbcb0980087290",
+                      "56e0598dd2720bb5668b45a6",
+                      "59f98b4986f7746f546d2cef",
+                      "5abccb7dd8ce87001773e277",
+                      "571a12c42459771f627b58a0",
+                      "5b3b713c5acfc4330140bd8d",
+                      "633ec7c2a6918cb895019c6c",
+                      "60db29ce99594040e04c4a27",
+                      "54491c4f4bdc2db1078b4568",
+                      "576165642459773c7a400233",
+                      "61f7c9e189e6fb1a5e3ea78d",
+                      "56dee2bdd2720bc8328b4567",
+                      "5580223e4bdc2d1c128b457f",
+                      "606dae0ab0e443224b421bb7",
+                      "5e848cc2988a8701445df1e8",
+                      "5a38e6bac4a2826c6e06d79b",
+                      "59f9cabd86f7743a10721f46",
+                      "60339954d62c9b14ed777c06",
+                      "59984ab886f7743e98271174",
+                      "62e14904c2699c0ec93adc47",
+                      "5ea03f7400685063ec28bfa8",
+                      "57f3c6bd24597738e730fa2f",
+                      "57d14d2524597714373db789",
+                      "57f4c844245977379d5c14d1",
+                      "5bfd297f0db834001a669119",
+                      "5ae08f0a5acfc408fb1398a1",
+                      "55801eed4bdc2d89578b4588",
+                      "588892092459774ac91d4b11",
+                      "5de652c31b7e3716273428be",
+                      "5df24cf80dee1b22f862e9bc",
+                      "5bead2e00db834001c062938"
+                    ]
+                  }
+                },
+                {
+                  "_parent": "Equipment",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "equipmentInclusive": [
+                      [
+                        "5ab8e79e86f7742d8b372e78"
+                      ],
+                      [
+                        "545cdb794bdc2d3a198b456a"
+                      ],
+                      [
+                        "5c0e53c886f7747fa54205c7"
+                      ],
+                      [
+                        "5c0e51be86f774598e797894"
+                      ],
+                      [
+                        "5c0e53c886f7747fa54205c7"
+                      ],
+                      [
+                        "5c0e5bab86f77461f55ed1f3"
+                      ],
+                      [
+                        "5c0e57ba86f7747fa141986d"
+                      ],
+                      [
+                        "5df8a2ca86f7740bfe6df777"
+                      ],
+                      [
+                        "5e9dacf986f774054d6b89f4"
+                      ],
+                      [
+                        "5b44d22286f774172b0c9de8"
+                      ],
+                      [
+                        "5f5f41476bdad616ad46d631"
+                      ],
+                      [
+                        "5ca2151486f774244a3b8d30"
+                      ],
+                      [
+                        "5ca21c6986f77479963115a7"
+                      ],
+                      [
+                        "5c0e5edb86f77461f55ed1f7"
+                      ],
+                      [
+                        "5c0e625a86f7742d77340f62"
+                      ],
+                      [
+                        "59e7635f86f7742cbf2c1095"
+                      ],
+                      [
+                        "5d5d646386f7742797261fd9"
+                      ],
+                      [
+                        "5c0e446786f7742013381639"
+                      ],
+                      [
+                        "5c0e3eb886f7742015526062"
+                      ]
+                    ],
+                    "id": "64bfc0ff39a321a6480fcf69"
+                  }
+                },
+                {
+                  "_parent": "Equipment",
+                  "_props": {
+                    "dynamicLocale": false,
+                    "equipmentInclusive": [
+                      [
+                        "5b43271c5acfc432ff4dce65"
+                      ],
+                      [
+                        "5f60e7788adaa7100c3adb49"
+                      ],
+                      [
+                        "5f60e784f2bcbb675b00dac7"
+                      ],
+                      [
+                        "5f60e6403b85f6263c14558c"
+                      ],
+                      [
+                        "5aa7e276e5b5b000171d0647"
+                      ],
+                      [
+                        "5ca20ee186f774799474abc2"
+                      ],
+                      [
+                        "5c091a4e0db834001d5addc8"
+                      ],
+                      [
+                        "5f60c74e3b85f6263c145586"
+                      ],
+                      [
+                        "59e770f986f7742cbe3164ef"
+                      ],
+                      [
+                        "60361a7497633951dc245eb4"
+                      ],
+                      [
+                        "5aa7cfc0e5b5b00015693143"
+                      ],
+                      [
+                        "5a7c4850e899ef00150be885"
+                      ],
+                      [
+                        "59e7708286f7742cbd762753"
+                      ],
+                      [
+                        "5d6d3716a4b9361bc8618872"
+                      ],
+                      [
+                        "5aa7e4a4e5b5b000137b76f2"
+                      ],
+                      [
+                        "5aa7e454e5b5b0214e506fa2"
+                      ],
+                      [
+                        "5b432d215acfc4771e1c6624"
+                      ],
+                      [
+                        "59e7711e86f7746cae05fbe1"
+                      ],
+                      [
+                        "5c0d2727d174af02a012cf58"
+                      ],
+                      [
+                        "5aa7d193e5b5b000171d063f"
+                      ],
+                      [
+                        "5c06c6a80db834001b735491"
+                      ],
+                      [
+                        "5645bc214bdc2d363b8b4571"
+                      ],
+                      [
+                        "5df8a58286f77412631087ed"
+                      ]
+                    ],
+                    "id": "64bfc7a30297e41dd305001e"
+                  }
+                }
+              ],
+              "id": "64ba8d82c7317d659200a190"
+            },
+            "doNotResetIfCounterCompleted": false,
+            "dynamicLocale": false,
+            "id": "64ba8d82c7317d659200a18f",
+            "index": 7,
+            "oneSessionOnly": false,
+            "parentId": "",
+            "type": "Elimination",
+            "value": "10",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        }
+      ],
+      "AvailableForStart": [
+        {
+          "_parent": "Quest",
+          "_props": {
+            "availableAfter": 0,
+            "dispersion": 0,
+            "dynamicLocale": false,
+            "id": "64bd4484f3a668f08805ce5a",
+            "index": 0,
+            "parentId": "",
+            "status": [
+              2
+            ],
+            "target": "64b907ad60d47bcb98044d10",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        }
+      ],
+      "Fail": []
+    },
+    "description": "64b907b205b23872610c0794 description",
+    "failMessageText": "64b907b205b23872610c0794 failMessageText",
+    "image": "/files/quest/icon/64c3cd095b03dccf8800271f.jpg",
+    "instantComplete": false,
+    "isKey": false,
+    "location": "any",
+    "name": "64b907b205b23872610c0794 name",
+    "note": "64b907b205b23872610c0794 note",
+    "questStatus": {},
+    "restartable": false,
+    "rewards": {
+      "Fail": [],
+      "Started": [],
+      "Success": [
+        {
+          "id": "64bd4428807321a9b905f062",
+          "index": 0,
+          "type": "Experience",
+          "value": 25300
+        },
+        {
+          "id": "64bd442f8f3a947a990aa493",
+          "index": 1,
+          "target": "5935c25fb3acc3127c3d8cd9",
+          "type": "TraderStanding",
+          "value": "0.02"
+        },
+        {
+          "id": "64bd4438e2ca8c5236002d9c",
+          "index": 2,
+          "items": [
+            {
+              "_id": "64c669dbafe1938ee204b9d5",
+              "_tpl": "5696686a4bdc2da3298b456a",
+              "upd": {
+                "StackObjectsCount": 500
+              }
+            }
+          ],
+          "target": "64c669dbafe1938ee204b9d5",
+          "type": "Item",
+          "value": "500"
+        },
+        {
+          "findInRaid": true,
+          "id": "64bd445939a321a6480fc6e4",
+          "index": 3,
+          "items": [
+            {
+              "_id": "64c669dbafe1938ee204b9d6",
+              "_tpl": "5c0e655586f774045612eeb2",
+              "upd": {
+                "StackObjectsCount": 1
+              }
+            }
+          ],
+          "target": "64c669dbafe1938ee204b9d6",
+          "type": "Item",
+          "value": "1"
+        },
+        {
+          "id": "64bd4467014d9a495e09a788",
+          "index": 4,
+          "items": [
+            {
+              "_id": "64c669dbafe1938ee204b9d7",
+              "_tpl": "5b40e2bc5acfc40016388216",
+              "upd": {
+                "StackObjectsCount": 1
+              }
+            }
+          ],
+          "target": "64c669dbafe1938ee204b9d7",
+          "type": "Item",
+          "value": "1"
+        }
+      ]
+    },
+    "secretQuest": false,
+    "side": "Pmc",
+    "startedMessageText": "64b907b205b23872610c0794 startedMessageText",
+    "successMessageText": "64b907b205b23872610c0794 successMessageText",
+    "templateId": "64b907b205b23872610c0794",
+    "traderId": "5935c25fb3acc3127c3d8cd9",
+    "type": "Completion"
+  },
+  "64b907bd55f4156df8007d14": {
+    "QuestName": "TerraGroup Trial Part 11-Event",
+    "_id": "64b907bd55f4156df8007d14",
+    "acceptPlayerMessage": "64b907bd55f4156df8007d14 acceptPlayerMessage",
+    "canShowNotificationsInGame": true,
+    "changeQuestMessageText": "64b907bd55f4156df8007d14 changeQuestMessageText",
+    "completePlayerMessage": "64b907bd55f4156df8007d14 completePlayerMessage",
+    "conditions": {
+      "AvailableForFinish": [
+        {
+          "_parent": "PlaceBeacon",
+          "_props": {
+            "dynamicLocale": false,
+            "id": "64bdc8a38f3a947a990aa499",
+            "index": 0,
+            "parentId": "",
+            "plantTime": "30",
+            "target": [
+              "63a0b2eabea67a6d93009e52"
+            ],
+            "value": "1",
+            "visibilityConditions": [],
+            "zoneId": "meh_42_radio_area_mark_1"
+          },
+          "dynamicLocale": false
+        },
+        {
+          "_parent": "PlaceBeacon",
+          "_props": {
+            "dynamicLocale": false,
+            "id": "64bdc8c3e2ca8c5236002da8",
+            "index": 1,
+            "parentId": "",
+            "plantTime": "30",
+            "target": [
+              "63a0b2eabea67a6d93009e52"
+            ],
+            "value": "1",
+            "visibilityConditions": [],
+            "zoneId": "meh_42_radio_area_mark_2"
+          },
+          "dynamicLocale": false
+        },
+        {
+          "_parent": "PlaceBeacon",
+          "_props": {
+            "dynamicLocale": false,
+            "id": "64bdc8ce807321a9b905f06b",
+            "index": 2,
+            "parentId": "",
+            "plantTime": "30",
+            "target": [
+              "63a0b2eabea67a6d93009e52"
+            ],
+            "value": "1",
+            "visibilityConditions": [],
+            "zoneId": "meh_42_radio_area_mark_3"
+          },
+          "dynamicLocale": false
+        },
+        {
+          "_parent": "PlaceBeacon",
+          "_props": {
+            "dynamicLocale": false,
+            "id": "64bdc8d5014d9a495e09a795",
+            "index": 3,
+            "parentId": "",
+            "plantTime": "30",
+            "target": [
+              "63a0b2eabea67a6d93009e52"
+            ],
+            "value": "1",
+            "visibilityConditions": [],
+            "zoneId": "meh_42_radio_area_mark_4"
+          },
+          "dynamicLocale": false
+        }
+      ],
+      "AvailableForStart": [
+        {
+          "_parent": "Quest",
+          "_props": {
+            "availableAfter": 0,
+            "dispersion": 0,
+            "dynamicLocale": false,
+            "id": "64bd465c014d9a495e09a78c",
+            "index": 0,
+            "parentId": "",
+            "status": [
+              4
+            ],
+            "target": "64b907a85e9b86ab7a08cf0d",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        }
+      ],
+      "Fail": [
+        {
+          "_parent": "Quest",
+          "_props": {
+            "availableAfter": 0,
+            "dispersion": 0,
+            "dynamicLocale": false,
+            "id": "64bd18fa329b780ddf02523f",
+            "index": 1,
+            "parentId": "",
+            "status": [
+              4
+            ],
+            "target": "625d6ffaf7308432be1d44c5",
+            "visibilityConditions": []
+          },
+          "dynamicLocale": false
+        }
+      ]
+    },
+    "description": "64b907bd55f4156df8007d14 description",
+    "failMessageText": "64b907bd55f4156df8007d14 failMessageText",
+    "image": "/files/quest/icon/64c3cd095b03dccf8800271f.jpg",
+    "instantComplete": false,
+    "isKey": false,
+    "location": "any",
+    "name": "64b907bd55f4156df8007d14 name",
+    "note": "64b907bd55f4156df8007d14 note",
+    "questStatus": {},
+    "restartable": false,
+    "rewards": {
+      "Fail": [],
+      "Started": [
+        {
+          "findInRaid": true,
+          "id": "64bf9e8a0297e41dd305001c",
+          "index": 0,
+          "items": [
+            {
+              "_id": "64c669dbafe1938ee204ba79",
+              "_tpl": "63a0b2eabea67a6d93009e52",
+              "upd": {
+                "StackObjectsCount": 4
+              }
+            }
+          ],
+          "target": "64c669dbafe1938ee204ba79",
+          "type": "Item",
+          "value": "4"
+        },
+        {
+          "id": "64bf9e93f2dec80e000e69e8",
+          "index": 1,
+          "items": [
+            {
+              "_id": "64c669dbafe1938ee204ba7a",
+              "_tpl": "63a0b2eabea67a6d93009e52"
+            }
+          ],
+          "loyaltyLevel": 1,
+          "target": "64c669dbafe1938ee204ba7a",
+          "traderId": "5a7c2eca46aef81a7ca2145d",
+          "type": "AssortmentUnlock"
+        }
+      ],
+      "Success": [
+        {
+          "id": "64bd46706de7c555ad05172b",
+          "index": 0,
+          "type": "Experience",
+          "value": 15000
+        },
+        {
+          "id": "64bd468039a321a6480fc6e6",
+          "index": 1,
+          "target": "5a7c2eca46aef81a7ca2145d",
+          "type": "TraderStanding",
+          "value": "0.01"
+        },
+        {
+          "id": "64bd468b807321a9b905f063",
+          "index": 2,
+          "items": [
+            {
+              "_id": "64c669dbafe1938ee204ba7b",
+              "_tpl": "5449016a4bdc2d6f028b456f",
+              "upd": {
+                "StackObjectsCount": 30000
+              }
+            }
+          ],
+          "target": "64c669dbafe1938ee204ba7b",
+          "type": "Item",
+          "value": "30000"
+        }
+      ]
+    },
+    "secretQuest": false,
+    "side": "Pmc",
+    "startedMessageText": "64b907bd55f4156df8007d14 startedMessageText",
+    "successMessageText": "64b907bd55f4156df8007d14 successMessageText",
+    "templateId": "64b907bd55f4156df8007d14",
+    "traderId": "5a7c2eca46aef81a7ca2145d",
     "type": "Completion"
   }
 }
