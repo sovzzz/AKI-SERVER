@@ -180,6 +180,8 @@ export class GameController
                         this.databaseServer.getTables().bots.types.usec.firstName = [pmcProfile.Info.Nickname];
                     }
                 }
+
+                this.checkForAndRemoveUndefinedDialogs(fullProfile);
             }
 
             if (this.seasonalEventService.isAutomaticEventDetectionEnabled())
@@ -675,6 +677,19 @@ export class GameController
             {
                 bots["usec"].firstName.push(playerName);
             } 
+        }
+    }
+
+    /**
+     * Check for a dialog with the key 'undefined', and remove it
+     * @param fullProfile Profile to check for dialog in
+     */
+    protected checkForAndRemoveUndefinedDialogs(fullProfile: IAkiProfile): void
+    {
+        const undefinedDialog = fullProfile.dialogues["undefined"];
+        if (undefinedDialog)
+        {
+            delete fullProfile.dialogues["undefined"];
         }
     }
 
