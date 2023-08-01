@@ -40988,73 +40988,73 @@
               "Id": "Endurance",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Strength",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Vitality",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Health",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "StressResistance",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Metabolism",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Immunity",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Perception",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Intellect",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Attention",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Charisma",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Memory",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Pistol",
@@ -41138,43 +41138,43 @@
               "Id": "RecoilControl",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "AimDrills",
               "LastAccess": -2147483648,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "TroubleShooting",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Surgery",
               "LastAccess": -2147483648,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "CovertMovement",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Search",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "MagDrills",
               "LastAccess": -2147483648,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Sniping",
@@ -41186,31 +41186,31 @@
               "Id": "ProneMovement",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "FieldMedicine",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "FirstAid",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "LightVests",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "HeavyVests",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "WeaponModding",
@@ -41222,7 +41222,7 @@
               "Id": "AdvancedModding",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "NightOps",
@@ -41270,7 +41270,7 @@
               "Id": "Barter",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Shadowconnections",
@@ -41288,13 +41288,13 @@
               "Id": "Crafting",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "HideoutManagement",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             }
           ],
           "Mastering": [],
@@ -44022,73 +44022,73 @@
               "Id": "Endurance",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Strength",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Vitality",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Health",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "StressResistance",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Metabolism",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Immunity",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Perception",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Intellect",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Attention",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Charisma",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Memory",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Pistol",
@@ -44172,7 +44172,7 @@
               "Id": "RecoilControl",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "AimDrills",
@@ -44184,7 +44184,7 @@
               "Id": "TroubleShooting",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Surgery",
@@ -44202,13 +44202,13 @@
               "Id": "Search",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "MagDrills",
               "LastAccess": -2147483648,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Sniping",
@@ -44220,19 +44220,19 @@
               "Id": "ProneMovement",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "FieldMedicine",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "FirstAid",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "LightVests",
@@ -44244,13 +44244,13 @@
               "Id": "HeavyVests",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "WeaponModding",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "AdvancedModding",
@@ -44304,7 +44304,7 @@
               "Id": "Barter",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "Shadowconnections",
@@ -44322,13 +44322,13 @@
               "Id": "Crafting",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             },
             {
               "Id": "HideoutManagement",
               "LastAccess": 0,
               "PointsEarnedDuringSession": 0,
-              "Progress": 2000
+              "Progress": 4000
             }
           ],
           "Mastering": [],

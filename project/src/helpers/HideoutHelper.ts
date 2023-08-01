@@ -84,6 +84,10 @@ export class HideoutHelper
         // @Important: Here we need to be very exact:
         // - normal recipe: Production time value is stored in attribute "productionType" with small "p"
         // - scav case recipe: Production time value is stored in attribute "ProductionType" with capital "P"
+        if (!pmcData.Hideout.Production)
+        {
+            pmcData.Hideout.Production = {};
+        }
         pmcData.Hideout.Production[body.recipeId] = this.initProduction(body.recipeId, modifiedProductionTime);
     }
 
@@ -225,6 +229,18 @@ export class HideoutHelper
         };
 
         return hideoutProperties;
+    }
+
+    protected doesWaterCollectorHaveFilter(waterCollector: HideoutArea): boolean
+    {
+        if (waterCollector.level === 3) // can put filters in from L3
+        {
+            // Has filter in at least one slot
+            return waterCollector.slots.some(x => x.item);
+        }
+        
+        // No Filter
+        return false;
     }
     
     /**
@@ -380,46 +396,6 @@ export class HideoutHelper
         }
     }
 
-    protected updateWaterCollector(sessionId: string, pmcData: IPmcData, area: HideoutArea, isGeneratorOn: boolean): void
-    {
-        // Skip water collector when not level 3
-        if (area.level !== 3)
-        {
-            return;
-        }
-
-        const prod = pmcData.Hideout.Production[HideoutHelper.waterCollector];
-        if (prod && this.isProduction(prod))
-        {
-            area = this.updateWaterFilters(area, prod, isGeneratorOn, pmcData);
-        }
-        else
-        {
-            // continuousProductionStart()
-            // seem to not trigger consistently
-            const recipe: IHideoutSingleProductionStartRequestData = {
-                recipeId: HideoutHelper.waterCollector,
-                Action: "HideoutSingleProductionStart",
-                items: [],
-                timestamp: this.timeUtil.getTimestamp()
-            };
-
-            this.registerProduction(pmcData, recipe, sessionId);
-        }
-    }
-
-    protected doesWaterCollectorHaveFilter(waterCollector: HideoutArea): boolean
-    {
-        if (waterCollector.level === 3) // can put filters in from L3
-        {
-            // Has filter in at least one slot
-            return waterCollector.slots.some(x => x.item);
-        }
-        
-        // No Filter
-        return false;
-    }
-
     protected updateFuel(generatorArea: HideoutArea, pmcData: IPmcData): void
     {
         // 1 resource last 14 min 27 sec, 1/14.45/60 = 0.00115
@@ -495,6 +471,35 @@ export class HideoutHelper
         }
     }
 
+    protected updateWaterCollector(sessionId: string, pmcData: IPmcData, area: HideoutArea, isGeneratorOn: boolean): void
+    {
+        // Skip water collector when not level 3 (cant collect until 3)
+        if (area.level !== 3)
+        {
+            return;
+        }
+
+        // Canister with purified water craft exists
+        const prod = pmcData.Hideout.Production[HideoutHelper.waterCollector];
+        if (prod && this.isProduction(prod))
+        {
+            area = this.updateWaterFilters(area, prod, isGeneratorOn, pmcData);
+        }
+        else
+        {
+            // continuousProductionStart()
+            // seem to not trigger consistently
+            const recipe: IHideoutSingleProductionStartRequestData = {
+                recipeId: HideoutHelper.waterCollector,
+                Action: "HideoutSingleProductionStart",
+                items: [],
+                timestamp: this.timeUtil.getTimestamp()
+            };
+
+            this.registerProduction(pmcData, recipe, sessionId);
+        }
+    }
+
     /**
      * Adjust water filter objects resourceValue or delete when they reach 0 resource
      * @param waterFilterArea water filter area to update
@@ -520,6 +525,7 @@ export class HideoutHelper
         if (production.Progress < productionTime)
         {
             // Check all slots that take water filters
+            // Must loop to find first water filter and use that
             for (let i = 0; i < waterFilterArea.slots.length; i++)
             {
                 // Has a water filter installed into slot
@@ -551,8 +557,10 @@ export class HideoutHelper
                     // Filter has some juice left in it
                     if (resourceValue > 0)
                     {
+                        // Set filter consumed amount
                         waterFilterArea.slots[i].item[0].upd = this.getAreaUpdObject(1, resourceValue, pointsConsumed);
                         this.logger.debug(`Water filter: ${resourceValue} filter left on slot ${i + 1}`);
+
                         break; // Break here to avoid updating all filters
                     }
 

@@ -917,6 +917,59 @@
                         "min": 51,
                         "max": 100
                     },
+					"ammo": {
+                        "add": {},
+                        "edit": {
+							"Caliber545x39": {
+                                "56dff061d2720bb5668b4567": 110,
+                                "61962b617c6c7b169525f168": 60,
+                                "56dff026d2720bb8668b4567": 90,
+                                "5c0d5e4486f77478390952fe": 50
+                            },
+							"Caliber556x45NATO": {
+								"601949593ae8f707c4608daa": 40,
+								"59e690b686f7746c9f75e848": 40
+							},
+							"Caliber762x51": {
+                                "5efb0c1bd79ff02a1f5e68d9": 12,
+                                "5a6086ea4f39f99cd479502f": 12,
+                                "5a608bf24f39f98ffc77720e": 12
+                            },
+							"Caliber762x39": {
+                                "601aa3d2b2bcb34913271e6d": 40,
+								"59e0d99486f7744a32234762": 50
+                            },
+							"Caliber1143x23ACP": {
+								"5efb0cabfb3e451d70735af5": 12
+							},
+							"Caliber762x35": {
+								"5fd20ff893a8961fc660a954": 11
+							},
+							"Caliber366TKM": {
+								"5f0596629e22f464da6bbdd9": 11
+							},
+							"Caliber46x30": {
+								"5ba26835d4351e0035628ff5": 11
+							},
+							"Caliber12g": {
+								"5d6e6911a4b9361bd5780d52": 12,
+								"5d6e68a8a4b9360b6c0d54e2": 12
+							},
+							"Caliber9x18PM": {
+								"573719df2459775a626ccbc2": 3,
+								"57371aab2459775a77142f22": 2
+							},
+							"Caliber9x19PARA": {
+								"5efb0da7a29a85116f6ea05f": 11
+							},
+							"Caliber127x55": {
+								"5cadf6eeae921500134b2799": 11
+							},
+							"Caliber23x75": {
+								"5e85aa1a988a8701445df1f5": 3
+							}
+						}
+					},
                     "equipment": {
                         "edit": {
                             "ArmorVest": {
