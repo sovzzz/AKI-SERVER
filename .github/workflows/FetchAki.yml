@@ -33,7 +33,8 @@ jobs:
       - name: Checkout
         uses: nschloe/action-cached-lfs-checkout@v1
       - name: GitHub Sync to Upstream Repository
-        uses: dabreadman/sync-upstream-repo@v1.3.0
+        #uses: dabreadman/sync-upstream-repo@v1.3.0
+        uses: sovzzz/sync-upstream-repo-lfs@0.1
         with: 
           upstream_repo: ${{ env.UPSTREAM_URL }}
           upstream_branch: ${{ env.UPSTREAM_BRANCH }}
