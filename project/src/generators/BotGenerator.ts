@@ -21,6 +21,7 @@ import { ILogger } from "../models/spt/utils/ILogger";
 import { ConfigServer } from "../servers/ConfigServer";
 import { DatabaseServer } from "../servers/DatabaseServer";
 import { BotEquipmentFilterService } from "../services/BotEquipmentFilterService";
+import { LocalisationService } from "../services/LocalisationService";
 import { SeasonalEventService } from "../services/SeasonalEventService";
 import { HashUtil } from "../utils/HashUtil";
 import { JsonUtil } from "../utils/JsonUtil";
@@ -49,6 +50,7 @@ export class BotGenerator
         @inject("BotHelper") protected botHelper: BotHelper,
         @inject("BotDifficultyHelper") protected botDifficultyHelper: BotDifficultyHelper,
         @inject("SeasonalEventService") protected seasonalEventService: SeasonalEventService,
+        @inject("LocalisationService") protected localisationService: LocalisationService,
         @inject("ConfigServer") protected configServer: ConfigServer
     )
     {
@@ -145,7 +147,7 @@ export class BotGenerator
             this.botEquipmentFilterService.filterBotEquipment(botJsonTemplate, botLevel.level, botGenerationDetails);
         }
 
-        bot.Info.Nickname = this.generateBotNickname(botJsonTemplate, botGenerationDetails.isPlayerScav, botRole);
+        bot.Info.Nickname = this.generateBotNickname(botJsonTemplate, botGenerationDetails.isPlayerScav, botRole, sessionId);
 
         const skipChristmasItems = !this.seasonalEventService.christmasEventEnabled();
         if (skipChristmasItems)
@@ -194,9 +196,11 @@ export class BotGenerator
      * @param botRole role of bot e.g. assault
      * @returns Nickname for bot
      */
-    protected generateBotNickname(botJsonTemplate: IBotType, isPlayerScav: boolean, botRole: string): string
+    protected generateBotNickname(botJsonTemplate: IBotType, isPlayerScav: boolean, botRole: string, sessionId: string): string
     {
         let name = `${this.randomUtil.getArrayValue(botJsonTemplate.firstName)} ${this.randomUtil.getArrayValue(botJsonTemplate.lastName) || ""}`;
+        name = name.trim();
+        const playerProfile = this.profileHelper.getPmcProfile(sessionId);
         
         // Simulate bot looking like a Player scav with the pmc name in brackets
         if (botRole === "assault" && this.randomUtil.getChance100(this.botConfig.chanceAssaultScavHasPlayerScavName))
@@ -208,17 +212,30 @@ export class BotGenerator
 
             const pmcNames = [
                 ...this.databaseServer.getTables().bots.types["usec"].firstName,
-                ...this.databaseServer.getTables().bots.types["bear"].firstName];
+                ...this.databaseServer.getTables().bots.types["bear"].firstName
+            ];
 
             return `${name} (${this.randomUtil.getArrayValue(pmcNames)})`;
         }
+
 
         if (this.botConfig.showTypeInNickname && !isPlayerScav)
         {
             name += ` ${botRole}`;
         }
 
-        return name.trim();
+        // If bot name matches current players name, chance to add localised prefix to name
+        if (name.toLowerCase() === playerProfile.Info.Nickname.toLowerCase())
+        {
+            if (this.randomUtil.getChance100(this.botConfig.pmc.addPrefixToSameNamePMCAsPlayerChance))
+            {
+
+                const prefix = this.localisationService.getRandomTextThatMatchesPartialKey("pmc-name_prefix_");
+                name = `${prefix} ${name}`;
+            }
+        }
+
+        return name;
     }
 
     /**

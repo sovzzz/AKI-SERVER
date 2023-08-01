@@ -642,12 +642,11 @@ export class GameController
 
     /**
      * Add the logged in players name to PMC name pool
-     * @param pmcProfile 
+     * @param pmcProfile Profile of player to get name from
      */
     protected addPlayerToPMCNames(pmcProfile: IPmcData): void
     {
         const playerName = pmcProfile.Info.Nickname;
-
         if (playerName)
         {
             const bots = this.databaseServer.getTables().bots.types;
@@ -655,13 +654,11 @@ export class GameController
             if (bots["bear"])
             {
                 bots["bear"].firstName.push(playerName);
-                bots["bear"].firstName.push(`Evil ${playerName}`);
             }
             
             if (bots["usec"])
             {
                 bots["usec"].firstName.push(playerName);
-                bots["usec"].firstName.push(`Evil ${playerName}`);
             } 
         }
     }

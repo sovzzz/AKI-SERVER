@@ -42,6 +42,7 @@ export interface IPmcConfig
     botRelativeLevelDeltaMax: number
     /** Force a number of healing items into PMCs secure container to ensure they can heal */
     forceHealingItemsIntoSecure: boolean;
+    addPrefixToSameNamePMCAsPlayerChance: number;
 }
 
 export interface PmcTypes

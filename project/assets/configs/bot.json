@@ -1556,7 +1556,8 @@
             }
         },
         "enemyTypes": ["assault", "marksman", "pmcBot", "bossBully", "bossKilla", "bossKojaniy", "bossGluhar", "bossSanitar", "bossTagilla", "bossKnight", "bossZryachiy", "followerBully", "followerKojaniy", "followerGluharAssault", "followerGluharSecurity", "followerGluharScout", "followerGluharSnipe", "followerSanitar", "followerBirdEye", "followerBigPipe", "followerZryachiy", "sectantWarrior", "sectantPriest"],
-    	"forceHealingItemsIntoSecure": true
+    	"forceHealingItemsIntoSecure": true,
+		"addPrefixToSameNamePMCAsPlayerChance": 40
 	},
     "showTypeInNickname": false,
     "maxBotCap": {
