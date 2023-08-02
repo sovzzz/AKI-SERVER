@@ -14,171 +14,186 @@
             "exploration": "62825ef60e88d037dc1eb42c"
         }
     },
-	"showNonSeasonalEventQuests": false,
-	"eventQuests": {
-		"641dbfd7f43eda9d810d7137": {
-			"name": "Important Patient",
-			"season": "None",
-			"startTimestamp": 1333753200000,
-			"endTimestamp": 1334444400000,
-			"yearly": false
-		},
-		"64764abcd125ab430a14ccb5": {
-			"name": "Bloodhounds",
-			"season": "None",
-			"startTimestamp": 1338591600000,
-			"endTimestamp": 1340578800000,
-			"yearly": false
-		},
-		"647710905320c660d91c15a5": {
-			"name": "Hint",
-			"season": "None",
-			"startTimestamp": 1338591600000,
-			"endTimestamp": "",
-			"yearly": false
-		},
-		"649567f359eab30d1b7c9585": {
-			"name": "Hustle",
-			"season": "None",
-			"startTimestamp": 1341270000000,
-			"endTimestamp": "",
-			"yearly": false
-		},
-		"649570491bb4d158bc4d0168": {
-			"name": "Tourist",
-			"season": "None",
-			"startTimestamp": 1341270000000,
-			"endTimestamp": "",
-			"yearly": false
-		},
-		"64916da7ad4e722c106f2345": {
-			"name": "Failed setup",
-			"season": "None",
-			"startTimestamp": 1340665200000,
-			"endTimestamp": "",
-			"yearly": false
-		},
-		"649af47d717cb30e7e4b5e26": {
-			"name": "Cocktail Tasting",
-			"season": "None",
-			"startTimestamp": 1341615600000,
-			"endTimestamp": "",
-			"yearly": false
-		},
-		"61bb474dce7374453b45dfd2": {
-			"name": "Fairy Tale Showdown",
-			"season": "christmas",
-			"startTimestamp": 1701388800000,
-			"endTimestamp": 1703980800000,
-			"yearly": true
-		},
-		"61bb474b1ab5304c3817a53a": {
-			"name": "Disrupting the Party",
-			"season": "christmas",
-			"startTimestamp": 1701388800000,
-			"endTimestamp": 1703980800000,
-			"yearly": true
-		},
-		"61bb47481908c67d4249a205": {
-			"name": "No Gifts for You",
-			"season": "christmas",
-			"startTimestamp": 1701388800000,
-			"endTimestamp": 1703980800000,
-			"yearly": true
-		},
-		"61bb468b8d7cac1532300ccc": {
-			"name": "Party Preparations",
-			"season": "christmas",
-			"startTimestamp": 1701388800000,
-			"endTimestamp": 1703980800000,
-			"yearly": true
-		},
-		"61b9e1aaef9a1b5d6a79899a": {
-			"name": "Santas bag",
-			"season": "christmas",
-			"startTimestamp": 1701388800000,
-			"endTimestamp": 1703980800000,
-			"yearly": true
-		},
-		"61bb47516b70332c062ca7b9": {
-			"name": "Stop the Fight!",
-			"season": "christmas",
-			"startTimestamp": 1701388800000,
-			"endTimestamp": 1703980800000,
-			"yearly": true
-		},
-		"61bb475467f83663e155e26a": {
-			"name": "A Kind Snow Maiden",
-			"season": "christmas",
-			"startTimestamp": 1701388800000,
-			"endTimestamp": 1703980800000,
-			"yearly": true
-		},
-		"61bb4756883b2c16a163870a": {
-			"name": "Home Comfort",
-			"season": "christmas",
-			"startTimestamp": 1701388800000,
-			"endTimestamp": 1703980800000,
-			"yearly": true
-		},
-		"61bb47578d7cac1532300ccd": {
-			"name": "Bad Santa",
-			"season": "christmas",
-			"startTimestamp": 1701388800000,
-			"endTimestamp": 1703980800000,
-			"yearly": true
-		},
-		"64b90786bbf5bf2b460ad982": {
-			"name": "TerraGroup Trial Part 1",
-			"season": "None",
-			"yearly": false
-		},
-		"64b90792f43eebce7c01e7af": {
-			"name": "TerraGroup Trial Part 2",
-			"season": "None",
-			"yearly": false
-		},
-		"64b907978d327e5bf9085bd9": {
-			"name": "TerraGroup Trial Part 3",
-			"season": "None",
-			"yearly": false
-		},
-		"64b9079cdd13d43b9d01d6cd": {
-			"name": "TerraGroup Trial Part 4",
-			"season": "None",
-			"yearly": false
-		},
-		"64b907a49ff61a79b10fab9c": {
-			"name": "TerraGroup Trial Part 5",
-			"season": "None",
-			"yearly": false
-		},
-		"64b907a85e9b86ab7a08cf0d": {
-			"name": "TerraGroup Trial Part 6",
-			"season": "None",
-			"yearly": false
-		},
-		"64b907ad60d47bcb98044d10": {
-			"name": "TerraGroup Trial Part 7",
-			"season": "None",
-			"yearly": false
-		},
-		"64b907b205b23872610c0794": {
-			"name": "TerraGroup Trial Part 8",
-			"season": "None",
-			"yearly": false
-		},
-		"64b907bd55f4156df8007d14": {
-			"name": "TerraGroup Trial Part 11",
-			"season": "None",
-			"yearly": false
-		},
-		"64b907c29bd0fad76c072e97": {
-			"name": "TerraGroup Trial Part 12",
-			"season": "None",
-			"yearly": false
-		}
-	},
+    "showNonSeasonalEventQuests": false,
+    "eventQuests": {
+        "641dbfd7f43eda9d810d7137": {
+            "name": "Important Patient",
+            "season": "None",
+            "startTimestamp": 1333753200000,
+            "endTimestamp": 1334444400000,
+            "yearly": false
+        },
+        "64764abcd125ab430a14ccb5": {
+            "name": "Bloodhounds",
+            "season": "None",
+            "startTimestamp": 1338591600000,
+            "endTimestamp": 1340578800000,
+            "yearly": false
+        },
+        "647710905320c660d91c15a5": {
+            "name": "Hint",
+            "season": "None",
+            "startTimestamp": 1338591600000,
+            "endTimestamp": "",
+            "yearly": false
+        },
+        "649567f359eab30d1b7c9585": {
+            "name": "Hustle",
+            "season": "None",
+            "startTimestamp": 1341270000000,
+            "endTimestamp": "",
+            "yearly": false
+        },
+        "649570491bb4d158bc4d0168": {
+            "name": "Tourist",
+            "season": "None",
+            "startTimestamp": 1341270000000,
+            "endTimestamp": "",
+            "yearly": false
+        },
+        "64916da7ad4e722c106f2345": {
+            "name": "Failed setup",
+            "season": "None",
+            "startTimestamp": 1340665200000,
+            "endTimestamp": "",
+            "yearly": false
+        },
+        "649af47d717cb30e7e4b5e26": {
+            "name": "Cocktail Tasting",
+            "season": "None",
+            "startTimestamp": 1341615600000,
+            "endTimestamp": "",
+            "yearly": false
+        },
+        "61bb474dce7374453b45dfd2": {
+            "name": "Fairy Tale Showdown",
+            "season": "christmas",
+            "startTimestamp": 1701388800000,
+            "endTimestamp": 1703980800000,
+            "yearly": true
+        },
+        "61bb474b1ab5304c3817a53a": {
+            "name": "Disrupting the Party",
+            "season": "christmas",
+            "startTimestamp": 1701388800000,
+            "endTimestamp": 1703980800000,
+            "yearly": true
+        },
+        "61bb47481908c67d4249a205": {
+            "name": "No Gifts for You",
+            "season": "christmas",
+            "startTimestamp": 1701388800000,
+            "endTimestamp": 1703980800000,
+            "yearly": true
+        },
+        "61bb468b8d7cac1532300ccc": {
+            "name": "Party Preparations",
+            "season": "christmas",
+            "startTimestamp": 1701388800000,
+            "endTimestamp": 1703980800000,
+            "yearly": true
+        },
+        "61b9e1aaef9a1b5d6a79899a": {
+            "name": "Santas bag",
+            "season": "christmas",
+            "startTimestamp": 1701388800000,
+            "endTimestamp": 1703980800000,
+            "yearly": true
+        },
+        "61bb47516b70332c062ca7b9": {
+            "name": "Stop the Fight!",
+            "season": "christmas",
+            "startTimestamp": 1701388800000,
+            "endTimestamp": 1703980800000,
+            "yearly": true
+        },
+        "61bb475467f83663e155e26a": {
+            "name": "A Kind Snow Maiden",
+            "season": "christmas",
+            "startTimestamp": 1701388800000,
+            "endTimestamp": 1703980800000,
+            "yearly": true
+        },
+        "61bb4756883b2c16a163870a": {
+            "name": "Home Comfort",
+            "season": "christmas",
+            "startTimestamp": 1701388800000,
+            "endTimestamp": 1703980800000,
+            "yearly": true
+        },
+        "61bb47578d7cac1532300ccd": {
+            "name": "Bad Santa",
+            "season": "christmas",
+            "startTimestamp": 1701388800000,
+            "endTimestamp": 1703980800000,
+            "yearly": true
+        },
+        "64b90786bbf5bf2b460ad982": {
+            "name": "TerraGroup Trial Part 1",
+            "season": "None",
+            "yearly": false
+        },
+        "64b90792f43eebce7c01e7af": {
+            "name": "TerraGroup Trial Part 2",
+            "season": "None",
+            "yearly": false
+        },
+        "64b907978d327e5bf9085bd9": {
+            "name": "TerraGroup Trial Part 3",
+            "season": "None",
+            "yearly": false
+        },
+        "64b9079cdd13d43b9d01d6cd": {
+            "name": "TerraGroup Trial Part 4",
+            "season": "None",
+            "yearly": false
+        },
+        "64b907a49ff61a79b10fab9c": {
+            "name": "TerraGroup Trial Part 5",
+            "season": "None",
+            "yearly": false
+        },
+        "64b907a85e9b86ab7a08cf0d": {
+            "name": "TerraGroup Trial Part 6",
+            "season": "None",
+            "yearly": false
+        },
+        "64b907ad60d47bcb98044d10": {
+            "name": "TerraGroup Trial Part 7",
+            "season": "None",
+            "yearly": false
+        },
+        "64b907b205b23872610c0794": {
+            "name": "TerraGroup Trial Part 8",
+            "season": "None",
+            "yearly": false
+        },
+        "64b907b5b1548514f3015707": {
+            "name": "TerraGroup Trial Part 9",
+            "season": "None",
+            "yearly": false
+        },
+        "64b907bd55f4156df8007d14": {
+            "name": "TerraGroup Trial Part 11",
+            "season": "None",
+            "yearly": false
+        },
+        "64b907c29bd0fad76c072e97": {
+            "name": "TerraGroup Trial Part 12",
+            "season": "None",
+            "yearly": false
+        },
+        "64b907c4e87866541c0d747e": {
+            "name": "TerraGroup Trial Part 13",
+            "season": "None",
+            "yearly": false
+        },
+        "64b907cabbf5bf2b460ad984": {
+            "name": "TerraGroup Trial Part 14",
+            "season": "None",
+            "yearly": false
+        }
+    },
     "repeatableQuests": [{
             "name": "Daily",
             "side": "Pmc",
@@ -472,189 +487,189 @@
                     "useBlacklist": false
                 },
                 "Elimination": [{
-					"levelRange": {
+                        "levelRange": {
                             "min": 1,
                             "max": 15
                         },
-                    "targets": [{
-                            "key": "Savage",
-                            "relativeProbability": 7,
-                            "data": {
-                                "isBoss": false
+                        "targets": [{
+                                "key": "Savage",
+                                "relativeProbability": 7,
+                                "data": {
+                                    "isBoss": false
+                                }
+                            }, {
+                                "key": "AnyPmc",
+                                "relativeProbability": 1,
+                                "data": {
+                                    "isBoss": false
+                                }
+                            }, {
+                                "key": "bossBully",
+                                "relativeProbability": 0,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }, {
+                                "key": "bossGluhar",
+                                "relativeProbability": 0,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }, {
+                                "key": "bossKilla",
+                                "relativeProbability": 0,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }, {
+                                "key": "bossSanitar",
+                                "relativeProbability": 0,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }, {
+                                "key": "bossTagilla",
+                                "relativeProbability": 0,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }, {
+                                "key": "bossKojaniy",
+                                "relativeProbability": 0,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }, {
+                                "key": "bossKnight",
+                                "relativeProbability": 0,
+                                "data": {
+                                    "isBoss": true
+                                }
                             }
-                        }, {
-                            "key": "AnyPmc",
-                            "relativeProbability": 1,
-                            "data": {
-                                "isBoss": false
+                        ],
+                        "bodyPartProb": 0.3,
+                        "bodyParts": [{
+                                "key": "Head",
+                                "relativeProbability": 1,
+                                "data": ["Head"]
+                            }, {
+                                "key": "Stomach",
+                                "relativeProbability": 3,
+                                "data": ["Stomach"]
+                            }, {
+                                "key": "Chest",
+                                "relativeProbability": 5,
+                                "data": ["Chest"]
+                            }, {
+                                "key": "Arms",
+                                "relativeProbability": 0.5,
+                                "data": ["LeftArm", "RightArm"]
+                            }, {
+                                "key": "Legs",
+                                "relativeProbability": 1,
+                                "data": ["LeftLeg", "RightLeg"]
                             }
-                        }, {
-                            "key": "bossBully",
-                            "relativeProbability": 0,
-                            "data": {
-                                "isBoss": true
-                            }
-                        }, {
-                            "key": "bossGluhar",
-                            "relativeProbability": 0,
-                            "data": {
-                                "isBoss": true
-                            }
-                        }, {
-                            "key": "bossKilla",
-                            "relativeProbability": 0,
-                            "data": {
-                                "isBoss": true
-                            }
-                        }, {
-                            "key": "bossSanitar",
-                            "relativeProbability": 0,
-                            "data": {
-                                "isBoss": true
-                            }
-                        }, {
-                            "key": "bossTagilla",
-                            "relativeProbability": 0,
-                            "data": {
-                                "isBoss": true
-                            }
-                        }, {
-                            "key": "bossKojaniy",
-                            "relativeProbability": 0,
-                            "data": {
-                                "isBoss": true
-                            }
-                        }, {
-                            "key": "bossKnight",
-                            "relativeProbability": 0,
-                            "data": {
-                                "isBoss": true
-                            }
-                        }
-                    ],
-                    "bodyPartProb": 0.3,
-                    "bodyParts": [{
-                            "key": "Head",
-                            "relativeProbability": 1,
-                            "data": ["Head"]
-                        }, {
-                            "key": "Stomach",
-                            "relativeProbability": 3,
-                            "data": ["Stomach"]
-                        }, {
-                            "key": "Chest",
-                            "relativeProbability": 5,
-                            "data": ["Chest"]
-                        }, {
-                            "key": "Arms",
-                            "relativeProbability": 0.5,
-                            "data": ["LeftArm", "RightArm"]
-                        }, {
-                            "key": "Legs",
-                            "relativeProbability": 1,
-                            "data": ["LeftLeg", "RightLeg"]
-                        }
-                    ],
-                    "specificLocationProb": 0.25,
-                    "distLocationBlacklist": ["laboratory", "factory4_day", "factory4_night"],
-                    "distProb": 0.20,
-                    "maxDist": 100,
-                    "minDist": 20,
-                    "maxKills": 10,
-                    "minKills": 5
-                },
-				{
-					"levelRange": {
+                        ],
+                        "specificLocationProb": 0.25,
+                        "distLocationBlacklist": ["laboratory", "factory4_day", "factory4_night"],
+                        "distProb": 0.20,
+                        "maxDist": 100,
+                        "minDist": 20,
+                        "maxKills": 10,
+                        "minKills": 5
+                    }, {
+                        "levelRange": {
                             "min": 16,
                             "max": 100
                         },
-                    "targets": [{
-                            "key": "Savage",
-                            "relativeProbability": 7,
-                            "data": {
-                                "isBoss": false
+                        "targets": [{
+                                "key": "Savage",
+                                "relativeProbability": 7,
+                                "data": {
+                                    "isBoss": false
+                                }
+                            }, {
+                                "key": "AnyPmc",
+                                "relativeProbability": 2,
+                                "data": {
+                                    "isBoss": false
+                                }
+                            }, {
+                                "key": "bossBully",
+                                "relativeProbability": 0.5,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }, {
+                                "key": "bossGluhar",
+                                "relativeProbability": 0.5,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }, {
+                                "key": "bossKilla",
+                                "relativeProbability": 0.5,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }, {
+                                "key": "bossSanitar",
+                                "relativeProbability": 0.5,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }, {
+                                "key": "bossTagilla",
+                                "relativeProbability": 0.5,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }, {
+                                "key": "bossKojaniy",
+                                "relativeProbability": 0.5,
+                                "data": {
+                                    "isBoss": true
+                                }
+                            }, {
+                                "key": "bossKnight",
+                                "relativeProbability": 0.5,
+                                "data": {
+                                    "isBoss": true
+                                }
                             }
-                        }, {
-                            "key": "AnyPmc",
-                            "relativeProbability": 2,
-                            "data": {
-                                "isBoss": false
+                        ],
+                        "bodyPartProb": 0.4,
+                        "bodyParts": [{
+                                "key": "Head",
+                                "relativeProbability": 1,
+                                "data": ["Head"]
+                            }, {
+                                "key": "Stomach",
+                                "relativeProbability": 3,
+                                "data": ["Stomach"]
+                            }, {
+                                "key": "Chest",
+                                "relativeProbability": 5,
+                                "data": ["Chest"]
+                            }, {
+                                "key": "Arms",
+                                "relativeProbability": 0.5,
+                                "data": ["LeftArm", "RightArm"]
+                            }, {
+                                "key": "Legs",
+                                "relativeProbability": 1,
+                                "data": ["LeftLeg", "RightLeg"]
                             }
-                        }, {
-                            "key": "bossBully",
-                            "relativeProbability": 0.5,
-                            "data": {
-                                "isBoss": true
-                            }
-                        }, {
-                            "key": "bossGluhar",
-                            "relativeProbability": 0.5,
-                            "data": {
-                                "isBoss": true
-                            }
-                        }, {
-                            "key": "bossKilla",
-                            "relativeProbability": 0.5,
-                            "data": {
-                                "isBoss": true
-                            }
-                        }, {
-                            "key": "bossSanitar",
-                            "relativeProbability": 0.5,
-                            "data": {
-                                "isBoss": true
-                            }
-                        }, {
-                            "key": "bossTagilla",
-                            "relativeProbability": 0.5,
-                            "data": {
-                                "isBoss": true
-                            }
-                        }, {
-                            "key": "bossKojaniy",
-                            "relativeProbability": 0.5,
-                            "data": {
-                                "isBoss": true
-                            }
-                        }, {
-                            "key": "bossKnight",
-                            "relativeProbability": 0.5,
-                            "data": {
-                                "isBoss": true
-                            }
-                        }
-                    ],
-                    "bodyPartProb": 0.4,
-                    "bodyParts": [{
-                            "key": "Head",
-                            "relativeProbability": 1,
-                            "data": ["Head"]
-                        }, {
-                            "key": "Stomach",
-                            "relativeProbability": 3,
-                            "data": ["Stomach"]
-                        }, {
-                            "key": "Chest",
-                            "relativeProbability": 5,
-                            "data": ["Chest"]
-                        }, {
-                            "key": "Arms",
-                            "relativeProbability": 0.5,
-                            "data": ["LeftArm", "RightArm"]
-                        }, {
-                            "key": "Legs",
-                            "relativeProbability": 1,
-                            "data": ["LeftLeg", "RightLeg"]
-                        }
-                    ],
-                    "specificLocationProb": 0.25,
-                    "distLocationBlacklist": ["laboratory", "factory4_day", "factory4_night"],
-                    "distProb": 0.25,
-                    "maxDist": 200,
-                    "minDist": 20,
-                    "maxKills": 15,
-                    "minKills": 5
-                }]
+                        ],
+                        "specificLocationProb": 0.25,
+                        "distLocationBlacklist": ["laboratory", "factory4_day", "factory4_night"],
+                        "distProb": 0.25,
+                        "maxDist": 200,
+                        "minDist": 20,
+                        "maxKills": 15,
+                        "minKills": 5
+                    }
+                ]
             },
             "rewardBaseTypeBlacklist": ["543be5e94bdc2df1348b4568", "5b3f15d486f77432d0509248"],
             "rewardBlacklist": ["627bce33f21bc425b06ab967"],
@@ -715,96 +730,95 @@
                     "useBlacklist": false
                 },
                 "Elimination": [{
-					"levelRange": {
+                        "levelRange": {
                             "min": 1,
                             "max": 15
                         },
-                    "targets":
-                    [{
-                            "key": "AnyPmc",
-                            "relativeProbability": 2,
-                            "data": {
-                                "isBoss": false
+                        "targets":
+                        [{
+                                "key": "AnyPmc",
+                                "relativeProbability": 2,
+                                "data": {
+                                    "isBoss": false
+                                }
                             }
-                        }
-                    ],
-                    "bodyPartProb": 0.4,
-                    "bodyParts": [{
-                            "key": "Head",
-                            "relativeProbability": 1,
-                            "data": ["Head"]
-                        }, {
-                            "key": "Stomach",
-                            "relativeProbability": 3,
-                            "data": ["Stomach"]
-                        }, {
-                            "key": "Chest",
-                            "relativeProbability": 10,
-                            "data": ["Chest"]
-                        }, {
-                            "key": "Arms",
-                            "relativeProbability": 0.5,
-                            "data": ["LeftArm", "RightArm"]
-                        }, {
-                            "key": "Legs",
-                            "relativeProbability": 1,
-                            "data": ["LeftLeg", "RightLeg"]
-                        }
-                    ],
-                    "specificLocationProb": 0.25,
-                    "distLocationBlacklist": ["laboratory"],
-                    "distProb": 0.20,
-                    "maxDist": 100,
-                    "minDist": 20,
-                    "maxKills": 3,
-                    "minKills": 1
-                },
-				{
-					"levelRange": {
+                        ],
+                        "bodyPartProb": 0.4,
+                        "bodyParts": [{
+                                "key": "Head",
+                                "relativeProbability": 1,
+                                "data": ["Head"]
+                            }, {
+                                "key": "Stomach",
+                                "relativeProbability": 3,
+                                "data": ["Stomach"]
+                            }, {
+                                "key": "Chest",
+                                "relativeProbability": 10,
+                                "data": ["Chest"]
+                            }, {
+                                "key": "Arms",
+                                "relativeProbability": 0.5,
+                                "data": ["LeftArm", "RightArm"]
+                            }, {
+                                "key": "Legs",
+                                "relativeProbability": 1,
+                                "data": ["LeftLeg", "RightLeg"]
+                            }
+                        ],
+                        "specificLocationProb": 0.25,
+                        "distLocationBlacklist": ["laboratory"],
+                        "distProb": 0.20,
+                        "maxDist": 100,
+                        "minDist": 20,
+                        "maxKills": 3,
+                        "minKills": 1
+                    }, {
+                        "levelRange": {
                             "min": 16,
                             "max": 100
                         },
-                    "targets":
-                    [{
-                            "key": "AnyPmc",
-                            "relativeProbability": 1,
-                            "data": {
-                                "isBoss": false
+                        "targets":
+                        [{
+                                "key": "AnyPmc",
+                                "relativeProbability": 1,
+                                "data": {
+                                    "isBoss": false
+                                }
                             }
-                        }
-                    ],
-                    "bodyPartProb": 0.4,
-                    "bodyParts": [{
-                            "key": "Head",
-                            "relativeProbability": 1,
-                            "data": ["Head"]
-                        }, {
-                            "key": "Stomach",
-                            "relativeProbability": 3,
-                            "data": ["Stomach"]
-                        }, {
-                            "key": "Chest",
-                            "relativeProbability": 5,
-                            "data": ["Chest"]
-                        }, {
-                            "key": "Arms",
-                            "relativeProbability": 0.5,
-                            "data": ["LeftArm", "RightArm"]
-                        }, {
-                            "key": "Legs",
-                            "relativeProbability": 1,
-                            "data": ["LeftLeg", "RightLeg"]
-                        }
-                    ],
-                    "specificLocationProb": 0.25,
-                    "distLocationBlacklist": ["laboratory"],
-                    "distProb": 0.25,
-                    "maxDist": 200,
-                    "minDist": 20,
-                    "maxKills": 5,
-                    "minKills": 2
-                }
-				]
+                        ],
+                        "bodyPartProb": 0.4,
+                        "bodyParts": [{
+                                "key": "Head",
+                                "relativeProbability": 1,
+                                "data": ["Head"]
+                            }, {
+                                "key": "Stomach",
+                                "relativeProbability": 3,
+                                "data": ["Stomach"]
+                            }, {
+                                "key": "Chest",
+                                "relativeProbability": 5,
+                                "data": ["Chest"]
+                            }, {
+                                "key": "Arms",
+                                "relativeProbability": 0.5,
+                                "data": ["LeftArm", "RightArm"]
+                            }, {
+                                "key": "Legs",
+                                "relativeProbability": 1,
+                                "data": ["LeftLeg", "RightLeg"]
+                            }
+                        ],
+                        "specificLocationProb": 0.25,
+                        "distLocationBlacklist": ["laboratory"],
+                        "distProb": 0.25,
+                        "maxDist": 200,
+                        "minDist": 20,
+                        "maxKills": 5,
+                        "minKills": 2
+                    }
+                ]
             },
             "rewardBaseTypeBlacklist": ["543be5e94bdc2df1348b4568", "5b3f15d486f77432d0509248"],
             "rewardBlacklist": ["627bce33f21bc425b06ab967"],

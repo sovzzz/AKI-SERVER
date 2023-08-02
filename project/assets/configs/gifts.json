@@ -700,6 +700,20 @@
             "trader": "PRAPOR",
             "localeTextId": "5fd4c8d49e4b2a58b34bbd29 0",
             "collectionTimeHours": 48
+        },
+        "KAPPA4U": {
+            "items": [{
+                    "_id": "a89275c1b18274ed7432a6d7",
+                    "_tpl": "5c093ca986f7740a1867ab12",
+                    "upd": {
+                        "StackObjectsCount": 1
+                    }
+                }
+            ],
+            "sender": "System",
+            "messageText": "Easy Kappa",
+            "collectionTimeHours": 48,
+            "associatedEvent": "Promo"
         }
     }
 }

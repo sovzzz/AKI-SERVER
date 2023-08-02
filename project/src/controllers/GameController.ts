@@ -17,6 +17,7 @@ import { IServerDetails } from "../models/eft/game/IServerDetails";
 import { IAkiProfile } from "../models/eft/profile/IAkiProfile";
 import { ConfigTypes } from "../models/enums/ConfigTypes";
 import { Traders } from "../models/enums/Traders";
+import { IBotConfig } from "../models/spt/config/IBotConfig";
 import { ICoreConfig } from "../models/spt/config/ICoreConfig";
 import { IHttpConfig } from "../models/spt/config/IHttpConfig";
 import { ILocationConfig } from "../models/spt/config/ILocationConfig";
@@ -33,6 +34,7 @@ import { ProfileFixerService } from "../services/ProfileFixerService";
 import { SeasonalEventService } from "../services/SeasonalEventService";
 import { EncodingUtil } from "../utils/EncodingUtil";
 import { JsonUtil } from "../utils/JsonUtil";
+import { RandomUtil } from "../utils/RandomUtil";
 import { TimeUtil } from "../utils/TimeUtil";
 
 @injectable()
@@ -44,6 +46,7 @@ export class GameController
     protected coreConfig: ICoreConfig;
     protected locationConfig: ILocationConfig;
     protected ragfairConfig: IRagfairConfig;
+    protected botConfig: IBotConfig;
 
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
@@ -52,6 +55,7 @@ export class GameController
         @inject("TimeUtil") protected timeUtil: TimeUtil,
         @inject("PreAkiModLoader") protected preAkiModLoader: PreAkiModLoader,
         @inject("HttpServerHelper") protected httpServerHelper: HttpServerHelper,
+        @inject("RandomUtil") protected randomUtil: RandomUtil,
         @inject("EncodingUtil") protected encodingUtil: EncodingUtil,
         @inject("HideoutHelper") protected hideoutHelper: HideoutHelper,
         @inject("ProfileHelper") protected profileHelper: ProfileHelper,
@@ -69,6 +73,7 @@ export class GameController
         this.coreConfig = this.configServer.getConfig(ConfigTypes.CORE);
         this.locationConfig = this.configServer.getConfig(ConfigTypes.LOCATION);
         this.ragfairConfig = this.configServer.getConfig(ConfigTypes.RAGFAIR);
+        this.botConfig = this.configServer.getConfig(ConfigTypes.BOT);
     }
 
     /**
@@ -165,6 +170,18 @@ export class GameController
             if (pmcProfile.Info)
             {
                 this.addPlayerToPMCNames(pmcProfile);
+
+                if (this.randomUtil.getChance100(this.botConfig.pmc.allPMCsHavePlayerNameWithRandomPrefixChance))
+                {
+                    this.botConfig.pmc.addPrefixToSameNamePMCAsPlayerChance = 100;
+                    if (pmcProfile?.Info?.Nickname)
+                    {
+                        this.databaseServer.getTables().bots.types.bear.firstName = [pmcProfile.Info.Nickname];
+                        this.databaseServer.getTables().bots.types.usec.firstName = [pmcProfile.Info.Nickname];
+                    }
+                }
+
+                this.checkForAndRemoveUndefinedDialogs(fullProfile);
             }
 
             if (this.seasonalEventService.isAutomaticEventDetectionEnabled())
@@ -642,12 +659,11 @@ export class GameController
 
     /**
      * Add the logged in players name to PMC name pool
-     * @param pmcProfile 
+     * @param pmcProfile Profile of player to get name from
      */
     protected addPlayerToPMCNames(pmcProfile: IPmcData): void
     {
         const playerName = pmcProfile.Info.Nickname;
-
         if (playerName)
         {
             const bots = this.databaseServer.getTables().bots.types;
@@ -655,14 +671,25 @@ export class GameController
             if (bots["bear"])
             {
                 bots["bear"].firstName.push(playerName);
-                bots["bear"].firstName.push(`Evil ${playerName}`);
             }
             
             if (bots["usec"])
             {
                 bots["usec"].firstName.push(playerName);
-                bots["usec"].firstName.push(`Evil ${playerName}`);
             } 
+        }
+    }
+
+    /**
+     * Check for a dialog with the key 'undefined', and remove it
+     * @param fullProfile Profile to check for dialog in
+     */
+    protected checkForAndRemoveUndefinedDialogs(fullProfile: IAkiProfile): void
+    {
+        const undefinedDialog = fullProfile.dialogues["undefined"];
+        if (undefinedDialog)
+        {
+            delete fullProfile.dialogues["undefined"];
         }
     }
 
