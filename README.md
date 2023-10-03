@@ -1,5 +1,5 @@
 # 秋-服务端 每日编译
-
+# 本仓库编写方式有问题，有他人创建的类似仓库可用，因此本仓库进行归档。
 本仓库是[秋-独行塔科夫计划](https://www.sp-tarkov.com/)（Aki Singleplayer Tarkov Project）中[服务端](https://dev.sp-tarkov.com/SPT-AKI/Server.git)的GitHub镜像仓库。本仓库的任务是在北京时间每日下午4:00左右从上游仓库拉取最新源码并编译。
 
 ## 如何下载
